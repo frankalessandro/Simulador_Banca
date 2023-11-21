@@ -1,6 +1,8 @@
 import './AsesorView.css'
 import Logo from '../../Assets/Logos/ClearBank LogoOnly.svg'
 import personIcon from '../../Assets/Icons/personIcon.svg'
+import messageIcon from '../../Assets/Icons/messageIcon.svg'
+import notificationIcon from '../../Assets/Icons/notificationIcon.svg'
 
 export const AsesorView = () => {
     return (
@@ -15,20 +17,24 @@ export const AsesorView = () => {
                     </header>
                     <main className='sideBar--main'>
                         <div className="sideBar--main--tittle">
-                            <p>Productos bancarios</p>
+                            <span className='sideBar--main--tiitle--content'>Productos bancarios</span>
                         </div>
                         <div className="sideBar--main--product">
-                            <p>Cuentas Bancarias</p>
-                            <div className="sideBar--main--product--dropmenu">
-                                <p>Cuenta Ahorro</p>
-                                <p>Cuenta Corriente</p>
-                            </div>
+                            <ul>
+                                <li>Cuentas Bancarias</li>
+                                <div className="sideBar--main--product--dropmenu">
+                                    <span>Cuenta Ahorro</span>
+                                    <span>Cuenta Corriente</span>
+                                </div>
+                                <li>CDT</li>
+                                <li>Tarjetas de credito</li>
+                            </ul>
                         </div>
 
                     </main>
                     <footer className='sideBar--footer'>
                         <div className="sideBar--footer--content">
-                            <p>Salir</p>
+                            <span>Salir</span>
                         </div>
                     </footer>
                 </section>
@@ -39,7 +45,10 @@ export const AsesorView = () => {
                         <img className='topBar--user--icon' src={personIcon} alt="" />
                         <span className='topBar--span--user'>Bienvenido, Asesor</span>
                     </div>
-
+                    <div className="topBar--actions">
+                        <img className='topBar--actions--content' src={notificationIcon} alt="" />
+                        <img className='topBar--actions--content' src={messageIcon} alt="" />
+                    </div>
                 </section>
             </div>
 

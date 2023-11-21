@@ -6,9 +6,13 @@
 }
 /* <-------------------------------- sideBar --------------------------------> */
 .sideBar--container{
-    width: 280px;
+    max-width: 285px;
     height: 100%;
     background-color: #038C73;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: bold;
 }
 
 /* Header SideBar */
@@ -28,21 +32,25 @@
 /* Main SideBar */
 
 .sideBar--main{
-    width: 100%;
+    width: 90%;
     height: 65%;
 }
 .sideBar--main--tittle{
     height: 30px;
 }
+.sideBar--main--tiitle--content{
+    font-size: 15px;
+    color: #f2f2f2;
+}
 .sideBar--main--product{
     height: 35px;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 /* Footer SideBar */
 
 .sideBar--footer{
-    width: 100%;
+    width: 90%;
     height: 20%;
     font-size: 20px;
 }
@@ -53,16 +61,34 @@
     width: 85%;
     height: 5%;
     background-color: #D2D2D2;
+    display: flex;
+    justify-content: space-between;
 }
 .topBar--user{
     width: 30%;
-    height: auto;
+    height: 100%;
     display: flex;
     align-items: center;
+    padding-left:15px ;
+    gap: 8px;
 }
 .topBar--user--icon{
-    width: 50px;
+    width: 30px;
 }
 .topBar--span--user{
-    font-size: 22px;
+    font-size: 18px;
+    width: auto;
+    height: auto;
+}
+
+.topBar--actions{
+    width: auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding-right: 15px ;
+}
+.topBar--actions--content{
+    width: 30px;
 }
