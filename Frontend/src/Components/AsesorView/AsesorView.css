@@ -1,0 +1,68 @@
+.asesorView--container{
+    width: 100%;
+    height: 100%;
+    background-color:#f2f2f2;
+    display: flex;
+}
+/* <-------------------------------- sideBar --------------------------------> */
+.sideBar--container{
+    width: 280px;
+    height: 100%;
+    background-color: #038C73;
+}
+
+/* Header SideBar */
+
+.sideBar--header{
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.sideBar--header--topLogo{
+    width: 80%;
+    height: 80%;
+}
+
+/* Main SideBar */
+
+.sideBar--main{
+    width: 100%;
+    height: 65%;
+}
+.sideBar--main--tittle{
+    height: 30px;
+}
+.sideBar--main--product{
+    height: 35px;
+    font-size: 20px;
+}
+
+/* Footer SideBar */
+
+.sideBar--footer{
+    width: 100%;
+    height: 20%;
+    font-size: 20px;
+}
+
+/* <-------------------------------- TopBar --------------------------------> */
+
+.topBar--container{
+    width: 85%;
+    height: 5%;
+    background-color: #D2D2D2;
+}
+.topBar--user{
+    width: 30%;
+    height: auto;
+    display: flex;
+    align-items: center;
+}
+.topBar--user--icon{
+    width: 50px;
+}
+.topBar--span--user{
+    font-size: 22px;
+}
