@@ -1,10 +1,11 @@
 import './App.css'
+import { AsesorView } from './Components/AsesorView/AsesorView'
 
 function App() {
  
   return (
     <>
-    <h1>Config React.</h1>
+    <AsesorView/>
     </>
   )
 }
