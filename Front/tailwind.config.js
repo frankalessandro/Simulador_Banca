@@ -6,12 +6,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-      spacing: {
-        '128': '32rem',
-      },
-      height: {
-        '128': '32rem',
-      },
       colors: {
         transparent: 'transparent',
         current: 'currentColor',
