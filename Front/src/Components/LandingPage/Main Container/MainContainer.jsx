@@ -7,7 +7,8 @@ export const MainContainer = () => {
         <div>Bienvenidos a <span>ClarBank</span> guardar tu dinero es facil y rapido.</div>
         
     </div>
-    <img className='w-106' src={FrontImage} alt="" />
+    <div className=''><img className='w-full' src={FrontImage} alt="" /></div>
+    
     </>
   )
 }
