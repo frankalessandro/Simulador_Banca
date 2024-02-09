@@ -16,12 +16,26 @@ module.exports = {
         lightGray: '#F2F2F2',
         black: colors.black,
         white: colors.white,
+      },
+      padding: {
+        '16rem': '16rem'
       }
     },
   },
   plugins: [
     require('flowbite/plugin')
   ],
+  purge: {
+    content: [
+      // Rutas de tus archivos JSX o HTML
+      './src/**/*.jsx',
+      './public/index.html',
+    ],
+    options: {
+      // Agrega excepciones para propiedades específicas
+      safelist: ['class', 'fill-rule', 'clip-rule', 'stroke-linecap', 'stroke-linejoin', 'stroke-width'],
+    },
+  },
 }
 
 
