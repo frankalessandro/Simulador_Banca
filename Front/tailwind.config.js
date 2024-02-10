@@ -1,14 +1,17 @@
 const colors = require('tailwindcss/colors');
 
 module.exports = {
+  enabled: true, // Agrega la propiedad enabled
+
   plugins: [
     require('flowbite/plugin')
   ],
+  
   theme: {
     extend: {
       colors: {
         transparent: 'transparent',
-        current: 'currentColor',
+        current: 'currentColor', 
         darkGreen: '#325259',
         green: '#04D9B2',
         neutralGreen: '#038C73',
@@ -17,14 +20,12 @@ module.exports = {
         black: colors.black,
         white: colors.white,
       },
-      padding: {
-        '16rem': '16rem'
+      spacing: {
+        '40': '3rem',
       }
     },
   },
-  plugins: [
-    require('flowbite/plugin')
-  ],
+  
   purge: {
     content: [
       // Rutas de tus archivos JSX o HTML
@@ -36,13 +37,5 @@ module.exports = {
       safelist: ['class', 'fill-rule', 'clip-rule', 'stroke-linecap', 'stroke-linejoin', 'stroke-width'],
     },
   },
-}
-
-
-
-module.exports = {
-  plugins: [
-    require('flowbite/plugin')
-  ],
-
 };
+
