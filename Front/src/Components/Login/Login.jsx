@@ -7,12 +7,14 @@ export const Login = () => {
 
     <div  class="absolute inset-0 bg-green-100 " >
       {/* <img src={Fondo} alt=""  class='object-cover h-screen w-full'/> */}
-    <div class=' absolute inset-0 flex items-center justify-center'>
-        
+    <div class=' absolute inset-0 flex items-center md:justify-center max-sm:justify-center max-[900px]:justify-center lg:justify-evenly'>
+        <div class="lg:not-sr-only max-[900px]:sr-only md:sr-only max-sm:sr-only border border-gray-300 rounded bg-gray-50">
+            <img src={Logo} alt="" />
+        </div>
 
-<div class="w-full max-w-sm p-4  bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+<div class="w-full max-w-sm  p-4  bg-white border border-gray-200 rounded-lg shadow sm:p-8 md:p-8 dark:bg-gray-800 dark:border-gray-700">
     <form class="space-y-6" action="#">
-        <img  src={Logo}  class="flex justify-center h-52 w-80"/>
+        <img  src={Logo}  class="flex justify-center h-64 w-96 lg:sr-only md:not-sr-only "/>
         <div>
             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Name</label>
             <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Your Name" required />
