@@ -1,6 +1,5 @@
 import React from 'react'
 import Logo from '../../assets/Img/Logos/ClarBank LogoOnly.svg'
-
 import { ContentCuentaAhorroJuridica } from './Components/ContentCuentaAhorroJuridica/ContentCuentaAhorroJuridica'
 import { useState } from 'react'
 import { ContentCuentaAhorroNatural } from './Components/ContentCuentaAhorroNatural/ContentCuentaAhorroNatural'

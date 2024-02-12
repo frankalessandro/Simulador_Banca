@@ -7,7 +7,16 @@ import { Login } from './Components/Login/Login';
 export default function MyPage() {
    return (
       <div>
-         <DashboardMenu/>
+      
+         <Router>
+            <Routes>
+               <Route path='/' element={<Home/>} />
+               <Route path='/Login' element={<Login/>} />
+               <Route path='/DashBoardMenu' element={<DashboardMenu/>} />
+               <Route path='/' element={<Home/>} />
+            </Routes>
+         </Router>
+     
       </div>
 
 

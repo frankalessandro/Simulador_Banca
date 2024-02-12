@@ -1,38 +1,39 @@
 import React from 'react'
 import Logo from '../../assets/Img/Logos/ClarBank Logo.svg'
-import Fondo from '../../assets/Img/Login/Inicio2.png'
+import { Link } from 'react-router-dom'
 
 export const Login = () => {
   return (
 
-    <div  class="absolute inset-0 bg-green-100 " >
-      {/* <img src={Fondo} alt=""  class='object-cover h-screen w-full'/> */}
-    <div class=' absolute inset-0 flex items-center md:justify-center max-sm:justify-center max-[900px]:justify-center lg:justify-evenly'>
-        <div class="lg:not-sr-only max-[900px]:sr-only md:sr-only max-sm:sr-only border border-gray-300 rounded bg-gray-50">
-            <img src={Logo} alt="" />
+    <div  className="absolute inset-0 bg-green-100 " >
+    <div className=' absolute inset-0 flex items-center md:justify-center max-sm:justify-center max-[900px]:justify-center lg:justify-evenly'>
+        <div className="lg:not-sr-only max-[900px]:sr-only md:sr-only max-sm:sr-only ">
+            <img src={Logo} alt="" className="object-cover" />
         </div>
 
-<div class="w-full max-w-sm  p-4  bg-white border border-gray-200 rounded-lg shadow sm:p-8 md:p-8 dark:bg-gray-800 dark:border-gray-700">
-    <form class="space-y-6" action="#">
-        <img  src={Logo}  class="flex justify-center h-64 w-96 lg:sr-only md:not-sr-only "/>
+<div className="w-full max-w-sm  p-4  bg-white border border-gray-200 rounded-lg shadow sm:p-8 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+    <form className="space-y-6" action="#">
+        <img  src={Logo}  className="flex justify-center h-64 w-96 lg:sr-only md:not-sr-only "/>
         <div>
-            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Name</label>
-            <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Your Name" required />
+            <label htmlFor="Text" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Name</label>
+            <input type="Text" name="Names" id="Name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green focus:border-green block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-green dark:text-white" placeholder="Your Name" required />
         </div>
         <div>
-            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
-            <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
+            <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
+            <input type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green focus:border-green block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
         </div>
-        <div class="flex items-start">
-            <div class="flex items-start">
-                <div class="flex items-center h-5">
-                    <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-green-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-green-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required />
+        <div className="flex items-start">
+            <div className="flex items-start">
+                <div className="flex items-center h-5">
+                    <input id="remember" type="checkbox" value="" className="w-4 h-4  border border-gray-300 rounded bg-gray-100 focus:ring-3 focus:ring-green dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-green dark:ring-offset-gray-600 dark:focus:ring-offset-gray" required />
                 </div>
-                <label for="remember" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Remember me</label>
+                <label htmlFor="remember" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Remember me</label>
             </div>
-            <a href="#" class="ms-auto text-sm text-green-700 hover:underline dark:text-green-500">Lost Password?</a>
+            <a href="#" className="ms-auto text-sm text-green-700 hover:underline dark:text-green-500">Lost Password?</a>
         </div>
-        <button type="sumit" class="w-full text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Login to your account</button>
+        <Link to="/DashBoardMenu">
+        <button type="sumit" className="w-full text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Login to your account</button>
+        </Link>
       
     </form>
 </div>
