@@ -1,7 +1,6 @@
 import React from 'react'
 import FrontImage from '../../../assets/Img/Main_Image.svg'
 import prueba from '../../../assets/Img/prueba1.jpg'
-import './Carousel.css'
 export const Carousel = () => {
     return (
         <>
