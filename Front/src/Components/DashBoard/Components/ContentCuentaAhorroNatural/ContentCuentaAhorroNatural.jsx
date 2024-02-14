@@ -44,9 +44,7 @@ export const ContentCuentaAhorroNatural = ({contenidoSeleccionado}) => {
           </div>
         </div>
       </div>
-      <div className="p-4 sm:ml-64">
-        {contenidoSeleccionado1 === 'infoPersonalForm' & (<InfoPersonal/>)}
-      </div>
+      
     </>
   )
 }
