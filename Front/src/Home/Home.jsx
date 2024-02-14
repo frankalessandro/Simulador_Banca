@@ -6,9 +6,6 @@ export const Home = () => {
   
   return (
     <>
-      {/* <Login/> */}
-      {/* <DashboardMenu/> */}
-
       <LandingPage/>
     </>
   );
