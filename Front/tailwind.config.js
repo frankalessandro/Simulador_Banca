@@ -34,7 +34,7 @@ module.exports = {
     ],
     options: {
       // Agrega excepciones para propiedades específicas
-      safelist: ['class', 'fill-rule', 'clip-rule', 'stroke-linecap', 'stroke-linejoin', 'stroke-width'],
+      
     },
   },
 };

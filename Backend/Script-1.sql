@@ -102,7 +102,18 @@ CREATE TABLE FormPersonNarural (
     IT_Ciudad_origen varchar(20)
 );
 
+-- Insertar datos en la tabla Rol
+INSERT INTO Rol (ID_Rol, Nombre, Estado) VALUES
+(1, 'Director', 'Activo'),
+(2, 'Asesor', 'Activo');
 
+
+-- Insertar datos en la tabla usuarios
+INSERT INTO usuarios (ID_Usuario, Name_User, Password, Rol, Estado) VALUES
+(1, 'admin', 'clave123', 1, 'Activo'),
+(2, 'asesor1', 'asesor123', 2, 'Activo');
+
+select * from usuarios;
 
 
 

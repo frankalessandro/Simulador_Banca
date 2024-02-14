@@ -13,7 +13,7 @@ export default function MyPage() {
                <Route path='/' element={<Home/>} />
                <Route path='/Login' element={<Login/>} />
                <Route path='/DashBoardMenu' element={<DashboardMenu/>} />
-               <Route path='/' element={<Home/>} />
+               
             </Routes>
          </Router>
      
