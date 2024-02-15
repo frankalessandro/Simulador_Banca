@@ -1,13 +1,14 @@
 import React, {useState} from 'react'
 import { InfoPersonal } from './Formulario/InfoPersonal'
 
-export const ContentCuentaAhorroNatural = ({contenidoSeleccionado}) => {
+export const ContentCuentaAhorroNatural = () => {
   
-  const [contenidoSeleccionado1, setContenidoSeleccionado1] = useState(false);
+  const [contenidoSeleccionado, setContenidoSeleccionado] = useState();
     // Función para manejar clics de botones
     const handleBotonClick = (contenido) => {
-        setContenidoSeleccionado1(contenido);
+        setContenidoSeleccionado(contenido);
     }
+
   return (
     <>
       <div class="p-4 sm:ml-64">
@@ -20,7 +21,7 @@ export const ContentCuentaAhorroNatural = ({contenidoSeleccionado}) => {
 
               <form>
                 <div class="grid gap-8 mb-8 md:grid-cols-2">
-                  <button type="button" onClick={() => handleBotonClick('infoPersonalForm')} class="h-20 flex justify-center px-8 py-3.5 text-base font-medium text-white items-center bg-gray-500 hover:bg-gray-300 hover:text-black focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
+                  <button type="button" onClick={() => handleBotonClick(1)} class="h-20 flex justify-center px-8 py-3.5 text-base font-medium text-white items-center bg-gray-500 hover:bg-gray-300 hover:text-black focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
                     Personal
                   </button>
                   <button type="button" class="h-20 flex justify-center px-8 py-3.5 text-base font-medium text-white items-center bg-gray-500 hover:bg-gray-300 hover:text-black focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
@@ -44,7 +45,10 @@ export const ContentCuentaAhorroNatural = ({contenidoSeleccionado}) => {
           </div>
         </div>
       </div>
-      
+       <div>
+                {contenidoSeleccionado === 1 && <InfoPersonal />}
+                {/* Renderiza otros contenidos según sea necesario */}
+            </div>
     </>
   )
 }

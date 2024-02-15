@@ -15,19 +15,19 @@ export const Carousel = () => {
                     <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
                      
                         <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                            <img src={prueba} class="absolute block w-4/5 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
+                            <img src={prueba} class="absolute block w-9/12 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
                         </div>
                      
                         <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
-                            <img src={FrontImage} class="absolute block w-6/12 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
+                            <img src={FrontImage} class="absolute block w-2/5 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
                         </div>
           
                         <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                            <img src={prueba1} class="absolute block w-6/12 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
+                            <img src={prueba1} class="absolute block w-2/5 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
                         </div>
                  
                         <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                            <img src={prueba2} class="absolute block w-6/12 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
+                            <img src={prueba2} class="absolute block w-2/5 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
                         </div>
 
                         <div class="hidden duration-700 ease-in-out" data-carousel-item>
