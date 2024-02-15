@@ -3,16 +3,17 @@ import Logo from '../../assets/Img/Logos/ClarBank LogoOnly.svg'
 import { ContentCuentaAhorroJuridica } from './Components/ContentCuentaAhorroJuridica/ContentCuentaAhorroJuridica'
 import { ContentCuentaAhorroNatural } from './Components/ContentCuentaAhorroNatural/ContentCuentaAhorroNatural'
 import { PrincipalPage } from './Components/PrincipalPage'
+import { Link} from 'react-router-dom'
 export const DashboardComponent = () => {
 
-    const [contenidoSeleccionado, setContenidoSeleccionado] = useState(1);
+    const [contenidoSeleccionado, setContenidoSeleccionado] = useState('PrincipalPage');
     // Función para manejar clics de botones
     const handleBotonClick = (contenido) => {
         setContenidoSeleccionado(contenido);
     }
-    console.log({contenidoSeleccionado})
+    console.log({ contenidoSeleccionado })
 
-    return (    
+    return (
         <>
             <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
                 <div class="px-3 py-3 lg:px-5 lg:pl-3">
@@ -56,7 +57,9 @@ export const DashboardComponent = () => {
                                             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Earnings</a>
                                         </li>
                                         <li>
-                                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Sign out</a>
+                                            <Link to="/Landing">
+                                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Sign out</a>
+                                            </Link>
                                         </li>
                                     </ul>
                                 </div>
