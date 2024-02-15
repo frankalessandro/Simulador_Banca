@@ -8,7 +8,7 @@ export const MainContainer = () => {
   return (
     <>
       {/* Inicio cards */}
-      <div className="Products-card flex flex-wrap items-center justify-center md:justify-between p-5  bg-white mx-4 md:mx-12 lg:mx-20 xl:mx-32 my-5 rounded shadow-md">
+      <div className="Products-card flex flex-wrap items-center justify-center md:justify-between p-5 bg-white mx-4 md:mx-12 lg:mx-20 xl:mx-32 my-5 rounded shadow-md">
         <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-3">
           <div className="p-5 h-auto md:h-96 w-full md:w-60">
             <a href="#">
