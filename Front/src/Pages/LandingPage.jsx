@@ -10,12 +10,16 @@ export const LandingPage = () => {
   return (
     <>
     <TopNavbar/>
-    <div class="bg-slate-100 ">
+    <div class="bg-slate-100  ">
       <div class="py-5">
     <Banner/>
     </div>
+    <div class="pt-5">
     <Carousel/>
+    </div>
+    <div class="py-10">
     <MainContainer/>
+    </div>
     <Footer/>
     </div>
     
