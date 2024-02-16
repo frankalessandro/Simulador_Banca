@@ -4,7 +4,7 @@ module.exports = {
   enabled: true, // Agrega la propiedad enabled
 
   plugins: [
-    require('flowbite/plugin')
+    require('flowbite/plugin'),
   ],
   
   theme: {
