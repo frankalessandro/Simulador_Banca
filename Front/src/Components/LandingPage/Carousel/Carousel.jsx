@@ -1,9 +1,9 @@
 import React from 'react'
 import FrontImage from '../../../assets/Img/Main_Image.svg'
-import prueba from '../../../assets/Img/prueba2.jpg'
-import prueba1 from '../../../assets/Img/carousel1.png'
-import prueba2 from '../../../assets/Img/carousel2.png'
-import prueba3 from '../../../assets/Img/carousel3.png'
+// import prueba from '../../../assets/Img/Carousel/prueba2.jpg'
+// import prueba1 from '../../../assets/Img/carousel1.png'
+// import prueba2 from '../../../assets/Img/carousel2.png'
+// import prueba3 from '../../../assets/Img/carousel3.png'
 
 export const Carousel = () => {
     return (
