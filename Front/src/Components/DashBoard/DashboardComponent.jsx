@@ -4,7 +4,9 @@ import { ContentCuentaAhorroJuridica } from './Components/ContentCuentaAhorroJur
 import { ContentCuentaAhorroNatural } from './Components/ContentCuentaAhorroNatural/ContentCuentaAhorroNatural'
 import { PrincipalPage } from './Components/PrincipalPage'
 import { Link} from 'react-router-dom'
+import Namelogo from '../../assets/Img/Logos/ClarBank Name.svg'
 import { No_Disponible } from './Components/NoDisponible'
+
 export const DashboardComponent = () => {
 
     const [contenidoSeleccionado, setContenidoSeleccionado] = useState('PrincipalPage');
@@ -25,7 +27,7 @@ export const DashboardComponent = () => {
                             </button>
                             <a href="#" class="flex ms-2 md:me-24">
                                 <img src={Logo} class="h-8 me-3" alt="ClarBankLogo" />
-                                <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">ClarBank</span>
+                                <span class=""><img src={Namelogo} alt="" class='relative h-4  top-2 ' /></span>
                             </a>
                         </div>
                         <div class="flex items-center">
@@ -94,7 +96,7 @@ export const DashboardComponent = () => {
                                 </svg>
                             </button>
                             <ul id="dropdown-example" class="hidden py-2 space-y-2 pl-4">
-                                <li>
+                                <li>    
                                     <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-cuentahorro" data-collapse-toggle="dropdown-cuentahorro">
                                         <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                                             <path fill-rule="evenodd" d="M12 14a3 3 0 0 1 3-3h4a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-4a3 3 0 0 1-3-3Zm3-1a1 1 0 1 0 0 2h4v-2h-4Z" clip-rule="evenodd" />
