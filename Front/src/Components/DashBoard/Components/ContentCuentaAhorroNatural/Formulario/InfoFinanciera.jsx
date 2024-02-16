@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const InfoPersonal = () => {
+export const InfoFinanciera = () => {
   return (
     <>
       <div class="p-4 sm:ml-64">
