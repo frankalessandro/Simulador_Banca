@@ -1,8 +1,10 @@
 import React from 'react'
 import Logo from '../../assets/Img/Logos/ClarBank Logo.svg'
-import { Link } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
 
-export const Login = () => {
+
+
+export default function Login ()  {
   return (
 
     <div  className="absolute inset-0 bg-green-100 " >
@@ -12,11 +14,11 @@ export const Login = () => {
         </div>
 
 <div className="w-full max-w-sm  p-4  bg-white border border-gray-200 rounded-lg shadow sm:p-8 md:p-8 dark:bg-gray-800 dark:border-gray-700">
-    <form className="space-y-6" action="#">
+    <form className="space-y-6" action="#"   >
         <img  src={Logo}  className="flex justify-center h-64 w-96 lg:sr-only md:not-sr-only "/>
         <div>
             <label htmlFor="Text" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Name</label>
-            <input type="Text" name="Names" id="Name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green focus:border-green block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-green dark:text-white" placeholder="Your Name" required />
+            <input type="Text" name="Name" id="Name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green focus:border-green block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-green dark:text-white" placeholder="Your Name" required />
         </div>
         <div>
             <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>

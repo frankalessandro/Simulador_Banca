@@ -4,6 +4,8 @@ const swaggerUi = require('swagger-ui-express');
 const yaml = require('js-yaml');
 const fs = require('fs')
 
+
+app.use(express.json())
 // Configuracion de Swagger
 
 const swaggerDocument = yaml.load(fs.readFileSync('./swagger.yaml' , 'utf-8'));
