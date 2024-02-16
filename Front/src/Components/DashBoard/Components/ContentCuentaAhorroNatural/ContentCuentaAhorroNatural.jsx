@@ -52,7 +52,7 @@ export const ContentCuentaAhorroNatural = ({contenidoSeleccionado}) => {
         </div>
       </div>
        <div>
-                {contenidoSeleccionado1 === contenidoSeleccionado === 'InfoPersonal' && <InfoPersonal />}
+                {contenidoSeleccionado1 === 'InfoPersonal' && <InfoPersonal />}
                 {contenidoSeleccionado1 === 'contacto' && <InfoContacto />}
                 {contenidoSeleccionado1 === 'tributaria' && <InfoTributaria />}
                 {contenidoSeleccionado1 === 'economica' && <InfoEconomicaLaboral />}

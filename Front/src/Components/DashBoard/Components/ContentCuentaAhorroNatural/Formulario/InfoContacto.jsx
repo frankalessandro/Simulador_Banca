@@ -20,58 +20,35 @@ export const InfoContacto = () => {
                 <p>Apto/Casa</p>
                 <input type="text" />
               </div>
-              <div class="">
-                <label htmlFor="opciones" className="mr-2">
-                  Tipo de documento:
-                </label>
-                <select id="opciones" name="opciones" className="p-2 border rounded">
-                  <option value="cc">CC</option>
-                  <option value="ti">TI</option>
-                </select>
-              </div>
               <div>
-                <p>N° de documento</p>
+                <p>Barrio</p>
                 <input type="text" />
               </div>
               <div>
-                <p>Ciudad de nacimiento</p>
+                <p>Ciudad/Municipio</p>
                 <input type="text" />
               </div>
               <div>
-                <p>Lugar de expedición</p>
+                <p>Departamento</p>
                 <input type="text" />
               </div>
               <div>
-                <p>Fecha de expedición</p>
-                <input type="date" />
-              </div>
-              <div>
-                <p>Fecha de nacimiento</p>
-                <input type="date" />
-              </div>
-              <div class="">
-                <label htmlFor="opciones" className="mr-2">
-                  Genero:
-                </label>
-                <select id="opciones" name="opciones" className="p-2 border rounded">
-                  <option value="cc">F</option>
-                  <option value="ti">M</option>
-                </select>
-              </div>
-              <div class="">
-                <label htmlFor="opciones" className="mr-2">
-                  Estado Civil:
-                </label>
-                <select  id="opciones" name="opciones" className="p-2 border rounded">
-                  <option value="cc">Soltero</option>
-                  <option value="ti">Casado</option>
-                  <option value="ti">Unión libre</option>
-                </select>
-              </div>
-              <div>
-                <p>Nacionalidad</p>
+                <p>País</p>
                 <input type="text" />
               </div>
+              <div>
+                <p>Teléfono</p>
+                <input type="text" />
+              </div>
+              <div>
+                <p>Celular</p>
+                <input type="text" />
+              </div>
+              <div>
+                <p>Correo electrónico</p>
+                <input type="text" />
+              </div>
+             
             </div>
           </div>
         </div>
