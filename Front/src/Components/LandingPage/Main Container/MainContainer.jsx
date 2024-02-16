@@ -1,8 +1,8 @@
 import React from 'react';
-import FrontImage from '../../../assets/Img/Main_Image.svg';
-import nomina from '../../../assets/Img/nomina.png';
-import ahorro from '../../../assets/Img/cuenta-ahorros.png';
-import credito from '../../../assets/Img/credito.png';
+// import FrontImage from '../../../assets/Img/Main_Image.svg';
+// import nomina from '../../../assets/Img/nomina.png';
+// import ahorro from '../../../assets/Img/cuenta-ahorros.png';
+// import credito from '../../../assets/Img/credito.png';
 
 export const MainContainer = () => {
   return (
