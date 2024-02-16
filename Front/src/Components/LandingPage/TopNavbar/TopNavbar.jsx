@@ -1,14 +1,17 @@
 import React from 'react'
 import { Link} from 'react-router-dom'
 import TopLogo from '../../../assets/Img/Logos/ClarBank LogoOnly.svg'
+import nameLogo from '../../../assets/Img/Logos/ClarBank Name.svg'
 
 export const TopNavbar = () => {
     return (
         <>
             <nav class="bg-white border-gray-200 dark:bg-gray-900 shadow-xl- ">
-                <div class="max-w-screen-x flex flex-wrap items-center justify-between mx-auto p-4">
+                <div class="max-w-screen-x flex flex-wrap items-center justify-between mx-auto p-2">
                     <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
-                        <img src={TopLogo} class="h-12" alt="ClarBank" />
+                        <img src={TopLogo} class="h-8" alt="ClarBank" />
+      <span class=""><img src={nameLogo} alt="" class=" h-4" /></span>
+
                     </a>
                     <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
 
