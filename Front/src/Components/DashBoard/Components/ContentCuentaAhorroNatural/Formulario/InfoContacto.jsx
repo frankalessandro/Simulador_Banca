@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const InfoPersonal = () => {
+export const InfoContacto = () => {
   return (
     <>
       <div class="p-4 sm:ml-64">
@@ -9,15 +9,15 @@ export const InfoPersonal = () => {
             <h1 class='w-3/4 p-0 text-black text-4xl flex items-center justify-center font-semibold text-center'>Información personal</h1>
             <div class="grid gap-8 mb-8 md:grid-cols-3">
               <div >
-                <p>Nombre</p>
+                <p>Dirección residencia</p>
                 <input type="text" />
               </div>
               <div>
-                <p>Primer Apellido</p>
+                <p>Bloque/Torre</p>
                 <input type="text" />
               </div>
               <div>
-                <p>Segundo Apellido</p>
+                <p>Apto/Casa</p>
                 <input type="text" />
               </div>
               <div class="">
