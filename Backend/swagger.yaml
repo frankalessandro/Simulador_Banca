@@ -7,5 +7,5 @@ paths:
     get:
       summary: Obtener todos los datos
       responses:
-        '200'
+        '200':
           description: Respuesta exitosa
