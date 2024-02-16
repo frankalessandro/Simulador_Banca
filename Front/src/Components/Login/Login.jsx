@@ -1,44 +1,12 @@
 import React from 'react'
 import Logo from '../../assets/Img/Logos/ClarBank Logo.svg'
 import { Link,useNavigate } from 'react-router-dom'
-import { useAuth } from '../../../Context/AuthContext'
+
 
 
 export default function Login ()  {
 
-    const url = "http://localhost:3000/Login";
-    const navegate = useNavigate();
-    const {setisLoggedIn, login, setUserData}= useAuth;
-    
-
-
-    const LoginSesion = async (data) => {
-        console.log(data);
-        try {
-            const response = await fetch(url , {
-                method: 'POST',
-                headers:{
-                    'content-Type': 'application/json',
-
-                },
-                body: JSON.stringify(data),
-            });
-            const responseData = await response.json();
-            console.log(responseData);
-            if(response.status === 200){
-                alert('Inicio sesion exitoso');
-                navegate('/DashBoardMenu')
-                setisLoggedIn(True);
-                login(responseData.user);
-
-                setUserData(responseData.user)
-
-            }
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
+   
 
 
 
@@ -51,7 +19,7 @@ export default function Login ()  {
         </div>
 
 <div className="w-full max-w-sm  p-4  bg-white border border-gray-200 rounded-lg shadow sm:p-8 md:p-8 dark:bg-gray-800 dark:border-gray-700">
-    <form className="space-y-6" action="#"  onChange={LoginSesion} >
+    <form className="space-y-6" action="#"   >
         <img  src={Logo}  className="flex justify-center h-64 w-96 lg:sr-only md:not-sr-only "/>
         <div>
             <label htmlFor="Text" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Name</label>
@@ -70,8 +38,9 @@ export default function Login ()  {
             </div>
             <a href="#" className="ms-auto text-sm text-green-700 hover:underline dark:text-green-500">Lost Password?</a>
         </div>
-   
+   <Link to="/DashBoardMenu">
         <button type="sumit" className="w-full text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Login to your account</button>
+   </Link>
        
       
     </form>
