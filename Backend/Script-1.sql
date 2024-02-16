@@ -35,6 +35,7 @@ CREATE TABLE Rol (
 CREATE TABLE FormPersonNarural (
     ID_FormPN serial PRIMARY KEY,
     ID_Cliente int NOT NULL,
+    --Información Personal--
     IP_primerNombre varchar(30),
     IP_segundoNombre varchar(30),
     IP_primerApellido varchar(30),
@@ -48,6 +49,7 @@ CREATE TABLE FormPersonNarural (
     IP_genero varchar(2),
     IP_estadoCivil varchar(15),
     IP_nacionalidad varchar(30),
+    --Información de Contacto Personal--
     ICP_direcResidencia varchar(30),
     ICP_bloque_torre varchar(30),
     ICP_apto_casa varchar(10),
@@ -58,11 +60,13 @@ CREATE TABLE FormPersonNarural (
     ICP_telefono int,
     ICP_celular int,
     ICP_email varchar(50),
+    --Actividad Económica--
     AE_profesion varchar(30),
     AE_ocupacion varchar(30),
     AE_detalle_act varchar(50),
     AE_cod_ciiu int,
     AE_n_empleados int,
+    --Información Laboral--
     IL_Nombre_Empresa varchar(25),
     IL_Direc_empresa varchar(20),
     IL_barrio varchar(20),
@@ -73,6 +77,7 @@ CREATE TABLE FormPersonNarural (
     IL_EXT int,
     IL_celular int,
     IL_Email_laboral varchar(50),
+    --Detalle Información Financiera--
     DIF_Ingresos_mensuales decimal(8,2),
     DIF_Otros_ingresos decimal(8,2),
     DIF_Detalle_Otros_ingresos varchar(50),
@@ -81,6 +86,7 @@ CREATE TABLE FormPersonNarural (
     DIF_Total_egresos_mensuales decimal(8,2),
     DIF_Ventas_anuales int,
     DIF_Fec_cierre_ventas date,
+    --Información Operaciónes Internacionales--
     IOIN_Moneda_extranjera varchar(2),
     IOIN_Tipos_ope varchar(20),
     IOIN_Nombre_entidad varchar(30),
@@ -90,6 +96,7 @@ CREATE TABLE FormPersonNarural (
     IOIN_Moneda varchar(12),
     IOIN_Ciudad varchar(20),
     IOIN_Pais varchar(20),
+    --Información Tributaria--
     IT_Declara_renta varchar(2),
     IT_Age_retenedor varchar(2),
     IT_Regimen_iva varchar(2),

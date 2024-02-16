@@ -19,7 +19,7 @@ export const ContentCuentaAhorroNatural = ({contenidoSeleccionado}) => {
     <>
       <div class="p-4 sm:ml-64">
         <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
-          <div class='flex justify-center items-center flex-col gap-32 bg-green-200' style={{ minHeight: '85vh' }}>
+          <div class='flex justify-center items-center flex-col gap-32' style={{ minHeight: '85vh' }}>
             <div class='w-3/4 text-black text-4xl flex items-center justify-center font-semibold text-center'>
               <p>Información de Cliente Persona Natural</p>
             </div>
@@ -27,7 +27,7 @@ export const ContentCuentaAhorroNatural = ({contenidoSeleccionado}) => {
 
               <form>
                 <div class="grid gap-8 mb-8 md:grid-cols-2">
-                  <button type="button" onClick={() => handleBotonClick(1)} class="h-20 flex justify-center px-8 py-3.5 text-base font-medium text-white items-center bg-gray-500 hover:bg-gray-300 hover:text-black focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
+                  <button type="button" onClick={() => handleBotonClick('InfoPersonal')} class="h-20 flex justify-center px-8 py-3.5 text-base font-medium text-white items-center bg-gray-500 hover:bg-gray-300 hover:text-black focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
                     Personal
                   </button>
                   <button type="button" onClick={() => handleBotonClick('contacto')} class="h-20 flex justify-center px-8 py-3.5 text-base font-medium text-white items-center bg-gray-500 hover:bg-gray-300 hover:text-black focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
@@ -52,12 +52,12 @@ export const ContentCuentaAhorroNatural = ({contenidoSeleccionado}) => {
         </div>
       </div>
        <div>
-                {contenidoSeleccionado1 === 1 && <InfoPersonal />}
+                {contenidoSeleccionado1 === contenidoSeleccionado === 'InfoPersonal' && <InfoPersonal />}
                 {contenidoSeleccionado1 === 'contacto' && <InfoContacto />}
                 {contenidoSeleccionado1 === 'tributaria' && <InfoTributaria />}
-                {contenidoSeleccionado === 'economica' && <InfoEconomicaLaboral />}
-                {contenidoSeleccionado === 'financiera' && <InfoFinanciera />}
-                {contenidoSeleccionado === 'operaciones' && <InfoOpeInternacional />}
+                {contenidoSeleccionado1 === 'economica' && <InfoEconomicaLaboral />}
+                {contenidoSeleccionado1 === 'financiera' && <InfoFinanciera />}
+                {contenidoSeleccionado1 === 'operaciones' && <InfoOpeInternacional />}
                 {/* Renderiza otros contenidos según sea necesario */}
             </div>
     </>
