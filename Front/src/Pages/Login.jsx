@@ -1,20 +1,21 @@
 import React, { useState } from 'react'
 
-import Logo from '../../assets/Img/Logos/ClarBank Logo.svg'
+import Logo from '../assets/Img/Logos/ClarBank Logo.svg'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
+import { useAuth } from '../context/AuthContext.jsx';
 
 
 
 export default function Login() {
 
+    const { setIsLoggedIn, login, setUserData } = useAuth();
+
     const navegate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm();
-
     
 
-    const apiUrl = 'http://localhost:3000'; // Reemplaza con la URL real de tu servidor
-
+   
     const inisesion = async (data) => {
         console.log(data);
         try {
@@ -30,7 +31,8 @@ export default function Login() {
           if (response.status === 200) {
             alert('Inicio de sesión exitoso');
             navegate("/DashBoardMenu");
-           
+            setIsLoggedIn(true);
+            login(responseData.user);
     
             // Aquí asignamos los datos del usuario al contexto de autenticación
             setUserData(responseData.user);
