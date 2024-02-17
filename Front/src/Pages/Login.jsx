@@ -11,95 +11,35 @@ export default function Login() {
     const navegate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-    const [formData, setFormData] = useState({
-        name: '',
-        password: '',
-    });
-    const [error, setError] = useState('');
+    
 
     const apiUrl = 'http://localhost:3000'; // Reemplaza con la URL real de tu servidor
 
-    //   const handleInputChange = (event) => {
-    //     const { name, value } = event.target;
-    //     setFormData({
-    //       ...formData,
-    //       [name]: value,
-    //     });
-    //   };
-
-    //   const fetchData = async () => {
-    //       try {
-    //         const response = await fetch(apiUrl + '/user', {
-    //           method: 'GET',
-    //           headers: {
-    //             'Content-Type': 'application/json',
-    //             // Puedes incluir otras cabeceras si son necesarias
-    //           },
-    //           // Puedes incluir otras opciones como 'credentials' si es necesario
-    //         });
-
-    //         if (!response.ok) {
-    //           throw new Error('No se pudo obtener la información');
-    //         }
-
-    //         const data = await response.json();
-    //         console.log('Datos obtenidos:', data);
-
-    //         // Aquí puedes manejar la respuesta, por ejemplo, actualizar el estado del componente, etc.
-
-    //       } catch (error) {
-    //         console.error('Error al obtener los datos:', error.message);
-    //       }
-    //     };
-
-    //     // Llama a la función para obtener los datos
-    //     fetchData();
-    const [name, setName] = useState('')
-    const [password, setPassword] = useState('')
-
-    const handleSubmilt = async (data) => {
-        event.preventDefault();
-        console.log(event)
-
-
-
-        
-    }
-
-    const onSubmit = async(data) => {
+    const inisesion = async (data) => {
+        console.log(data);
         try {
-
-
-            const response = await fetch('http://localhost:3000/Login', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-              });
-
-            console.log(data)
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                setError(errorData.message || 'Error en el servidor');
-                return;
-            }
-
-            setError(''); // Limpiar el mensaje de error si la solicitud es exitosa
-
-            const responseData = await response.json();
-            // Aquí puedes manejar la respuesta del servidor, por ejemplo, redirigir a una nueva página
-            if (response.ok) {
-                navegate('/DashBoardMenu')
-
-            }
-            console.log(responseData);
-
+          const response = await fetch('http://localhost:3000/Login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          });
+          const responseData = await response.json();
+          console.log(responseData);
+          if (response.status === 200) {
+            alert('Inicio de sesión exitoso');
+            navegate("/DashBoardMenu");
+           
+    
+            // Aquí asignamos los datos del usuario al contexto de autenticación
+            setUserData(responseData.user);
+          }
         } catch (error) {
-            console.error('Error al enviar la solicitud:', error);
+            return res.status(400).json({ message: 'No se encontró información del usuario' });
         }
     };
+ 
 
     return (
 
@@ -110,8 +50,8 @@ export default function Login() {
                 </div>
 
                 <div className="w-full max-w-sm  p-4  bg-white border border-gray-200 rounded-lg shadow sm:p-8 md:p-8 dark:bg-gray-800 dark:border-gray-700">
-                    {error && <p style={{ color: 'red' }}>{error}</p>}
-                    <form className="space-y-6" action="#" onSubmit={handleSubmit(onSubmit)}  >
+              
+                    <form className="space-y-6" action="#" onSubmit={handleSubmit(inisesion)}  >
                         <img src={Logo} className="flex justify-center h-64 w-96 lg:sr-only md:not-sr-only " />
                         <div>
                             <label htmlFor="Text" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Name</label>
@@ -122,12 +62,12 @@ export default function Login() {
                             <input type="password" {...register("password")} name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green focus:border-green block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
                         </div>
                         <div className="flex items-start">
-                            <div className="flex items-start">
+                            {/* <div className="flex items-start">
                                 <div className="flex items-center h-5">
                                     <input id="remember" type="checkbox" value="" className="w-4 h-4  border border-gray-300 rounded bg-gray-100 focus:ring-3 focus:ring-green dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-green dark:ring-offset-gray-600 dark:focus:ring-offset-gray" required />
                                 </div>
                                 <label htmlFor="remember" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Remember me</label>
-                            </div>
+                            </div> */}
 
                         </div>
 
