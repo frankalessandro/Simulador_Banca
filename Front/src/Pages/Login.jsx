@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import Logo from '../../assets/Img/Logos/ClarBank Logo.svg'
+import Logo from '../assets/Img/Logos/ClarBank Logo.svg'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
 
