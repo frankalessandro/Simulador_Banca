@@ -6,7 +6,7 @@ import nameLogo from '../../../assets/Img/Logos/ClarBank Name.svg'
 export const TopNavbar = () => {
     return (
         <>
-            <nav class="bg-white border-gray-200 dark:bg-gray-900 shadow-xl- ">
+            <nav class="bg-white border-gray-200 dark:bg-gray-900 shadow-xl ">
                 <div class="max-w-screen-x flex flex-wrap items-center justify-between mx-auto p-2">
                     <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
                         <img src={TopLogo} class="h-8" alt="ClarBank" />
