@@ -8,7 +8,13 @@ import { Link } from 'react-router-dom'
 import { No_Disponible } from './Components/NoDisponible'
 import { AutorizacionCuentas } from './Components/Director/AutorizacionCuentas'
 import { CrearUsuario } from './Components/Director/CrearUsuario'
+import { useAuth } from '../../context/AuthContext'
+
 export const DashboardComponent = () => {
+
+const { user , isLoggedIn}= useAuth();
+
+console.log(user)
 
     const [contenidoSeleccionado, setContenidoSeleccionado] = useState('PrincipalPage');
     // Función para manejar clics de botones
@@ -36,7 +42,7 @@ export const DashboardComponent = () => {
                                 <div>
                                     <button type="button" class="flex text-sm bg-white rounded-full focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">
                                         <span class="sr-only">Open user menu</span>
-                                        <p class='p-2'>Nombre Asesor</p>
+                                        <p class='p-2'>{user?.name_user},{user?.rol == 2 && ( <> Asesor </>)}{user?.rol == 1 && ( <> Director </>)} </p>
                                         <svg class="h-8 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0a9 9 0 0 0 5-1.5 4 4 0 0 0-4-3.5h-2a4 4 0 0 0-4 3.5 9 9 0 0 0 5 1.5Zm3-11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                                         </svg>
@@ -45,7 +51,7 @@ export const DashboardComponent = () => {
                                 <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">
                                     <div class="px-4 py-3" role="none">
                                         <p class="text-sm text-gray-900 dark:text-white" role="none">
-                                            Nombre de Asesor
+                                        {user?.name_user}
                                         </p>
                                         <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
                                             asesor@ClarBank.com
@@ -86,6 +92,8 @@ export const DashboardComponent = () => {
                                 <span class="ms-3">Inicio</span>
                             </button>
                         </li>
+                        {user?.rol == 2 && ( <>
+                        
                         <li>
                             <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
                                 <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 21">
@@ -130,23 +138,23 @@ export const DashboardComponent = () => {
                                 </li>
                                 {/* <li>
                                     <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-cuentacorriente" data-collapse-toggle="dropdown-cuentacorritente">
-                                        <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8H5m12 0c.6 0 1 .4 1 1v2.6M17 8l-4-4M5 8a1 1 0 0 0-1 1v10c0 .6.4 1 1 1h12c.6 0 1-.4 1-1v-2.6M5 8l4-4 4 4m6 4h-4a2 2 0 1 0 0 4h4c.6 0 1-.4 1-1v-2c0-.6-.4-1-1-1Z" />
-                                        </svg>
-                                        <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Cuenta Corriente</span>
-                                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
-                                        </svg>
+                                    <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8H5m12 0c.6 0 1 .4 1 1v2.6M17 8l-4-4M5 8a1 1 0 0 0-1 1v10c0 .6.4 1 1 1h12c.6 0 1-.4 1-1v-2.6M5 8l4-4 4 4m6 4h-4a2 2 0 1 0 0 4h4c.6 0 1-.4 1-1v-2c0-.6-.4-1-1-1Z" />
+                                    </svg>
+                                    <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Cuenta Corriente</span>
+                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                                    </svg>
                                     </button>
                                     <ul id="dropdown-cuentacorritente" class="hidden py-2 space-y-2">
                                         <li>
-                                            <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Persona Natural</a>
+                                        <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Persona Natural</a>
                                         </li>
                                         <li>
-                                            <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Persona Juridica</a>
+                                        <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Persona Juridica</a>
                                         </li>
-                                    </ul>
-                                </li> */}
+                                        </ul>
+                                    </li> */}
                             </ul>
                         </li>
                         <li>
@@ -196,7 +204,10 @@ export const DashboardComponent = () => {
                                 <span class="flex-1 ms-3 whitespace-nowrap">Inversiones</span>
                             </a>
                         </li>
-                        <li>
+                        </>)}
+                      {user?.rol == 1  && (
+                          <>
+                          <li>
                             <a href="#" onClick={() => handleBotonClick('AutorizacionCuentas')} class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                                 <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                     <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.96 2.96 0 0 0 .13 5H5Z" />
@@ -214,6 +225,9 @@ export const DashboardComponent = () => {
                                 <span class="flex-1 ms-3 whitespace-nowrap">Creación de Usuarios</span>
                             </a>
                         </li>
+</>
+                            )
+                        }
                     </ul>
                 </div>
             </aside>
