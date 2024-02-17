@@ -7,7 +7,7 @@ import Login from './Pages/Login';
 export default function MyPage() {
    return (
       <div>
-      
+         
          <Router>
             <Routes>
                <Route path='/' element={<Home/>} />
