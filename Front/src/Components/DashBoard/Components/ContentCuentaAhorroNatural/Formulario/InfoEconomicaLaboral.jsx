@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const InfoEconomicaLaboral = () => {
+export const InfoEconomicaLaboral = ({regresar}) => {
   return (
     <>
     <div class="p-4 sm:ml-64">
@@ -82,7 +82,7 @@ export const InfoEconomicaLaboral = () => {
                 <input type="email" class="rounded-md" />
               </div>
             </div>
-            
+            <button onClick={regresar}>regresar</button>
           </div>
         </div>
       </div>
