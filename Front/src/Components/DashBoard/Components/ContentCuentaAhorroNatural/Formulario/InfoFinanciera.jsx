@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const InfoFinanciera = () => {
+export const InfoFinanciera = ({regresar}) => {
   return (
     <>
      <div class="p-4 sm:ml-64">
@@ -41,6 +41,7 @@ export const InfoFinanciera = () => {
                 <input type="date" class="rounded-md w-52" />
               </div>
             </div>
+            <button onClick={regresar}>regresar</button>
           </div>
         </div>
       </div>

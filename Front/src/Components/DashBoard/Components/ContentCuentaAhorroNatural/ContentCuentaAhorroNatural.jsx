@@ -7,17 +7,31 @@ import { InfoFinanciera } from './Formulario/InfoFinanciera';
 import { InfoOpeInternacional } from './Formulario/InfoOpeInternacional';
 
 
-export const ContentCuentaAhorroNatural = ({ contenidoSeleccionado }) => {
+export const ContentCuentaAhorroNatural = ({ }) => {
 
-  const [contenidoSeleccionado1, setContenidoSeleccionado1] = useState(null);
+  const [active , setactive] = useState("p-4 sm:ml-64  not-sr-only")
+
+  const [contenidoSeleccionado1, setContenidoSeleccionado1] = useState('');
   // Función para manejar clics de botones
   const handleBotonClick = (contenido) => {
     setContenidoSeleccionado1(contenido);
   }
 
+  const volver = () => {
+    if(active === "p-4 sm:ml-64  not-sr-only"){
+      setactive("p-4 sm:ml-64  sr-only");
+      
+    }else {
+      setactive("p-4 sm:ml-64  not-sr-only")
+      handleBotonClick('FormularioPersonaNatural')
+    }
+  }
+  
+
+
   return (
     <>
-      <div class="p-4 sm:ml-64">
+      <div class={active}>
         <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
           <div class='flex justify-center items-center flex-col gap-32' style={{ minHeight: '85vh' }}>
             <div class='w-3/4 text-black text-4xl flex items-center justify-center font-semibold text-center'>
@@ -27,22 +41,22 @@ export const ContentCuentaAhorroNatural = ({ contenidoSeleccionado }) => {
 
               <form>
                 <div class="grid gap-8 mb-8 md:grid-cols-2">
-                  <button type="button" onClick={() => handleBotonClick('InfoPersonal')} class="h-20 flex justify-center px-8 py-3.5 text-base font-medium text-white items-center bg-gray-500 hover:bg-gray-300 hover:text-black focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
+                  <button type="button" onClick={() => handleBotonClick('InfoPersonal', volver())} class="h-20 flex justify-center px-8 py-3.5 text-base font-medium text-white items-center bg-gray-500 hover:bg-gray-300 hover:text-black focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
                     Personal
                   </button>
-                  <button type="button" onClick={() => handleBotonClick('contacto')} class="h-20 flex justify-center px-8 py-3.5 text-base font-medium text-white items-center bg-gray-500 hover:bg-gray-300 hover:text-black focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
+                  <button type="button" onClick={() => handleBotonClick('contacto', volver())} class="h-20 flex justify-center px-8 py-3.5 text-base font-medium text-white items-center bg-gray-500 hover:bg-gray-300 hover:text-black focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
                     Contacto
                   </button>
-                  <button type="button" onClick={() => handleBotonClick('economica')} class="h-20 flex justify-center px-8 py-3.5 text-base font-medium text-white items-center bg-gray-500 hover:bg-gray-300 hover:text-black focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
+                  <button type="button" onClick={() => handleBotonClick('economica', volver())} class="h-20 flex justify-center px-8 py-3.5 text-base font-medium text-white items-center bg-gray-500 hover:bg-gray-300 hover:text-black focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
                     Económica y Laboral
                   </button>
-                  <button type="button" onClick={() => handleBotonClick('financiera')} class="h-20 flex justify-center px-8 py-3.5 text-base font-medium text-white items-center bg-gray-500 hover:bg-gray-300 hover:text-black focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
+                  <button type="button" onClick={() => handleBotonClick('financiera', volver())} class="h-20 flex justify-center px-8 py-3.5 text-base font-medium text-white items-center bg-gray-500 hover:bg-gray-300 hover:text-black focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
                     Detalle Información Financiera
                   </button>
-                  <button type="button" onClick={() => handleBotonClick('tributaria')} class="h-20 flex justify-center px-8 py-3.5 text-base font-medium text-white items-center bg-gray-500 hover:bg-gray-300 hover:text-black focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
+                  <button type="button" onClick={() => handleBotonClick('tributaria', volver())} class="h-20 flex justify-center px-8 py-3.5 text-base font-medium text-white items-center bg-gray-500 hover:bg-gray-300 hover:text-black focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
                     Tributaria
                   </button>
-                  <button type="button" onClick={() => handleBotonClick('operaciones')} class="h-20 flex justify-center px-8 py-3.5 text-base font-medium text-white items-center bg-gray-500 hover:bg-gray-300 hover:text-black focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
+                  <button type="button" onClick={() => handleBotonClick('operaciones', volver())} class="h-20 flex justify-center px-8 py-3.5 text-base font-medium text-white items-center bg-gray-500 hover:bg-gray-300 hover:text-black focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
                     Operaciones Internacionales
                   </button>
                 </div>
@@ -51,12 +65,12 @@ export const ContentCuentaAhorroNatural = ({ contenidoSeleccionado }) => {
           </div>
         </div>
       </div>
-        {contenidoSeleccionado1 === 'InfoPersonal' && <InfoPersonal />}
-        {contenidoSeleccionado1 === 'contacto' && <InfoContacto />}
-        {contenidoSeleccionado1 === 'tributaria' && <InfoTributaria />}
-        {contenidoSeleccionado1 === 'economica' && <InfoEconomicaLaboral />}
-        {contenidoSeleccionado1 === 'financiera' && <InfoFinanciera />}
-        {contenidoSeleccionado1 === 'operaciones' && <InfoOpeInternacional />}
+        {contenidoSeleccionado1 === 'InfoPersonal' && <InfoPersonal   regresar={volver}/>}
+        {contenidoSeleccionado1 === 'contacto' && <InfoContacto regresar={volver}/> }
+        {contenidoSeleccionado1 === 'tributaria' && <InfoTributaria regresar={volver}/>}
+        {contenidoSeleccionado1 === 'economica' && <InfoEconomicaLaboral regresar={volver}/>}
+        {contenidoSeleccionado1 === 'financiera' && <InfoFinanciera regresar={volver}/>}
+        {contenidoSeleccionado1 === 'operaciones' && <InfoOpeInternacional regresar={volver}/>}
         {/* Renderiza otros contenidos según sea necesario */}
     </>
   )

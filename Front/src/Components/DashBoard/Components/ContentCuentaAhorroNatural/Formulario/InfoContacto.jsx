@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const InfoContacto = () => {
+export const InfoContacto = ({regresar}) => {
   return (
     <>
        <div class="p-4 sm:ml-64">
@@ -50,7 +50,7 @@ export const InfoContacto = () => {
               </div>
              
             </div>
-            
+            <button onClick={regresar}>regresar</button>
           </div>
         </div>
       </div>

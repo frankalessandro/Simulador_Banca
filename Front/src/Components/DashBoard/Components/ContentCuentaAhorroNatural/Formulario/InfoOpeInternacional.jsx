@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const InfoOpeInternacional = () => {
+export const InfoOpeInternacional = ({regresar}) => {
   return (
     <>
      <div class="p-4 sm:ml-64">
@@ -8,7 +8,7 @@ export const InfoOpeInternacional = () => {
           <div class='pt-12 flex justify-start items-center flex-col gap-10 bg-white' style={{ minHeight: '85vh' }}>
             <h1 class='w-3/4 p-0 text-black text-4xl flex items-center justify-center font-semibold text-center'>Información de operaciones internacionales</h1>
             <div class="w-full grid  gap-5 mb-8 md:grid-cols-3 bg-slate-200 px-24 py-8 mx-12 rounded shadow-xl">
-            <div class="flex flex-col gap-6">
+            <div class="flex flex-col ">
                 <label htmlFor="opciones" className="mr-2">
                 ¿Realiza operaciones en moneda extranjera?:
                 </label>
@@ -35,7 +35,7 @@ export const InfoOpeInternacional = () => {
                 </select>
                 {/* <input type="text" placeholder='Otra, ¿Cual?' /> */}
               </div>
-              <div class="flex flex-col gap-12 w-52">
+              <div class="flex flex-col gap-6 w-52">
                 <p>Nombre de la entidad</p>
                 <input type="text" class="rounded-md" />
               </div>
@@ -73,6 +73,7 @@ export const InfoOpeInternacional = () => {
                 <input type="text" class="rounded-md" />
               </div>
             </div>
+            <button onClick={regresar}>regresar</button>
           </div>
         </div>
       </div>
