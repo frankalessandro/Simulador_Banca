@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = (userData) => {
     Cookies.set('User', JSON.stringify(userData));
-    setUser(userData);x
+    setUser(userData);
     Cookies.set('isLoggedIn', 'true', { expires: 7 });
     setIsLoggedIn(true);
     setIsDirector(userData.rol ==='1');

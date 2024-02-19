@@ -7,15 +7,18 @@ import { InfoFinanciera } from './Formulario/InfoFinanciera';
 import { InfoOpeInternacional } from './Formulario/InfoOpeInternacional';
 
 
+
 export const ContentCuentaAhorroNatural = ({ }) => {
+
 
   const [active , setactive] = useState("p-4 sm:ml-64  not-sr-only")
 
   const [contenidoSeleccionado1, setContenidoSeleccionado1] = useState('');
   // Función para manejar clics de botones
   const handleBotonClick = (contenido) => {
-    setContenidoSeleccionado1(contenido);
+    setContenidoSeleccionado1(contenido)
   }
+  console.log({contenidoSeleccionado1})
 
   const volver = () => {
     if(active === "p-4 sm:ml-64  not-sr-only"){
