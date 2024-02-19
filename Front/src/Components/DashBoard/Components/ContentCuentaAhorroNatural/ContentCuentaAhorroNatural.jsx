@@ -7,13 +7,14 @@ import { InfoFinanciera } from './Formulario/InfoFinanciera';
 import { InfoOpeInternacional } from './Formulario/InfoOpeInternacional';
 
 
-export const ContentCuentaAhorroNatural = ({ contenidoSeleccionado }) => {
+export const ContentCuentaAhorroNatural = ({  }) => {
 
   const [contenidoSeleccionado1, setContenidoSeleccionado1] = useState(null);
   // Función para manejar clics de botones
   const handleBotonClick = (contenido) => {
-    setContenidoSeleccionado1(contenido);
+    setContenidoSeleccionado1(contenido)
   }
+  console.log({contenidoSeleccionado1})
 
   return (
     <>
