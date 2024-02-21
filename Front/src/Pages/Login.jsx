@@ -30,7 +30,7 @@ export default function Login() {
           console.log(responseData);
           if (response.status === 200) {
             alert('Inicio de sesión exitoso');
-            navegate("/DashBoardMenu");
+            window.location = "/DashBoardMenu";
             setIsLoggedIn(true);
             login(responseData.user);
     
