@@ -1,12 +1,13 @@
 CREATE TABLE cliente (
     ID_Cliente serial PRIMARY KEY,
+    producto int,
+    inf_cliente int,
     Tipo_de_Cliente varchar(30),
     Estado varchar(15)
 );
 
 CREATE TABLE producto (
     ID_Producto serial PRIMARY KEY,
-    ID_Cliente int,
     Estado varchar(15),
     Tipo int,
     Asignado int
@@ -32,9 +33,8 @@ CREATE TABLE Rol (
 );
 
 
-CREATE TABLE FormPersonNarural (
+CREATE TABLE FormPersonNatural (
     ID_FormPN serial PRIMARY KEY,
-    ID_Cliente int NOT NULL,
     --Información Personal--
     IP_primerNombre varchar(30),
     IP_segundoNombre varchar(30),
@@ -113,17 +113,17 @@ CREATE TABLE FormPersonNarural (
 ALTER TABLE usuarios
 ADD FOREIGN KEY (Rol) REFERENCES Rol(ID_Rol);
 
-ALTER TABLE formpersonnarural
-add foreign key (id_cliente) references cliente(id_cliente);
-
 ALTER TABLE producto
 add foreign key (tipo) references tipoproducto(id_tipo);
 
 ALTER TABLE producto
-add foreign key (id_cliente) references cliente(id_cliente);
+add foreign key (asignado) references usuarios(id_usuario);
 
 ALTER TABLE producto
 add foreign key (asignado) references usuarios(id_usuario);
+
+ALTER TABLE producto
+add foreign key (tipo) references tipoproducto(id_tipo);
 
 -- Insertar datos en la tabla Rol
 INSERT INTO Rol (ID_Rol, Nombre, Estado) VALUES
@@ -136,12 +136,15 @@ INSERT INTO usuarios (ID_Usuario, Name_User, Password, Rol, Estado) VALUES
 (1, 'admin', 'clave123', 1, 'Activo'),
 (2, 'asesor1', 'asesor123', 2, 'Activo');
 
-select * from usuarios;
+select * from usuarios
 
 
-
-
-
+SELECT c.ID_Cliente, fpn.IP_primerNombre as Nombre_Cliente, tp.Descripcion as Nombre_Producto
+FROM cliente c
+JOIN producto p ON c.producto = p.tipo
+JOIN TipoProducto tp ON p.Tipo = tp.ID_tipo
+JOIN usuarios u ON c.inf_cliente = u.ID_Usuario
+JOIN FormPersonNatural fpn ON u.ID_Usuario = fpn.ID_FormPN;
 
 
 
