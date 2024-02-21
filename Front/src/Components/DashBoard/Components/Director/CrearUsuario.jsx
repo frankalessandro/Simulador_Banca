@@ -5,6 +5,8 @@ export const CrearUsuario = () => {
 
     const [datauser, setdatauser] = useState([]);
 
+const [activeModal , setactiveModal] = useState("absolute overflow-y-auto overflow-x-hidden justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full sr-only")
+ 
     useEffect(() => {
         const fecthData = async () => {
             try {
@@ -23,28 +25,26 @@ export const CrearUsuario = () => {
         fecthData();
     }, []);
 
-    // const [modalIsOpen, setModalIsOpen] = useState(false);
+    const abrir = () => {
+        if(activeModal === "absolute overflow-y-auto overflow-x-hidden justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full sr-only"){
+          setactiveModal("absolute flex items-center overflow-y-auto overflow-x-hidden bg-gray-100 bg-opacity-60 justify-center items-center w- md:inset-0 h-[calc(100%)] max-h-full not-sr-only");
+          
+        }else {
+          setactiveModal("absolute overflow-y-auto overflow-x-hidden justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full sr-only")
+        
+        }
+      }
 
-    // const openModal = () => {
-    //     setModalIsOpen(true);
-    // };
 
-    // const closeModal = () => {
-    //     setModalIsOpen(false);
-    // };
+   
 
-    const nose = (info) => {
-        return (
-            <p>hola {info.name_user}</p>
-        )
-    }
     return (
         <>
             <div class="p-4 sm:ml-64">
                 <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
                     <div class='flex justify-center items-center flex-col gap-32' style={{ minHeight: '85vh' }}>
                         <div class='w-3/4 text-black text-4xl flex items-center justify-center font-semibold text-center'>
-                            <p>Aqui se crean usuarios bb</p>
+                            <p>Creacion de Usuarios</p>
                         </div>
 
 
@@ -86,7 +86,7 @@ export const CrearUsuario = () => {
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 flex gap-5 justify-center">
-                                            <button type="button" class='hover:bg-gray-200 p-1 rounded-sm'>
+                                            <button type="button" onClick={abrir}  class='hover:bg-gray-200 p-1 rounded-sm'>
                                                 <svg class="w-6 h-6 text-black dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12h4m-2 2v-4M4 18v-1a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v1c0 .6-.4 1-1 1H5a1 1 0 0 1-1-1Zm8-10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                                                 </svg>
@@ -137,6 +137,56 @@ export const CrearUsuario = () => {
                         </div>
                         {/* {datauser.map((info) => nose(info))} */}
                     </div>
+                    <div class={activeModal} >
+                    <div class="p-4 sm:ml-64">
+                <div class="p-4  border-dashed rounded-lg dark:border-gray-700 mt-14">
+                    <div className='bg-white rounded-lg shadow dark:bg-gray-700 '>
+          
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                    Create New User
+                </h3>
+                <button type="button" onClick={abrir} class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+          
+            <form class="p-4 md:p-5">
+            <div class="p-6 space-y-6">
+                            <div class="grid grid-cols-6 gap-6">
+                                <div class="col-span-6 sm:col-span-3">
+                                    <label for="first-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name</label>
+                                    <input type="text" name="first-name" id="first-name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green focus:border-green block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green dark:focus:border-green" placeholder="Bonnie" required="" />
+                                </div>
+                                <div class="col-span-6 sm:col-span-3">
+                                    <label for="last-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Name</label>
+                                    <input type="text" name="last-name" id="last-name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green focus:border-green block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green dark:focus:border-green" placeholder="Green" required="" />
+                                </div>
+                                <div class="col-span-6 sm:col-span-3">
+                                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                                    <input type="email" name="email" id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green focus:border-green block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green dark:focus:border-green" placeholder="example@company.com" required="" />
+                                </div>
+                               
+                                
+                                <div class="col-span-6 sm:col-span-3">
+                                    <label for="current-password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Current Password</label>
+                                    <input type="password" name="current-password" id="current-password" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green focus:border-green block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green dark:focus:border-green" placeholder="••••••••" required="" />
+                                </div>
+                               
+                            </div>
+                        </div>
+                        {/* <!-- Modal footer --> */}
+                        <div class="flex items-center p-6 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b dark:border-gray-600">
+                            <button type="submmit" class="w-full my-4 text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Save all</button>
+                        </div>
+            </form>
+        </div>
+    </div>
+</div> 
+</div>
                 </div>
             </div>
         </>
