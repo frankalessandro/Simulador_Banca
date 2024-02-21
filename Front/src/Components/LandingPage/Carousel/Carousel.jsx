@@ -1,6 +1,6 @@
 import React from 'react'
 import FrontImage from '../../../assets/Img/Main_Image.svg'
-import prueba from '../../../assets/Img/Carousel/prueba2.jpg'
+import prueba from '../../../assets/Img/UsoVario/Ahorro.svg'
 import prueba1 from '../../../assets/Img/Carousel/carousel1.png'
 import prueba2 from '../../../assets/Img/Carousel/carousel2.png'
 import prueba3 from '../../../assets/Img/Carousel/carousel3.png'
@@ -8,9 +8,9 @@ import prueba3 from '../../../assets/Img/Carousel/carousel3.png'
 export const Carousel = () => {
     return (
         <>
-            <div className="p-3" class="flex place-content-center">
+            <div class="flex place-content-center justify-center w-full opac">
 
-                <div id="controls-carousel" class="relative w-9/12 mt-2  " data-carousel="static">
+                <div id="controls-carousel" class="relative w-11/12 mt-2" data-carousel="static">
                
                     <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
                      
