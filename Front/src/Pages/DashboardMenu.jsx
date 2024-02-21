@@ -5,6 +5,7 @@ import { DashboardComponent } from '../Components/DashBoard/DashboardComponent'
 export const DashboardMenu = () => {
     return (
         <>
+        {console.log("sad")}
             <DashboardComponent/> 
         </>
     )

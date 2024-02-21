@@ -11,25 +11,25 @@ import { InfoOpeInternacional } from './Formulario/InfoOpeInternacional';
 export const ContentCuentaAhorroNatural = ({ }) => {
 
 
-  const [active , setactive] = useState("p-4 sm:ml-64  not-sr-only")
+  const [active, setactive] = useState("p-4 sm:ml-64  not-sr-only")
 
   const [contenidoSeleccionado1, setContenidoSeleccionado1] = useState('');
   // Función para manejar clics de botones
   const handleBotonClick = (contenido) => {
     setContenidoSeleccionado1(contenido)
   }
-  console.log({contenidoSeleccionado1})
+  console.log({ contenidoSeleccionado1 })
 
   const volver = () => {
-    if(active === "p-4 sm:ml-64  not-sr-only"){
+    if (active === "p-4 sm:ml-64  not-sr-only") {
       setactive("p-4 sm:ml-64  sr-only");
-      
-    }else {
+
+    } else {
       setactive("p-4 sm:ml-64  not-sr-only")
       handleBotonClick('FormularioPersonaNatural')
     }
   }
-  
+
 
 
   return (
@@ -68,13 +68,13 @@ export const ContentCuentaAhorroNatural = ({ }) => {
           </div>
         </div>
       </div>
-        {contenidoSeleccionado1 === 'InfoPersonal' && <InfoPersonal   regresar={volver}/>}
-        {contenidoSeleccionado1 === 'contacto' && <InfoContacto regresar={volver}/> }
-        {contenidoSeleccionado1 === 'tributaria' && <InfoTributaria regresar={volver}/>}
-        {contenidoSeleccionado1 === 'economica' && <InfoEconomicaLaboral regresar={volver}/>}
-        {contenidoSeleccionado1 === 'financiera' && <InfoFinanciera regresar={volver}/>}
-        {contenidoSeleccionado1 === 'operaciones' && <InfoOpeInternacional regresar={volver}/>}
-        {/* Renderiza otros contenidos según sea necesario */}
+      {contenidoSeleccionado1 === 'InfoPersonal' && <InfoPersonal regresar={volver} />}
+      {contenidoSeleccionado1 === 'contacto' && <InfoContacto regresar={volver} />}
+      {contenidoSeleccionado1 === 'tributaria' && <InfoTributaria regresar={volver} />}
+      {contenidoSeleccionado1 === 'economica' && <InfoEconomicaLaboral regresar={volver} />}
+      {contenidoSeleccionado1 === 'financiera' && <InfoFinanciera regresar={volver} />}
+      {contenidoSeleccionado1 === 'operaciones' && <InfoOpeInternacional regresar={volver} />}
+      {/* Renderiza otros contenidos según sea necesario */}
     </>
   )
 }

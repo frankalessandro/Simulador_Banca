@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import Cookies from 'js-cookie';
+import { Navigate } from 'react-router-dom';
 
 const AuthContext = createContext();
 
@@ -33,15 +34,18 @@ export const AuthProvider = ({ children }) => {
     setUser(userData);
     Cookies.set('isLoggedIn', 'true', { expires: 7 });
     setIsLoggedIn(true);
-    setIsDirector(userData.rol ==='1');
+    setIsDirector(userData.rol === '1');
   };
 
   const logout = () => {
+    console.log("se presiono  cerrar sesion")
     Cookies.remove('User');
     setUser(null);
-    setIsAdmin(false);
+    setIsDirector(false);
     Cookies.remove('isLoggedIn');
     setIsLoggedIn(false);
+    // Utiliza Navigate para redirigir en lugar de window.location
+    window.location = "/landing"
   };
 
   const setUserData = (userData) => {
@@ -55,10 +59,9 @@ export const AuthProvider = ({ children }) => {
   const getCookie = (name) => {
     return Cookies.get(name);
   };
-  const updateUserData = async (userData) => {
 
+  const updateUserData = async (userData) => {
     try {
-      // Realiza la solicitud al servidor para actualizar los datos del usuario
       const response = await fetch('http://localhost:3000/updateUser', {
         method: 'POST',
         headers: {
@@ -67,18 +70,13 @@ export const AuthProvider = ({ children }) => {
         body: JSON.stringify(userData),
       });
 
-  
       if (response.ok) {
-        // Los datos del usuario se actualizaron correctamente en el servidor
         const updatedUserData = await response.json();
-        setUserData(updatedUserData); // Actualiza los datos del usuario en el contexto
-
-        // Guarda los datos actualizados en una cookie
+        setUserData(updatedUserData);
         Cookies.set('User', JSON.stringify(updatedUserData));
 
         return { success: true, message: 'Datos de usuario actualizados con éxito' };
       } else {
-        // Hubo un error al actualizar los datos del usuario en el servidor
         const errorData = await response.json();
         return { success: false, message: errorData.message };
       }
@@ -87,6 +85,7 @@ export const AuthProvider = ({ children }) => {
       return { success: false, message: 'Error en el servidor' };
     }
   };
+
   return (
     <AuthContext.Provider
       value={{
@@ -99,7 +98,7 @@ export const AuthProvider = ({ children }) => {
         setCookie,
         getCookie,
         isDirector,
-        updateUserData
+        updateUserData,
       }}
     >
       {children}
