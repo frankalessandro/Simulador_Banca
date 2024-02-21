@@ -109,6 +109,22 @@ CREATE TABLE FormPersonNarural (
     IT_Ciudad_origen varchar(20)
 );
 
+-- Llaves foraneas
+ALTER TABLE usuarios
+ADD FOREIGN KEY (Rol) REFERENCES Rol(ID_Rol);
+
+ALTER TABLE formpersonnarural
+add foreign key (id_cliente) references cliente(id_cliente);
+
+ALTER TABLE producto
+add foreign key (tipo) references tipoproducto(id_tipo);
+
+ALTER TABLE producto
+add foreign key (id_cliente) references cliente(id_cliente);
+
+ALTER TABLE producto
+add foreign key (asignado) references usuarios(id_usuario);
+
 -- Insertar datos en la tabla Rol
 INSERT INTO Rol (ID_Rol, Nombre, Estado) VALUES
 (1, 'Director', 'Activo'),
