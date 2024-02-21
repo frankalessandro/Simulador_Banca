@@ -3,14 +3,26 @@ import { InfoContacto } from './InfoContacto'
 
 export const InfoPersonal = ({ regresar }) => {
 
+  const [active1 , setactive1] = useState("p-4 sm:ml-64  not-sr-only")
   const [contenidoSeleccionado2, setcontenidoSeleccionado2] = useState('')
   const handleBotonClick = (contenido) => {
     setcontenidoSeleccionado2(contenido)
   }
+console.log(active1)
+console.log(contenidoSeleccionado2)
+  const Siguiente = () => {
+    if(active1 === "p-4 sm:ml-64  not-sr-only"){
+      setactive1("p-4 sm:ml-64  sr-only");
+
+    }else {
+      setactive1("p-4 sm:ml-64  not-sr-only")
+      handleBotonClick('Infopersonal')
+    }
+  }
   
   return (
     <>
-      <div class="p-4  sm:ml-64">
+      <div class={active1}>
         <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
           <div class='pt-12+ flex justify-start items-center flex-col gap-10 bg-white' style={{ minHeight: '85vh' }}>
             <h1 class='w-3/4 p-0 text-black text-4xl flex items-center justify-center font-semibold text-center'>Información personal</h1>
@@ -96,7 +108,7 @@ export const InfoPersonal = ({ regresar }) => {
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
                   </svg>
                 </a>
-                <a onClick={() => handleBotonClick('contacto')} class="flex items-center justify-center px-4 h-10 text-base font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                <a onClick={() => handleBotonClick('contacto',Siguiente())} class="flex items-center justify-center px-4 h-10 text-base font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                   Siguiente
                   <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />

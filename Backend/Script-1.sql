@@ -18,7 +18,7 @@ CREATE TABLE TipoProducto (
 );
 
 CREATE TABLE usuarios (
-    ID_Usuario int PRIMARY KEY,
+    ID_Usuario int PRIMARY KEY, id_usuario integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
     Name_User varchar(30),
     Password varchar(30),
     Rol int,
