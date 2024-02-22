@@ -19,7 +19,7 @@ CREATE TABLE TipoProducto (
 );
 
 CREATE TABLE usuarios (
-    ID_Usuario int PRIMARY KEY, id_usuario integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    ID_Usuario int PRIMARY KEY,
     Name_User varchar(30),
     Password varchar(30),
     Rol int,
@@ -119,11 +119,11 @@ add foreign key (tipo) references tipoproducto(id_tipo);
 ALTER TABLE producto
 add foreign key (asignado) references usuarios(id_usuario);
 
-ALTER TABLE producto
-add foreign key (asignado) references usuarios(id_usuario);
+ALTER TABLE cliente
+add foreign key (producto) references producto(ID_Producto);
 
-ALTER TABLE producto
-add foreign key (tipo) references tipoproducto(id_tipo);
+ALTER TABLE cliente
+add foreign key (inf_cliente) references FormPersonNatural(ID_FormPN);
 
 -- Insertar datos en la tabla Rol
 INSERT INTO Rol (ID_Rol, Nombre, Estado) VALUES
@@ -145,19 +145,3 @@ JOIN producto p ON c.producto = p.tipo
 JOIN TipoProducto tp ON p.Tipo = tp.ID_tipo
 JOIN usuarios u ON c.inf_cliente = u.ID_Usuario
 JOIN FormPersonNatural fpn ON u.ID_Usuario = fpn.ID_FormPN;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
