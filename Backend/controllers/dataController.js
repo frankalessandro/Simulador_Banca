@@ -104,9 +104,22 @@ const user = async (req, res)=> {
     }
 }
 
+const getcliente = async (req,res)=>{
+try {
+  
+const result = await pool.query('SELECT c.ID_Cliente, fpn.IP_primerNombre as Nombre_Cliente, tp.Descripcion as Nombre_Producto, c.estado FROM cliente c JOIN producto p ON c.producto = p.tipo JOIN TipoProducto tp ON p.Tipo = tp.ID_tipo JOIN usuarios u ON c.inf_cliente = u.ID_Usuario JOIN FormPersonNatural fpn ON u.ID_Usuario = fpn.ID_FormPN;')
+ if (result.rows.length > 0){
+  return res.status(200).json({ result });
+ }
+} catch (error) {
+  console.error(error);
+}
+
+}
+
 module.exports = {
     loginUser,
     user,
-    
+    getcliente,
 }
 

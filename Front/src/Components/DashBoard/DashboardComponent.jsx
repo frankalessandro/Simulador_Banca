@@ -37,7 +37,7 @@ export const DashboardComponent = () => {
                             </button>
                             <a href="#" class="flex ms-2 md:me-24">
                                 <img src={Logo} class="h-8 me-3" alt="ClarBankLogo" />
-                                <span class=""><img src='' alt="" class='relative h-4  top-2 ' /></span>
+                                <span class=""><img src={Namelogo} alt="" class='relative h-4  top-2 ' /></span>
                             </a>
                         </div>
                         <div class="flex items-center">
