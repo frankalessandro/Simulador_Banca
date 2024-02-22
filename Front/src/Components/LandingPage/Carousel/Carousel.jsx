@@ -1,9 +1,10 @@
 import React from 'react'
 import FrontImage from '../../../assets/Img/Main_Image.svg'
-import prueba from '../../../assets/Img/UsoVario/Ahorro.svg'
-import prueba1 from '../../../assets/Img/Carousel/carousel1.png'
-import prueba2 from '../../../assets/Img/Carousel/carousel2.png'
-import prueba3 from '../../../assets/Img/Carousel/carousel3.png'
+import ImagenPrueba from '../../../assets/Img/UsoVario/InfoPersonal.svg'
+import operacionesInternacionales from '../../../assets/Img/UsoVario/Internet.svg'
+import personalinfo from '../../../assets/Img/UsoVario/MainInfo.svg'
+import economicaLaboral from '../../../assets/Img/UsoVario/Support.svg'
+import tributaria from '../../../assets/Img/UsoVario/SelectInfo.svg'
 
 export const Carousel = () => {
     return (
@@ -15,23 +16,23 @@ export const Carousel = () => {
                     <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
                      
                         <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                            <img src={prueba} class="absolute block w-9/12 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
+                            <img src={ImagenPrueba} class="absolute w-9/12 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
                         </div>
                      
                         <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
-                            <img src={FrontImage} class="absolute block w-2/5 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
+                            <img src={operacionesInternacionales} class="absolute block w-2/5 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
                         </div>
           
                         <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                            <img src={prueba1} class="absolute block w-2/5 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
+                            <img src={economicaLaboral} class="absolute block w-2/5 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
                         </div>
                  
                         <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                            <img src={prueba2} class="absolute block w-2/5 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
+                            <img src={personalinfo} class="absolute block w-2/5 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
                         </div>
 
                         <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                            <img src={prueba3} class="absolute block w-9/12 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
+                            <img src={tributaria} class="absolute block w-9/12 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
                         </div>
                     </div>
 
