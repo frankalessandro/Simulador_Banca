@@ -1,5 +1,5 @@
 import React from 'react'
-import PrincipalImage from '../../../assets/Img/Login/Inicio2.png'
+import PrincipalImage from '../../../assets/Img/UsoVario/Analytics.svg'
 import { useAuth } from '../../../context/AuthContext'
 useAuth
 export const PrincipalPage = () => {
