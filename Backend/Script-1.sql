@@ -14,20 +14,21 @@ CREATE TABLE producto (
 );
 
 CREATE TABLE TipoProducto (
-    ID_tipo int PRIMARY KEY,
+    ID_tipo serial PRIMARY KEY,
     Descripcion varchar(30)
 );
 
 CREATE TABLE usuarios (
-    ID_Usuario int PRIMARY KEY,
+    ID_Usuario SERIAL PRIMARY KEY,
     Name_User varchar(30),
     Password varchar(30),
     Rol int,
     Estado varchar(15)
 );
 
+
 CREATE TABLE Rol (
-    ID_Rol int PRIMARY KEY,
+    ID_Rol serial PRIMARY KEY,
     Nombre varchar(20),
     Estado varchar(15)
 );

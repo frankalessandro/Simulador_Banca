@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'; 
 
 export const CrearUsuario = () => {
+    const { register, handleSubmit,setValue  } = useForm();
 
     const [datauser, setdatauser] = useState([]);
 
@@ -34,7 +36,33 @@ export const CrearUsuario = () => {
         }
     }
 
-
+    const AddUser = async (data) => {
+      
+        try {
+          const response = await fetch('http://localhost:3000/AddUser', {
+            method: 'POST',
+            headers: {
+              "Content-type": "application/json" 
+            },
+            body: JSON.stringify({
+              name: data.name,
+              password: data.password,
+              rol: data.rol
+             })
+          });
+             console.log(data)
+    
+          if (response.ok) {
+            alert('Registro de producto exitoso');
+          } 
+          else {
+              console.error('Error al registrar producto');
+            }
+          }
+         catch (error) {
+          console.error('Error en el servidor', error);
+        }
+      };
 
 
     return (
@@ -73,7 +101,7 @@ export const CrearUsuario = () => {
                                             </svg>
                                             <div class="ps-3">
                                                 <div class="text-base font-semibold">Nombre Usuario</div>
-                                                <div class="font-normal text-gray-500">Correo Usuario</div>
+                                                {/* <div class="font-normal text-gray-500">Correo Usuario</div> */}
                                             </div>
                                         </th>
                                         <td class="px-6 py-4">
@@ -103,7 +131,7 @@ export const CrearUsuario = () => {
                                                         </svg>
                                                         <div class="ps-3">
                                                             <div class="text-base font-semibold">{date.name_user}</div>
-                                                            <div class="font-normal text-gray-500">abenitez@clarbank.com</div>
+                                                            {/* <div class="font-normal text-gray-500">abenitez@clarbank.com</div> */}
                                                         </div>
                                                     </th>
                                                     <td class="px-6 py-4">
@@ -153,28 +181,21 @@ export const CrearUsuario = () => {
                                         </button>
                                     </div>
 
-                                    <form class="p-4 md:p-5">
+                                    <form class="p-4 md:p-5" onSubmit={handleSubmit(AddUser)}>
                                         <div class="p-6 space-y-6">
                                             <div class="grid grid-cols-6 gap-6">
                                                 <div class="col-span-6 sm:col-span-3">
-                                                    <label for="first-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
-                                                    <input type="text" name="first-name" id="first-name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green focus:border-green block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green dark:focus:border-green" placeholder="Nombre Asesor" required="" />
+                                                    <label htmlFor='name' class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
+                                                    <input type="text" name="name" id="name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green focus:border-green block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green dark:focus:border-green" placeholder="Nombre" {...register("name", { required: true })} required="" />
                                                 </div>
                                                 <div class="col-span-6 sm:col-span-3">
-                                                    <label for="last-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Apellido</label>
-                                                    <input type="text" name="last-name" id="last-name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green focus:border-green block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green dark:focus:border-green" placeholder="Apellido Asesor" required="" />
+                                                    <label htmlFor='password' class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contraseña</label>
+                                                    <input type="text" name="password" id="password" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green focus:border-green block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green dark:focus:border-green" placeholder="Contraseña" {...register("password", { required: true })}  required="" />
                                                 </div>
                                                 <div class="col-span-6 sm:col-span-3">
-                                                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Correo</label>
-                                                    <input type="email" name="email" id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green focus:border-green block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green dark:focus:border-green" placeholder="Correo Asesor" required="" />
+                                                    <label htmlFor='rol' class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rol</label>
+                                                    <input type="number" name="rol" id="rol" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green focus:border-green block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green dark:focus:border-green" placeholder="Rol" {...register("rol", { required: true })} required="" />
                                                 </div>
-
-
-                                                <div class="col-span-6 sm:col-span-3">
-                                                    <label for="current-password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contraseña</label>
-                                                    <input type="password" name="current-password" id="current-password" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green focus:border-green block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green dark:focus:border-green" placeholder="••••••••" required="" />
-                                                </div>
-
                                             </div>
                                         </div>
                                         {/* <!-- Modal footer --> */}
