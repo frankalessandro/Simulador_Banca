@@ -26,7 +26,7 @@ export const CrearUsuario = () => {
 
     const abrir = () => {
         if (activeModal === "absolute overflow-y-auto overflow-x-hidden justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full sr-only") {
-            setactiveModal("absolute flex items-center overflow-y-auto overflow-x-hidden bg-gray-100 bg-opacity-60 justify-center items-center w- md:inset-0 h-[calc(100%)] max-h-full not-sr-only");
+            setactiveModal("absolute flex items-center overflow-y-auto overflow-x-hidden bg-gray-400 bg-opacity-60 justify-center items-center w- md:inset-0 h-[calc(100%)] max-h-full not-sr-only");
 
         } else {
             setactiveModal("absolute overflow-y-auto overflow-x-hidden justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full sr-only")
@@ -138,7 +138,7 @@ export const CrearUsuario = () => {
                     </div>
                     <div class={activeModal} >
                         <div class="p-4 sm:ml-64">
-                            <div class="p-4  border-dashed rounded-lg dark:border-gray-700 mt-14">
+                            <div class="p-4 border-dashed rounded-lg dark:border-gray-700 mt-14">
                                 <div className='bg-white rounded-lg shadow dark:bg-gray-700 '>
 
                                     <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
