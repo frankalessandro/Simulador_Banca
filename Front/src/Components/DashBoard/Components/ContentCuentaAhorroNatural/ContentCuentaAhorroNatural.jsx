@@ -11,6 +11,7 @@ import personalinfo from '../../../../assets/Img/UsoVario/MainInfo.svg'
 import economicaLaboral from '../../../../assets/Img/UsoVario/Support.svg'
 import tributaria from '../../../../assets/Img/UsoVario/SelectInfo.svg'
 import detalleFinanciera from '../../../../assets/Img/UsoVario/Analytics.svg'
+import { Formulario } from './Formulario/Formulario';
 
 export const ContentCuentaAhorroNatural = ({ }) => {
 
@@ -101,12 +102,14 @@ export const ContentCuentaAhorroNatural = ({ }) => {
           </div>
         </div>
       </div>
-      {contenidoSeleccionado1 === 'InfoPersonal' && <InfoPersonal regresar={volver} />}
+      <Formulario contenidoSeleccionado1={contenidoSeleccionado1} regresar={volver} handleBotonClick={handleBotonClick}/>
+      
+      {/* {contenidoSeleccionado1 === 'InfoPersonal' && <InfoPersonal regresar={volver} />}
       {contenidoSeleccionado1 === 'contacto' && <InfoContacto regresar={volver} />}
       {contenidoSeleccionado1 === 'tributaria' && <InfoTributaria regresar={volver} />}
       {contenidoSeleccionado1 === 'economica' && <InfoEconomicaLaboral regresar={volver} />}
       {contenidoSeleccionado1 === 'financiera' && <InfoFinanciera regresar={volver} />}
-      {contenidoSeleccionado1 === 'operaciones' && <InfoOpeInternacional regresar={volver} />}
+      {contenidoSeleccionado1 === 'operaciones' && <InfoOpeInternacional regresar={volver} />} */}
     </>
   )
 }

@@ -1,6 +1,8 @@
 import React from 'react'
 
 export const InfoContacto = ({regresar}) => {
+ 
+
   return (
     <>
        <div class="p-4 sm:ml-64">
@@ -12,8 +14,8 @@ export const InfoContacto = ({regresar}) => {
                 <p>Dirección residencia</p>
                 <input type="text" class="rounded-md" />
               </div>
-              <div>
-                <p>Bloque/Torre</p>
+              <div class='flex flex-col w-52 '>
+                <label>Bloque/Torre</label>
                 <input type="text" class="rounded-md" />
               </div>
               <div>
