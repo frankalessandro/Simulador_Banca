@@ -1,47 +1,50 @@
-import React, { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'; 
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 
 export const CrearUsuario = () => {
-    const { register, handleSubmit,setValue  } = useForm();
+    const { register, handleSubmit, setValue } = useForm();
 
 
    
     const [datauser, setdatauser] = useState([]);
 
+    
+    const [forceUpdate, setForceUpdate] = useState(false);
+
+
     const [activeModal, setactiveModal] = useState("absolute overflow-y-auto overflow-x-hidden justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full sr-only")
     const [activeModal1, setactiveModal1] = useState("absolute overflow-y-auto overflow-x-hidden justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full sr-only")
 
+
     useEffect(() => {
-        const fecthData = async () => {
+        const fetchData = async () => {
             try {
                 const response = await fetch('http://localhost:3000/user');
                 if (!response.ok) {
-                    throw new Error('Network response was not ok')
+                    throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
-                setdatauser(data.result.rows)
-console.log(datauser)
+
+                setdatauser(data.result.rows);
 
             } catch (error) {
-                console.error('error al encontrar informacion')
+                console.error('Error al encontrar información');
             }
         };
-        fecthData();
-    }, []);
 
 
- 
+        fetchData();
+    }, [forceUpdate]); // Hacer que el efecto dependa de forceUpdate
 
     const abrir = () => {
-        if (activeModal === "absolute overflow-y-auto overflow-x-hidden justify-center items-center w-full md:inset-0 h-[calc(100%)] max-h-full sr-only") {
-            setactiveModal("absolute flex items-center overflow-y-auto overflow-x-hidden bg-gray-400 bg-opacity-60 justify-center items-center w- md:inset-0 h-[calc(100%)] max-h-full not-sr-only");
+        setactiveModal((prev) =>
+            prev === "absolute overflow-y-auto overflow-x-hidden justify-center items-center w-full md:inset-0 h-[calc(100%)] max-h-full sr-only"
+                ? "absolute flex items-center overflow-y-auto overflow-x-hidden bg-gray-400 bg-opacity-60 justify-center items-center w- md:inset-0 h-[calc(100%)] max-h-full not-sr-only"
+                : "absolute overflow-y-auto overflow-x-hidden justify-center items-center w-full md:inset-0 h-[calc(100%)] max-h-full sr-only"
+        );
+    };
 
-        } else {
-            setactiveModal("absolute overflow-y-auto overflow-x-hidden justify-center items-center w-full md:inset-0 h-[calc(100%)] max-h-full sr-only")
-
-        }
-    }
     const abrir1 = () => {
         if (activeModal1 === "absolute overflow-y-auto overflow-x-hidden justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full sr-only") {
             setactiveModal1("absolute flex items-center overflow-y-auto overflow-x-hidden bg-gray-400 bg-opacity-60 justify-center items-center w- md:inset-0 h-[calc(100%)] max-h-full not-sr-only");
@@ -52,33 +55,36 @@ console.log(datauser)
         }
     }
 
+
     const AddUser = async (data) => {
-      
         try {
-          const response = await fetch('http://localhost:3000/AddUser', {
-            method: 'POST',
-            headers: {
-              "Content-type": "application/json" 
-            },
-            body: JSON.stringify({
-              name: data.name,
-              password: data.password,
-              rol: data.rol
-             })
-          });
-             console.log(data)
-    
-          if (response.ok) {
-            alert('Registro de producto exitoso');
-          } 
-          else {
-              console.error('Error al registrar producto');
+            const response = await fetch('http://localhost:3000/AddUser', {
+                method: 'POST',
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify({
+                    name: data.name,
+                    password: data.password,
+                    rol: 2
+                })
+            });
+
+            console.log(data);
+
+            if (response.ok) {
+                alert('Registro de usuario exitoso');
+                // Actualiza el estado local para forzar la re-renderización
+                setForceUpdate((prev) => !prev);
+                abrir();
+            } else {
+                console.error('Error al registrar usuario');
+                alert('Error al registrar usuarios');
             }
-          }
-         catch (error) {
-          console.error('Error en el servidor', error);
+        } catch (error) {
+            console.error('Error en el servidor', error);
         }
-      };
+    };
 
 
     return (
@@ -249,11 +255,16 @@ console.log(datauser)
                                                 </div>
                                                 <div class="col-span-6 sm:col-span-3">
                                                     <label htmlFor='password' class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contraseña</label>
-                                                    <input type="text" name="password" id="password" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green focus:border-green block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green dark:focus:border-green" placeholder="Contraseña" {...register("password", { required: true })}  required="" />
+                                                    <input type="text" name="password" id="password" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green focus:border-green block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green dark:focus:border-green" placeholder="Contraseña" {...register("password", { required: true })} required="" />
                                                 </div>
                                                 <div class="col-span-6 sm:col-span-3">
                                                     <label htmlFor='rol' class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rol</label>
-                                                    <input type="number" name="rol" id="rol" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green focus:border-green block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green dark:focus:border-green" placeholder="Rol" {...register("rol", { required: true })} required="" />
+                                                    <select name="rol" id="rol" class="rounded-md w-full border bg-gray-50 border-gray-300 text-gray-900 text-sm p-2.5 focus:ring-green focus:border-green dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green dark:focus:border-green">
+                                                        <option value="" disabled selected>
+                                                            Seleccionar
+                                                        </option>
+                                                        <option value="2">Asesor</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
