@@ -47,51 +47,51 @@ export const ContentCuentaAhorroNatural = ({ }) => {
             </div>
             <div class='w-3/4'>
               <form>
-                <div class="grid gap-8 mb-8 md:grid-cols-3">
-                  <div onClick={() => handleBotonClick('InfoPersonal', volver())} class="cursor-pointer flex flex-col w-96 min-h-56 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <div class="grid gap-8 mb-8 lg:grid-cols-3">
+                  <div onClick={() => handleBotonClick('InfoPersonal', volver())} class="cursor-pointer flex flex-col w-full min-h-56 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <img class="rounded-t-lg h-56" src={personalinfo} alt="" />
-                    <div class="w-full ">
-                      <button type="button" onClick={() => handleBotonClick('InfoPersonal', volver())} className=" w-full flex justify-center px-8 py-3.5 text-xl font-medium text-black bg-gray-200 hover:bg-lightGreen hover:text-black focus:ring-1 focus:outline-none focus:ring-green rounded-b-md text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
+                    <div class="w-full h-full">
+                      <button type="button" onClick={() => handleBotonClick('InfoPersonal', volver())} className=" w-full h-full flex justify-center items-center px-8 py-3.5 text-xl font-medium text-black bg-gray-200 hover:bg-lightGreen hover:text-black focus:ring-1 focus:outline-none focus:ring-green rounded-b-md text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
                         <span>Personal</span>
                       </button>
                     </div>
                   </div>
-                  <div onClick={() => handleBotonClick('contacto', volver())} class="cursor-pointer flex flex-col w-96 min-h-56 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                  <div onClick={() => handleBotonClick('contacto', volver())} class="cursor-pointer flex flex-col w-full min-h-56 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <img class="rounded-t-lg h-56" src={ImagenPrueba} alt="" />
-                    <div class="w-full ">
-                      <button type="button" onClick={() => handleBotonClick('contacto', volver())} className=" w-full flex justify-center px-8 py-3.5 text-xl font-medium text-black bg-gray-200 hover:bg-lightGreen hover:text-black focus:ring-1 focus:outline-none focus:ring-green rounded-b-md text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
+                    <div class="w-full h-full">
+                      <button type="button" onClick={() => handleBotonClick('contacto', volver())} className=" w-full h-full flex justify-center items-center px-8 py-3.5 text-xl font-medium text-black bg-gray-200 hover:bg-lightGreen hover:text-black focus:ring-1 focus:outline-none focus:ring-green rounded-b-md text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
                         <span>Contacto</span>
                       </button>
                     </div>
                   </div>
-                  <div onClick={() => handleBotonClick('economica', volver())} class="cursor-pointer flex flex-col w-96 min-h-56 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                  <div onClick={() => handleBotonClick('economica', volver())} class="cursor-pointer flex flex-col w-full min-h-56 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <img class="rounded-t-lg h-56" src={economicaLaboral} alt="" />
-                    <div class="w-full ">
-                      <button type="button" onClick={() => handleBotonClick('economica', volver())} className=" w-full flex justify-center px-8 py-3.5 text-xl font-medium text-black bg-gray-200 hover:bg-lightGreen hover:text-black focus:ring-1 focus:outline-none focus:ring-green rounded-b-md text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
+                    <div class="w-full h-full">
+                      <button type="button" onClick={() => handleBotonClick('economica', volver())} className=" w-full h-full flex justify-center items-center px-8 py-3.5 text-xl font-medium text-black bg-gray-200 hover:bg-lightGreen hover:text-black focus:ring-1 focus:outline-none focus:ring-green rounded-b-md text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
                         <span>Económica y Laboral</span>
                       </button>
                     </div>
                   </div>
-                  <div onClick={() => handleBotonClick('financiera', volver())} class="cursor-pointer flex flex-col w-96 min-h-56 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                  <div onClick={() => handleBotonClick('financiera', volver())} class="cursor-pointer flex flex-col w-full min-h-56 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <img class="rounded-t-lg h-56" src={detalleFinanciera} alt="" />
-                    <div class="w-full ">
-                      <button type="button" onClick={() => handleBotonClick('financiera', volver())} className=" w-full flex justify-center px-8 py-3.5 text-xl font-medium text-black bg-gray-200 hover:bg-lightGreen hover:text-black focus:ring-1 focus:outline-none focus:ring-green rounded-b-md text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
+                    <div class="w-full h-full">
+                      <button type="button" onClick={() => handleBotonClick('financiera', volver())} className=" w-full h-full flex justify-center items-center px-8 py-3.5 text-xl font-medium text-black bg-gray-200 hover:bg-lightGreen hover:text-black focus:ring-1 focus:outline-none focus:ring-green rounded-b-md text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
                         <span>Detalle Información Financiera</span>
                       </button>
                     </div>
                   </div>
-                  <div onClick={() => handleBotonClick('tributaria', volver())} class="cursor-pointer flex flex-col w-96 min-h-56 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                  <div onClick={() => handleBotonClick('tributaria', volver())} class="cursor-pointer flex flex-col w-full min-h-56 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <img class="rounded-t-lg h-56" src={tributaria} alt="" />
-                    <div class="w-full ">
-                      <button type="button" onClick={() => handleBotonClick('tributaria', volver())} className=" w-full flex justify-center px-8 py-3.5 text-xl font-medium text-black bg-gray-200 hover:bg-lightGreen hover:text-black focus:ring-1 focus:outline-none focus:ring-green rounded-b-md text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
+                    <div class="w-full h-full">
+                      <button type="button" onClick={() => handleBotonClick('tributaria', volver())} className=" w-full h-full flex justify-center items-center px-8 py-3.5 text-xl font-medium text-black bg-gray-200 hover:bg-lightGreen hover:text-black focus:ring-1 focus:outline-none focus:ring-green rounded-b-md text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
                         <span>Tributaria</span>
                       </button>
                     </div>
                   </div>
-                  <div onClick={() => handleBotonClick('operaciones', volver())} class="cursor-pointer flex flex-col w-96 min-h-56 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                  <div onClick={() => handleBotonClick('operaciones', volver())} class="cursor-pointer flex flex-col w-full min-h-56 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <img class="rounded-t-lg h-56" src={operacionesInternacionales} alt="" />
-                    <div class="w-full ">
-                      <button type="button" onClick={() => handleBotonClick('operaciones', volver())} className=" w-full flex justify-center px-8 py-3.5 text-xl font-medium text-black bg-gray-200 hover:bg-lightGreen hover:text-black focus:ring-1 focus:outline-none focus:ring-green rounded-b-md text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
+                    <div class="w-full h-full">
+                      <button type="button" onClick={() => handleBotonClick('operaciones', volver())} className=" w-full h-full flex justify-center items-center px-8 py-3.5 text-xl font-medium text-black bg-gray-200 hover:bg-lightGreen hover:text-black focus:ring-1 focus:outline-none focus:ring-green rounded-b-md text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
                         <span>Operaciones Internacionales</span>
                       </button>
                     </div>
