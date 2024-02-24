@@ -1,10 +1,4 @@
 import React, { useState } from 'react'
-import { InfoPersonal } from './Formulario/InfoPersonal'
-import { InfoContacto } from './Formulario/InfoContacto';
-import { InfoTributaria } from './Formulario/InfoTributaria';
-import { InfoEconomicaLaboral } from './Formulario/InfoEconomicaLaboral';
-import { InfoFinanciera } from './Formulario/InfoFinanciera';
-import { InfoOpeInternacional } from './Formulario/InfoOpeInternacional';
 import ImagenPrueba from '../../../../assets/Img/UsoVario/InfoPersonal.svg'
 import operacionesInternacionales from '../../../../assets/Img/UsoVario/Internet.svg'
 import personalinfo from '../../../../assets/Img/UsoVario/MainInfo.svg'
