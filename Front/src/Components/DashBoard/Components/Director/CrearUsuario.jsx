@@ -4,18 +4,11 @@ import { useForm } from 'react-hook-form';
 
 export const CrearUsuario = () => {
     const { register, handleSubmit, setValue } = useForm();
-
-
-   
     const [datauser, setdatauser] = useState([]);
-
-    
     const [forceUpdate, setForceUpdate] = useState(false);
-
-
     const [activeModal, setactiveModal] = useState("absolute overflow-y-auto overflow-x-hidden justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full sr-only")
     const [activeModal1, setactiveModal1] = useState("absolute overflow-y-auto overflow-x-hidden justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full sr-only")
-
+    const [selectedUserId, setSelectedUserId] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -32,8 +25,6 @@ export const CrearUsuario = () => {
                 console.error('Error al encontrar información');
             }
         };
-
-
         fetchData();
     }, [forceUpdate]); // Hacer que el efecto dependa de forceUpdate
 
@@ -45,15 +36,14 @@ export const CrearUsuario = () => {
         );
     };
 
-    const abrir1 = () => {
-        if (activeModal1 === "absolute overflow-y-auto overflow-x-hidden justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full sr-only") {
-            setactiveModal1("absolute flex items-center overflow-y-auto overflow-x-hidden bg-gray-400 bg-opacity-60 justify-center items-center w- md:inset-0 h-[calc(100%)] max-h-full not-sr-only");
-    
-        } else {
-            setactiveModal1("absolute overflow-y-auto overflow-x-hidden justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full sr-only")
-
-        }
-    }
+    const abrir1 = (userId) => {
+        setSelectedUserId(userId); // Almacena el userId seleccionado al abrir el modal de edición
+        setactiveModal1((prev) =>
+            prev === "absolute overflow-y-auto overflow-x-hidden justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full sr-only"
+                ? "absolute flex items-center overflow-y-auto overflow-x-hidden bg-gray-400 bg-opacity-60 justify-center items-center w- md:inset-0 h-[calc(100%)] max-h-full not-sr-only"
+                : "absolute overflow-y-auto overflow-x-hidden justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full sr-only"
+        );
+    };
 
 
     const AddUser = async (data) => {
@@ -66,7 +56,7 @@ export const CrearUsuario = () => {
                 body: JSON.stringify({
                     name: data.name,
                     password: data.password,
-                    rol: 2
+                    rol: data.rol
                 })
             });
 
@@ -86,6 +76,38 @@ export const CrearUsuario = () => {
         }
     };
 
+    const UpdateUser = async (data) => { 
+        console.log("holaaaaaaaaaa")
+        try {
+          const response = await fetch(`http://localhost:3000/UpdateUser/${selectedUserId}`, {
+            method: 'PUT',
+            headers: {
+              'Content-type': 'application/json',
+            },
+            body: JSON.stringify({
+                name: data.name,
+                password: data.password,
+                rol: data.rol
+            })
+          });
+    
+          if (response.ok) {
+            alert('Actualización de usuario exitosa');
+            setForceUpdate((prev) => !prev); // Actualiza el estado local para forzar la re-renderización
+            // ... (otras acciones después de la actualización)
+          } else {
+            console.error('Error al actualizar usuario');
+            alert('Error al actualizar usuario');
+          }
+        } catch (error) {
+          console.error('Error en el servidor', error);
+        }
+      };
+
+      const abrirEdicion = (userId) => {
+        setSelectedUserId(userId);
+        abrir1();
+    };
 
     return (
         <>
@@ -165,12 +187,12 @@ export const CrearUsuario = () => {
                                                         </div>
                                                     </td>
                                                     <td class="px-6 py-4 flex gap-5 justify-center">
-                                                        <button href="#" onClick={abrir1} class='hover:bg-gray-200 p-1 rounded-sm'>
+                                                        <button href="#"  onClick={() => abrirEdicion(date.id_usuario)} class='hover:bg-gray-200 p-1 rounded-sm'>
                                                             <svg class="w-6 h-6 text-neutralGreen dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.3 4.8 2.9 2.9M7 7H4a1 1 0 0 0-1 1v10c0 .6.4 1 1 1h11c.6 0 1-.4 1-1v-4.5m2.4-10a2 2 0 0 1 0 3l-6.8 6.8L8 14l.7-3.6 6.9-6.8a2 2 0 0 1 2.8 0Z" />
                                                             </svg>
                                                         </button>
-                                                        <button href="#"   class='hover:bg-gray-200 p-1 rounded-sm'>
+                                                        <button href="#" class='hover:bg-gray-200 p-1 rounded-sm'>
                                                             <svg class="w-6 h-6 text-red-600 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 18 6m0 12L6 6" />
                                                             </svg>
@@ -186,6 +208,7 @@ export const CrearUsuario = () => {
                         </div>
                         {/* {datauser.map((info) => nose(info))} */}
                     </div>
+                    {/* Editar Usuarios */}
                     <div class={activeModal1} >
                         <div class="p-4 sm:ml-64">
                             <div class="p-4 border-dashed rounded-lg dark:border-gray-700 mt-14">
@@ -203,20 +226,33 @@ export const CrearUsuario = () => {
                                         </button>
                                     </div>
 
-                                    <form class="p-4 md:p-5" onSubmit={handleSubmit(AddUser)}>
+                                    
+                                    
+                                    <form class="p-4 md:p-5" onSubmit={handleSubmit()}>
                                         <div class="p-6 space-y-6">
                                             <div class="grid grid-cols-6 gap-6">
                                                 <div class="col-span-6 sm:col-span-3">
                                                     <label htmlFor='name' class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
-                                                    <input type="text" name="name" id="name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green focus:border-green block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green dark:focus:border-green" placeholder='Nombre' {...register("name", { required: true })} required="" />
+                                                    <input type="text" name="name" id="name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green focus:border-green block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green dark:focus:border-green" placeholder="Nombre" {...register("name", { required: true })} required="" />
                                                 </div>
                                                 <div class="col-span-6 sm:col-span-3">
                                                     <label htmlFor='password' class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contraseña</label>
-                                                    <input type="text" name="password" id="password" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green focus:border-green block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green dark:focus:border-green" placeholder="Contraseña" {...register("password", { required: true })}  required="" />
+                                                    <input type="text" name="password" id="password" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green focus:border-green block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green dark:focus:border-green" placeholder="Contraseña" {...register("password", { required: true })} required="" />
                                                 </div>
                                                 <div class="col-span-6 sm:col-span-3">
                                                     <label htmlFor='rol' class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rol</label>
-                                                    <input type="number" name="rol" id="rol" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green focus:border-green block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green dark:focus:border-green" placeholder="Rol" {...register("rol", { required: true })} required="" />
+                                                    <select
+                                                        name="rol"
+                                                        id="rol"
+                                                        class="rounded-md w-full border bg-gray-50 border-gray-300 text-gray-900 text-sm p-2.5 focus:ring-green focus:border-green dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green dark:focus:border-green"
+                                                        {...register("rol", { required: true })}
+                                                    >
+                                                        <option value="" disabled>
+                                                            Seleccionar
+                                                        </option>
+                                                        <option value="2">Asesor</option>
+                                                    </select>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -229,6 +265,7 @@ export const CrearUsuario = () => {
                             </div>
                         </div>
                     </div>
+                    {/* crear usuarios */}
                     <div class={activeModal} >
                         <div class="p-4 sm:ml-64">
                             <div class="p-4 border-dashed rounded-lg dark:border-gray-700 mt-14">
@@ -259,12 +296,18 @@ export const CrearUsuario = () => {
                                                 </div>
                                                 <div class="col-span-6 sm:col-span-3">
                                                     <label htmlFor='rol' class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rol</label>
-                                                    <select name="rol" id="rol" class="rounded-md w-full border bg-gray-50 border-gray-300 text-gray-900 text-sm p-2.5 focus:ring-green focus:border-green dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green dark:focus:border-green">
-                                                        <option value="" disabled selected>
+                                                    <select
+                                                        name="rol"
+                                                        id="rol"
+                                                        class="rounded-md w-full border bg-gray-50 border-gray-300 text-gray-900 text-sm p-2.5 focus:ring-green focus:border-green dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green dark:focus:border-green"
+                                                        {...register("rol", { required: true })}
+                                                    >
+                                                        <option value="" disabled>
                                                             Seleccionar
                                                         </option>
                                                         <option value="2">Asesor</option>
                                                     </select>
+
                                                 </div>
                                             </div>
                                         </div>
