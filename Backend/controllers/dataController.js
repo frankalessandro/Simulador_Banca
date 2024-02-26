@@ -169,6 +169,29 @@ const UpdateUser = async (req, res) => {
   }
 };
 
+const AddFormData = async (req, res) => {
+  const formData = req.body;
+
+  try {
+    // Asegúrate de que los nombres de las propiedades en formData coincidan con los nombres de las columnas en la tabla
+    const {P_nombre, S_nombre, P_apellido, S_apellido, T_doc, N_documento, C_nacimineto, Lugar_exp, F_exp, F_nacimiento, Genero, Estado_c, Nacionalidad, Direc_residencia, Bloque_Torre, Apto_Casa, Barrio, Ciudad_Municipio, Departamento, Pais, Telefono, Celular, Correo_elec, Profesion, Ocupación, Act_Eco_principal, Codigo_CIUU, N_empleados,Nombre_empresa, Direc_empresa, Barrio_Empresa, Ciudad_Municipio_empresa, Departamento_empresa, Pais_empresa, Telefono_empresa, ext, Celular_empresa, Correo_elec_empresa, In_mensuales, Otro_in_mensual, T_activos, T_pasivos, Detalle_otro_in_mensual, T_egresos_mensuales, Ventas_anuales, F_cierre_ventas, Declara_renta, Agente_retenedor, Regimen_iva, Tributo_EEUU, N_id_tributario, tributo_otro_pais, id_tributario,Origen_bienes, Pais_origen_bienes, Ciudad_origen_bienes, R_Ope_moneda_extranjera, Ope_moneda_extranjera, Nombre_entidad, Tipo_producto, N_producto, Monto_mensual_prom, Moneda, Ciudad, Pais_op_extranjera } = formData;
+
+    // Construye la consulta de inserción
+    const insertQuery = `INSERT INTO FormPersonNatural (IP_primerNombre, IP_segundoNombre, IP_primerApellido, IP_segundoApellido, IP_tipoDoc, IP_documento, IP_fechaExpedicion, IP_lugarExpedicion, IP_fechaNacimiento, IP_ciudadNac, IP_genero, IP_estadoCivil, IP_nacionalidad, ICP_direcResidencia, ICP_bloque_torre, ICP_apto_casa, ICP_barrio, ICP_ciudad_municipio, ICP_departamento, ICP_pais, ICP_telefono, ICP_celular, ICP_email, AE_profesion, AE_ocupacion, AE_detalle_act, AE_cod_ciiu, AE_n_empleados, IL_Nombre_Empresa, IL_Direc_empresa, IL_barrio, IL_Ciudad_Municipio, IL_Departamento, IL_Pais, IL_Telefono, IL_EXT, IL_celular, IL_Email_laboral, DIF_Ingresos_mensuales, DIF_Otros_ingresos, DIF_Detalle_Otros_ingresos, DIF_Total_Activos, DIF_Total_Pasivos, DIF_Total_egresos_mensuales, DIF_Ventas_anuales, DIF_Fec_cierre_ventas, IT_Declara_renta, IT_Age_retenedor, IT_Regimen_iva, IT_Tributo_EEUU, IT_id_tributo_eeuu, IT_Tributo_otro_pais, IT_id_otro_pais, IT_Origen_Bienes, IT_Pais_origen, IT_Ciudad_origen, IOIN_Moneda_extranjera, IOIN_Tipos_ope, OIN_Nombre_entidad, IOIN_Tipo_produc, IOIN_N_produc, IOIN_Monto_mensual_promedio, IOIN_Moneda, IOIN_Ciudad, IOIN_Pais )
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40, $41, $42, $43, $44, $45, $46, $47, $48, $49, $50, $51, $52, $53, $54, $55, $56, $57, $58, $59, $60, $61, $62, $63, $64, $65)`;
+
+    // Asegúrate de proporcionar los valores en el orden correcto
+    const insertValues = [P_nombre, S_nombre, P_apellido, S_apellido, T_doc, N_documento, C_nacimineto, Lugar_exp, F_exp, F_nacimiento, Genero, Estado_c, Nacionalidad, Direc_residencia, Bloque_Torre, Apto_Casa, Barrio, Ciudad_Municipio, Departamento, Pais, Telefono, Celular, Correo_elec, Profesion, Ocupación, Act_Eco_principal, Codigo_CIUU, N_empleados,Nombre_empresa, Direc_empresa, Barrio_Empresa, Ciudad_Municipio_empresa, Departamento_empresa, Pais_empresa, Telefono_empresa, ext, Celular_empresa, Correo_elec_empresa, In_mensuales, Otro_in_mensual, T_activos, T_pasivos, Detalle_otro_in_mensual, T_egresos_mensuales, Ventas_anuales, F_cierre_ventas, Declara_renta, Agente_retenedor, Regimen_iva, Tributo_EEUU, N_id_tributario, tributo_otro_pais, id_tributario ,Origen_bienes, Pais_origen_bienes, Ciudad_origen_bienes, R_Ope_moneda_extranjera, Ope_moneda_extranjera, Nombre_entidad, Tipo_producto, N_producto, Monto_mensual_prom, Moneda, Ciudad, Pais_op_extranjera];
+
+    // Ejecuta la consulta de inserción
+    const result = await pool.query(insertQuery, insertValues);
+
+    res.status(201).json({ message: 'Datos insertados exitosamente', data: result.rows[0] });
+  } catch (error) {
+    console.error('Error al insertar datos en FormPersonNatural:', error);
+    res.status(500).json({ message: 'Error interno del servidor' });
+  }
+};
 
 
 
