@@ -16,47 +16,63 @@ FechaN:'',
 opciones2:'',
 opciones3:'',
 Nacionalidad:'',
+// ---------contacto--------
 DireccionR:'',
-Celular:'',
 BloqueTorre:'',
 AptoCasa:'',
 Barrio:'',
+Municipio:'',
 Departamento:'',
-CorreoE:'',
 Pais:'',
-NombreE:'',
-NumeroE:'',
+Telefono:'',
+Celular:'',
+CorreoE:'',
+// ------economica --------------
+Profesion:'',
+opciones4:'',
+ActiEcoP:'',
+CodigoCIIU:'',
+NumeroEm:'',
+NombreEm:'',
+DireccionEm:'',
+BarrioEm:'',
+MunicipioEm:'',
+DepartamentoEm:'',
 PaisEm:'',
 TelefonoEm:'',
-CelularEm:'',
-DireccionEm:'',
-DepartamentoEm:'',
-BarrioEm:'',
-PaisEm:'',
-opciones4:'',
-Telefono:'',
-Profesion:'',
-ActiEcoP:'',
 Ext:'',
+CelularEm:'',
 CorreoEm:'',
-CodigoCIIU:'',
+// ----- financiera -------
 IngresosM:'',
 OIngresosM:'',
 TotalAc:'',
 Totalpa:'',
 DetalleOIM:'',
-VentasA:'',
 TotalIn:'',
+VentasA:'',
 FechaCV:'',
+// ------- Tributaria---------
 opciones5:'',
 opciones6:'',
 opciones7:'',
 opciones8:'',
 NumeroT:'',
 PaisT:'',
+Idtributario:'',
 FondosP:'',
 PaisFondos:'',
 CiudadFondos:'',
+// ----operaciones--------
+opciones9:'',
+opciones10:'',
+NombreEn:'',
+opciones11:'',
+NProducto:'',
+MontoMP:'',
+Moneda:'',
+CiudadOp:'',
+PaisOp:''
 
   }) 
 
@@ -68,10 +84,35 @@ setgetfrom({...getform , [name]: defaultValue }) ;
 console.log(getform)
 
 } 
+const CrearCliente = async (data) => {
+  console.log(data);
+  try {
+    const response = await fetch('http://localhost:3000/AddFormData', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    const responseData = await response.json();
+    console.log(responseData);
+    if (response.status === 200) {
+      alert('Inicio de sesión exitoso');
+      window.location = "/DashBoardMenu";
+      setIsLoggedIn(true);
+      login(responseData.user);
+
+      // Aquí asignamos los datos del usuario al contexto de autenticación
+      setUserData(responseData.user);
+    }
+  } catch (error) {
+      return res.status(400).json({ message: 'No se encontró información del usuario' });
+  }
+};
 
   return (
     <>
-      <form action="" >
+      <form action="" onSubmit={handleSubmit(CrearCliente)} >
         {contenidoSeleccionado1 === 'InfoPersonal' && (
           <div class="p-4 sm:ml-64">
             <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
@@ -467,7 +508,7 @@ console.log(getform)
                     </div>
                     <div class="flex flex-col w-52 justify-end">
                       <p>ID Tributario</p>
-                      <input type="text"  {...register("NombreE")} name="NombreE" defaultValue={getform.NombreE} onChange={valorInput}class="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      <input type="text"  {...register("Idtributario")} name="Idtributario" defaultValue={getform.Idtributario} onChange={valorInput}class="rounded-md border-gray-300 focus:ring-green focus:border-green" />
                     </div>
                     <div class="flex flex-col w-52 justify-end">
                       <p>Declaro que: El origen de mis bienes y/o fondos provienen de:</p>
@@ -515,7 +556,7 @@ console.log(getform)
                       <label htmlFor="opciones">
                         ¿Realiza operaciones en moneda extranjera?:
                       </label>
-                      <select id="opciones" name="opciones" class="rounded-md border-gray-300 focus:ring-green focus:border-green w-52 p-2">
+                      <select id="opciones" {...register("opciones9")}  defaultValue={getform.opciones9} name="opciones9" class="rounded-md border-gray-300 focus:ring-green focus:border-green w-52 p-2">
                         <option defaultValue="">Seleccionar</option>
                         <option defaultValue="Si">Si</option>
                         <option defaultValue="No">No</option>
@@ -525,7 +566,7 @@ console.log(getform)
                       <label htmlFor="opciones" className="mr-2 ">
                         ¿Cuál(es) de las siguientes operaciones realiza en moneda extranjera?:
                       </label>
-                      <select id="opciones" name="opciones" class="rounded-md border-gray-300 focus:ring-green focus:border-green w-52 p-2">
+                      <select id="opciones" {...register("opciones10")} defaultValue={getform.opciones10} name="opciones10" class="rounded-md border-gray-300 focus:ring-green focus:border-green w-52 p-2">
                         <option defaultValue="">Seleccionar</option>
                         <option defaultValue="EI">Exportador e importador</option>
                         <option defaultValue="Exportador">Exportador</option>
@@ -540,13 +581,13 @@ console.log(getform)
                     </div>
                     <div class="flex flex-col w-52 justify-end">
                       <p>Nombre de la entidad</p>
-                      <input type="text" class="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      <input type="text" {...register("NombreEn")} name="NombreEn" defaultValue={getform.NombreEn} class="rounded-md border-gray-300 focus:ring-green focus:border-green" />
                     </div>
                     <div class="flex flex-col w-52 justify-end">
                       <label htmlFor="opciones" className="mr-2">
                         ¿Realiza operaciones en moneda extranjera?:
                       </label>
-                      <select id="opciones" name="opciones" class="rounded-md border-gray-300 focus:ring-green focus:border-green w-52 p-2">
+                      <select id="opciones"{...register("opciones11")} defaultValue={getform.opciones11} name="opciones11" class="rounded-md border-gray-300 focus:ring-green focus:border-green w-52 p-2">
                         <option defaultValue="">Seleccionar</option>
                         <option defaultValue="prestamos">Préstamos</option>
                         <option defaultValue="Inversiones">Inversiones</option>
@@ -557,23 +598,23 @@ console.log(getform)
 
                     <div class="flex flex-col w-52 justify-end">
                       <p>N° de producto</p>
-                      <input type="number" class="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      <input type="number"  {...register("NProducto")} name="NProducto" defaultValue={getform.NProducto} class="rounded-md border-gray-300 focus:ring-green focus:border-green" />
                     </div>
                     <div class="flex flex-col w-52 justify-end">
                       <p>Monto mensual promedio</p>
-                      <input type="number" class="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      <input type="number" {...register("MontoMP")} name="MontoMP" defaultValue={getform.MontoMP}  class="rounded-md border-gray-300 focus:ring-green focus:border-green" />
                     </div>
                     <div>
                       <p>Moneda</p>
-                      <input type="text" class="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      <input type="text" {...register("Moneda")} name="Moneda" defaultValue={getform.Moneda} class="rounded-md border-gray-300 focus:ring-green focus:border-green" />
                     </div>
                     <div>
                       <p>Ciudad</p>
-                      <input type="text" class="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      <input type="text" {...register("CiudadOp")} name="CiudadOp" defaultValue={getform.CiudadOp} class="rounded-md border-gray-300 focus:ring-green focus:border-green" />
                     </div>
                     <div>
                       <p>País</p>
-                      <input type="text" class="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      <input type="text" {...register("PaisOp")} name="PaisOp" defaultValue={getform.PaisOp} class="rounded-md border-gray-300 focus:ring-green focus:border-green" />
                     </div>
                   </div>
                 </div>
@@ -587,7 +628,7 @@ console.log(getform)
                     </svg>
                     Anterior
                   </a>
-                  <button class="flex items-center justify-center px-4 h-10 text-base font-medium text-black bg-gray-200 border-gray-300 rounded-lg hover:bg-lightGreen shadow-md hover:text-black">
+                  <button  type='submit' class="flex items-center justify-center px-4 h-10 text-base font-medium text-black bg-gray-200 border-gray-300 rounded-lg hover:bg-lightGreen shadow-md hover:text-black">
                     Finalizar Formulario
                   </button>
                 </div>
