@@ -97,14 +97,13 @@ const CrearCliente = async (data) => {
     const responseData = await response.json();
     console.log(responseData);
     if (response.status === 200) {
-      alert('Inicio de sesión exitoso');
       window.location = "/DashBoardMenu";
-      setIsLoggedIn(true);
-      login(responseData.user);
-
+     
+      alert('Registro de cliente exitoso');
       // Aquí asignamos los datos del usuario al contexto de autenticación
       setUserData(responseData.user);
-    }
+    } 
+
   } catch (error) {
       return res.status(400).json({ message: 'No se encontró información del usuario' });
   }
