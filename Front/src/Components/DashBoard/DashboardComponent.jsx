@@ -103,6 +103,14 @@ export const DashboardComponent = () => {
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
                                     </svg>
                                 </button>
+                                            <li>
+                                                <button type="button" onClick={() => handleBotonClick('FormularioPersonaNatural')} class="flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group hover:text-black hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                                                    <svg class="w-6 h-6 text-white dark:text-white transition duration-75 group-hover:text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path fill-rule="evenodd" d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z" clip-rule="evenodd" />
+                                                    </svg>
+                                                    <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Persona Natural</span>
+                                                </button>
+                                            </li>
                                 <ul id="dropdown-example" class="hidden py-2 space-y-2 pl-4">
                                     <li>
                                         <button type="button" class="flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group hover:bg-gray-100 hover:text-black dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-cuentahorro" data-collapse-toggle="dropdown-cuentahorro">
@@ -117,14 +125,6 @@ export const DashboardComponent = () => {
                                             </svg>
                                         </button>
                                         <ul id="dropdown-cuentahorro" class="hidden py-2 space-y-2 pl-6">
-                                            <li>
-                                                <button type="button" onClick={() => handleBotonClick('FormularioPersonaNatural')} class="flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group hover:text-black hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-                                                    <svg class="w-6 h-6 text-white dark:text-white transition duration-75 group-hover:text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path fill-rule="evenodd" d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z" clip-rule="evenodd" />
-                                                    </svg>
-                                                    <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Persona Natural</span>
-                                                </button>
-                                            </li>
                                             <li>
                                                 <button type="button" onClick={() => handleBotonClick('FormularioPersonaJuridica')} class="flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group  hover:bg-gray-100 hover:text-black dark:text-white dark:hover:bg-gray-700">
                                                     <svg class="w-6 h-6 text-white dark:text-white transition duration-75 group-hover:text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">

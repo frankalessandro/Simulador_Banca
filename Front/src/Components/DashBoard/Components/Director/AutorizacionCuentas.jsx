@@ -20,6 +20,7 @@ export const AutorizacionCuentas = () => {
         };
         fecthData();
     }, []);
+    console.log(datauser)
 
     return (
         <>

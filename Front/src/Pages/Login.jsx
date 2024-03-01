@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 
 import Logo from '../assets/Img/Logos/ClarBank Logo.svg'
-import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../context/AuthContext.jsx';
 
@@ -11,7 +10,6 @@ export default function Login() {
 
     const { setIsLoggedIn, login, setUserData } = useAuth();
 
-    const navegate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm();
     
 
