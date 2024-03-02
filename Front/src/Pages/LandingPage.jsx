@@ -7,23 +7,22 @@ import { Banner } from '../Components/LandingPage/Banner/Banner'
 
 
 export const LandingPage = () => {
+
   return (
     <>
-    <TopNavbar/>
-    <div class="bg-slate-100  ">
-      <div class="py-5">
-    <Banner/>
-    </div>
-    <div class="pt-5">
-    <Carousel/>
-    </div>
-    <div class="py-10">
-    <MainContainer/>
-    </div>
-    <Footer/>
-    </div>
-    
-  
+      <TopNavbar />
+      <div className="bg-slate-100  ">
+        <div className="py-5">
+          <Banner />
+        </div>
+        <div className="pt-5">
+          <Carousel />
+        </div>
+        <div className="py-10">
+          <MainContainer />
+        </div>
+        <Footer />
+      </div>
     </>
   )
 }
