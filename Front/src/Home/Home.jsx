@@ -7,8 +7,7 @@ export const Home = () => {
   
   return (
     <>
-      {/* <LandingPage/> */}
-     <ContentCuentaAhorroNatural/>
+      <LandingPage/>
     </>
   );
 };
