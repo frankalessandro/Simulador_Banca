@@ -1,7 +1,7 @@
 CREATE TABLE cliente (
     ID_Cliente serial PRIMARY KEY,
     producto int,
-    inf_cliente int,
+    inf_cliente serial,
     Tipo_de_Cliente varchar(30),
     Estado varchar(15)
 );

@@ -20,6 +20,7 @@ export const AutorizacionCuentas = () => {
         };
         fecthData();
     }, []);
+    console.log(datauser)
 
     return (
         <>
@@ -55,9 +56,8 @@ export const AutorizacionCuentas = () => {
                                 <tbody>
                                     {datauser?.map((data) => (
 
-
                                         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={data.id_cliente}>
-                                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                 {data.nombre_cliente}
                                             </th>
                                             <td className="px-6 py-4">
@@ -76,8 +76,8 @@ export const AutorizacionCuentas = () => {
                                                     </svg>
                                                 </button>
                                                 <button href="#" className='hover:bg-gray-200 p-1 rounded-sm'>
-                                                    <svg className="w-6 h-6 text-neutralGrenn dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m5 12 4.7 4.5 9.3-9" />
+                                                    <svg className="w-6 h-6 text-neutralGreen dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 12 4.7 4.5 9.3-9" />
                                                     </svg>
                                                 </button>
                                             </td>

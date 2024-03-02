@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { ModalUpdate } from './Modals/ModalUpdate';
 
 
 export const CrearUsuario = () => {
     const { register, handleSubmit, setValue } = useForm();
+    
     const [datauser, setdatauser] = useState([]);
     const [forceUpdate, setForceUpdate] = useState(false);
     const [activeModal, setactiveModal] = useState("absolute overflow-y-auto overflow-x-hidden justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full sr-only")
     const [activeModal1, setactiveModal1] = useState("absolute overflow-y-auto overflow-x-hidden justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full sr-only")
     const [selectedUserId, setSelectedUserId] = useState(null);
-
+    const [InfoUser, setInfoUser] = useState(null);
+    const [ActivateModal, setActivateModal] = useState(false);
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -76,35 +79,14 @@ export const CrearUsuario = () => {
         }
     };
 
-    const UpdateUser = async (data) => { 
-        console.log("holaaaaaaaaaa")
-        try {
-          const response = await fetch(`http://localhost:3000/UpdateUser/${selectedUserId}`, {
-            method: 'PUT',
-            headers: {
-              'Content-type': 'application/json',
-            },
-            body: JSON.stringify({
-                name: data.name,
-                password: data.password,
-                rol: data.rol
-            })
-          });
-    
-          if (response.ok) {
-            alert('Actualización de usuario exitosa');
-            setForceUpdate((prev) => !prev); // Actualiza el estado local para forzar la re-renderización
-            // ... (otras acciones después de la actualización)
-          } else {
-            console.error('Error al actualizar usuario');
-            alert('Error al actualizar usuario');
-          }
-        } catch (error) {
-          console.error('Error en el servidor', error);
-        }
-      };
+    const handlePrueba = (date) => {
+        setActivateModal(true)
+        setInfoUser(date)
+        setSelectedUserId(date.id_usuario)
+        console.log(date)
+    }
 
-      const abrirEdicion = (userId) => {
+    const abrirEdicion = (userId) => {
         setSelectedUserId(userId);
         abrir1();
     };
@@ -165,9 +147,9 @@ export const CrearUsuario = () => {
                                             {/* <ModalEditUser isOpen={modalIsOpen} onClose={closeModal} /> */}
                                         </td>
                                     </tr>
-                                    {datauser?.map((date) => (
-                                        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={date.id_usuario}>
-                                            {date.rol == 2 && (
+                                    {datauser?.map((date) => (<>
+                                        {date.rol == 2 && (
+                                            <tr onClick={() => handlePrueba(date)} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={date.id_usuario}>
                                                 <>
                                                     <th scope="row" className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                                                         <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -187,9 +169,9 @@ export const CrearUsuario = () => {
                                                         </div>
                                                     </td>
                                                     <td className="px-6 py-4 flex gap-5 justify-center">
-                                                        <button href="#"  onClick={() => abrirEdicion(date.id_usuario)} className='hover:bg-gray-200 p-1 rounded-sm'>
-                                                            <svg className="w-6 h-6 text-neutralGreen dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m14.3 4.8 2.9 2.9M7 7H4a1 1 0 0 0-1 1v10c0 .6.4 1 1 1h11c.6 0 1-.4 1-1v-4.5m2.4-10a2 2 0 0 1 0 3l-6.8 6.8L8 14l.7-3.6 6.9-6.8a2 2 0 0 1 2.8 0Z" />
+                                                        <button href="#" onClick={() => abrirEdicion(date.id_usuario)} class='hover:bg-gray-200 p-1 rounded-sm'>
+                                                            <svg className="w-6 h-6 cd f dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.3 4.8 2.9 2.9M7 7H4a1 1 0 0 0-1 1v10c0 .6.4 1 1 1h11c.6 0 1-.4 1-1v-4.5m2.4-10a2 2 0 0 1 0 3l-6.8 6.8L8 14l.7-3.6 6.9-6.8a2 2 0 0 1 2.8 0Z" />
                                                             </svg>
                                                         </button>
                                                         <button href="#" className='hover:bg-gray-200 p-1 rounded-sm'>
@@ -199,72 +181,21 @@ export const CrearUsuario = () => {
                                                         </button>
                                                     </td>
                                                 </>
-                                            )}
-                                        </tr>
+                                            </tr>
+                                        )}
+                                    </>
                                     ))}
-
                                 </tbody>
                             </table>
                         </div>
-                        {/* {datauser.map((info) => nose(info))} */}
+                        {/* {datauser.map((info) => ActivateModal(info))} */}
                     </div>
+
+                    
                     {/* Editar Usuarios */}
-                    <div className={activeModal1} >
-                        <div className="p-4 sm:ml-64">
-                            <div className="p-4 border-dashed rounded-lg dark:border-gray-700 mt-14">
-                                <div className='bg-white rounded-lg shadow dark:bg-gray-700 '>
 
-                                    <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                                            Edit User
-                                        </h3>
-                                        <button type="button" onClick={abrir1} className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal">
-                                            <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                                            </svg>
-                                            <span className="sr-only">Close modal</span>
-                                        </button>
-                                    </div>
+                   <ModalUpdate  ActivateModal={ActivateModal} InfoUser={InfoUser} setActivateModal={setActivateModal} />
 
-                                    
-                                    
-                                    <form className="p-4 md:p-5" onSubmit={handleSubmit()}>
-                                        <div className="p-6 space-y-6">
-                                            <div className="grid grid-cols-6 gap-6">
-                                                <div className="col-span-6 sm:col-span-3">
-                                                    <label htmlFor='name' className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
-                                                    <input type="text" name="name" id="name" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green focus:border-green block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green dark:focus:border-green" placeholder="Nombre" {...register("name", { required: true })} required="" />
-                                                </div>
-                                                <div className="col-span-6 sm:col-span-3">
-                                                    <label htmlFor='password' className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contraseña</label>
-                                                    <input type="text" name="password" id="password" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green focus:border-green block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green dark:focus:border-green" placeholder="Contraseña" {...register("password", { required: true })} required="" />
-                                                </div>
-                                                <div className="col-span-6 sm:col-span-3">
-                                                    <label htmlFor='rol' className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rol</label>
-                                                    <select
-                                                        name="rol"
-                                                        id="rol"
-                                                        className="rounded-md w-full border bg-gray-50 border-gray-300 text-gray-900 text-sm p-2.5 focus:ring-green focus:border-green dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green dark:focus:border-green"
-                                                        {...register("rol", { required: true })}
-                                                    >
-                                                        <option value="" disabled>
-                                                            Seleccionar
-                                                        </option>
-                                                        <option value="2">Asesor</option>
-                                                    </select>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {/* <!-- Modal footer --> */}
-                                        <div className="flex items-center p-6 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b dark:border-gray-600">
-                                            <button type="submmit" className="w-full my-4 text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Crear</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     {/* crear usuarios */}
                     <div className={activeModal} >
                         <div className="p-4 sm:ml-64">

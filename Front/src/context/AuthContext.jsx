@@ -62,7 +62,7 @@ export const AuthProvider = ({ children }) => {
 
   const updateUserData = async (userData) => {
     try {
-      const response = await fetch('http://localhost:3000/updateUser', {
+      const response = await fetch('http://localhost:3000/UpdateUser', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
