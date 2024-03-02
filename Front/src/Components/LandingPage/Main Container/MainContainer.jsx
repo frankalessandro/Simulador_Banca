@@ -7,7 +7,6 @@ import credito from '../../../assets/Img/Carousel/credito.png';
 export const MainContainer = () => {
   return (
     <>
-      {/* Inicio cards */}
       <div className="Products-card flex flex-wrap items-center justify-center md:justify-between p-5 bg-white mx-4 md:mx-12 lg:mx-20 xl:mx-32 my-5 rounded shadow-md">
         <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-3">
           <div className="p-5 h-auto md:h-96 w-full md:w-60">
@@ -43,8 +42,7 @@ export const MainContainer = () => {
               Entra en un mundo de estabilidad financiera y crecimiento con nuestra cuenta de ahorros. ¿Te has preguntado alguna vez cómo sería tener un respaldo financiero sólido para tus proyectos futuros? Con nuestra cuenta de ahorros, estás a un paso de lograrlo.
             </p>
           </div>
-        </div>
-        {/* Fin Cards */}
+        </div> 
       </div>
     </>
   );

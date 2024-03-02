@@ -648,18 +648,18 @@
 				</g>
 				<g>
 					
-						<path style="fill:none;stroke:#FFFFFF;stroke-width:1.0527;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" d="
+						<path style="fill:none;stroke:#FFFFFF;strokeWidth:1.0527;strokeLinecap:round;strokeLinejoin:round;stroke-miterlimit:10;" d="
 						M255.495,337.375c-1.232,0.263-2.548,0.779-3.906,1.579c-7.422,4.358-13.433,15.264-13.433,24.36c0,0.242,0,0.474,0.01,0.705
 						l13.412-6.137L255.495,337.375z"/>
 					
-						<path style="fill:none;stroke:#FFFFFF;stroke-width:1.0527;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" d="
+						<path style="fill:none;stroke:#FFFFFF;strokeWidth:1.0527;strokeLinecap:round;strokeLinejoin:round;stroke-miterlimit:10;" d="
 						M255.495,337.375l-3.916,20.507l13.296-7.716c0.095-0.832,0.147-1.663,0.147-2.484
 						C265.022,340.196,261.011,336.217,255.495,337.375z"/>
 					
-						<path style="fill:none;stroke:#FFFFFF;stroke-width:1.0527;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" d="
+						<path style="fill:none;stroke:#FFFFFF;strokeWidth:1.0527;strokeLinecap:round;strokeLinejoin:round;stroke-miterlimit:10;" d="
 						M263.19,357.082c0.853-2.284,1.442-4.632,1.685-6.916l-13.296,7.716L263.19,357.082z"/>
 					
-						<path style="fill:none;stroke:#FFFFFF;stroke-width:1.0527;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" d="
+						<path style="fill:none;stroke:#FFFFFF;strokeWidth:1.0527;strokeLinecap:round;strokeLinejoin:round;stroke-miterlimit:10;" d="
 						M238.167,364.019c0.305,8.601,6.201,12.191,13.422,8.022c4.958-2.863,9.285-8.674,11.601-14.959l-11.611,0.8L238.167,364.019z"
 						/>
 				</g>
@@ -683,16 +683,16 @@
 			</g>
 			<g>
 				
-					<path style="fill:none;stroke:#FFFFFF;stroke-width:1.0527;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" d="
+					<path style="fill:none;stroke:#FFFFFF;strokeWidth:1.0527;strokeLinecap:round;strokeLinejoin:round;stroke-miterlimit:10;" d="
 					M294.782,315.678c-4.369,5.264-7.358,12.612-7.358,19.075c0,2.937,0.621,5.348,1.695,7.116l11.738-14.885L294.782,315.678z"/>
 				
-					<path style="fill:none;stroke:#FFFFFF;stroke-width:1.0527;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" d="
+					<path style="fill:none;stroke:#FFFFFF;strokeWidth:1.0527;strokeLinecap:round;strokeLinejoin:round;stroke-miterlimit:10;" d="
 					M306.92,308.636c-1.821-0.084-3.884,0.463-6.064,1.727c-2.19,1.263-4.253,3.105-6.074,5.316l6.074,11.306L306.92,308.636z"/>
 				
-					<path style="fill:none;stroke:#FFFFFF;stroke-width:1.0527;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" d="
+					<path style="fill:none;stroke:#FFFFFF;strokeWidth:1.0527;strokeLinecap:round;strokeLinejoin:round;stroke-miterlimit:10;" d="
 					M313.047,312.931c-1.274-2.653-3.442-4.169-6.127-4.295l-6.064,18.349L313.047,312.931z"/>
 				
-					<path style="fill:none;stroke:#FFFFFF;stroke-width:1.0527;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" d="
+					<path style="fill:none;stroke:#FFFFFF;strokeWidth:1.0527;strokeLinecap:round;strokeLinejoin:round;stroke-miterlimit:10;" d="
 					M313.047,312.931l-12.191,14.054l-11.738,14.885c2.305,3.748,6.695,4.653,11.738,1.737c7.422-4.285,13.443-15.201,13.443-24.391
 					C314.3,316.71,313.847,314.594,313.047,312.931z"/>
 			</g>
