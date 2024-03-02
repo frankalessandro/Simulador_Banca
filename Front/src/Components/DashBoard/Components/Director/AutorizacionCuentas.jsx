@@ -42,11 +42,13 @@ export const AutorizacionCuentas = () => {
                                         <th scope="col" className="px-6 py-3">
                                             Producto bancario
                                         </th>
+
                                         <th scope="col" className="px-6 py-3">
-                                            Estado
+                                             N° Cuenta
                                         </th>
                                         <th scope="col" className="px-6 py-3">
-                                            Saldo
+                                            Estado
+
                                         </th>
                                         <th scope="col" className="w-48 px-6 py-3">
                                             Acción
@@ -57,17 +59,20 @@ export const AutorizacionCuentas = () => {
                                     {datauser?.map((data) => (
 
                                         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={data.id_cliente}>
+
                                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {data.nombre_cliente}
+                                                {data.nombre}
                                             </th>
+
                                             <td className="px-6 py-4">
-                                                {data.nombre_producto}
+                                                {data.producto}
                                             </td>
                                             <td className="px-6 py-4">
-                                                {data.estado}
+                                                {data.n_cuenta}
                                             </td>
                                             <td className="px-6 py-4">
-                                                $0
+                                                {data.estadocliente}
+
                                             </td>
                                             <td className="px-6 py-4 flex gap-5 justify-center">
                                                 <button href="#" className='hover:bg-gray-200 p-1 rounded-sm'>
@@ -85,9 +90,7 @@ export const AutorizacionCuentas = () => {
 
 
                                     )
-                                    )}
-
-
+                                    )}{console.log(datauser)}
                                 </tbody>
                             </table>
                         </div>

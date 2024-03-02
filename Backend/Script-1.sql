@@ -1,6 +1,5 @@
 CREATE TABLE cliente (
     ID_Cliente serial PRIMARY KEY,
-    producto int,
     inf_cliente serial,
     Tipo_de_Cliente varchar(30),
     Estado varchar(15)
@@ -33,6 +32,13 @@ CREATE TABLE Rol (
     Estado varchar(15)
 );
 
+CREATE TABLE DetalleProducto(
+    ID_detalle serial PRIMARY KEY,
+    Cliente serial,
+    producto int,
+    N_Cuenta bigint GENERATED ALWAYS AS IDENTITY (START WITH 1000000001 INCREMENT BY 1) NOT NULL,
+    CHECK (N_Cuenta  >= 1000000000 AND N_Cuenta  <= 9999999999)
+)
 
 CREATE TABLE FormPersonNatural (
     ID_FormPN serial PRIMARY KEY,
@@ -121,8 +127,11 @@ add foreign key (tipo) references tipoproducto(id_tipo);
 ALTER TABLE producto
 add foreign key (asignado) references usuarios(id_usuario);
 
-ALTER TABLE cliente
-add foreign key (producto) references producto(ID_Producto);
+ALTER TABLE DetalleProducto	
+ADD FOREIGN KEY (Cliente) REFERENCES cliente(ID_Cliente);
+
+ALTER TABLE DetalleProducto	
+ADD FOREIGN KEY (producto) references producto(ID_Producto);
 
 ALTER TABLE cliente
 add foreign key (inf_cliente) references FormPersonNatural(ID_FormPN);
@@ -134,16 +143,17 @@ INSERT INTO Rol (ID_Rol, Nombre, Estado) VALUES
 
 
 -- Insertar datos en la tabla usuarios
-INSERT INTO usuarios (ID_Usuario, Name_User, Password, Rol, Estado) VALUES
-(1, 'admin', 'clave123', 1, 'Activo'),
-(2, 'asesor1', 'asesor123', 2, 'Activo');
+INSERT INTO usuarios ( Name_User, Password, Rol, Estado) VALUES
+('admin', 'admin', 1, 'Activo'),
 
+-- Insertar datos en la tabla TipoProducto
+INSERT INTO tipoproducto (Descripcion) VALUES
+('Cuenta de Ahorros'),
+
+-- Insertar datos en la tabla producto
+INSERT INTO producto (Estado, Tipo, Asignado) VALUES
+('Activo', 1, 2),
 select * from usuarios
 
 
-SELECT c.ID_Cliente, fpn.IP_primerNombre as Nombre_Cliente, tp.Descripcion as Nombre_Producto
-FROM cliente c
-JOIN producto p ON c.producto = p.tipo
-JOIN TipoProducto tp ON p.Tipo = tp.ID_tipo
-JOIN usuarios u ON c.inf_cliente = u.ID_Usuario
-JOIN FormPersonNatural fpn ON u.ID_Usuario = fpn.ID_FormPN;
+SELECT fpn.IP_primerNombre AS Nombre, c.Estado AS EstadoCliente, p.ID_Producto AS Producto, dp.N_Cuenta FROM DetalleProducto dp JOIN cliente c ON dp.Cliente = c.ID_Cliente JOIN FormPersonNatural fpn ON c.inf_cliente = fpn.ID_FormPN JOIN producto p ON dp.Producto = p.ID_Producto
