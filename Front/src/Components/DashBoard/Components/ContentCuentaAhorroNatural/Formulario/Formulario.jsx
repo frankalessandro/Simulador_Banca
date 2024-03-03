@@ -78,7 +78,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
 
   const valorInput = (event) => {
 
-    const { name, defaultValue, id  } = event.target;
+    const { name, defaultValue, id } = event.target;
     setgetfrom({ ...getform, [name]: defaultValue });
     console.log(id);
   }
@@ -112,7 +112,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
     setdatainfo(data)
     console.log(data);
     CrearCliente(data)
-
+    alert('Registro de cliente exitoso');
   }
   const CrearCliente = async () => {
     console.log(datainfo);
@@ -141,9 +141,9 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
 
   return (
     <>
-      
-        {contenidoSeleccionado1 === 'InfoPersonal' && (
-          <form action="" onSubmit={handleSubmit(OnsumitInfo)}>
+
+      {contenidoSeleccionado1 === 'InfoPersonal' && (
+        <form action="" onSubmit={handleSubmit(OnsumitInfo)}>
           <div className="p-4 sm:ml-64">
             <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
               <div className='flex gap-5 items-center justify-center flex-col bg-white' style={{ minHeight: '85vh' }}>
@@ -154,16 +154,17 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                       <p>Nombre Completo:</p>
                       <input type="text" {...register("Nombre", {
                         required: {
-                          value : true, 
+                          value: true,
 
-                        } , minLength: {
-                          value: 3 ,
-                          message : 'pue',
-                        }  , 
-                      maxLength: {
-                        value: 20
-                      }},
-                      
+                        }, minLength: {
+                          value: 3,
+                          message: 'pue',
+                        },
+                        maxLength: {
+                          value: 20
+                        }
+                      },
+
 
                       )} name="Nombre" defaultValue={getform.Nombre} onChange={valorInput} class="rounded-md border-gray-300 focus:ring-green focus:border-green" required />
 
@@ -177,7 +178,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                       <input type="text" {...register("Apellido2")} name="Apellido2" defaultValue={getform.Apellido2} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
                     </div>
                     <div className="flex flex-col">
-                      <label htmlFor="opciones" className="rounded-md border-gray-300 focus:ring-green focus:border-green" classNameName="mr-2">
+                      <label htmlFor="opciones" className="rounded-md border-gray-300 focus:ring-green focus:border-green">
                         Tipo de documento:
                       </label>
                       <select id="opciones" {...register("opciones1")} name="opciones1" defaultValue={getform.opciones1} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green w-52 p-2">
@@ -211,17 +212,17 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                       <input type="date" {...register("FechaN")} name="FechaN" defaultValue={getform.FechaN} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green w-52" />
                     </div>
                     <div className="flex flex-col">
-                      <label htmlFor="opciones" classNameName="mr-2">
+                      <label htmlFor="opciones" className="mr-2">
                         Genero:
                       </label>
-                      <select id="opciones" {...register("opciones2")} name="opciones2" defaultValue={getform.opciones2} onChange={valorInput} classNameName="p-2 rounded border-gray-300 focus:ring-green focus:border-green w-52">
+                      <select id="opciones" {...register("opciones2")} name="opciones2" defaultValue={getform.opciones2} onChange={valorInput} className="p-2 rounded border-gray-300 focus:ring-green focus:border-green w-52">
                         <option defaultValue="">Seleccionar</option>
                         <option defaultValue="F">Femenino</option>
                         <option defaultValue="M">Masculino</option>
                       </select>
                     </div>
                     <div className="flex flex-col">
-                      <label htmlFor="opciones" classNameName="mr-2">
+                      <label htmlFor="opciones" className="mr-2">
                         Estado Civil:
                       </label>
                       <select id="opciones" {...register("opciones3")} name="opciones3" defaultValue={getform.opciones3} onChange={valorInput} className="p-2 rounded border-gray-300 focus:ring-green focus:border-green w-52">
@@ -241,7 +242,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                   <a onClick={regresar} className="flex items-center justify-center px-4 h-10 text-base font-medium text-black bg-gray-200 border-gray-300 rounded-lg hover:bg-lightGreen shadow-md hover:text-black">
                     Menú Formulario
                   </a>
-              <button type="submit"  className="flex items-center justify-center px-4 h-10 text-base font-medium text-black bg-gray-200 border-gray-300 rounded-lg hover:bg-lightGreen shadow-md hover:text-black">
+                  <button type="submit" className="flex items-center justify-center px-4 h-10 text-base font-medium text-black bg-gray-200 border-gray-300 rounded-lg hover:bg-lightGreen shadow-md hover:text-black">
                     Siguiente
                     <svg className="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                       <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
@@ -251,10 +252,10 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
               </div>
             </div>
           </div>
-          </form>
-        )}
-        {contenidoSeleccionado1 === 'contacto' && (
-          <form action="" onSubmit={handleSubmit(OnsumitInfo2)}>
+        </form>
+      )}
+      {contenidoSeleccionado1 === 'contacto' && (
+        <form action="" onSubmit={handleSubmit(OnsumitInfo2)}>
           <div className="p-4 sm:ml-64">
             <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
               <div className='flex gap-5 items-center justify-center flex-col bg-white' style={{ minHeight: '85vh' }}>
@@ -324,11 +325,11 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
               </div>
             </div>
           </div>
-          </form>
-        )}
-        {contenidoSeleccionado1 === 'economica' && (
+        </form>
+      )}
+      {contenidoSeleccionado1 === 'economica' && (
 
-<form action="" onSubmit={handleSubmit(OnsumitInfo3)}>
+        <form action="" onSubmit={handleSubmit(OnsumitInfo3)}>
           <div className="p-4 sm:ml-64">
             <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
               <div className='flex gap-5 items-center justify-center flex-col bg-white' style={{ minHeight: '85vh' }}>
@@ -424,7 +425,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                     </svg>
                     Anterior
                   </a>
-                  <button  className="flex items-center justify-center px-4 h-10 text-base font-medium text-black bg-gray-200 border-gray-300 rounded-lg hover:bg-lightGreen shadow-md hover:text-black">
+                  <button className="flex items-center justify-center px-4 h-10 text-base font-medium text-black bg-gray-200 border-gray-300 rounded-lg hover:bg-lightGreen shadow-md hover:text-black">
                     Siguiente
                     <svg className="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                       <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
@@ -434,10 +435,10 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
               </div>
             </div>
           </div>
-          </form>
-        )}
-        {contenidoSeleccionado1 === 'financiera' && (
-          <form action="" onSubmit={handleSubmit(OnsumitInfo4)}>
+        </form>
+      )}
+      {contenidoSeleccionado1 === 'financiera' && (
+        <form action="" onSubmit={handleSubmit(OnsumitInfo4)}>
           <div className="p-4 sm:ml-64">
             <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
               <div className='flex gap-5 items-center justify-center flex-col bg-white' style={{ minHeight: '85vh' }}>
@@ -488,7 +489,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                     </svg>
                     Anterior
                   </a>
-                  <button  className="flex items-center justify-center px-4 h-10 text-base font-medium text-black bg-gray-200 border-gray-300 rounded-lg hover:bg-lightGreen shadow-md hover:text-black">
+                  <button className="flex items-center justify-center px-4 h-10 text-base font-medium text-black bg-gray-200 border-gray-300 rounded-lg hover:bg-lightGreen shadow-md hover:text-black">
                     Siguiente
                     <svg className="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                       <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
@@ -498,105 +499,105 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
               </div>
             </div>
           </div>
-          </form>
-        )}
-        {contenidoSeleccionado1 === 'tributaria' && (
-          <div className="p-4 sm:ml-64">
-            <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
-              <div className='flex gap-5 items-center justify-center flex-col bg-white' style={{ minHeight: '85vh' }}>
-                <h1 className='w-2/4 text-black text-4xl flex items-center justify-center font-semibold text-center p-2 border-b-2 border-lightGreen'>Información Tributaria</h1>
-                <div className="w-11/12  flex justify-center items-center bg-gray-100 rounded shadow-md" style={{ minHeight: '55vh' }}>
-                  <div className="grid justify-center gap-5 p-5 lg:grid-cols-3">
-                    <div className="flex flex-col">
-                      <label htmlFor="opciones" classNameName="mr-2">
-                        ¿Es declarante de renta?:
-                      </label>
-                      <select id="opciones" {...register("opciones5")} defaultValue={getform.opciones5} onChange={valorInput} name="opciones5" className="rounded-md border-gray-300 focus:ring-green focus:border-green w-52 p-2">
-                        <option defaultValue="">Seleccionar</option>
-                        <option defaultValue="Si">Si</option>
-                        <option defaultValue="No">No</option>
-                      </select>
-                    </div>
-                    <div className="flex flex-col">
-                      <label htmlFor="opciones" classNameName="mr-2">
-                        Agente retenedor:
-                      </label>
-                      <select id="opciones" {...register("opciones6")} defaultValue={getform.opciones6} onChange={valorInput} name="opciones6" className="rounded-md border-gray-300 focus:ring-green focus:border-green w-52 p-2">
-                        <option defaultValue="">Seleccionar</option>
-                        <option defaultValue="Si">Si</option>
-                        <option defaultValue="No">No</option>
-                      </select>
-                    </div>
-                    <div className="flex flex-col">
-                      <label htmlFor="opciones" classNameName="mr-2">
-                        Régimen de IVA:
-                      </label>
-                      <select id="opciones" {...register("opciones7")} defaultValue={getform.opciones7} onChange={valorInput} name="opciones7" className="rounded-md border-gray-300 focus:ring-green focus:border-green w-52 p-2">
-                        <option defaultValue="">Seleccionar</option>
-                        <option defaultValue="Comun">Común</option>
-                        <option defaultValue="Simplificado">Simplificado</option>
-                        <option defaultValue="Ninguno">Ninguno</option>
-                      </select>
-                    </div>
-                    <div className="flex flex-col w-52 justify-end">
-                      <label htmlFor="opciones" classNameName="mr-2">
-                        Obligado a tributar en Estados Unidos:
-                      </label>
-                      <select id="opciones" {...register("opciones8")} defaultValue={getform.opciones8} onChange={valorInput} name="opciones8" className="rounded-md border-gray-300 focus:ring-green focus:border-green w-52 p-2">
-                        <option defaultValue="">Seleccionar</option>
-                        <option defaultValue="Si">Si</option>
-                        <option defaultValue="No">No</option>
-                      </select>
-                    </div>
-                    <div className="flex flex-col w-52 justify-end" >
-                      <p>*Si su respuesta es afirmativa indique el número de ID tributario (TIN)</p>
-                      <input type="text"  {...register("NumeroT")} name="NumeroT" defaultValue={getform.NumeroT} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
-                    </div>
-                    <div className="flex flex-col w-52 justify-end">
-                      <p>Si está obligado a tributar en otro país diferente a Colombia, indique cuál (es):</p>
-                      <input type="text"  {...register("PaisT")} name="PaisT" defaultValue={getform.PaisT} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green " />
-                    </div>
-                    <div className="flex flex-col w-52 justify-end">
-                      <p>ID Tributario</p>
-                      <input type="text"  {...register("Idtributario")} name="Idtributario" defaultValue={getform.Idtributario} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
-                    </div>
-                    <div className="flex flex-col w-52 justify-end">
-                      <p>Declaro que: El origen de mis bienes y/o fondos provienen de:</p>
-                      <input type="text"  {...register("FondosP")} name="FondosP" defaultValue={getform.FondosP} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
-                    </div>
-                    <div className="flex flex-col w-52 justify-end">
-                      <p>El país origen de bienes y/o fondos</p>
-                      <input type="text"  {...register("PaisFondos")} name="PaisFondos" defaultValue={getform.PaisFondos} onChange={valorInput} placeholder='' className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
-                    </div>
-                    <div className="flex flex-col w-52 justify-end">
-                      <p>La ciudad origen de bienes y/o fondos</p>
-                      <input type="text"  {...register("CiudadFondos")} name="CiudadFondos" defaultValue={getform.CiudadFondos} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
-                    </div>
+        </form>
+      )}
+      {contenidoSeleccionado1 === 'tributaria' && (
+        <div className="p-4 sm:ml-64">
+          <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
+            <div className='flex gap-5 items-center justify-center flex-col bg-white' style={{ minHeight: '85vh' }}>
+              <h1 className='w-2/4 text-black text-4xl flex items-center justify-center font-semibold text-center p-2 border-b-2 border-lightGreen'>Información Tributaria</h1>
+              <div className="w-11/12  flex justify-center items-center bg-gray-100 rounded shadow-md" style={{ minHeight: '55vh' }}>
+                <div className="grid justify-center gap-5 p-5 lg:grid-cols-3">
+                  <div className="flex flex-col">
+                    <label htmlFor="opciones" className="mr-2">
+                      ¿Es declarante de renta?:
+                    </label>
+                    <select id="opciones" {...register("opciones5")} defaultValue={getform.opciones5} onChange={valorInput} name="opciones5" className="rounded-md border-gray-300 focus:ring-green focus:border-green w-52 p-2">
+                      <option defaultValue="">Seleccionar</option>
+                      <option defaultValue="Si">Si</option>
+                      <option defaultValue="No">No</option>
+                    </select>
+                  </div>
+                  <div className="flex flex-col">
+                    <label htmlFor="opciones" className="mr-2">
+                      Agente retenedor:
+                    </label>
+                    <select id="opciones" {...register("opciones6")} defaultValue={getform.opciones6} onChange={valorInput} name="opciones6" className="rounded-md border-gray-300 focus:ring-green focus:border-green w-52 p-2">
+                      <option defaultValue="">Seleccionar</option>
+                      <option defaultValue="Si">Si</option>
+                      <option defaultValue="No">No</option>
+                    </select>
+                  </div>
+                  <div className="flex flex-col">
+                    <label htmlFor="opciones" className="mr-2">
+                      Régimen de IVA:
+                    </label>
+                    <select id="opciones" {...register("opciones7")} defaultValue={getform.opciones7} onChange={valorInput} name="opciones7" className="rounded-md border-gray-300 focus:ring-green focus:border-green w-52 p-2">
+                      <option defaultValue="">Seleccionar</option>
+                      <option defaultValue="Comun">Común</option>
+                      <option defaultValue="Simplificado">Simplificado</option>
+                      <option defaultValue="Ninguno">Ninguno</option>
+                    </select>
+                  </div>
+                  <div className="flex flex-col w-52 justify-end">
+                    <label htmlFor="opciones" className="mr-2">
+                      Obligado a tributar en Estados Unidos:
+                    </label>
+                    <select id="opciones" {...register("opciones8")} defaultValue={getform.opciones8} onChange={valorInput} name="opciones8" className="rounded-md border-gray-300 focus:ring-green focus:border-green w-52 p-2">
+                      <option defaultValue="">Seleccionar</option>
+                      <option defaultValue="Si">Si</option>
+                      <option defaultValue="No">No</option>
+                    </select>
+                  </div>
+                  <div className="flex flex-col w-52 justify-end" >
+                    <p>*Si su respuesta es afirmativa indique el número de ID tributario (TIN)</p>
+                    <input type="text"  {...register("NumeroT")} name="NumeroT" defaultValue={getform.NumeroT} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                  </div>
+                  <div className="flex flex-col w-52 justify-end">
+                    <p>Si está obligado a tributar en otro país diferente a Colombia, indique cuál (es):</p>
+                    <input type="text"  {...register("PaisT")} name="PaisT" defaultValue={getform.PaisT} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green " />
+                  </div>
+                  <div className="flex flex-col w-52 justify-end">
+                    <p>ID Tributario</p>
+                    <input type="text"  {...register("Idtributario")} name="Idtributario" defaultValue={getform.Idtributario} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                  </div>
+                  <div className="flex flex-col w-52 justify-end">
+                    <p>Declaro que: El origen de mis bienes y/o fondos provienen de:</p>
+                    <input type="text"  {...register("FondosP")} name="FondosP" defaultValue={getform.FondosP} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                  </div>
+                  <div className="flex flex-col w-52 justify-end">
+                    <p>El país origen de bienes y/o fondos</p>
+                    <input type="text"  {...register("PaisFondos")} name="PaisFondos" defaultValue={getform.PaisFondos} onChange={valorInput} placeholder='' className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                  </div>
+                  <div className="flex flex-col w-52 justify-end">
+                    <p>La ciudad origen de bienes y/o fondos</p>
+                    <input type="text"  {...register("CiudadFondos")} name="CiudadFondos" defaultValue={getform.CiudadFondos} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
                   </div>
                 </div>
-                <div className="grid gap-5 lg:grid-cols-3 p-8">
-                  <a onClick={regresar} className="flex items-center justify-center px-4 h-10 text-base font-medium text-black bg-gray-200 border-gray-300 rounded-lg hover:bg-lightGreen shadow-md hover:text-black">
-                    Menú Formulario
-                  </a>
-                  <a onClick={() => handleBotonClick('financiera')} className="flex items-center justify-center px-4 h-10 text-base font-medium text-black bg-gray-200 border-gray-300 rounded-lg hover:bg-lightGreen shadow-md hover:text-black">
-                    <svg className="w-3.5 h-3.5 me-2 rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                      <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-                    </svg>
-                    Anterior
-                  </a>
-                  <a onClick={() => handleBotonClick('operaciones')} className="flex items-center justify-center px-4 h-10 text-base font-medium text-black bg-gray-200 border-gray-300 rounded-lg hover:bg-lightGreen shadow-md hover:text-black">
-                    Siguiente
-                    <svg className="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                      <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-                    </svg>
-                  </a>
-                </div>
+              </div>
+              <div className="grid gap-5 lg:grid-cols-3 p-8">
+                <a onClick={regresar} className="flex items-center justify-center px-4 h-10 text-base font-medium text-black bg-gray-200 border-gray-300 rounded-lg hover:bg-lightGreen shadow-md hover:text-black">
+                  Menú Formulario
+                </a>
+                <a onClick={() => handleBotonClick('financiera')} className="flex items-center justify-center px-4 h-10 text-base font-medium text-black bg-gray-200 border-gray-300 rounded-lg hover:bg-lightGreen shadow-md hover:text-black">
+                  <svg className="w-3.5 h-3.5 me-2 rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+                  </svg>
+                  Anterior
+                </a>
+                <a onClick={() => handleBotonClick('operaciones')} className="flex items-center justify-center px-4 h-10 text-base font-medium text-black bg-gray-200 border-gray-300 rounded-lg hover:bg-lightGreen shadow-md hover:text-black">
+                  Siguiente
+                  <svg className="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+                  </svg>
+                </a>
               </div>
             </div>
           </div>
-        )}
-        {contenidoSeleccionado1 === 'operaciones' && (
-          <form action="" onSubmit={handleSubmit(OnsumitInfo5)}>
+        </div>
+      )}
+      {contenidoSeleccionado1 === 'operaciones' && (
+        <form action="" onSubmit={handleSubmit(OnsumitInfo5)}>
           <div className="p-4 sm:ml-64">
             <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
               <div className='flex gap-5 items-center justify-center flex-col bg-white' style={{ minHeight: '85vh' }}>
@@ -614,7 +615,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                       </select>
                     </div>
                     <div className="flex flex-col w-52 justify-end">
-                      <label htmlFor="opciones" classNameName="mr-2 ">
+                      <label htmlFor="opciones" className="mr-2 ">
                         ¿Cuál(es) de las siguientes operaciones realiza en moneda extranjera?:
                       </label>
                       <select id="opciones" {...register("opciones10")} defaultValue={getform.opciones10} name="opciones10" className="rounded-md border-gray-300 focus:ring-green focus:border-green w-52 p-2">
@@ -635,7 +636,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                       <input type="text" {...register("NombreEn")} name="NombreEn" defaultValue={getform.NombreEn} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
                     </div>
                     <div className="flex flex-col w-52 justify-end">
-                      <label htmlFor="opciones" classNameName="mr-2">
+                      <label htmlFor="opciones" className="mr-2">
                         ¿Realiza operaciones en moneda extranjera?:
                       </label>
                       <select id="opciones"{...register("opciones11")} defaultValue={getform.opciones11} name="opciones11" className="rounded-md border-gray-300 focus:ring-green focus:border-green w-52 p-2">
@@ -679,19 +680,19 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                     </svg>
                     Anterior
                   </a>
-                  <button type='submit'  className="flex items-center justify-center px-4 h-10 text-base font-medium text-black bg-gray-200 border-gray-300 rounded-lg hover:bg-lightGreen shadow-md hover:text-black">
+                  <button type='submit' className="flex items-center justify-center px-4 h-10 text-base font-medium text-black bg-gray-200 border-gray-300 rounded-lg hover:bg-lightGreen shadow-md hover:text-black">
                     Finalizar Formulario
                   </button>
                 </div>
               </div>
             </div>
           </div>
-          </form>
-        )}
+        </form>
+      )}
 
 
 
-      
+
 
 
     </>
