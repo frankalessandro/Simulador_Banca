@@ -28,10 +28,10 @@ module.exports = {
   
   purge: {
     content: [
-      // Rutas de tus archivos JSX o HTML
-      './src/**/*.{js,jsx,ts,tsx}',
-      './public/index.html',
-      'node_modules/flowbite-react/lib/esm/**/*.js',
+      './src/**/*.html',
+      './src/**/*.vue',
+      './src/**/*.jsx',
+      // ... otras rutas de contenido
     ],
     options: {
       // Agrega excepciones para propiedades específicas
