@@ -9,6 +9,7 @@ import { No_Disponible } from './Components/NoDisponible'
 import { AutorizacionCuentas } from './Components/Director/AutorizacionCuentas'
 import { CrearUsuario } from './Components/Director/CrearUsuario'
 import { useAuth } from '../../context/AuthContext'
+import { Reportes } from './Components/Director/Reportes'
 
 export const DashboardComponent = () => {
 
@@ -227,7 +228,7 @@ export const DashboardComponent = () => {
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#" onClick={() => handleBotonClick('CrearUsuario')} className="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-100 hover:text-black dark:hover:bg-gray-700 group">
+                                            <a href="#" onClick={() => handleBotonClick('Reportes')} className="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-100 hover:text-black dark:hover:bg-gray-700 group">
                                                 <svg className="w-6 h-6 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                                                     <path fillRule="evenodd" d="M5.6 2c.4 0 .8 0 1.1.3L8 3.6l1.3-1.3a1 1 0 0 1 1.4 0L12 3.6l1.3-1.3a1 1 0 0 1 1.4 0L16 3.6l1.3-1.3A1 1 0 0 1 19 3v18a1 1 0 0 1-1.7.7L16 20.4l-1.3 1.3a1 1 0 0 1-1.4 0L12 20.4l-1.3 1.3a1 1 0 0 1-1.4 0L8 20.4l-1.3 1.3A1 1 0 0 1 5 21V3c0-.4.2-.8.6-1ZM9 7a1 1 0 0 0 0 2h6a1 1 0 1 0 0-2H9Zm0 4a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2H9Zm0 4a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2H9Z" clipRule="evenodd" />
                                                 </svg>
@@ -248,6 +249,7 @@ export const DashboardComponent = () => {
                         {contenidoSeleccionado === 'NoDisponible' && <No_Disponible />}
                         {contenidoSeleccionado === 'AutorizacionCuentas' && <AutorizacionCuentas />}
                         {contenidoSeleccionado === 'CrearUsuario' && <CrearUsuario />}
+                        {contenidoSeleccionado === 'Reportes' && <Reportes />}
                         {/* Renderiza otros contenidos según sea necesario */}
                     </div>
                 </>
