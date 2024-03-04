@@ -45,7 +45,7 @@ export const ContentCuentaAhorroNatural = ({ }) => {
                   <div onClick={() => handleBotonClick('InfoPersonal', volver())} className="cursor-pointer flex flex-col w-full min-h-56 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <img className="rounded-t-lg h-56" src={personalinfo} alt="" />
                     <div className="w-full h-full">
-                      <button type="button" onClick={() => handleBotonClick('InfoPersonal', volver())} classNameName=" w-full h-full flex justify-center items-center px-8 py-3.5 text-xl font-medium text-black bg-gray-200 hover:bg-lightGreen hover:text-black focus:ring-1 focus:outline-none focus:ring-green rounded-b-md text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
+                      <button type="button" onClick={() => handleBotonClick('InfoPersonal', volver())} className=" w-full h-full flex justify-center items-center px-8 py-3.5 text-xl font-medium text-black bg-gray-200 hover:bg-lightGreen hover:text-black focus:ring-1 focus:outline-none focus:ring-green rounded-b-md text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
                         <span>Personal</span>
                       </button>
                     </div>
@@ -53,7 +53,7 @@ export const ContentCuentaAhorroNatural = ({ }) => {
                   <div onClick={() => handleBotonClick('contacto', volver())} className="cursor-pointer flex flex-col w-full min-h-56 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <img className="rounded-t-lg h-56" src={ImagenPrueba} alt="" />
                     <div className="w-full h-full">
-                      <button type="button" onClick={() => handleBotonClick('contacto', volver())} classNameName=" w-full h-full flex justify-center items-center px-8 py-3.5 text-xl font-medium text-black bg-gray-200 hover:bg-lightGreen hover:text-black focus:ring-1 focus:outline-none focus:ring-green rounded-b-md text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
+                      <button type="button" onClick={() => handleBotonClick('contacto', volver())} className=" w-full h-full flex justify-center items-center px-8 py-3.5 text-xl font-medium text-black bg-gray-200 hover:bg-lightGreen hover:text-black focus:ring-1 focus:outline-none focus:ring-green rounded-b-md text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
                         <span>Contacto</span>
                       </button>
                     </div>
@@ -61,7 +61,7 @@ export const ContentCuentaAhorroNatural = ({ }) => {
                   <div onClick={() => handleBotonClick('economica', volver())} className="cursor-pointer flex flex-col w-full min-h-56 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <img className="rounded-t-lg h-56" src={economicaLaboral} alt="" />
                     <div className="w-full h-full">
-                      <button type="button" onClick={() => handleBotonClick('economica', volver())} classNameName=" w-full h-full flex justify-center items-center px-8 py-3.5 text-xl font-medium text-black bg-gray-200 hover:bg-lightGreen hover:text-black focus:ring-1 focus:outline-none focus:ring-green rounded-b-md text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
+                      <button type="button" onClick={() => handleBotonClick('economica', volver())} className=" w-full h-full flex justify-center items-center px-8 py-3.5 text-xl font-medium text-black bg-gray-200 hover:bg-lightGreen hover:text-black focus:ring-1 focus:outline-none focus:ring-green rounded-b-md text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
                         <span>Económica y Laboral</span>
                       </button>
                     </div>
@@ -69,7 +69,7 @@ export const ContentCuentaAhorroNatural = ({ }) => {
                   <div onClick={() => handleBotonClick('financiera', volver())} className="cursor-pointer flex flex-col w-full min-h-56 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <img className="rounded-t-lg h-56" src={detalleFinanciera} alt="" />
                     <div className="w-full h-full">
-                      <button type="button" onClick={() => handleBotonClick('financiera', volver())} classNameName=" w-full h-full flex justify-center items-center px-8 py-3.5 text-xl font-medium text-black bg-gray-200 hover:bg-lightGreen hover:text-black focus:ring-1 focus:outline-none focus:ring-green rounded-b-md text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
+                      <button type="button" onClick={() => handleBotonClick('financiera', volver())} className=" w-full h-full flex justify-center items-center px-8 py-3.5 text-xl font-medium text-black bg-gray-200 hover:bg-lightGreen hover:text-black focus:ring-1 focus:outline-none focus:ring-green rounded-b-md text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
                         <span>Detalle Información Financiera</span>
                       </button>
                     </div>
@@ -77,7 +77,7 @@ export const ContentCuentaAhorroNatural = ({ }) => {
                   <div onClick={() => handleBotonClick('tributaria', volver())} className="cursor-pointer flex flex-col w-full min-h-56 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <img className="rounded-t-lg h-56" src={tributaria} alt="" />
                     <div className="w-full h-full">
-                      <button type="button" onClick={() => handleBotonClick('tributaria', volver())} classNameName=" w-full h-full flex justify-center items-center px-8 py-3.5 text-xl font-medium text-black bg-gray-200 hover:bg-lightGreen hover:text-black focus:ring-1 focus:outline-none focus:ring-green rounded-b-md text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
+                      <button type="button" onClick={() => handleBotonClick('tributaria', volver())} className=" w-full h-full flex justify-center items-center px-8 py-3.5 text-xl font-medium text-black bg-gray-200 hover:bg-lightGreen hover:text-black focus:ring-1 focus:outline-none focus:ring-green rounded-b-md text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
                         <span>Tributaria</span>
                       </button>
                     </div>
@@ -85,7 +85,7 @@ export const ContentCuentaAhorroNatural = ({ }) => {
                   <div onClick={() => handleBotonClick('operaciones', volver())} className="cursor-pointer flex flex-col w-full min-h-56 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <img className="rounded-t-lg h-56" src={operacionesInternacionales} alt="" />
                     <div className="w-full h-full">
-                      <button type="button" onClick={() => handleBotonClick('operaciones', volver())} classNameName=" w-full h-full flex justify-center items-center px-8 py-3.5 text-xl font-medium text-black bg-gray-200 hover:bg-lightGreen hover:text-black focus:ring-1 focus:outline-none focus:ring-green rounded-b-md text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
+                      <button type="button" onClick={() => handleBotonClick('operaciones', volver())} className=" w-full h-full flex justify-center items-center px-8 py-3.5 text-xl font-medium text-black bg-gray-200 hover:bg-lightGreen hover:text-black focus:ring-1 focus:outline-none focus:ring-green rounded-b-md text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-gray-800">
                         <span>Operaciones Internacionales</span>
                       </button>
                     </div>

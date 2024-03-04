@@ -12,7 +12,7 @@ CREATE TABLE producto (
     Asignado int
 );
 
-CREATE TABLE TipoProducto (
+CREATE TABLE tipoproducto (
     ID_tipo serial PRIMARY KEY,
     Descripcion varchar(30)
 );
@@ -38,7 +38,7 @@ CREATE TABLE DetalleProducto(
     producto int,
     N_Cuenta bigint GENERATED ALWAYS AS IDENTITY (START WITH 1000000001 INCREMENT BY 1) NOT NULL,
     CHECK (N_Cuenta  >= 1000000000 AND N_Cuenta  <= 9999999999)
-)
+);
 
 CREATE TABLE FormPersonNatural (
     ID_FormPN serial PRIMARY KEY,
@@ -145,15 +145,16 @@ INSERT INTO Rol (ID_Rol, Nombre, Estado) VALUES
 -- Insertar datos en la tabla usuarios
 INSERT INTO usuarios ( Name_User, Password, Rol, Estado) VALUES
 ('admin', 'admin', 1, 'Activo'),
+('asesor', 'asesor', 2, 'Activo');
 
--- Insertar datos en la tabla TipoProducto
+-- Insertar datos en la tabla tipoproducto
 INSERT INTO tipoproducto (Descripcion) VALUES
-('Cuenta de Ahorros'),
+('Cuenta de Ahorros');
 
 -- Insertar datos en la tabla producto
 INSERT INTO producto (Estado, Tipo, Asignado) VALUES
-('Activo', 1, 2),
-select * from usuarios
+('Activo', 1, 2);
+select * from usuarios;
 
 
 SELECT fpn.IP_primerNombre AS Nombre, c.Estado AS EstadoCliente, p.ID_Producto AS Producto, dp.N_Cuenta FROM DetalleProducto dp JOIN cliente c ON dp.Cliente = c.ID_Cliente JOIN FormPersonNatural fpn ON c.inf_cliente = fpn.ID_FormPN JOIN producto p ON dp.Producto = p.ID_Producto

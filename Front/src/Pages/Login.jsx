@@ -35,6 +35,9 @@ export default function Login() {
             // Aquí asignamos los datos del usuario al contexto de autenticación
             setUserData(responseData.user);
           }
+          else{
+            alert('Usuario o contraseña incorrecto');
+          }
         } catch (error) {
             return res.status(400).json({ message: 'No se encontró información del usuario' });
         }
