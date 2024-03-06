@@ -49,47 +49,6 @@ const loginUser = async (req, res) => {
   }
 };
 
-// const LoginUser = async (req, res) => {
-//     try {
-//         const { name, password } = req.body; // Corrección: req.Body => req.body
-
-//         const nameExistsQuery = 'SELECT * FROM usuarios WHERE name_User =$1';
-//         console.log('hola');
-//         const nameExistsValues = [name];
-//         const nameExistsResult = await pool.query(nameExistsQuery, nameExistsValues);
-
-//         if (nameExistsResult.rows.length === 0) {
-//             return res.status(400).json({ message: 'El Nombre no es el correcto' });
-//         }
-
-//         const bancaPassword = nameExistsResult.rows[0].Password;
-
-//         if (password !== bancaPassword) {
-//             return res.status(400).json({ message: 'Credenciales incorrectas' });
-//         }
-
-//         const userType = nameExistsResult.rows[0].rol;
-
-//         const userQuery = 'SELECT * FROM usuarios WHERE name_User =$1';
-//         const userValues = [name];
-//         const userResult = await pool.query(userQuery, userValues);
-
-//         if (userResult.rows.length === 0) {
-
-//             return res.status(400).json({ message: 'No se encontro Informacion del Usuario' });
-//         }
-
-//         const userData = userResult.rows[0];
-//         userData.rol = userType;
-
-//         // Devolver la información del usuario, incluyendo el tipo de usuario (rol)
-//         res.status(200).json({ user: userData });
-
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).json({ message: 'Error en el servidor' });
-//     }
-// }
 const user = async (req, res) => {
   try {
 
@@ -106,7 +65,11 @@ const user = async (req, res) => {
 
 const getcliente = async (req, res) => {
   try {
-    const result = await pool.query(`SELECT fpn.IP_primerNombre AS Nombre, c.Estado AS EstadoCliente, p.ID_Producto AS Producto, dp.N_Cuenta FROM DetalleProducto dp JOIN cliente c ON dp.Cliente = c.ID_Cliente JOIN FormPersonNatural fpn ON c.inf_cliente = fpn.ID_FormPN JOIN producto p ON dp.Producto = p.ID_Producto;`);
+    const result = await pool.query(`SELECT c.id_cliente, fpn.IP_primerNombre AS Nombre, c.Estado AS EstadoCliente, p.ID_Producto AS Producto, dp.N_Cuenta
+    FROM DetalleProducto dp
+    JOIN cliente c ON dp.Cliente = c.ID_Cliente
+    JOIN FormPersonNatural fpn ON c.inf_cliente = fpn.ID_FormPN
+    JOIN producto p ON dp.Producto = p.ID_Producto;`);
 
     if (result.rows.length > 0) {
       return res.status(200).json({ result });
@@ -125,7 +88,6 @@ const AddUser = async (req, res) => {
 
   try {
     const { name, password, rol } = newuser;
-
     // Verificar si el usuario ya existe
     const checkUserQuery = 'SELECT COUNT(*) FROM usuarios WHERE name_user = $1';
     const checkUserValues = [name];
@@ -135,15 +97,10 @@ const AddUser = async (req, res) => {
     if (userExists) {
       return res.status(400).json({ message: 'El usuario ya existe' });
     }
-
     // Insertar el nuevo usuario sin proporcionar un valor para id_usuario
     const insertQuery = 'INSERT INTO usuarios (name_user, password, rol, estado) VALUES ($1, $2, $3, $4)';
     const insertValues = [name, password, rol, 'Activo'];
-
     const result = await pool.query(insertQuery, insertValues);
-
-    // Obtener el id generado automáticamente
-    // const generatedUserId = result.rows[0].id_usuario;
 
     res.status(201).json({ message: 'Registro de usuario exitoso' });
   } catch (error) {
@@ -155,16 +112,12 @@ const AddUser = async (req, res) => {
 const UpdateUser = async (req, res) => {
   const userId = req.params.id; // Obtén el ID del usuario de los parámetros de la ruta
   const updateUser = req.body; // Obtén los nuevos datos del usuario desde el cuerpo de la solicitud
-
   try {
     const { name1, password1, rol1 } = updateUser;
-
     // Realiza la actualización en la base de datos utilizando el ID
     const updateQuery = 'UPDATE usuarios SET name_user = $1, password = $2, rol = $3 WHERE id_usuario = $4';
     const updateValues = [name1, password1, rol1, userId];
-
     await pool.query(updateQuery, updateValues);
-
     res.status(200).json({ message: 'Actualización de usuario exitosa' });
   } catch (error) {
     console.error('Error al actualizar el usuario:', error);
@@ -174,23 +127,15 @@ const UpdateUser = async (req, res) => {
 
 const AddFormData = async (req, res) => {
   const formData = req.body;
-
   try {
     // Asegúrate de que los nombres de las propiedades en formData coincidan con los nombres de las columnas en la tabla
     const { Nombre, Apellido1, Apellido2, opcines1, NDocumento, FechaE, LugarE, FechaN, CiudadN, opcines2, opcines3, Nacionalidad, DireccionR, BloqueTorre, AptoCasa, Barrio, Municipio, Departamento, Pais, Telefono, Celular, CorreoE, Profesion, opcines4, ActiEcoP, CodigoCIUU, NumeroEm, NombreEm, DireccionEm, BarrioEm, MunicipioEm, DepartamentoEm, PaisEm, TelefonoEm, Ext, CelularEm, CorreoEm, IngresosM, OIngresosM, TotalAc, Totalpa, DetalleOIM, TotalIn, VentasA, FechaCV, opcines5, opcines6, opcines7, opcines8, NumeroT, PaisT, Idtributario, FondosP, PaisFondos, CiudadFondos, opcines9, opcines10, NombreEn, opcines11, NProducto, MontoMP, Moneda, CiudadO, PaisOP } = formData;
-
     // Construye la consulta de inserción
     const insertQuery = `INSERT INTO FormPersonNatural (IP_primerNombre, IP_primerApellido, IP_segundoApellido, IP_tipoDoc, IP_documento, IP_fechaExpedicion, IP_lugarExpedicion, IP_fechaNacimiento, IP_ciudadNac, IP_genero, IP_estadoCivil, IP_nacionalidad, ICP_direcResidencia, ICP_bloque_torre, ICP_apto_casa, ICP_barrio, ICP_ciudad_municipio, ICP_departamento, ICP_pais, ICP_telefono, ICP_celular, ICP_email, AE_profesion, AE_ocupacion, AE_detalle_act, AE_cod_ciiu, AE_n_empleados, IL_Nombre_Empresa, IL_Direc_empresa, IL_barrio, IL_Ciudad_Municipio, IL_Departamento, IL_Pais, IL_Telefono, IL_EXT, IL_celular, IL_Email_laboral, DIF_Ingresos_mensuales, DIF_Otros_ingresos, DIF_Detalle_Otros_ingresos, DIF_Total_Activos, DIF_Total_Pasivos, DIF_Total_egresos_mensuales, DIF_Ventas_anuales, DIF_Fec_cierre_ventas, IT_Declara_renta, IT_Age_retenedor, IT_Regimen_iva, IT_Tributo_EEUU, IT_id_tributo_eeuu, IT_Tributo_otro_pais, IT_id_otro_pais, IT_Origen_Bienes, IT_Pais_origen, IT_Ciudad_origen, IOIN_Moneda_extranjera, IOIN_Tipos_ope, IOIN_Nombre_entidad, IOIN_Tipo_produc, IOIN_N_produc, IOIN_Monto_mensual_promedio, IOIN_Moneda, IOIN_Ciudad, IOIN_Pais )
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40, $41, $42, $43, $44, $45, $46, $47, $48, $49, $50, $51, $52, $53, $54, $55, $56, $57, $58, $59, $60, $61, $62, $63, $64) ;`;
-
     // Asegúrate de proporcionar los valores en el orden correcto
     const insertValues = [Nombre, Apellido1, Apellido2, opcines1, NDocumento, FechaE, LugarE, FechaN, CiudadN, opcines2, opcines3, Nacionalidad, DireccionR, BloqueTorre, AptoCasa, Barrio, Municipio, Departamento, Pais, Telefono, Celular, CorreoE, Profesion, opcines4, ActiEcoP, CodigoCIUU, NumeroEm, NombreEm, DireccionEm, BarrioEm, MunicipioEm, DepartamentoEm, PaisEm, TelefonoEm, Ext, CelularEm, CorreoEm, IngresosM, OIngresosM, TotalAc, Totalpa, DetalleOIM, TotalIn, VentasA, FechaCV, opcines5, opcines6, opcines7, opcines8, NumeroT, PaisT, Idtributario, FondosP, PaisFondos, CiudadFondos, opcines9, opcines10, NombreEn, opcines11, NProducto, MontoMP, Moneda, CiudadO, PaisOP];
-
     const resultFormPersonNatural = await pool.query(insertQuery, insertValues);
-
-    // Obtiene el ID del formulario insertado en FormPersonNatural
-    // const idFormPersonNatural = resultFormPersonNatural.rows[0].id_FormPN;
-
     // Segunda inserción en la tabla cliente utilizando el ID obtenido
     const insertQueryCliente = `
       INSERT INTO cliente (Tipo_de_Cliente, Estado)
@@ -200,14 +145,12 @@ const AddFormData = async (req, res) => {
     const insertValuesCliente = ["Natural", "Pendiente"];
     // Realiza la inserción en la tabla cliente
     const resultCliente = await pool.query(insertQueryCliente, insertValuesCliente);
-
     const insertQueryDetalle= `
     INSERT INTO DetalleProducto (producto)
     VALUES ($1)
   `;
   const insertValuesDetalle = [1];
   const resultDetalle = await pool.query(insertQueryDetalle, insertValuesDetalle);
-
     res.status(201).json({ message: 'Datos insertados exitosamente', data: resultFormPersonNatural, resultCliente, resultDetalle });
   } catch (error) {
     console.error('Error al insertar datos:', error);
@@ -215,7 +158,29 @@ const AddFormData = async (req, res) => {
   }
 };
 
+const Estado = async (req, res) => {
+  const Id = req.params.id;
+  const estado = req.body.nuevoEstado;
 
+  try {
+      // Verifica que estado esté definido antes de utilizarlo
+      if (typeof estado !== 'undefined') {
+          // Realiza la actualización en la base de datos utilizando el ID
+          const updateQueryA = 'UPDATE cliente SET estado = $1 WHERE id_cliente = $2';
+          const updateValuesA = [estado, Id];
+          await pool.query(updateQueryA, updateValuesA);
+
+          res.status(200).json({ message: 'Actualización de autorización exitosa' });
+      } else {
+          console.error('El valor de nuevoEstado no está definido en el cuerpo de la solicitud.');
+          res.status(400).json({ message: 'Bad Request: El valor de nuevoEstado no está definido en el cuerpo de la solicitud.' });
+      }
+  } catch (error) {
+      console.log(req.body);
+      console.error('Error al actualizar la autorización:', error);
+      res.status(500).json({ message: 'Error en el servidor' });
+  }
+};
 
 module.exports = {
   loginUser,
@@ -223,6 +188,7 @@ module.exports = {
   getcliente,
   AddUser,
   UpdateUser,
-  AddFormData
+  AddFormData,
+  Estado
 }
 

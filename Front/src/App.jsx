@@ -5,6 +5,8 @@ import { DashboardMenu } from "./Pages/DashboardMenu";
 import { LandingPage } from './Pages/LandingPage';
 import Login from './Pages/Login';
 import { CrearUsuario } from './Components/DashBoard/Components/Director/CrearUsuario';
+import { AutorizacionCuentas } from './Components/DashBoard/Components/Director/AutorizacionCuentas';
+
 
 
 export default function MyPage() {
@@ -16,6 +18,7 @@ export default function MyPage() {
             <Route path='/DashBoardMenu' element={<DashboardMenu />} />
             <Route path='/Landing' element={<LandingPage />} />
             <Route path='/CrearUsuario' element={<CrearUsuario/>} />
+            <Route path='/AutorizacionCuentas' element={<AutorizacionCuentas/>} />
          </Routes>
       </Router>
    );

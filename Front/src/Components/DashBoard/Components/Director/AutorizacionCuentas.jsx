@@ -20,6 +20,82 @@ export const AutorizacionCuentas = () => {
         };
         fecthData();
     }, []);
+    console.log(datauser)
+
+
+    const autorizar = (id) => {
+        console.log(id)
+        try {
+            // Realiza una solicitud al servidor para cambiar el estado del cliente con el ID proporcionado
+            fetch(`http://localhost:3000/Estado/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 
+                    nuevoEstado: 'Autorizado',
+                    
+             }),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data.message);
+                // Actualiza localmente el estado del cliente según sea necesario
+                // Puedes utilizar la función setDatauser para actualizar el estado local
+                // Ejemplo: setDatauser(prevData => [...prevData, data.updatedClient]);
+    
+                // Redirige a la página '/DashBoardMenu' después de procesar la respuesta
+                window.location = "/DashBoardMenu";
+            })
+            .catch(error => {
+                console.error('Error al cambiar el estado del cliente:', error);
+            });
+        } catch (error) {
+            console.error('Error general:', error);
+        }
+    };
+    
+    const denegar = (id) => {
+        console.log(id)
+        try {
+            // Realiza una solicitud al servidor para cambiar el estado del cliente con el ID proporcionado
+            fetch(`http://localhost:3000/Estado/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 
+                    nuevoEstado: 'Denegado',
+                    
+             }),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data.message);
+                // Actualiza localmente el estado del cliente según sea necesario
+                // Puedes utilizar la función setDatauser para actualizar el estado local
+                // Ejemplo: setDatauser(prevData => [...prevData, data.updatedClient]);
+    
+                // Redirige a la página '/DashBoardMenu' después de procesar la respuesta
+                window.location = "/DashBoardMenu";
+            })
+            .catch(error => {
+                console.error('Error al cambiar el estado del cliente:', error);
+            });
+        } catch (error) {
+            console.error('Error general:', error);
+        }
+    };
 
     return (
         <>
@@ -68,12 +144,12 @@ export const AutorizacionCuentas = () => {
                                                 {data.estadocliente}
                                             </td>
                                             <td class="px-6 py-4 flex gap-5 justify-center">
-                                                <button href="#" class='hover:bg-gray-200 p-1 rounded-sm'>
+                                                <button onClick={() => denegar(data.id_cliente)} href="#" class='hover:bg-gray-200 p-1 rounded-sm'>
                                                     <svg class="w-6 h-6 text-red-600 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 18 6m0 12L6 6" />
                                                     </svg>
                                                 </button>
-                                                <button href="#" class='hover:bg-gray-200 p-1 rounded-sm'>
+                                                <button  onClick={() => autorizar(data.id_cliente)} href="#" class='hover:bg-gray-200 p-1 rounded-sm'>
                                                     <svg class="w-6 h-6 text-neutralGreen dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 12 4.7 4.5 9.3-9" />
                                                     </svg>

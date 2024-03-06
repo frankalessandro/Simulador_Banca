@@ -155,5 +155,8 @@ INSERT INTO producto (Estado, Tipo, Asignado) VALUES
 ('Activo', 1, 2),
 select * from usuarios
 
-
-SELECT fpn.IP_primerNombre AS Nombre, c.Estado AS EstadoCliente, p.ID_Producto AS Producto, dp.N_Cuenta FROM DetalleProducto dp JOIN cliente c ON dp.Cliente = c.ID_Cliente JOIN FormPersonNatural fpn ON c.inf_cliente = fpn.ID_FormPN JOIN producto p ON dp.Producto = p.ID_Producto
+SELECT c.ID_Cliente, fpn.IP_primerNombre AS Nombre, c.Estado AS EstadoCliente, p.ID_Producto AS Producto, dp.N_Cuenta
+FROM DetalleProducto dp
+JOIN cliente c ON dp.Cliente = c.ID_Cliente
+JOIN FormPersonNatural fpn ON c.inf_cliente = fpn.ID_FormPN
+JOIN producto p ON dp.Producto = p.ID_Producto;
