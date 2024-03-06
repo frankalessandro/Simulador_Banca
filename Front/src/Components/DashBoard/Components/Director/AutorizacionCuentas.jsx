@@ -154,16 +154,10 @@ export const AutorizacionCuentas = () => {
                                                 <button href="#" className='hover:bg-gray-200 p-1 rounded-sm'>
                                                     <svg className="w-6 h-6 text-red-600 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18 18 6m0 12L6 6" />
-                                            <td class="px-6 py-4 flex gap-5 justify-center">
-                                                <button onClick={() => denegar(data.id_cliente)} href="#" class='hover:bg-gray-200 p-1 rounded-sm'>
-                                                    <svg class="w-6 h-6 text-red-600 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 18 6m0 12L6 6" />
                                                     </svg>
                                                 </button>
                                                 <button href="#" className='hover:bg-gray-200 p-1 rounded-sm'>
                                                     <svg className="w-6 h-6 text-neutralGreen dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                                <button  onClick={() => autorizar(data.id_cliente)} href="#" class='hover:bg-gray-200 p-1 rounded-sm'>
-                                                    <svg class="w-6 h-6 text-neutralGreen dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 12 4.7 4.5 9.3-9" />
                                                     </svg>
                                                 </button>
