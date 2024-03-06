@@ -336,7 +336,7 @@
 					334.355,127.876 258.605,171.564 				"/>
 				<g id="XMLID_2285_">
 					
-						<polyline id="XMLID_2336_" style="fill:none;stroke:#455A64;stroke-width:0.75;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" points="
+						<polyline id="XMLID_2336_" style="fill:none;stroke:#455A64;strokeWidth:0.75;strokeLinecap:round;strokeLinejoin:round;stroke-miterlimit:10;" points="
 						262.435,160.654 272.672,132.699 283.991,139.467 295.372,127.874 306.722,135.356 318.072,107.409 329.422,113.23 					"/>
 					<path id="XMLID_2335_" style="fill:#27DEBF;" d="M272.672,131.376c-0.63,0.364-1.141,1.251-1.141,1.983
 						c0,0.731,0.511,1.027,1.141,0.661c0.63-0.366,1.141-1.254,1.141-1.983C273.813,131.308,273.302,131.012,272.672,131.376z"/>

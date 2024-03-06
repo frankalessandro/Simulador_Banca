@@ -138,8 +138,10 @@ const AddFormData = async (req, res) => {
     const resultFormPersonNatural = await pool.query(insertQuery, insertValues);
     // Segunda inserción en la tabla cliente utilizando el ID obtenido
     const insertQueryCliente = `
+
       INSERT INTO cliente (Tipo_de_Cliente, Estado)
       VALUES ($1, $2)
+
     `;
     // Asegúrate de proporcionar los valores en el orden correcto
     const insertValuesCliente = ["Natural", "Pendiente"];
@@ -152,6 +154,7 @@ const AddFormData = async (req, res) => {
   const insertValuesDetalle = [1];
   const resultDetalle = await pool.query(insertQueryDetalle, insertValuesDetalle);
     res.status(201).json({ message: 'Datos insertados exitosamente', data: resultFormPersonNatural, resultCliente, resultDetalle });
+
   } catch (error) {
     console.error('Error al insertar datos:', error);
     res.status(500).json({ message: 'Error interno del servidor' });
