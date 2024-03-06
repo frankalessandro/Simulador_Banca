@@ -21,6 +21,82 @@ export const AutorizacionCuentas = () => {
         fecthData();
     }, []);
     console.log(datauser)
+    console.log(datauser)
+
+
+    const autorizar = (id) => {
+        console.log(id)
+        try {
+            // Realiza una solicitud al servidor para cambiar el estado del cliente con el ID proporcionado
+            fetch(`http://localhost:3000/Estado/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 
+                    nuevoEstado: 'Autorizado',
+                    
+             }),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data.message);
+                // Actualiza localmente el estado del cliente según sea necesario
+                // Puedes utilizar la función setDatauser para actualizar el estado local
+                // Ejemplo: setDatauser(prevData => [...prevData, data.updatedClient]);
+    
+                // Redirige a la página '/DashBoardMenu' después de procesar la respuesta
+                window.location = "/DashBoardMenu";
+            })
+            .catch(error => {
+                console.error('Error al cambiar el estado del cliente:', error);
+            });
+        } catch (error) {
+            console.error('Error general:', error);
+        }
+    };
+    
+    const denegar = (id) => {
+        console.log(id)
+        try {
+            // Realiza una solicitud al servidor para cambiar el estado del cliente con el ID proporcionado
+            fetch(`http://localhost:3000/Estado/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 
+                    nuevoEstado: 'Denegado',
+                    
+             }),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data.message);
+                // Actualiza localmente el estado del cliente según sea necesario
+                // Puedes utilizar la función setDatauser para actualizar el estado local
+                // Ejemplo: setDatauser(prevData => [...prevData, data.updatedClient]);
+    
+                // Redirige a la página '/DashBoardMenu' después de procesar la respuesta
+                window.location = "/DashBoardMenu";
+            })
+            .catch(error => {
+                console.error('Error al cambiar el estado del cliente:', error);
+            });
+        } catch (error) {
+            console.error('Error general:', error);
+        }
+    };
 
     return (
         <>
