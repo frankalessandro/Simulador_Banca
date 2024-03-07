@@ -9,7 +9,7 @@ export const TopNavbar = () => {
             <nav className="bg-white border-gray-200 dark:bg-gray-900 shadow-xl">
                 <div className="max-w-screen-x flex flex-wrap items-center justify-between mx-auto p-2">
                     <Link to="#" class="flex items-center space-x-3 rtl:space-x-reverse">
-                        <img xsrc={TopLogo} className="h-8" alt="ClarBank" />
+                        <img src={TopLogo} className="h-8" alt="ClarBank" />
                         <span><img src={nameLogo} alt="" className="h-4" /></span>
                     </Link>
                     <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
