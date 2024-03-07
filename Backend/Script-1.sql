@@ -8,8 +8,7 @@ CREATE TABLE cliente (
 CREATE TABLE producto (
     ID_Producto serial PRIMARY KEY,
     Estado varchar(15),
-    Tipo int,
-    Asignado int
+    Tipo int
 );
 
 CREATE TABLE tipoproducto (
@@ -37,7 +36,8 @@ CREATE TABLE DetalleProducto(
     Cliente serial,
     producto int,
     N_Cuenta bigint GENERATED ALWAYS AS IDENTITY (START WITH 1000000001 INCREMENT BY 1) NOT NULL,
-    CHECK (N_Cuenta  >= 1000000000 AND N_Cuenta  <= 9999999999)
+    CHECK (N_Cuenta  >= 1000000000 AND N_Cuenta  <= 9999999999),
+    responsable int
 );
 
 CREATE TABLE FormPersonNatural (
@@ -124,8 +124,8 @@ ADD FOREIGN KEY (Rol) REFERENCES Rol(ID_Rol);
 ALTER TABLE producto
 add foreign key (tipo) references tipoproducto(id_tipo);
 
-ALTER TABLE producto
-add foreign key (asignado) references usuarios(id_usuario);
+ALTER TABLE DetalleProducto
+add foreign key (responsable) references usuarios(id_usuario);
 
 ALTER TABLE DetalleProducto	
 ADD FOREIGN KEY (Cliente) REFERENCES cliente(ID_Cliente);

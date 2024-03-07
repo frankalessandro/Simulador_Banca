@@ -127,6 +127,8 @@ const UpdateUser = async (req, res) => {
 
 const AddFormData = async (req, res) => {
   const formData = req.body;
+  const id = req.params.id;
+  console.log(formData)
   try {
     // Asegúrate de que los nombres de las propiedades en formData coincidan con los nombres de las columnas en la tabla
     const { Nombre, Apellido1, Apellido2, opcines1, NDocumento, FechaE, LugarE, FechaN, CiudadN, opcines2, opcines3, Nacionalidad, DireccionR, BloqueTorre, AptoCasa, Barrio, Municipio, Departamento, Pais, Telefono, Celular, CorreoE, Profesion, opcines4, ActiEcoP, CodigoCIUU, NumeroEm, NombreEm, DireccionEm, BarrioEm, MunicipioEm, DepartamentoEm, PaisEm, TelefonoEm, Ext, CelularEm, CorreoEm, IngresosM, OIngresosM, TotalAc, Totalpa, DetalleOIM, TotalIn, VentasA, FechaCV, opcines5, opcines6, opcines7, opcines8, NumeroT, PaisT, Idtributario, FondosP, PaisFondos, CiudadFondos, opcines9, opcines10, NombreEn, opcines11, NProducto, MontoMP, Moneda, CiudadO, PaisOP } = formData;
@@ -141,17 +143,16 @@ const AddFormData = async (req, res) => {
 
       INSERT INTO cliente (Tipo_de_Cliente, Estado)
       VALUES ($1, $2)
-
     `;
     // Asegúrate de proporcionar los valores en el orden correcto
     const insertValuesCliente = ["Natural", "Pendiente"];
     // Realiza la inserción en la tabla cliente
     const resultCliente = await pool.query(insertQueryCliente, insertValuesCliente);
     const insertQueryDetalle= `
-    INSERT INTO DetalleProducto (producto)
-    VALUES ($1)
+    INSERT INTO DetalleProducto (producto, responsable )
+    VALUES ($1, $2)
   `;
-  const insertValuesDetalle = [1];
+  const insertValuesDetalle = [1, id];
   const resultDetalle = await pool.query(insertQueryDetalle, insertValuesDetalle);
     res.status(201).json({ message: 'Datos insertados exitosamente', data: resultFormPersonNatural, resultCliente, resultDetalle });
 
