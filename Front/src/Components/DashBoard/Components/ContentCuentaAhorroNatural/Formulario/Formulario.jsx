@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
-
+import { Dropdown } from 'flowbite-react';
 export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick }) => {
   const { register, handleSubmit, formState: { errors} } = useForm();
   let [getform, setgetfrom] = useState({
@@ -1021,9 +1021,14 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                    
                     </div>
                     <div>
-                      <p>Detalle otros ingresos mensuales 
-                     
-                      </p>
+                   
+                      
+                         <Dropdown label=" Detalle otros ingresos mensuales " inline >
+      <Dropdown.Item>(diferentes a su actividad económica principal)</Dropdown.Item>
+     
+    </Dropdown>
+                        
+                    
                       <input type="text"  {...register("DetalleOIM", {
                          pattern: {
                           value:/^[A-Za-z]+$/i,
@@ -1056,10 +1061,20 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                     {errors.TotalIn &&  <span className='text-red-600 flex items-end'>{errors.TotalIn.message}</span> }
                     
                     </div>
+                    <div className=' flex flex-col w-36   '>
+                      <div className=' flex-row- flex max-[1024px]:flex-col  max-[1024px]:justify-center  '>
+
+<label htmlFor="" class='absolute text-sm flex flex-row max-[1024px]:xs w-72 min-[1324px]:w-80 max-[1024px]:flex-col '> Si su ocupación es agricultor, comerciante, independiente
+o ganadero, por favor diligencie la siguiente información.</label>
+                      </div>
+                      <br/> 
+<br /><br />
+<div className='flex flex-row  gap-x-16 max-[1024px]:flex-col'>
+
                     <div>
                       <p>Ventas anuales</p>
                       <input type="number"  {...register("VentasA",{
-                         minLength: {
+                        minLength: {
                           value: 1,
                           message:'Minimo 1 numeros'
                         },
@@ -1078,6 +1093,8 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                   
                   </div>
                 </div>
+                      </div>
+                      </div>
                 <div className="grid gap-5 lg:grid-cols-3 p-8">
                   <a onClick={regresar} className="flex items-center justify-center px-4 h-10 text-base font-medium text-black bg-gray-200 border-gray-300 rounded-lg hover:bg-lightGreen shadow-md hover:text-black">
                     Menú Formulario
