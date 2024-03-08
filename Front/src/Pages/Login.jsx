@@ -57,11 +57,11 @@ export default function Login() {
                     <form className="space-y-6" action="#" onSubmit={handleSubmit(inisesion)}  >
                         <img src={Logo} className="flex justify-center h-64 w-96 lg:sr-only md:not-sr-only " />
                         <div>
-                            <label htmlFor="Text" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Name</label>
-                            <input type="Text" {...register("name")} name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green focus:border-green block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-green dark:text-white" placeholder="Your Name" required />
+                            <label htmlFor="Text" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Usuario</label>
+                            <input type="Text" {...register("name")} name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green focus:border-green block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-green dark:text-white" placeholder="Nombre de usuario" required />
                         </div>
                         <div>
-                            <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
+                            <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contraseña</label>
                             <input type="password" {...register("password")} name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green focus:border-green block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
                         </div>
                         <div className="flex items-start">
