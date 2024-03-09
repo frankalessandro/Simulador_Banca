@@ -24,8 +24,11 @@ export const AutorizacionCuentas = () => {
         };
         fecthData();
     }, []);
+
+    const estado = datauser.map(user => user.estadocliente == 'Pendiente')
+
     console.log(datauser)
-    console.log(datauser)
+    console.log(estado)
 
     
 
@@ -38,11 +41,10 @@ export const AutorizacionCuentas = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ 
+                body: JSON.stringify({
                     nuevoEstado: 'Autorizado',
-                    
-             }),
             })
+
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -65,11 +67,12 @@ export const AutorizacionCuentas = () => {
             .catch(error => {
                 console.error('Error al cambiar el estado del cliente:', error);
             });
+
         } catch (error) {
             console.error('Error general:', error);
         }
     };
-    
+
     const denegar = (id) => {
         console.log(id)
         try {
@@ -79,8 +82,8 @@ export const AutorizacionCuentas = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ 
-                    nuevoEstado: 'Denegado',
+                body: JSON.stringify({
+                    nuevoEstado: 'Denegado'
                     
              }),
             })
@@ -101,10 +104,26 @@ export const AutorizacionCuentas = () => {
                     // Redirige a la página '/DashBoardMenu' después de procesar la respuesta
                     window.location = "/DashBoardMenu";
                 }, 1500);
+
             })
-            .catch(error => {
-                console.error('Error al cambiar el estado del cliente:', error);
-            });
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data.message);
+                    // Actualiza localmente el estado del cliente según sea necesario
+                    // Puedes utilizar la función setDatauser para actualizar el estado local
+                    // Ejemplo: setDatauser(prevData => [...prevData, data.updatedClient]);
+
+                    // Redirige a la página '/DashBoardMenu' después de procesar la respuesta
+                    window.location = "/DashBoardMenu";
+                })
+                .catch(error => {
+                    console.error('Error al cambiar el estado del cliente:', error);
+                });
         } catch (error) {
             console.error('Error general:', error);
         }
@@ -120,7 +139,7 @@ export const AutorizacionCuentas = () => {
                         </div>
                         <div className="w-8/12 relative overflow-x-auto shadow-md sm:rounded-lg">
                             <table className="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-gray-400">
-                                
+
 
                                 <thead className="text-xs text-center text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                     <tr>
@@ -132,7 +151,7 @@ export const AutorizacionCuentas = () => {
                                         </th>
 
                                         <th scope="col" className="px-6 py-3">
-                                             N° Cuenta
+                                            N° Cuenta
                                         </th>
                                         <th scope="col" className="px-6 py-3">
                                             Estado
@@ -145,6 +164,7 @@ export const AutorizacionCuentas = () => {
                                 </thead>
                                 <tbody>
                                     {datauser?.map((data) => (
+
 
                                         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={data.id_cliente}>
 
@@ -177,6 +197,7 @@ export const AutorizacionCuentas = () => {
                                                
                                             </td>
                                         </tr>
+
 
 
                                     )
