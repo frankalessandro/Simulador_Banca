@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const AutorizacionCuentas = () => {
     const [datauser, setdatauser] = useState([]);
+
+    
 
     useEffect(() => {
         const fecthData = async () => {
@@ -23,6 +27,7 @@ export const AutorizacionCuentas = () => {
     console.log(datauser)
     console.log(datauser)
 
+    
 
     const autorizar = (id) => {
         console.log(id)
@@ -46,12 +51,16 @@ export const AutorizacionCuentas = () => {
             })
             .then(data => {
                 console.log(data.message);
-                // Actualiza localmente el estado del cliente según sea necesario
-                // Puedes utilizar la función setDatauser para actualizar el estado local
-                // Ejemplo: setDatauser(prevData => [...prevData, data.updatedClient]);
-                alert('Autorización exitosa')
-                // Redirige a la página '/DashBoardMenu' después de procesar la respuesta
-                window.location = "/DashBoardMenu";
+                toast.success("Autorizado")
+                setTimeout(() => {
+                    // Actualiza localmente el estado del cliente según sea necesario
+                    // Puedes utilizar la función setDatauser para actualizar el estado local
+                    // Ejemplo: setDatauser(prevData => [...prevData, data.updatedClient]);
+                    // alert('Autorización exitosa')
+                    // Redirige a la página '/DashBoardMenu' después de procesar la respuesta
+                    window.location = "/DashBoardMenu";
+                }, 1500); // 2000 milisegundos = 2 segundos
+            
             })
             .catch(error => {
                 console.error('Error al cambiar el estado del cliente:', error);
@@ -83,12 +92,15 @@ export const AutorizacionCuentas = () => {
             })
             .then(data => {
                 console.log(data.message);
-                // Actualiza localmente el estado del cliente según sea necesario
-                // Puedes utilizar la función setDatauser para actualizar el estado local
-                // Ejemplo: setDatauser(prevData => [...prevData, data.updatedClient]);
-    
-                // Redirige a la página '/DashBoardMenu' después de procesar la respuesta
-                window.location = "/DashBoardMenu";
+                toast.error("Denegado")
+                setTimeout(() => {
+                    // Actualiza localmente el estado del cliente según sea necesario
+                    // Puedes utilizar la función setDatauser para actualizar el estado local
+                    // Ejemplo: setDatauser(prevData => [...prevData, data.updatedClient]);
+                    // alert('Autorización exitosa')
+                    // Redirige a la página '/DashBoardMenu' después de procesar la respuesta
+                    window.location = "/DashBoardMenu";
+                }, 1500);
             })
             .catch(error => {
                 console.error('Error al cambiar el estado del cliente:', error);
@@ -156,11 +168,13 @@ export const AutorizacionCuentas = () => {
                                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 18 6m0 12L6 6" />
                                                     </svg>
                                                 </button>
-                                                <button  onClick={() => autorizar(data.id_cliente)} href="#" class='hover:bg-gray-200 p-1 rounded-sm'>
+
+                                                <button  onClick={() => autorizar(data.id_cliente) } href="#" class='hover:bg-gray-200 p-1 rounded-sm'>
                                                     <svg class="w-6 h-6 text-neutralGreen dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 12 4.7 4.5 9.3-9" />
                                                     </svg>
                                                 </button>
+                                               
                                             </td>
                                         </tr>
 
@@ -171,7 +185,7 @@ export const AutorizacionCuentas = () => {
                             </table>
                         </div>
 
-
+                        
                     </div>
                 </div>
             </div>

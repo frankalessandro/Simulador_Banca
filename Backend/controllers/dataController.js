@@ -148,11 +148,20 @@ const AddFormData = async (req, res) => {
     const insertValuesCliente = ["Natural", "Pendiente"];
     // Realiza la inserción en la tabla cliente
     const resultCliente = await pool.query(insertQueryCliente, insertValuesCliente);
+
+    const currentDate = new Date();
+    const dia = currentDate.getDate();
+    // Ten en cuenta que los meses en JavaScript son indexados desde 0 (enero es 0, febrero es 1, etc.)
+    const mes = currentDate.getMonth() + 1;
+    const anio = currentDate.getFullYear();
+  
+    const fechaFormateada = `${anio}-${mes < 10 ? '0' + mes : mes}-${dia < 10 ? '0' + dia : dia}`;
+
     const insertQueryDetalle= `
-    INSERT INTO DetalleProducto (producto, responsable )
-    VALUES ($1, $2)
+    INSERT INTO DetalleProducto (producto, responsable, fecha)
+    VALUES ($1, $2, $3)
   `;
-  const insertValuesDetalle = [1, id];
+  const insertValuesDetalle = [1, id, fechaFormateada];
   const resultDetalle = await pool.query(insertQueryDetalle, insertValuesDetalle);
     res.status(201).json({ message: 'Datos insertados exitosamente', data: resultFormPersonNatural, resultCliente, resultDetalle });
 
