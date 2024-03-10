@@ -10,9 +10,9 @@ import { AutorizacionCuentas } from './Components/Director/AutorizacionCuentas'
 import { CrearUsuario } from './Components/Director/CrearUsuario'
 import { useAuth } from '../../context/AuthContext'
 import { Reportes } from './Components/Director/Reportes'
-import { Sidebar, SidebarItemGroup } from 'flowbite-react';
+import { Button, FloatingLabel, Label, Sidebar, SidebarItemGroup } from 'flowbite-react';
 import { Avatar, Dropdown, Navbar } from 'flowbite-react';
-import {HiShoppingCart } from "react-icons/hi";
+import {HiShoppingCart ,HiUser , HiClipboard, HiUserCircle ,HiUserGroup } from "react-icons/hi";
 import { Colors } from 'chart.js'
 
 
@@ -58,14 +58,13 @@ export const DashboardComponent = () => {
                                 <div className="flex items-center">
                                     <div className="flex items-center ms-3">
 
-                                        <p className=' flex items-center gap-2 '>{user?.name_user} - {user?.rol == 2 && (<> Asesor </>)}{user?.rol == 1 && (<> Director </>)} </p>
-                                        <div className="flex    ">
+                                       
+                                        
                                             <Dropdown
-
-                                                arrow
+                                            arrowIcon={false}
                                                 inline
                                                 label={
-                                                    <Avatar alt="User settings" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" rounded />
+                                                   <button className='flex flex-row items-center  text-sm bg-white rounded-full focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-600'> <p className=' flex items-center text-sm bg-white rounded-full focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-600 '>{user?.name_user} - {user?.rol == 2 && (<> Asesor </>)}{user?.rol == 1 && (<> Director </>)} </p><HiUserCircle color='gray' className='w-20 h-12'/>  </button>
                                                 }
                                             >
                                                 <Dropdown.Header>
@@ -75,7 +74,7 @@ export const DashboardComponent = () => {
                                                 <Dropdown.Divider />
                                                 <Dropdown.Item onClick={handlelogout}>Salir</Dropdown.Item>
                                             </Dropdown>
-                                        </div>
+                                        
 
                                     </div>
                                 </div>
@@ -83,7 +82,7 @@ export const DashboardComponent = () => {
                         </div>
                     </nav>
                     <Sidebar  className="fixed top-0 left-0 z-40 w-64 shadow-lg h-screen pt-20 transition-transform -translate-x-full bg-green border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidebar">
-                        <div className="fixed left-0 top-0 py-10 h-full px-3 pb-4 w-full  overflow-y-auto bg-green dark:bg-gray-800  "  >
+                        <div className="fixed left-0 top-1 py-10 h-full px-3 pb-4 w-full  overflow-y-auto bg-green dark:bg-gray-800  "  >
                             <Sidebar.ItemGroup className="space-y-2 font-medium ">
 
                             
@@ -105,11 +104,11 @@ export const DashboardComponent = () => {
                                  
        
           <Sidebar.Collapse 
-             className="flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group hover:bg-white hover:text-black dark:text-white dark:hover:bg-gray-700" label={  <HiShoppingCart color='white'  />  }  >
+             className="flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group hover:bg-white hover:text-black dark:text-white dark:hover:bg-gray-700" label={<label className='flex  flex-row  relative right-5 items-center '> <HiShoppingCart color='white || black' className='flex relative right-1 items-center justify-center w-12' /> Apertura de cuentas </label>}   >
                 
-            <Sidebar.Collapse  label="Cuenta de ahorro" className="flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group hover:bg-gray-100 hover:text-black dark:text-white dark:hover:bg-gray-700" >
-            <Sidebar.Item onClick={() => handleBotonClick('FormularioPersonaNatural')} class="flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group hover:text-black hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Persona Natural</Sidebar.Item>
-            <Sidebar.Item onClick={() => handleBotonClick('FormularioPersonaJuridica')} class="flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group  hover:bg-gray-100 hover:text-black dark:text-white dark:hover:bg-gray-700">Persona Juridica</Sidebar.Item>
+            <Sidebar.Collapse   label={<label className='flex  flex-row  relative right-4 items-center'> <HiClipboard color='white || black' className='flex relative right-1 items-center justify-center w-12' /> Cuenta de Ahorro </label>} className="flex items-center w-full p-2 text-base text-white  transition duration-75 rounded-lg group hover:bg-gray-100  hover:text-black dark:text-white dark:hover:bg-gray-700" >
+            <Sidebar.Item onClick={() => handleBotonClick('FormularioPersonaNatural')} class="flex items-center  relative left-4 w-full p-2 text-base text-white transition duration-75 rounded-lg group hover:text-black hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{<p className='flex  flex-row  relative right-5 items-center'><HiUser color='white || black' className='flex relative right-1 items-center justify-center w-12'/> Persona Natural</p>}</Sidebar.Item>
+            <Sidebar.Item onClick={() => handleBotonClick('FormularioPersonaJuridica')} class="flex items-center relative left-4  w-full p-2 text-base text-white transition duration-75 rounded-lg group  hover:bg-gray-100 hover:text-black dark:text-white dark:hover:bg-gray-700">{<p className='flex  flex-row  relative right-5 items-center'><HiUserGroup color='white || black' className='flex relative right-1 items-center justify-center w-12'/> Persona Juridica</p>}</Sidebar.Item>
     
           </Sidebar.Collapse>
           {/* <Sidebar.Collapse  label="Cuenta de Corriente">
@@ -124,7 +123,7 @@ export const DashboardComponent = () => {
     
 
 
-                                    <li>
+                                    {/* <li>
 
                                         <button type="button" className="flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group hover:bg-gray-100 hover:text-black dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
                                             <svg className="flex-shrink-0 w-5 h-5 text-white transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 21">
@@ -167,7 +166,7 @@ export const DashboardComponent = () => {
                                                         </button>
                                                     </li>
                                                 </ul>
-                                            </li> 
+                                            </li>  */}
 
                                             {/* <li>
                                     <button type="button" className="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-cuentacorriente" data-collapse-toggle="dropdown-cuentacorritente">
@@ -188,9 +187,9 @@ export const DashboardComponent = () => {
                                     </li>
                                     </ul>
                                 </li> */}
-                                        </ul>
+                                        {/* </ul>
                                
-                                    </li>
+                                    </li> */}
                                     {/* <li>
                                 <a href="#" onClick={() => handleBotonClick('NoDisponible')} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                                     <svg className="w-6 h-6 text-gray-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">

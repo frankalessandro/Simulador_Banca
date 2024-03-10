@@ -783,7 +783,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                       <p>Barrio</p>
                       <input type="text"  {...register("BarrioEm", {
                          pattern: {
-                          value:/^[A-Za-z]+$/i,
+                          value:/^[A-Za-z ]+$/i,
                           message:'Digita solo letras'
                          },
                         required: {
