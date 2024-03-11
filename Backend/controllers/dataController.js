@@ -67,12 +67,19 @@ const getcliente = async (req, res) => {
   try {
 
     const result = await pool.query(`
-      SELECT c.id_cliente, fpn.IP_primerNombre AS Nombre, c.Estado AS EstadoCliente, p.ID_Producto AS Producto, dp.N_Cuenta
-      FROM DetalleProducto dp
-      JOIN cliente c ON dp.Cliente = c.ID_Cliente
-      JOIN FormPersonNatural fpn ON c.inf_cliente = fpn.ID_FormPN
-      JOIN producto p ON dp.Producto = p.ID_Producto
-      WHERE c.Estado = 'Pendiente';
+      SELECT
+  c.ID_Cliente,
+  fpn.IP_primerNombre AS Nombre,
+  c.Estado AS EstadoCliente,
+  tp.Descripcion AS Producto,
+  dp.N_Cuenta
+FROM
+  DetalleProducto dp
+  JOIN cliente c ON dp.Cliente = c.ID_Cliente
+  JOIN FormPersonNatural fpn ON c.inf_cliente = fpn.ID_FormPN
+  JOIN producto p ON dp.Producto = p.ID_Producto
+  JOIN tipoproducto tp ON p.Tipo = tp.ID_tipo
+  WHERE c.Estado = 'Pendiente';
     `);
 
     if (result.rows.length > 0) {
