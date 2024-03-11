@@ -37,7 +37,8 @@ CREATE TABLE DetalleProducto(
     producto int,
     N_Cuenta bigint GENERATED ALWAYS AS IDENTITY (START WITH 1000000001 INCREMENT BY 1) NOT NULL,
     CHECK (N_Cuenta  >= 1000000000 AND N_Cuenta  <= 9999999999),
-    responsable int
+    responsable int,
+    fecha date 
 );
 
 CREATE TABLE FormPersonNatural (
