@@ -10,8 +10,27 @@ import { AutorizacionCuentas } from './Components/Director/AutorizacionCuentas'
 import { CrearUsuario } from './Components/Director/CrearUsuario'
 import { useAuth } from '../../context/AuthContext'
 import { Reportes } from './Components/Director/Reportes'
+import { Button, FloatingLabel, Label, Sidebar, SidebarItemGroup } from 'flowbite-react';
+import { Avatar, Dropdown, Navbar } from 'flowbite-react';
+import {HiShoppingCart,HiOutlineViewList ,HiUser , HiClipboard, HiUserCircle ,HiUserGroup } from "react-icons/hi";
+import { Colors } from 'chart.js'
+
+
 
 export const DashboardComponent = () => {
+     
+
+    const [active , setactive ] =useState("fixed top-0 left-0 z-40 w-64 shadow-lg h-screen pt-20 transition-transform -translate-x-full bg-green border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700")
+ 
+    const Abrir  = () => {
+        if (active === "fixed top-0 left-0 z-40 w-64 shadow-lg h-screen pt-20 transition-transform -translate-x-full bg-green border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700") {
+          setactive("fixed top-0 left-0 z-40 w-64 shadow-lg h-screen pt-20 transition-transform -translate-x-px bg-green border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700");
+    
+        } else {
+          setactive("fixed top-0 left-0 z-40 w-64 shadow-lg h-screen pt-20 transition-transform -translate-x-full bg-green border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700")
+
+        }
+      }
 
     const { user, isLoggedIn, logout } = useAuth();
 
@@ -35,8 +54,10 @@ export const DashboardComponent = () => {
                     <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
                         <div className="px-3 py-3 lg:px-5 lg:pl-3">
                             <div className="flex items-center justify-between">
+
                                 <div className="flex items-center justify-start rtl:justify-end">
-                                    <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+                                    <button  onClick={Abrir} type="button" className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+                                       <HiOutlineViewList className='h-8 w-5 flex items-center'/>
                                         <span className="sr-only">Open sidebar</span>
                                     </button>
                                     <a href="#" className="flex ms-2 md:me-24">
@@ -44,44 +65,40 @@ export const DashboardComponent = () => {
                                         <span className=""><img src={Namelogo} alt="" className='relative h-4  top-2 ' /></span>
                                     </a>
                                 </div>
+
                                 <div className="flex items-center">
                                     <div className="flex items-center ms-3">
-                                        <div>
 
-                                            <button type="button" className="flex text-sm bg-white rounded-full focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">
-                                                <span className="sr-only">Open user menu</span>
-                                                <p className='p-2'>{user?.name_user} - {user?.rol == 2 && (<> Asesor </>)}{user?.rol == 1 && (<> Director </>)} </p>
-                                                <svg className="h-8 text-gray-600 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                                    <path fillRule="evenodd" d="M12 20a8 8 0 0 1-5-1.8v-.6c0-1.8 1.5-3.3 3.3-3.3h3.4c1.8 0 3.3 1.5 3.3 3.3v.6a8 8 0 0 1-5 1.8ZM2 12a10 10 0 1 1 10 10A10 10 0 0 1 2 12Zm10-5a3.3 3.3 0 0 0-3.3 3.3c0 1.7 1.5 3.2 3.3 3.2 1.8 0 3.3-1.5 3.3-3.3C15.3 8.6 13.8 7 12 7Z" clipRule="evenodd" />
-                                                </svg>
+                                       
+                                        
+                                            <Dropdown
+                                            arrowIcon={false}
+                                                inline
+                                                label={
+                                                   <button className='flex flex-row items-center  text-sm bg-white rounded-full focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-600'> <p className=' flex items-center text-sm bg-white rounded-full focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-600 '>{user?.name_user} - {user?.rol == 2 && (<> Asesor </>)}{user?.rol == 1 && (<> Director </>)} </p><HiUserCircle color='gray' className='w-16 h-10 '/>  </button>
+                                                }
+                                            >
+                                                <Dropdown.Header>
+                                                    <span className="block text-sm">{user?.name_user}</span>
+                                                    <span className="block truncate text-sm font-medium">{user?.name_user}@ClarBank.com</span>
+                                                </Dropdown.Header>
+                                                <Dropdown.Divider />
+                                                <Dropdown.Item onClick={handlelogout}>Salir</Dropdown.Item>
+                                            </Dropdown>
+                                        
 
-                                            </button>
-
-                                        </div>
-                                        <div className="z-50  hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">
-                                            <div className="px-4 py-3" role="none">
-                                                <p className="text-sm text-gray-900 dark:text-white" role="none">
-                                                    {user?.name_user}
-                                                </p>
-                                                <p className="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
-                                                    {user?.name_user}@ClarBank.com
-                                                </p>
-                                            </div>
-                                            <ul className="py-1" role="none">
-                                                <li>
-                                                    <button onClick={handlelogout} className="block px-4 py-2 w-full text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Salir </button>
-                                                </li>
-                                            </ul>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </nav>
+                    <Sidebar  className={active} aria-label="Sidebar">
+                        <div className="fixed left-0 top-1 py-10 h-full px-3 pb-4 w-full  overflow-y-auto bg-green dark:bg-gray-800  "  >
+                            <Sidebar.ItemGroup className="space-y-2 font-medium ">
 
-                    <aside id="logo-sidebar" className="fixed top-0 left-0 z-40 w-64 shadow-lg h-screen pt-20 transition-transform -translate-x-full bg-green border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidebar">
-                        <div className="h-full px-3 pb-4 overflow-y-auto bg-green dark:bg-gray-800">
-                            <ul className="space-y-2 font-medium">
+                            
+                                
+
                                 <li>
                                     <button href="#" onClick={() => handleBotonClick('PrincipalPage')} className="flex items-center p-2 text-white w-full rounded-lg hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">
                                         <svg className="w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
@@ -91,17 +108,33 @@ export const DashboardComponent = () => {
                                         <span className="ms-3">Inicio</span>
                                     </button>
                                 </li>
+                               
+                             
+        
                                 {user?.rol == 2 && (<>
-                                                    <li>
-                                                        <button type="button" onClick={() => handleBotonClick('FormularioPersonaNatural')} class="flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group hover:text-black hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-                                                            <svg className="w-6 h-6 text-white dark:text-white transition duration-75 group-hover:text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                                                <path fillRule="evenodd" d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z" clipRule="evenodd" />
-                                                            </svg>
-                                                            <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Persona Natural</span>
-                                                        </button>
-                                                    </li>
+                                 
+       
+          <Sidebar.Collapse 
+             className="flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group hover:bg-white hover:text-black dark:text-white dark:hover:bg-gray-700" label={<label className='flex  flex-row  relative right-5 items-center '> <HiShoppingCart color='white || black' className='flex relative right-1 items-center justify-center w-12' /> Apertura de cuentas </label>}   >
+                
+            <Sidebar.Collapse   label={<label className='flex  flex-row  relative right-4 items-center'> <HiClipboard color='white || black' className='flex relative right-1 items-center justify-center w-12' /> Cuenta de Ahorro </label>} className="flex items-center w-full p-2 text-base text-white  transition duration-75 rounded-lg group hover:bg-gray-100  hover:text-black dark:text-white dark:hover:bg-gray-700" >
+            <Sidebar.Item onClick={() => handleBotonClick('FormularioPersonaNatural')} class="flex items-center  relative left-4 w-full p-2 text-base text-white transition duration-75 rounded-lg group hover:text-black hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{<p className='flex  flex-row  relative right-5 items-center'><HiUser color='white || black' className='flex relative right-1 items-center justify-center w-12'/> Persona Natural</p>}</Sidebar.Item>
+            <Sidebar.Item onClick={() => handleBotonClick('FormularioPersonaJuridica')} class="flex items-center relative left-4  w-full p-2 text-base text-white transition duration-75 rounded-lg group  hover:bg-gray-100 hover:text-black dark:text-white dark:hover:bg-gray-700">{<p className='flex  flex-row  relative right-5 items-center'><HiUserGroup color='white || black' className='flex relative right-1 items-center justify-center w-12'/> Persona Juridica</p>}</Sidebar.Item>
+    
+          </Sidebar.Collapse>
+          {/* <Sidebar.Collapse  label="Cuenta de Corriente">
+            <Sidebar.Item href="#">Persona Natural</Sidebar.Item>
+            <Sidebar.Item href="#">Persona Juridica</Sidebar.Item>
+    
+          </Sidebar.Collapse> */}
+          </Sidebar.Collapse>
+          
+          
+       
+    
 
-                                    <li>
+
+                                    {/* <li>
 
                                         <button type="button" className="flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group hover:bg-gray-100 hover:text-black dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
                                             <svg className="flex-shrink-0 w-5 h-5 text-white transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 21">
@@ -127,7 +160,15 @@ export const DashboardComponent = () => {
                                                     </svg>
                                                 </button>
                                                 <ul id="dropdown-cuentahorro" className="hidden py-2 space-y-2 pl-6">
-                                                    <li>
+                                    <li>
+                                        <button type="button" onClick={() => handleBotonClick('FormularioPersonaNatural')} class="flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group hover:text-black hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                                            <svg className="w-6 h-6 text-white dark:text-white transition duration-75 group-hover:text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                                <path fillRule="evenodd" d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z" clipRule="evenodd" />
+                                            </svg>
+                                            <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Persona Natural</span>
+                                        </button>
+                                    </li> 
+                                                     <li>
                                                         <button type="button" onClick={() => handleBotonClick('FormularioPersonaJuridica')} class="flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group  hover:bg-gray-100 hover:text-black dark:text-white dark:hover:bg-gray-700">
                                                             <svg className="w-6 h-6 text-white dark:text-white transition duration-75 group-hover:text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                                                                 <path fillRule="evenodd" d="M12 6a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Zm-1.5 8a4 4 0 0 0-4 4c0 1.1.9 2 2 2h7a2 2 0 0 0 2-2 4 4 0 0 0-4-4h-3Zm6.8-3.1a5.5 5.5 0 0 0-2.8-6.3c.6-.4 1.3-.6 2-.6a3.5 3.5 0 0 1 .8 6.9Zm2.2 7.1h.5a2 2 0 0 0 2-2 4 4 0 0 0-4-4h-1.1l-.5.8c1.9 1 3.1 3 3.1 5.2ZM4 7.5a3.5 3.5 0 0 1 5.5-2.9A5.5 5.5 0 0 0 6.7 11 3.5 3.5 0 0 1 4 7.5ZM7.1 12H6a4 4 0 0 0-4 4c0 1.1.9 2 2 2h.5a6 6 0 0 1 3-5.2l-.4-.8Z" clipRule="evenodd" />
@@ -136,7 +177,8 @@ export const DashboardComponent = () => {
                                                         </button>
                                                     </li>
                                                 </ul>
-                                            </li>
+                                            </li>  */}
+
                                             {/* <li>
                                     <button type="button" className="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-cuentacorriente" data-collapse-toggle="dropdown-cuentacorritente">
                                     <svg className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -148,16 +190,17 @@ export const DashboardComponent = () => {
                                     </svg>
                                     </button>
                                     <ul id="dropdown-cuentacorritente" className="hidden py-2 space-y-2">
-                                        <li>
-                                        <a href="#" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Persona Natural</a>
-                                        </li>
-                                        <li>
-                                        <a href="#" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Persona Juridica</a>
-                                        </li>
-                                        </ul>
-                                    </li> */}
-                                        </ul>
+                                    <li>
+                                    <a href="#" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Persona Natural</a>
                                     </li>
+                                    <li>
+                                    <a href="#" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Persona Juridica</a>
+                                    </li>
+                                    </ul>
+                                </li> */}
+                                        {/* </ul>
+                               
+                                    </li> */}
                                     {/* <li>
                                 <a href="#" onClick={() => handleBotonClick('NoDisponible')} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                                     <svg className="w-6 h-6 text-gray-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
@@ -239,9 +282,9 @@ export const DashboardComponent = () => {
                                     </>
                                 )
                                 }
-                            </ul>
+                            </Sidebar.ItemGroup>
                         </div>
-                    </aside>
+                    </Sidebar>
                     <div>
                         {contenidoSeleccionado === 'FormularioPersonaNatural' && <ContentCuentaAhorroNatural />}
                         {contenidoSeleccionado === 'FormularioPersonaJuridica' && <ContentCuentaAhorroJuridica />}

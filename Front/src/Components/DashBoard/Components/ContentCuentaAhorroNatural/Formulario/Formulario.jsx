@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
-import { useAuth } from '../../../../../context/AuthContext';
 
+import { Dropdown } from 'flowbite-react';
+import { useAuth } from '../../../../../context/AuthContext';
 
 export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick }) => {
 
@@ -9,9 +10,9 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
   const { user } = useAuth();
   console.log(user?.id_usuario)
   let id = user?.id_usuario;
-
-
+  
   const [getform, setgetfrom] = useState({
+
     Nombre: '',
     Apellido1: '',
     Apellido2: '',
@@ -84,17 +85,19 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
 
   })
 
+  const [salanamafa, setSalanamafa] = useState(null);
+
   const valorInput = (event) => {
 
     const { name, defaultValue, id } = event.target;
     setgetfrom({ ...getform, [name]: defaultValue });
-    console.log(id);
+    console.log(getform);
   }
 
   const [datainfo, setdatainfo] = useState()
   const OnsumitInfo = async (data) => {
     setdatainfo(data)
-    console.log(datainfo);
+    console.log(data);
     handleBotonClick('contacto')
 
   }
@@ -118,11 +121,18 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
   }
   const OnsumitInfo5 = async (data) => {
 
+    setdatainfo(data)
+    console.log(data);
+    handleBotonClick('operaciones')
+
+  }
+  const OnsumitInfo6 = async (data) => {
     setdatainfo(data); // Agregar el id_usuario al objeto datainfo
     console.log('datainfo:', datainfo);
     console.log('user?.id_usuario:', user?.id_usuario);
     CrearCliente(data );
-    alert('Registro de cliente exitoso');
+    
+
   }
 
   const CrearCliente = async () => {
@@ -598,19 +608,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                     </div>
                     <div>
                       <p>Correo electrónico</p>
-                      <input type="email" required {...register("CorreoE", {
-                        
-                        required: {
-                          value: true,
-                        }, minLength: {
-                          value: 3,
-                        },
-                        maxLength: {
-                          value: 30
-                        }
-                      })} name="CorreoE" defaultValue={getform.CorreoE} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green w-auto lg:w-72" />
-                    {errors.CorreoE &&  <span className='text-red-600 flex items-end'>{errors.CorreoE.message}</span> }
-                    
+                      <input type="email" required {...register("CorreoE")} name="CorreoE" defaultValue={getform.CorreoE} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green w-auto lg:w-72" />
                     </div>
                   </div>
                 </div>
@@ -648,80 +646,301 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                   <div className="grid justify-center gap-5 p-5 lg:grid-cols-3">
                     <div className="flex flex-col w-52 justify-end">
                       <p>Profesión</p>
-                      <input type="text" {...register("Profesion")} name="Profesion" defaultValue={getform.Profesion} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      <input type="text" {...register("Profesion", {
+                         pattern: {
+                          value:/^[A-Za-z]+$/i,
+                          message:'Digita solo letras'
+                         },
+                        required: {
+                          value: true,
+                          message:'Campo requerido'
+                        }, minLength: {
+                          value: 3,
+                          message:'Minimo 3 letras'
+                        },
+                        maxLength: {
+                          value: 15,
+                          message:'Maximo 15 letras'
+                        }
+                      })} name="Profesion" defaultValue={getform.Profesion} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                    {errors.Profesion &&  <span className='text-red-600 flex items-end'>{errors.Profesion.message}</span> }
+                   
                     </div>
                     <div className="flex flex-col w-52 justify-end">
                       <label htmlFor="opciones">
                         Ocupación/Oficio:
                       </label>
-                      <select id="opciones" {...register("opciones4")} defaultValue={getform.opciones4} onChange={valorInput} name="opciones4" className="rounded-md border-gray-300 focus:ring-green focus:border-green">
-                        <option defaultValue="">Seleccionar</option>
-                        <option defaultValue="Empleado">Empleado</option>
-                        <option defaultValue="Pensionado">Pensionado</option>
-                        <option defaultValue="Ama de casa">Ama de casa</option>
-                        <option defaultValue="Estudiante">Estudiante</option>
-                        <option defaultValue="Ganadero">Ganadero</option>
-                        <option defaultValue="Comerciante">Comerciante</option>
-                        <option defaultValue="Agricultor">Agricultor</option>
-                        <option defaultValue="RC">Rentista de capital</option>
-                        <option defaultValue="Independiente">Independiente</option>
-                        <option defaultValue="DSI">Desempleado sin ingresos</option>
-                        <option defaultValue="DCI">Desempleado con ingresos</option>
-                        <option defaultValue="PI">Profesional independiente</option>
-                        <option defaultValue="SOE">Socio o Empleado-socio</option>
+                      <select id="opciones" {...register("opciones4", {
+                         
+                        required: {
+                          value: true,
+                          message:'Campo requerido'
+                        }
+                      })} defaultValue={getform.opciones4} onChange={valorInput} name="opciones4" className="rounded-md border-gray-300 focus:ring-green focus:border-green">
+                        <option Value="">Seleccionar</option>
+                        <option Value="Empleado">Empleado</option>
+                        <option Value="Pensionado">Pensionado</option>
+                        <option Value="Ama de casa">Ama de casa</option>
+                        <option Value="Estudiante">Estudiante</option>
+                        <option Value="Ganadero">Ganadero</option>
+                        <option Value="Comerciante">Comerciante</option>
+                        <option Value="Agricultor">Agricultor</option>
+                        <option Value="RC">Rentista de capital</option>
+                        <option Value="Independiente">Independiente</option>
+                        <option Value="DSI">Desempleado sin ingresos</option>
+                        <option Value="DCI">Desempleado con ingresos</option>
+                        <option Value="PI">Profesional independiente</option>
+                        <option Value="SOE">Socio o Empleado-socio</option>
                       </select>
+                    {errors.opciones4 &&  <span className='text-red-600 flex items-end'>{errors.opciones4.message}</span> }
+
                     </div>
                     <div className="flex flex-col justify-end">
                       <p>Actividad económica principal</p>
-                      <input type="text"  {...register("ActiEcoP")} name="ActiEcoP" defaultValue={getform.ActiEcoP} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      <input type="text"  {...register("ActiEcoP", {
+                         pattern: {
+                          value:/^[A-Za-z]+$/i,
+                          message:'Digita solo letras'
+                         },
+                        required: {
+                          value: true,
+                          message:'Campo requerido'
+                        }, minLength: {
+                          value: 3,
+                          message:'Minimo 3 letras'
+                        },
+                        maxLength: {
+                          value: 15,
+                          message:'Maximo 15 letras'
+                        }
+                      })} name="ActiEcoP" defaultValue={getform.ActiEcoP} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                    {errors.ActiEcoP &&  <span className='text-red-600 flex items-end'>{errors.ActiEcoP.message}</span> }
+                    
                     </div>
                     <div className="flex flex-col w-52 justify-end">
                       <p>Código CIIU</p>
-                      <input type="text"  {...register("CodigoCIIU")} name="CodigoCIIU" defaultValue={getform.CodigoCIIU} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      <input type="number"  {...register("CodigoCIIU", {
+                        
+                        required: {
+                          value: true,
+                          message:'Campo requerido'
+                        }, minLength: {
+                          value: 4,
+                          message:'Minimo4 numeros'
+                        },
+                        maxLength: {
+                          value: 7,
+                          message:'Maximo 7 numeros'
+                        }
+                      })} name="CodigoCIIU" defaultValue={getform.CodigoCIIU} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                    {errors.CodigoCIIU &&  <span className='text-red-600 flex items-end'>{errors.CodigoCIIU.message}</span> }
+                     
                     </div>
                     <div className="flex flex-col w-52 justify-end">
                       <p>N° Empleados</p>
-                      <input type="number"  {...register("NumeroEm")} name="NumeroEm" defaultValue={getform.NumeroEm} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      <input type="number"  {...register("NumeroEm", {
+                        
+                        required: {
+                          value: true,
+                          message:'Campo requerido'
+                        }, minLength: {
+                          value: 1,
+                          message:'Minimo 1 numeros'
+                        },
+                        maxLength: {
+                          value: 7,
+                          message:'Maximo 7 numeros'
+                        }
+                      })} name="NumeroEm" defaultValue={getform.NumeroEm} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                    {errors.NumeroEm &&  <span className='text-red-600 flex items-end'>{errors.NumeroEm.message}</span> }
+                     
                     </div>
                     <div className="flex flex-col w-52 justify-end">
                       <p>Nombre de la empresa</p>
-                      <input type="text"  {...register("NombreEm")} name="NombreEm" defaultValue={getform.NombreEm} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      <input type="text"  {...register("NombreEm", {
+                         pattern: {
+                          value:/^[A-Za-z]+$/i,
+                          message:'Digita solo letras'
+                         },
+                        required: {
+                          value: true,
+                          message:'Campo requerido'
+                        }, minLength: {
+                          value: 3,
+                          message:'Minimo 3 letras'
+                        },
+                        maxLength: {
+                          value: 15,
+                          message:'Maximo 15 letras'
+                        }
+                      })} name="NombreEm" defaultValue={getform.NombreEm} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                    {errors.NombreEm &&  <span className='text-red-600 flex items-end'>{errors.NombreEm.message}</span> }
+                  
                     </div>
                     <div className="flex flex-col w-52 justify-end">
                       <p>Dirección de empresa o lugar donde desarrolla su actividad</p>
-                      <input type="text"  {...register("DireccionEm")} name="DireccionEm" defaultValue={getform.DireccionEm} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      <input type="text"  {...register("DireccionEm", {
+                        
+                        required: {
+                          value: true,
+                          message:'Campo requerido'
+                        }, minLength: {
+                          value: 3,
+                          message:'Minimo 3 digitos'
+                        },
+                        maxLength: {
+                          value: 15,
+                          message:'Maximo 15 digitos'
+                        }
+                      })} name="DireccionEm" defaultValue={getform.DireccionEm} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                    {errors.DireccionEm &&  <span className='text-red-600 flex items-end'>{errors.DireccionEm.message}</span> }
+                    
                     </div>
                     <div>
                       <p>Barrio</p>
-                      <input type="text"  {...register("BarrioEm")} name="BarrioEm" defaultValue={getform.BarrioEm} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      <input type="text"  {...register("BarrioEm", {
+                         pattern: {
+                          value:/^[A-Za-z ]+$/i,
+                          message:'Digita solo letras'
+                         },
+                        required: {
+                          value: true,
+                          message:'Campo requerido'
+                        }, minLength: {
+                          value: 3,
+                          message:'Minimo 3 letras'
+                        },
+                        maxLength: {
+                          value: 15,
+                          message:'Maximo 15 letras'
+                        }
+                      })} name="BarrioEm" defaultValue={getform.BarrioEm} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                    {errors.BarrioEm &&  <span className='text-red-600 flex items-end'>{errors.BarrioEm.message}</span> }
+                   
                     </div>
                     <div>
                       <p>Ciudad/Municipio</p>
-                      <input type="text" {...register("MunicipioEm")} name="MunicipioEm" defaultValue={getform.MunicipioEm} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      <input type="text" {...register("MunicipioEm", {
+                         pattern: {
+                          value:/^[A-Za-z]+$/i,
+                          message:'Digita solo letras'
+                         },
+                        required: {
+                          value: true,
+                          message:'Campo requerido'
+                        }, minLength: {
+                          value: 3,
+                          message:'Minimo 3 letras'
+                        },
+                        maxLength: {
+                          value: 15,
+                          message:'Maximo 15 letras'
+                        }
+                      })} name="MunicipioEm" defaultValue={getform.MunicipioEm} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                    {errors.MunicipioEm &&  <span className='text-red-600 flex items-end'>{errors.MunicipioEm.message}</span> }
+                   
                     </div>
                     <div>
                       <p>Departamento</p>
-                      <input type="text" {...register("DepartamentoEm")} name="DepartamentoEm" defaultValue={getform.DepartamentoEm} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      <input type="text" {...register("DepartamentoEm", {
+                         pattern: {
+                          value:/^[A-Za-z]+$/i,
+                          message:'Digita solo letras'
+                         },
+                        required: {
+                          value: true,
+                          message:'Campo requerido'
+                        }, minLength: {
+                          value: 3,
+                          message:'Minimo 3 letras'
+                        },
+                        maxLength: {
+                          value: 15,
+                          message:'Maximo 15 letras'
+                        }
+                      })} name="DepartamentoEm" defaultValue={getform.DepartamentoEm} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                    {errors.DepartamentoEm &&  <span className='text-red-600 flex items-end'>{errors.DepartamentoEm.message}</span> }
+                    
                     </div>
                     <div>
                       <p>País</p>
-                      <input type="text"  {...register("PaisEm")} name="PaisEm" defaultValue={getform.PaisEm} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      <input type="text"  {...register("PaisEm", {
+                         pattern: {
+                          value:/^[A-Za-z]+$/i,
+                          message:'Digita solo letras'
+                         },
+                        required: {
+                          value: true,
+                          message:'Campo requerido'
+                        }, minLength: {
+                          value: 3,
+                          message:'Minimo 3 letras'
+                        },
+                        maxLength: {
+                          value: 15,
+                          message:'Maximo 15 letras'
+                        }
+                      })} name="PaisEm" defaultValue={getform.PaisEm} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                    {errors.PaisEm &&  <span className='text-red-600 flex items-end'>{errors.PaisEm.message}</span> }
+                    
                     </div>
                     <div>
                       <p>Teléfono</p>
-                      <input type="number"  {...register("TelefonoEm")} name="TelefonoEm" defaultValue={getform.TelefonoEm} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      <input type="number"  {...register("TelefonoEm", {
+                        
+                        minLength: {
+                          value: 3,
+                          message:'Minimo 3 letras'
+                        },
+                        maxLength: {
+                          value: 15,
+                          message:'Maximo 15 letras'
+                        }
+                      })} name="TelefonoEm" defaultValue={getform.TelefonoEm} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                    {errors.TelefonoEm &&  <span className='text-red-600 flex items-end'>{errors.Telefono.message}</span> }
+                    
                     </div>
                     <div>
                       <p>Ext</p>
-                      <input type="number"  {...register("Ext")} name="Ext" defaultValue={getform.Ext} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      <input type="number"  {...register("Ext", {
+                        
+                        required: {
+                          value: true,
+                          message:'Campo requerido'
+                        }, minLength: {
+                          value: 5,
+                          message:'Minimo 5 numeros '
+                        },
+                        maxLength: {
+                          value: 5,
+                          message:'Maximo 5 numeros'
+                        }
+                      })} name="Ext" defaultValue={getform.Ext} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                    {errors.Ext &&  <span className='text-red-600 flex items-end'>{errors.Ext.message}</span> }
+                    
                     </div>
                     <div>
                       <p>Celular</p>
-                      <input type="number" {...register("CelularEm")} name="CelularEm" defaultValue={getform.CelularEm} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      <input type="number" {...register("CelularEm", {
+                       
+                        required: {
+                          value: true,
+                          message:'Campo requerido'
+                        }, minLength: {
+                          value: 8,
+                          message:'Minimo 8 numeros'
+                        },
+                        maxLength: {
+                          value: 10,
+                          message:'Maximo 10 numeros'
+                        }
+                      })} name="CelularEm" defaultValue={getform.CelularEm} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                    {errors.CelularEm &&  <span className='text-red-600 flex items-end'>{errors.CelularEm.message}</span> }
+                    
                     </div>
                     <div>
                       <p>Correo electrónico laboral</p>
-                      <input type="email"  {...register("CorreoEm")} name="CorreoEm" defaultValue={getform.CorreoEm} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      <input type="email" required {...register("CorreoEm")} name="CorreoEm" defaultValue={getform.CorreoEm} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
                     </div>
                   </div>
                 </div>
@@ -757,38 +976,142 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                   <div className="grid justify-center gap-5 p-5 lg:grid-cols-3">
                     <div >
                       <p>Ingresos mensuales</p>
-                      <input type="number"  {...register("IngresosM")} name="IngresosM" defaultValue={getform.IngresosM} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      <input type="number"  {...register("IngresosM",{
+                        required: {
+                          value: true,
+                          message:'Campo requerido'
+                        }, minLength: {
+                          value: 1,
+                          message:'Minimo 1 numeros'
+                        },
+                        maxLength: {
+                          value: 8,
+                          message:'Maximo 8 numeros'
+                        }
+                      })} name="IngresosM" defaultValue={getform.IngresosM} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                    {errors.IngresosM &&  <span className='text-red-600 flex items-end'>{errors.IngresosM.message}</span> }
+                   
                     </div>
                     <div>
                       <p>Otros ingresos mensuales</p>
-                      <input type="number"  {...register("OIngresosM")} name="OIngresosM" defaultValue={getform.OIngresosM} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      <input type="number"  {...register("OIngresosM",{
+                         minLength: {
+                          value: 1,
+                          message:'Minimo 1 numeros'
+                        },
+                        maxLength: {
+                          value: 8,
+                          message:'Maximo 8 numeros'
+                        }
+                      })} name="OIngresosM" defaultValue={getform.OIngresosM} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                    {errors.OIngresosM &&  <span className='text-red-600 flex items-end'>{errors.OIngresosM.message}</span> }
+                   
                     </div>
                     <div>
                       <p>Total activos</p>
-                      <input type="number"  {...register("TotalAc")} name="TotalAc" defaultValue={getform.TotalAc} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      <input type="number"  {...register("TotalAc",{
+                         minLength: {
+                          value: 1,
+                          message:'Minimo 1 numeros'
+                        },
+                        maxLength: {
+                          value: 8,
+                          message:'Maximo 8 numeros'
+                        }
+                      })} name="TotalAc" defaultValue={getform.TotalAc} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                    {errors.TotalAc &&  <span className='text-red-600 flex items-end'>{errors.TotalAc.message}</span> }
+                    
                     </div>
                     <div>
                       <p>Total pasivos</p>
-                      <input type="number"  {...register("Totalpa")} name="Totalpa" defaultValue={getform.Totalpa} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      <input type="number"  {...register("Totalpa",{
+                        minLength: {
+                          value: 1,
+                          message:'Minimo 1 numeros'
+                        },
+                        maxLength: {
+                          value: 8,
+                          message:'Maximo 8 numeros'
+                        }
+                      })} name="Totalpa" defaultValue={getform.Totalpa} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                    {errors.Totalpa &&  <span className='text-red-600 flex items-end'>{errors.Totalpa.message}</span> }
+                   
                     </div>
                     <div>
-                      <p>Detalle otros ingresos mensuales</p>
-                      <input type="text"  {...register("DetalleOIM")} name="DetalleOIM" defaultValue={getform.DetalleOIM} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                   
+                      
+                         <Dropdown label=" Detalle otros ingresos mensuales " inline >
+      <Dropdown.Item>(diferentes a su actividad económica principal)</Dropdown.Item>
+     
+    </Dropdown>
+                        
+                    
+                      <input type="text"  {...register("DetalleOIM", {
+                         pattern: {
+                          value:/^[A-Za-z]+$/i,
+                          message:'Digita solo letras'
+                         },
+                        minLength: {
+                          value: 3,
+                          message:'Minimo 3 letras'
+                        },
+                        maxLength: {
+                          value: 15,
+                          message:'Maximo 15 letras'
+                        }
+                      })} name="DetalleOIM" defaultValue={getform.DetalleOIM} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                    {errors.DetalleOIM &&  <span className='text-red-600 flex items-end'>{errors.DetalleOIM.message}</span> }
+                   
                     </div>
                     <div>
                       <p>Total egresos mensuales</p>
-                      <input type="number"  {...register("TotalIn")} name="TotalIn" defaultValue={getform.TotalIn} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      <input type="number"  {...register("TotalIn",{
+                         minLength: {
+                          value: 1,
+                          message:'Minimo 1 numeros'
+                        },
+                        maxLength: {
+                          value: 8,
+                          message:'Maximo 8 numeros'
+                        }
+                      })} name="TotalIn" defaultValue={getform.TotalIn} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                    {errors.TotalIn &&  <span className='text-red-600 flex items-end'>{errors.TotalIn.message}</span> }
+                    
                     </div>
+                    <div className=' flex flex-col w-36   '>
+                      <div className=' flex-row- flex max-[1024px]:flex-col  max-[1024px]:justify-center  '>
+
+<label htmlFor="" class='absolute text-sm flex flex-row max-[1024px]:xs w-72 min-[1324px]:w-80 max-[1024px]:flex-col '> Si su ocupación es agricultor, comerciante, independiente
+o ganadero, por favor diligencie la siguiente información.</label>
+                      </div>
+                      <br/> 
+<br /><br />
+<div className='flex flex-row  gap-x-16 max-[1024px]:flex-col'>
+
                     <div>
                       <p>Ventas anuales</p>
-                      <input type="number"  {...register("VentasA")} name="VentasA" defaultValue={getform.VentasA} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      <input type="number"  {...register("VentasA",{
+                        minLength: {
+                          value: 1,
+                          message:'Minimo 1 numeros'
+                        },
+                        maxLength: {
+                          value: 8,
+                          message:'Maximo 8 numeros'
+                        }
+                      })} name="VentasA" defaultValue={getform.VentasA} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                    {errors.VentasA &&  <span className='text-red-600 flex items-end'>{errors.VentasA.message}</span> }
+                   
                     </div>
                     <div>
                       <p>Fecha de cierre de ventas</p>
                       <input type="date" {...register("FechaCV")} name="FechaCV" defaultValue={getform.FechaCV} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green w-52" />
                     </div>
+                  
                   </div>
                 </div>
+                      </div>
+                      </div>
                 <div className="grid gap-5 lg:grid-cols-3 p-8">
                   <a onClick={regresar} className="flex items-center justify-center px-4 h-10 text-base font-medium text-black bg-gray-200 border-gray-300 rounded-lg hover:bg-lightGreen shadow-md hover:text-black">
                     Menú Formulario
@@ -812,6 +1135,8 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
         </form>
       )}
       {contenidoSeleccionado1 === 'tributaria' && (
+          <form action="" onSubmit={handleSubmit(OnsumitInfo5)}>
+
         <div className="p-4 sm:ml-64">
           <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
             <div className='flex gap-5 items-center justify-center flex-col bg-white' style={{ minHeight: '85vh' }}>
@@ -822,66 +1147,167 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                     <label htmlFor="opciones" className="mr-2">
                       ¿Es declarante de renta?:
                     </label>
-                    <select id="opciones" {...register("opciones5")} defaultValue={getform.opciones5} onChange={valorInput} name="opciones5" className="rounded-md border-gray-300 focus:ring-green focus:border-green w-52 p-2">
-                      <option defaultValue="">Seleccionar</option>
-                      <option defaultValue="Si">Si</option>
-                      <option defaultValue="No">No</option>
+                    <select id="opciones" {...register("opciones5",{
+                        required: {
+                          value: true,
+                          message:'Campo requerido'
+                        }
+                      })} defaultValue={getform.opciones5} onChange={valorInput} name="opciones5" className="rounded-md border-gray-300 focus:ring-green focus:border-green w-52 p-2">
+                      <option Value="">Seleccionar</option>
+                      <option Value="Si">Si</option>
+                      <option Value="No">No</option>
                     </select>
+                    {errors.opciones5 &&  <span className='text-red-600 flex items-end'>{errors.opciones5.message}</span> }
+
                   </div>
                   <div className="flex flex-col">
                     <label htmlFor="opciones" className="mr-2">
                       Agente retenedor:
                     </label>
-                    <select id="opciones" {...register("opciones6")} defaultValue={getform.opciones6} onChange={valorInput} name="opciones6" className="rounded-md border-gray-300 focus:ring-green focus:border-green w-52 p-2">
-                      <option defaultValue="">Seleccionar</option>
-                      <option defaultValue="Si">Si</option>
-                      <option defaultValue="No">No</option>
+                    <select id="opciones" {...register("opciones6",{
+                        required: {
+                          value: true,
+                          message:'Campo requerido'
+                        }
+                      })} defaultValue={getform.opciones6} onChange={valorInput} name="opciones6" className="rounded-md border-gray-300 focus:ring-green focus:border-green w-52 p-2">
+                      <option Value="">Seleccionar</option>
+                      <option Value="Si">Si</option>
+                      <option Value="No">No</option>
                     </select>
+                    {errors.opciones6 &&  <span className='text-red-600 flex items-end'>{errors.opciones6.message}</span> }
+
                   </div>
                   <div className="flex flex-col">
                     <label htmlFor="opciones" className="mr-2">
                       Régimen de IVA:
                     </label>
-                    <select id="opciones" {...register("opciones7")} defaultValue={getform.opciones7} onChange={valorInput} name="opciones7" className="rounded-md border-gray-300 focus:ring-green focus:border-green w-52 p-2">
-                      <option defaultValue="">Seleccionar</option>
-                      <option defaultValue="Comun">Común</option>
-                      <option defaultValue="Simplificado">Simplificado</option>
-                      <option defaultValue="Ninguno">Ninguno</option>
+                    <select id="opciones" {...register("opciones7",{
+                        required: {
+                          value: true,
+                          message:'Campo requerido'
+                        },maxLength:{
+                          value:20,
+                          message:'option muy larga'
+                        }
+                      })} defaultValue={getform.opciones7} onChange={valorInput} name="opciones7" className="rounded-md border-gray-300 focus:ring-green focus:border-green w-52 p-2">
+                      <option Value="">Seleccionar</option>
+                      <option Value="Comun">Común</option>
+                      <option Value="Simplificado">Simplificado</option>
+                      <option Value="Ninguno">Ninguno</option>
                     </select>
+                    {errors.opciones7 &&  <span className='text-red-600 flex items-end'>{errors.opciones7.message}</span> }
+
                   </div>
                   <div className="flex flex-col w-52 justify-end">
                     <label htmlFor="opciones" className="mr-2">
                       Obligado a tributar en Estados Unidos:
                     </label>
                     <select id="opciones" {...register("opciones8")} defaultValue={getform.opciones8} onChange={valorInput} name="opciones8" className="rounded-md border-gray-300 focus:ring-green focus:border-green w-52 p-2">
-                      <option defaultValue="">Seleccionar</option>
-                      <option defaultValue="Si">Si</option>
-                      <option defaultValue="No">No</option>
+                      <option Value="">Seleccionar</option>
+                      <option Value="Si">Si</option>
+                      <option Value="No">No</option>
                     </select>
+                   
+
                   </div>
                   <div className="flex flex-col w-52 justify-end" >
                     <p>*Si su respuesta es afirmativa indique el número de ID tributario (TIN)</p>
-                    <input type="text"  {...register("NumeroT")} name="NumeroT" defaultValue={getform.NumeroT} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                    <input type="number"  {...register("NumeroT",{
+                      required:{
+                        value:false
+                      },
+                        minLength: {
+                          value: 9,
+                          message:'Minimo 9 numeros'
+                        },
+                        maxLength: {
+                          value: 9,
+                          message:'Maximo 9 numeros'
+                        }
+                      })} name="NumeroT" defaultValue={getform.NumeroT} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                    {errors.NumeroT &&  <span className='text-red-600 flex items-end'>{errors.NumeroT.message}</span> }
+                  
                   </div>
                   <div className="flex flex-col w-52 justify-end">
                     <p>Si está obligado a tributar en otro país diferente a Colombia, indique cuál (es):</p>
-                    <input type="text"  {...register("PaisT")} name="PaisT" defaultValue={getform.PaisT} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green " />
+                    <input type="text"  {...register("PaisT" ,{
+                         minLength: {
+                          value: 3,
+                          message:'Minimo 3 letras'
+                        },
+                        maxLength: {
+                          value: 20,
+                          message:'Maximo 20 letras'
+                        }
+                      })} name="PaisT" defaultValue={getform.PaisT} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green " />
+                    {errors.PaisT &&  <span className='text-red-600 flex items-end'>{errors.PaisT.message}</span> }
+                    
                   </div>
                   <div className="flex flex-col w-52 justify-end">
                     <p>ID Tributario</p>
-                    <input type="text"  {...register("Idtributario")} name="Idtributario" defaultValue={getform.Idtributario} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                    <input type="text"  {...register("Idtributario",{
+                         minLength: {
+                          value: 9,
+                          message:'Minimo 9 numeros'
+                        },
+                        maxLength: {
+                          value: 9,
+                          message:'Maximo 9 numeros'
+                        }
+                      })} name="Idtributario" defaultValue={getform.Idtributario} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                    {errors.Idtributario &&  <span className='text-red-600 flex items-end'>{errors.Idtributario.message}</span> }
+                  
                   </div>
                   <div className="flex flex-col w-52 justify-end">
                     <p>Declaro que: El origen de mis bienes y/o fondos provienen de:</p>
-                    <input type="text"  {...register("FondosP")} name="FondosP" defaultValue={getform.FondosP} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                    <input type="text"  {...register("FondosP",{
+                        minLength: {
+                          value: 3,
+                          message:'Minimo 3 letras'
+                        },
+                        maxLength: {
+                          value: 20,
+                          message:'Maximo 20 letras'
+                        }
+                      })} name="FondosP" defaultValue={getform.FondosP} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                    {errors.FondosP &&  <span className='text-red-600 flex items-end'>{errors.FondosP.message}</span> }
+                  
                   </div>
                   <div className="flex flex-col w-52 justify-end">
                     <p>El país origen de bienes y/o fondos</p>
-                    <input type="text"  {...register("PaisFondos")} name="PaisFondos" defaultValue={getform.PaisFondos} onChange={valorInput} placeholder='' className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                    <input type="text"  {...register("PaisFondos",{
+                        required: {
+                          value: true,
+                          message:'Campo requerido'
+                        }, minLength: {
+                          value: 3,
+                          message:'Minimo 3 letras'
+                        },
+                        maxLength: {
+                          value: 15,
+                          message:'Maximo 15 letras'
+                        }
+                      })} name="PaisFondos" defaultValue={getform.PaisFondos} onChange={valorInput} placeholder='' className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                    {errors.PaisFondos &&  <span className='text-red-600 flex items-end'>{errors.PaisFondos.message}</span> }
+                  
                   </div>
                   <div className="flex flex-col w-52 justify-end">
                     <p>La ciudad origen de bienes y/o fondos</p>
-                    <input type="text"  {...register("CiudadFondos")} name="CiudadFondos" defaultValue={getform.CiudadFondos} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                    <input type="text"  {...register("CiudadFondos",{
+                        required: {
+                          value: true,
+                          message:'Campo requerido'
+                        }, minLength: {
+                          value: 3,
+                          message:'Minimo 3 letras'
+                        },
+                        maxLength: {
+                          value: 15,
+                          message:'Maximo 15 letras'
+                        }
+                      })} name="CiudadFondos" defaultValue={getform.CiudadFondos} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                    {errors.CiudadFondos &&  <span className='text-red-600 flex items-end'>{errors.CiudadFondos.message}</span> }
+                    
                   </div>
                 </div>
               </div>
@@ -895,19 +1321,20 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                   </svg>
                   Anterior
                 </a>
-                <a onClick={() => handleBotonClick('operaciones')} className="flex items-center justify-center px-4 h-10 text-base font-medium text-black bg-gray-200 border-gray-300 rounded-lg hover:bg-lightGreen shadow-md hover:text-black">
+                <button type='submit' className="flex items-center justify-center px-4 h-10 text-base font-medium text-black bg-gray-200 border-gray-300 rounded-lg hover:bg-lightGreen shadow-md hover:text-black">
                   Siguiente
                   <svg className="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
                   </svg>
-                </a>
+                </button>
               </div>
             </div>
           </div>
         </div>
+      </form>
       )}
       {contenidoSeleccionado1 === 'operaciones' && (
-        <form action="" onSubmit={handleSubmit(OnsumitInfo5)}>
+        <form action="" onSubmit={handleSubmit(OnsumitInfo6)}>
           <div className="p-4 sm:ml-64">
             <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
               <div className='flex gap-5 items-center justify-center flex-col bg-white' style={{ minHeight: '85vh' }}>
@@ -918,17 +1345,29 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                       <label htmlFor="opciones">
                         ¿Realiza operaciones en moneda extranjera?:
                       </label>
-                      <select id="opciones" {...register("opciones9")} defaultValue={getform.opciones9} name="opciones9" className="rounded-md border-gray-300 focus:ring-green focus:border-green w-52 p-2">
-                        <option defaultValue="">Seleccionar</option>
-                        <option defaultValue="Si">Si</option>
-                        <option defaultValue="No">No</option>
+                      <select id="opciones" {...register("opciones9",{
+                        required: {
+                          value: true,
+                          message:'Campo requerido'
+                        }
+                      })} defaultValue={getform.opciones9} name="opciones9" className="rounded-md border-gray-300 focus:ring-green focus:border-green w-52 p-2">
+                        <option Value="">Seleccionar</option>
+                        <option Value="Si">Si</option>
+                        <option Value="No">No</option>
                       </select>
+                    {errors.opciones9 &&  <span className='text-red-600 flex items-end'>{errors.opciones9.message}</span> }
+
                     </div>
                     <div className="flex flex-col w-52 justify-end">
                       <label htmlFor="opciones" className="mr-2 ">
                         ¿Cuál(es) de las siguientes operaciones realiza en moneda extranjera?:
                       </label>
-                      <select id="opciones" {...register("opciones10")} defaultValue={getform.opciones10} name="opciones10" className="rounded-md border-gray-300 focus:ring-green focus:border-green w-52 p-2">
+                      <select id="opciones" {...register("opciones10",{
+                        required: {
+                          value: true,
+                          message:'Campo requerido'
+                        }
+                      })} defaultValue={getform.opciones10} name="opciones10" className="rounded-md border-gray-300 focus:ring-green focus:border-green w-52 p-2">
                         <option Value="">Seleccionar</option>
                         <option Value="EI">Exportador e importador</option>
                         <option Value="Exportador">Exportador</option>
@@ -939,44 +1378,147 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                         <option Value="Inversiones">Inversiones</option>
                         <option Value="otra">otra: </option>
                       </select>
-                      {/* <input type="text" placeholder='Otra, ¿Cual?' /> */}
+                    {errors.opciones10 &&  <span className='text-red-600 flex items-end'>{errors.opciones10.message}</span> }
+                      
                     </div>
                     <div className="flex flex-col w-52 justify-end">
                       <p>Nombre de la entidad</p>
-                      <input type="text" {...register("NombreEn")} name="NombreEn" defaultValue={getform.NombreEn} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      <input type="text" {...register("NombreEn",{
+                        required: {
+                          value: true,
+                          message:'Campo requerido'
+                        }, minLength: {
+                          value: 3,
+                          message:'Minimo 3 letras'
+                        },
+                        maxLength: {
+                          value: 20,
+                          message:'Maximo 20 letras'
+                        }
+                      })} name="NombreEn" defaultValue={getform.NombreEn} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                    {errors.NombreEn &&  <span className='text-red-600 flex items-end'>{errors.NombreEn.message}</span> }
+                    
                     </div>
                     <div className="flex flex-col w-52 justify-end">
                       <label htmlFor="opciones" className="mr-2">
                         ¿Realiza operaciones en moneda extranjera?:
                       </label>
-                      <select id="opciones"{...register("opciones11")} defaultValue={getform.opciones11} name="opciones11" className="rounded-md border-gray-300 focus:ring-green focus:border-green w-52 p-2">
-                        <option defaultValue="">Seleccionar</option>
-                        <option defaultValue="prestamos">Préstamos</option>
-                        <option defaultValue="Inversiones">Inversiones</option>
-                        <option defaultValue="Otra">otra</option>
+                      <select id="opciones"{...register("opciones11",{
+                        required: {
+                          value: true,
+                          message:'Campo requerido'
+                        }
+                      })} defaultValue={getform.opciones11} name="opciones11" className="rounded-md border-gray-300 focus:ring-green focus:border-green w-52 p-2">
+                        <option Value="">Seleccionar</option>
+                        <option Value="prestamos">Préstamos</option>
+                        <option Value="Inversiones">Inversiones</option>
+                        <option Value="Otra">otra</option>
                       </select>
-                      {/* <input type="text" placeholder='Otra, ¿Cual?' /> */}
+                      {errors.opciones11 &&  <span className='text-red-600 flex items-end'>{errors.opciones11.message}</span> }
+
                     </div>
 
                     <div className="flex flex-col w-52 justify-end">
                       <p>N° de producto</p>
-                      <input type="number"  {...register("NProducto")} name="NProducto" defaultValue={getform.NProducto} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      <input type="number"  {...register("NProducto",{
+                        required: {
+                          value: true,
+                          message:'Campo requerido'
+                        }, minLength: {
+                          value: 1,
+                          message:'Minimo 1 numeros'
+                        },
+                        maxLength: {
+                          value: 8,
+                          message:'Maximo 8 numeros'
+                        }
+                      })} name="NProducto" defaultValue={getform.NProducto} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                    {errors.NProducto &&  <span className='text-red-600 flex items-end'>{errors.NProducto.message}</span> }
+                    
                     </div>
                     <div className="flex flex-col w-52 justify-end">
                       <p>Monto mensual promedio</p>
-                      <input type="number" {...register("MontoMP")} name="MontoMP" defaultValue={getform.MontoMP} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      <input type="number" {...register("MontoMP",{
+                        required: {
+                          value: true,
+                          message:'Campo requerido'
+                        }, minLength: {
+                          value: 1,
+                          message:'Minimo 1 numeros'
+                        },
+                        maxLength: {
+                          value: 8,
+                          message:'Maximo 8 numeros'
+                        }
+                      })} name="MontoMP" defaultValue={getform.MontoMP} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                    {errors.MontoMP &&  <span className='text-red-600 flex items-end'>{errors.MontoMP.message}</span> }
+                   
                     </div>
                     <div>
                       <p>Moneda</p>
-                      <input type="text" {...register("Moneda")} name="Moneda" defaultValue={getform.Moneda} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      <input type="text" {...register("Moneda",{
+                         pattern: {
+                          value:/^[A-Za-z]+$/i,
+                          message:'Digita solo letras'
+                         },
+                        required: {
+                          value: true,
+                          message:'Campo requerido'
+                        }, minLength: {
+                          value: 1,
+                          message:'Minimo 1 letras'
+                        },
+                        maxLength: {
+                          value: 8,
+                          message:'Maximo 8 letras'
+                        }
+                      })} name="Moneda" defaultValue={getform.Moneda} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                    {errors.Moneda &&  <span className='text-red-600 flex items-end'>{errors.Moneda.message}</span> }
+                   
                     </div>
                     <div>
                       <p>Ciudad</p>
-                      <input type="text" {...register("CiudadOp")} name="CiudadOp" defaultValue={getform.CiudadOp} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      <input type="text" {...register("CiudadOp",{
+                        pattern: {
+                          value:/^[A-Za-z]+$/i,
+                          message:'Digita solo letras'
+                         },
+                        required: {
+                          value: true,
+                          message:'Campo requerido'
+                        }, minLength: {
+                          value: 1,
+                          message:'Minimo 1 letras'
+                        },
+                        maxLength: {
+                          value: 8,
+                          message:'Maximo 8 letras'
+                        }
+                      })} name="CiudadOp" defaultValue={getform.CiudadOp} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                    {errors.CiudadOp &&  <span className='text-red-600 flex items-end'>{errors.CiudadOp.message}</span> }
+                   
                     </div>
                     <div>
                       <p>País</p>
-                      <input type="text" {...register("PaisOp")} name="PaisOp" defaultValue={getform.PaisOp} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      <input type="text" {...register("PaisOp",{
+                        pattern: {
+                          value:/^[A-Za-z]+$/i,
+                          message:'Digita solo letras'
+                         },
+                        required: {
+                          value: true,
+                          message:'Campo requerido'
+                        }, minLength: {
+                          value: 1,
+                          message:'Minimo 1 letras'
+                        },
+                        maxLength: {
+                          value: 8,
+                          message:'Maximo 8 letras'
+                        }
+                      })} name="PaisOp" defaultValue={getform.PaisOp} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                    {errors.PaisOp &&  <span className='text-red-600 flex items-end'>{errors.PaisOp.message}</span> }
+                   
                     </div>
                   </div>
                 </div>

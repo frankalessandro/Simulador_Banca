@@ -31,6 +31,7 @@ module.exports = {
       './src/**/*.html',
       './src/**/*.vue',
       './src/**/*.jsx',
+      './src/**/*.js',
       // ... otras rutas de contenido
     ],
     options: {

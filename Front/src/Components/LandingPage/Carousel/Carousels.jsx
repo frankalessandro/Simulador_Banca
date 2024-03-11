@@ -5,11 +5,12 @@ import operacionesInternacionales from '../../../assets/Img/UsoVario/Internet.sv
 import personalinfo from '../../../assets/Img/UsoVario/MainInfo.svg'
 import economicaLaboral from '../../../assets/Img/UsoVario/Support.svg'
 import tributaria from '../../../assets/Img/UsoVario/SelectInfo.svg'
+import { Carousel } from 'flowbite-react'
 
-export const Carousel = () => {
+export const Carousels = () => {
     return (
         <>
-            <div className="flex place-content-center justify-center w-full opac">
+            {/* <div className="flex place-content-center justify-center w-full opac">
 
                 <div id="controls-carousel" className="relative w-11/12 mt-2" data-carousel="static">
                
@@ -54,9 +55,22 @@ export const Carousel = () => {
                     </button>
                 </div>
 
+            </div> */}
+            <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
+                <Carousel slide={false} className='bg-green ' >
+                    <img src={ImagenPrueba} className="absolute w-1/4 rounded -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
+
+                    <img src={operacionesInternacionales} className="absolute block w-1/4 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
+
+                    <img src={economicaLaboral} className="absolute block w-1/4 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
+
+                    <img src={personalinfo} className="absolute block w-1/4 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
+
+                    <img src={tributaria} className="absolute block w-1/4 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
+                </Carousel>
+                
             </div>
-
-
+          
         </>
     )
 }
