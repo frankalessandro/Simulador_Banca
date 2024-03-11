@@ -1,6 +1,7 @@
 import React from 'react'
 import NoDisponible from '../../../assets/Img/no service.svg'
 export const No_Disponible = () => {
+    
     return (
         <>
             <div className="p-4 sm:ml-64">

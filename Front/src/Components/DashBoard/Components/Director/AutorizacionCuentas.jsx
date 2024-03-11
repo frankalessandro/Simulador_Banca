@@ -10,7 +10,7 @@ export const AutorizacionCuentas = () => {
     useEffect(() => {
         const fecthData = async () => {
             try {
-                const response = await fetch('http://localhost:3000/getcliente');
+                const response = await fetch('http://localhost:3000/getclienteP');
                 if (!response.ok) {
                     throw new Error('Network response was not ok')
                 }
