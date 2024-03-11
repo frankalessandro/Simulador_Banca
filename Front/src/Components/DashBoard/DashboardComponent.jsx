@@ -12,7 +12,7 @@ import { useAuth } from '../../context/AuthContext'
 import { Reportes } from './Components/Director/Reportes'
 import { Button, FloatingLabel, Label, Sidebar, SidebarItemGroup } from 'flowbite-react';
 import { Avatar, Dropdown, Navbar } from 'flowbite-react';
-import {HiShoppingCart ,HiUser , HiClipboard, HiUserCircle ,HiUserGroup } from "react-icons/hi";
+import {HiShoppingCart,HiOutlineViewList ,HiUser , HiClipboard, HiUserCircle ,HiUserGroup } from "react-icons/hi";
 import { Colors } from 'chart.js'
 
 
@@ -20,9 +20,17 @@ import { Colors } from 'chart.js'
 export const DashboardComponent = () => {
      
 
-    
+    const [active , setactive ] =useState("fixed top-0 left-0 z-40 w-64 shadow-lg h-screen pt-20 transition-transform -translate-x-full bg-green border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700")
  
+    const Abrir  = () => {
+        if (active === "fixed top-0 left-0 z-40 w-64 shadow-lg h-screen pt-20 transition-transform -translate-x-full bg-green border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700") {
+          setactive("fixed top-0 left-0 z-40 w-64 shadow-lg h-screen pt-20 transition-transform -translate-x-px bg-green border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700");
     
+        } else {
+          setactive("fixed top-0 left-0 z-40 w-64 shadow-lg h-screen pt-20 transition-transform -translate-x-full bg-green border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700")
+
+        }
+      }
 
     const { user, isLoggedIn, logout } = useAuth();
 
@@ -46,8 +54,10 @@ export const DashboardComponent = () => {
                     <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
                         <div className="px-3 py-3 lg:px-5 lg:pl-3">
                             <div className="flex items-center justify-between">
+
                                 <div className="flex items-center justify-start rtl:justify-end">
-                                    <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+                                    <button  onClick={Abrir} type="button" className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+                                       <HiOutlineViewList className='h-8 w-5 flex items-center'/>
                                         <span className="sr-only">Open sidebar</span>
                                     </button>
                                     <a href="#" className="flex ms-2 md:me-24">
@@ -55,6 +65,7 @@ export const DashboardComponent = () => {
                                         <span className=""><img src={Namelogo} alt="" className='relative h-4  top-2 ' /></span>
                                     </a>
                                 </div>
+
                                 <div className="flex items-center">
                                     <div className="flex items-center ms-3">
 
@@ -64,7 +75,7 @@ export const DashboardComponent = () => {
                                             arrowIcon={false}
                                                 inline
                                                 label={
-                                                   <button className='flex flex-row items-center  text-sm bg-white rounded-full focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-600'> <p className=' flex items-center text-sm bg-white rounded-full focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-600 '>{user?.name_user} - {user?.rol == 2 && (<> Asesor </>)}{user?.rol == 1 && (<> Director </>)} </p><HiUserCircle color='gray' className='w-20 h-12'/>  </button>
+                                                   <button className='flex flex-row items-center  text-sm bg-white rounded-full focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-600'> <p className=' flex items-center text-sm bg-white rounded-full focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-600 '>{user?.name_user} - {user?.rol == 2 && (<> Asesor </>)}{user?.rol == 1 && (<> Director </>)} </p><HiUserCircle color='gray' className='w-16 h-10 '/>  </button>
                                                 }
                                             >
                                                 <Dropdown.Header>
@@ -81,7 +92,7 @@ export const DashboardComponent = () => {
                             </div>
                         </div>
                     </nav>
-                    <Sidebar  className="fixed top-0 left-0 z-40 w-64 shadow-lg h-screen pt-20 transition-transform -translate-x-full bg-green border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidebar">
+                    <Sidebar  className={active} aria-label="Sidebar">
                         <div className="fixed left-0 top-1 py-10 h-full px-3 pb-4 w-full  overflow-y-auto bg-green dark:bg-gray-800  "  >
                             <Sidebar.ItemGroup className="space-y-2 font-medium ">
 
