@@ -583,7 +583,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                         },
                         maxLength: {
                           value: 13,
-                          message:'Maximo 13 letras'
+                          message:'Maximo 13 Numeros'
                         }
                       })} name="Telefono" defaultValue={getform.Telefono} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
                     {errors.Telefono &&  <span className='text-red-600 flex items-end'>{errors.Telefono.message}</span> }
@@ -600,7 +600,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                         },
                         maxLength: {
                           value: 13,
-                          message:'Maximo 13 letras'
+                          message:'Maximo 13 Numeros'
                         }
                       })} name="Celular" defaultValue={getform.Celular} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
                     {errors.Celular &&  <span className='text-red-600 flex items-end'>{errors.Celular.message}</span> }
@@ -1048,7 +1048,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                     
                       <input type="text"  {...register("DetalleOIM", {
                          pattern: {
-                          value:/^[A-Za-z]+$/i,
+                          value:/^[A-Za-z ]+$/i,
                           message:'Digita solo letras'
                          },
                         minLength: {
@@ -1056,8 +1056,8 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                           message:'Minimo 3 letras'
                         },
                         maxLength: {
-                          value: 15,
-                          message:'Maximo 15 letras'
+                          value: 20,
+                          message:'Maximo 20 letras'
                         }
                       })} name="DetalleOIM" defaultValue={getform.DetalleOIM} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
                     {errors.DetalleOIM &&  <span className='text-red-600 flex items-end'>{errors.DetalleOIM.message}</span> }

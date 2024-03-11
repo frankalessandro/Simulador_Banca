@@ -5,7 +5,9 @@ const dataController = require('../controllers/dataController');
 
 router.post('/Login', dataController.loginUser);
 router.get('/user', dataController.user);
-router.get('/getcliente', dataController.getcliente)
+router.get('/getclienteP', dataController.getPendiente)
+router.get('/getclienteA', dataController.getAutorizado)
+router.get('/getclienteD', dataController.getDenegado)
 router.post('/AddUser', dataController.AddUser)
 router.put('/UpdateUser/:id', dataController.UpdateUser);
 router.post('/AddFormData/:id', dataController.AddFormData) 
