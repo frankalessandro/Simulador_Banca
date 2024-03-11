@@ -1,9 +1,18 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
+
 import { Dropdown } from 'flowbite-react';
+import { useAuth } from '../../../../../context/AuthContext';
+
 export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick }) => {
-  const { register, handleSubmit, formState: { errors} } = useForm();
-  let [getform, setgetfrom] = useState({
+
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { user } = useAuth();
+  console.log(user?.id_usuario)
+  let id = user?.id_usuario;
+  
+  const [getform, setgetfrom] = useState({
+
     Nombre: '',
     Apellido1: '',
     Apellido2: '',
@@ -111,25 +120,33 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
 
   }
   const OnsumitInfo5 = async (data) => {
+
     setdatainfo(data)
     console.log(data);
     handleBotonClick('operaciones')
 
   }
   const OnsumitInfo6 = async (data) => {
-    setdatainfo(data)
-    console.log(data);
-    CrearCliente(data)
+    setdatainfo(data); // Agregar el id_usuario al objeto datainfo
+    console.log('datainfo:', datainfo);
+    console.log('user?.id_usuario:', user?.id_usuario);
+    CrearCliente(data );
+    
+
   }
+
   const CrearCliente = async () => {
-    console.log(datainfo);
+    console.log('id:', id);
+    console.log('datainfo:', datainfo);
     try {
-      const response = await fetch('http://localhost:3000/AddFormData', {
+      const response = await fetch(`http://localhost:3000/AddFormData/${id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(datainfo),
+        body: JSON.stringify(datainfo,
+          id
+          ),
       });
       const responseData = await response.json();
       console.log(responseData);

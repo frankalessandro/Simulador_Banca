@@ -127,10 +127,14 @@ const UpdateUser = async (req, res) => {
 
 const AddFormData = async (req, res) => {
   const formData = req.body;
+
  
   if(!formData.FechaCV){
     formData.FechaCV = null
   }
+
+  const id = req.params.id;
+  
   try {
     // Asegúrate de que los nombres de las propiedades en formData coincidan con los nombres de las columnas en la tabla
     const { Nombre, Apellido1, Apellido2, opcines1, NDocumento, FechaE, LugarE, FechaN, CiudadN, opcines2, opcines3, Nacionalidad, DireccionR, BloqueTorre, AptoCasa, Barrio, Municipio, Departamento, Pais, Telefono, Celular, CorreoE, Profesion, opcines4, ActiEcoP, CodigoCIUU, NumeroEm, NombreEm, DireccionEm, BarrioEm, MunicipioEm, DepartamentoEm, PaisEm, TelefonoEm, Ext, CelularEm, CorreoEm, IngresosM, OIngresosM, TotalAc, Totalpa, DetalleOIM, TotalIn, VentasA, FechaCV, opcines5, opcines6, opcines7, opcines8, NumeroT, PaisT, Idtributario, FondosP, PaisFondos, CiudadFondos, opcines9, opcines10, NombreEn, opcines11, NProducto, MontoMP, Moneda, CiudadO, PaisOP } = formData;
@@ -142,20 +146,31 @@ const AddFormData = async (req, res) => {
     const resultFormPersonNatural = await pool.query(insertQuery, insertValues);
     // Segunda inserción en la tabla cliente utilizando el ID obtenido
     const insertQueryCliente = `
+
     
     INSERT INTO cliente (Tipo_de_Cliente, Estado)
     VALUES ($1, $2)
     
+
     `;
     // Asegúrate de proporcionar los valores en el orden correcto
     const insertValuesCliente = ["Natural", "Pendiente"];
     // Realiza la inserción en la tabla cliente
     const resultCliente = await pool.query(insertQueryCliente, insertValuesCliente);
+
+    const currentDate = new Date();
+    const dia = currentDate.getDate();
+    // Ten en cuenta que los meses en JavaScript son indexados desde 0 (enero es 0, febrero es 1, etc.)
+    const mes = currentDate.getMonth() + 1;
+    const anio = currentDate.getFullYear();
+  
+    const fechaFormateada = `${anio}-${mes < 10 ? '0' + mes : mes}-${dia < 10 ? '0' + dia : dia}`;
+
     const insertQueryDetalle= `
-    INSERT INTO DetalleProducto (producto)
-    VALUES ($1)
+    INSERT INTO DetalleProducto (producto, responsable, fecha)
+    VALUES ($1, $2, $3)
   `;
-  const insertValuesDetalle = [1];
+  const insertValuesDetalle = [1, id, fechaFormateada];
   const resultDetalle = await pool.query(insertQueryDetalle, insertValuesDetalle);
     res.status(201).json({ message: 'Datos insertados exitosamente', data: resultFormPersonNatural, resultCliente, resultDetalle });
 

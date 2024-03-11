@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const AutorizacionCuentas = () => {
     const [datauser, setdatauser] = useState([]);
+
+
 
     useEffect(() => {
         const fecthData = async () => {
@@ -20,8 +24,12 @@ export const AutorizacionCuentas = () => {
         };
         fecthData();
     }, []);
+
+    const estado = datauser.map(user => user.estadocliente == 'Pendiente')
+
     console.log(datauser)
-    console.log(datauser)
+    console.log(estado)
+
 
 
     const autorizar = (id) => {
@@ -33,34 +41,39 @@ export const AutorizacionCuentas = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ 
+                body: JSON.stringify({
                     nuevoEstado: 'Autorizado',
-                    
-             }),
+                })
             })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log(data.message);
-                // Actualiza localmente el estado del cliente según sea necesario
-                // Puedes utilizar la función setDatauser para actualizar el estado local
-                // Ejemplo: setDatauser(prevData => [...prevData, data.updatedClient]);
-    
-                // Redirige a la página '/DashBoardMenu' después de procesar la respuesta
-                window.location = "/DashBoardMenu";
-            })
-            .catch(error => {
-                console.error('Error al cambiar el estado del cliente:', error);
-            });
+
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data.message);
+                    toast.success("Autorizado")
+                    setTimeout(() => {
+                        // Actualiza localmente el estado del cliente según sea necesario
+                        // Puedes utilizar la función setDatauser para actualizar el estado local
+                        // Ejemplo: setDatauser(prevData => [...prevData, data.updatedClient]);
+                        // alert('Autorización exitosa')
+                        // Redirige a la página '/DashBoardMenu' después de procesar la respuesta
+                        window.location = "/DashBoardMenu";
+                    }, 1500); // 2000 milisegundos = 2 segundos
+
+                })
+                .catch(error => {
+                    console.error('Error al cambiar el estado del cliente:', error);
+                });
+
         } catch (error) {
             console.error('Error general:', error);
         }
     };
-    
+
     const denegar = (id) => {
         console.log(id)
         try {
@@ -70,29 +83,48 @@ export const AutorizacionCuentas = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ 
-                    nuevoEstado: 'Denegado',
-                    
-             }),
+                body: JSON.stringify({
+                    nuevoEstado: 'Denegado'
+
+                }),
             })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log(data.message);
-                // Actualiza localmente el estado del cliente según sea necesario
-                // Puedes utilizar la función setDatauser para actualizar el estado local
-                // Ejemplo: setDatauser(prevData => [...prevData, data.updatedClient]);
-    
-                // Redirige a la página '/DashBoardMenu' después de procesar la respuesta
-                window.location = "/DashBoardMenu";
-            })
-            .catch(error => {
-                console.error('Error al cambiar el estado del cliente:', error);
-            });
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data.message);
+                    toast.error("Denegado")
+                    setTimeout(() => {
+                        // Actualiza localmente el estado del cliente según sea necesario
+                        // Puedes utilizar la función setDatauser para actualizar el estado local
+                        // Ejemplo: setDatauser(prevData => [...prevData, data.updatedClient]);
+                        // alert('Autorización exitosa')
+                        // Redirige a la página '/DashBoardMenu' después de procesar la respuesta
+                        window.location = "/DashBoardMenu";
+                    }, 1500);
+
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data.message);
+                    // Actualiza localmente el estado del cliente según sea necesario
+                    // Puedes utilizar la función setDatauser para actualizar el estado local
+                    // Ejemplo: setDatauser(prevData => [...prevData, data.updatedClient]);
+
+                    // Redirige a la página '/DashBoardMenu' después de procesar la respuesta
+                    window.location = "/DashBoardMenu";
+                })
+                .catch(error => {
+                    console.error('Error al cambiar el estado del cliente:', error);
+                });
         } catch (error) {
             console.error('Error general:', error);
         }
@@ -108,7 +140,7 @@ export const AutorizacionCuentas = () => {
                         </div>
                         <div className="w-8/12 relative overflow-x-auto shadow-md sm:rounded-lg">
                             <table className="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-gray-400">
-                                
+
 
                                 <thead className="text-xs text-center text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                     <tr>
@@ -120,7 +152,7 @@ export const AutorizacionCuentas = () => {
                                         </th>
 
                                         <th scope="col" className="px-6 py-3">
-                                             N° Cuenta
+                                            N° Cuenta
                                         </th>
                                         <th scope="col" className="px-6 py-3">
                                             Estado
@@ -133,6 +165,7 @@ export const AutorizacionCuentas = () => {
                                 </thead>
                                 <tbody>
                                     {datauser?.map((data) => (
+
 
                                         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={data.id_cliente}>
 
@@ -150,19 +183,22 @@ export const AutorizacionCuentas = () => {
                                                 {data.estadocliente}
 
                                             </td>
-                                            <td className="px-6 py-4 flex gap-5 justify-center">
-                                                <button href="#" className='hover:bg-gray-200 p-1 rounded-sm'>
-                                                    <svg className="w-6 h-6 text-red-600 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18 18 6m0 12L6 6" />
+                                            <td class="px-6 py-4 flex gap-5 justify-center">
+                                                <button onClick={() => denegar(data.id_cliente)} href="#" class='hover:bg-gray-200 p-1 rounded-sm'>
+                                                    <svg class="w-6 h-6 text-red-600 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 18 6m0 12L6 6" />
                                                     </svg>
                                                 </button>
-                                                <button href="#" className='hover:bg-gray-200 p-1 rounded-sm'>
-                                                    <svg className="w-6 h-6 text-neutralGreen dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+
+                                                <button onClick={() => autorizar(data.id_cliente)} href="#" class='hover:bg-gray-200 p-1 rounded-sm'>
+                                                    <svg class="w-6 h-6 text-neutralGreen dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 12 4.7 4.5 9.3-9" />
                                                     </svg>
                                                 </button>
+
                                             </td>
                                         </tr>
+
 
 
                                     )

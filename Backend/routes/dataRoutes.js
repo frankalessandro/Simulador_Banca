@@ -8,7 +8,7 @@ router.get('/user', dataController.user);
 router.get('/getcliente', dataController.getcliente)
 router.post('/AddUser', dataController.AddUser)
 router.put('/UpdateUser/:id', dataController.UpdateUser);
-router.post('/AddFormData', dataController.AddFormData) 
+router.post('/AddFormData/:id', dataController.AddFormData) 
 router.put('/Estado/:id', dataController.Estado);
 
 module.exports = router;
