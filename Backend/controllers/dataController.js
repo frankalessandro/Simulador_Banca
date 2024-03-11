@@ -186,6 +186,20 @@ const Estado = async (req, res) => {
   }
 };
 
+const getDetalle = async(req, res) =>{
+  try {
+
+    const result = await pool.query('SELECT * FROM detalleproducto')
+
+    if (result.rows.length > 0) {
+      return res.status(200).json({ result });
+    }
+
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 module.exports = {
   loginUser,
   user,
@@ -193,6 +207,7 @@ module.exports = {
   AddUser,
   UpdateUser,
   AddFormData,
-  Estado
+  Estado,
+  getDetalle
 }
 
