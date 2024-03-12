@@ -56,11 +56,11 @@ export const Carousels = () => {
                 </div>
 
             </div> */}
-            <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
-                <Carousel slide={false} className='bg-green ' >
+            <div className="h-56 sm:h-64 xl:h-80 2xl:h-96 w-5/6 flex justify-center">
+                <Carousel slide={false} className='bg-green-400   ' >
                     <img src={ImagenPrueba} className="absolute w-1/4 rounded -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
 
-                    <img src={operacionesInternacionales} className="absolute block w-1/4 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
+                    <img src={operacionesInternacionales} className="absolute    block w-1/4 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
 
                     <img src={economicaLaboral} className="absolute block w-1/4 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
 
