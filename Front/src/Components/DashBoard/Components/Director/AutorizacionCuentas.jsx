@@ -3,9 +3,11 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export const AutorizacionCuentas = () => {
+
+
+
+console.log(supabase)
     const [datauser, setdatauser] = useState([]);
-
-
 
     useEffect(() => {
         const fecthData = async () => {

@@ -15,6 +15,7 @@ export default function MyPage() {
          <Routes>
             <Route path='/' exact element={<Home />} />
             <Route path='/Login' element={<Login />} />
+            
             <Route path='/DashBoardMenu' element={<DashboardMenu />} />
             <Route path='/Landing' element={<LandingPage />} />
             <Route path='/CrearUsuario' element={<CrearUsuario/>} />
