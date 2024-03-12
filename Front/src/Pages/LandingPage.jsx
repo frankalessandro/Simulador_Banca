@@ -15,7 +15,7 @@ export const LandingPage = () => {
         <div className="py-5">
           <Banner />
         </div>
-        <div className="pt-5">
+        <div className="pt-5 flex justify-center">
           <Carousels />
         </div>
         <div className="py-10">

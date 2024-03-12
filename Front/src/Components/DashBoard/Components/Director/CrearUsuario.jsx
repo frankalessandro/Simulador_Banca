@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { ModalUpdate } from './Modals/ModalUpdate';
+
 
 
 export const CrearUsuario = () => {
@@ -95,7 +95,7 @@ export const CrearUsuario = () => {
         <>
             <div className="p-4 sm:ml-64">
                 <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
-                    <div className='flex justify-center items-center flex-col gap-32' style={{ minHeight: '85vh' }}>
+                    <div className='flex justify-center items-center flex-col gap-10' style={{ minHeight: '85vh' }}>
                         <div className='w-3/4 text-black text-4xl flex items-center justify-center font-semibold text-center'>
                             <p>Creacion de Usuarios</p>
                         </div>
@@ -194,7 +194,6 @@ export const CrearUsuario = () => {
                     
                     {/* Editar Usuarios */}
 
-                   <ModalUpdate  ActivateModal={ActivateModal} InfoUser={InfoUser} setActivateModal={setActivateModal} />
 
                     {/* crear usuarios */}
                     <div className={activeModal} >
