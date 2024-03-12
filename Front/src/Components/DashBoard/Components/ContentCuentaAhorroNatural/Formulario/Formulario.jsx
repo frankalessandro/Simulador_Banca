@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Dropdown } from 'flowbite-react';
 import { useAuth } from '../../../../../context/AuthContext';
 
@@ -131,8 +132,15 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
     console.log('datainfo:', datainfo);
     console.log('user?.id_usuario:', user?.id_usuario);
     CrearCliente(data );
-    
-
+    toast.success("Envio de fomulario exitoso")
+    setTimeout(() => {
+        // Actualiza localmente el estado del cliente según sea necesario
+        // Puedes utilizar la función setDatauser para actualizar el estado local
+        // Ejemplo: setDatauser(prevData => [...prevData, data.updatedClient]);
+        // alert('Autorización exitosa')
+        // Redirige a la página '/DashBoardMenu' después de procesar la respuesta
+        window.location = "/DashBoardMenu";
+    }, 2000);
   }
 
   const CrearCliente = async () => {
@@ -151,10 +159,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
       const responseData = await response.json();
       console.log(responseData);
       if (response.status === 200) {
-        window.location = "/DashBoardMenu";
-
-        alert('Registro de cliente exitoso');
-        // Aquí asignamos los datos del usuario al contexto de autenticación
+       
         setUserData(responseData.user);
       }
 
