@@ -67,19 +67,21 @@ const getPendiente = async (req, res) => {
   try {
 
     const result = await pool.query(`
-      SELECT
-  c.ID_Cliente,
-  fpn.IP_primerNombre AS Nombre,
-  c.Estado AS EstadoCliente,
-  tp.Descripcion AS Producto,
-  dp.N_Cuenta
+    SELECT
+    c.ID_Cliente,
+    fpn.IP_primerNombre AS Nombre,
+    c.Estado AS EstadoCliente,
+    tp.Descripcion AS Producto,
+    dp.N_Cuenta,
+    dp.fecha
 FROM
-  DetalleProducto dp
-  JOIN cliente c ON dp.Cliente = c.ID_Cliente
-  JOIN FormPersonNatural fpn ON c.inf_cliente = fpn.ID_FormPN
-  JOIN producto p ON dp.Producto = p.ID_Producto
-  JOIN tipoproducto tp ON p.Tipo = tp.ID_tipo
-  WHERE c.Estado = 'Pendiente';
+    DetalleProducto dp
+    JOIN cliente c ON dp.Cliente = c.ID_Cliente
+    JOIN FormPersonNatural fpn ON c.inf_cliente = fpn.ID_FormPN
+    JOIN producto p ON dp.Producto = p.ID_Producto
+    JOIN tipoproducto tp ON p.Tipo = tp.ID_tipo
+  WHERE
+   c.Estado = 'Pendiente';
     `);
 
     if (result.rows.length > 0) {
@@ -101,14 +103,16 @@ const getAutorizado = async (req, res) => {
     fpn.IP_primerNombre AS Nombre,
     c.Estado AS EstadoCliente,
     tp.Descripcion AS Producto,
-    dp.N_Cuenta
-  FROM
+    dp.N_Cuenta,
+    dp.fecha
+FROM
     DetalleProducto dp
     JOIN cliente c ON dp.Cliente = c.ID_Cliente
     JOIN FormPersonNatural fpn ON c.inf_cliente = fpn.ID_FormPN
     JOIN producto p ON dp.Producto = p.ID_Producto
     JOIN tipoproducto tp ON p.Tipo = tp.ID_tipo
-    WHERE c.Estado = 'Autorizado';
+WHERE
+    c.Estado = 'Autorizado';
     `);
 
     if (result.rows.length > 0) {
@@ -130,14 +134,16 @@ const getDenegado = async (req, res) => {
     fpn.IP_primerNombre AS Nombre,
     c.Estado AS EstadoCliente,
     tp.Descripcion AS Producto,
-    dp.N_Cuenta
-  FROM
+    dp.N_Cuenta,
+    dp.fecha
+FROM
     DetalleProducto dp
     JOIN cliente c ON dp.Cliente = c.ID_Cliente
     JOIN FormPersonNatural fpn ON c.inf_cliente = fpn.ID_FormPN
     JOIN producto p ON dp.Producto = p.ID_Producto
     JOIN tipoproducto tp ON p.Tipo = tp.ID_tipo
-    WHERE c.Estado = 'Denegado';
+    WHERE
+     c.Estado = 'Denegado';
     `);
 
     if (result.rows.length > 0) {

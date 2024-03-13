@@ -27,17 +27,28 @@ export const HistorialD = () => {
 
     const estado = datauser.map(user => user.estadocliente == 'Pendiente')
 
-    console.log(datauser)
+    console.log(datauser.fecha)
     console.log(estado)
 
+    const [fechaFiltro, setFechaFiltro] = useState(null);
 
+    const handleFechaChange1 = (event) => {
+      setFechaFiltro(event.target.value);
+    };
+  
+    const dataFiltrados = fechaFiltro
+      ? datauser.filter((data) => {
+          // Suponiendo que tienes una propiedad 'fecha' en tu objeto datauser
+          return data.fecha === fechaFiltro;
+        })
+      : datauser;
 
     
 
    
   return (
 
-    <div>
+    <>
 
 <div className="p-4 sm:ml-64">
                 <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
@@ -51,6 +62,7 @@ export const HistorialD = () => {
                             <p>Historial de Denegados</p>
                         </div>
                         <div className="w-8/12 relative overflow-x-auto shadow-md sm:rounded-lg">
+                        <input type="date" onChange={handleFechaChange1} />
                             <table className="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-gray-400">
 
 
@@ -74,7 +86,7 @@ export const HistorialD = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {datauser?.map((data) => (
+                                    {dataFiltrados?.map((data) => (
 
 
                                         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={data.id_cliente}>
@@ -108,6 +120,6 @@ export const HistorialD = () => {
                     </div>
                 </div>
             </div>
-    </div>
+    </>
   )
 }

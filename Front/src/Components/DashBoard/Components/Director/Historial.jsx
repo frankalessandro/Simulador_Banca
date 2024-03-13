@@ -26,9 +26,27 @@ export const Historial = () => {
     }, []);
 
   
+    const [fechaFiltro, setFechaFiltro] = useState(null);
 
+    const handleFechaChange2 = (event) => {
+        const fechaSeleccionada = new Date(event.target.value).toISOString().slice(0, 10);
+        setFechaFiltro(fechaSeleccionada);
+    };
+  
+    const dataFiltrados = fechaFiltro
+  ? datauser.filter((data) => {
+      // Suponiendo que tienes una propiedad 'fecha' en tus objetos datauser
+      // Formatea la fecha del objeto data para que coincida con la fecha del filtro
+      const fechaData = new Date(data.fecha).toISOString().slice(0, 10);
+      // Compara las fechas formateadas
+      return fechaData === fechaFiltro;
+    })
+  : datauser;
  
 
+      console.log(dataFiltrados)
+
+     
 
 
     
@@ -50,6 +68,8 @@ export const Historial = () => {
                             <p>Historial de Apertura</p>
                         </div>
                         <div className="w-8/12 relative overflow-x-auto shadow-md sm:rounded-lg">
+                        <input type="date" onChange={handleFechaChange2} />
+
                             <table className="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-gray-400">
 
 
@@ -73,7 +93,7 @@ export const Historial = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {datauser?.map((data) => (
+                                    {dataFiltrados?.map((data) => (
 
 
                                         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={data.id_cliente}>
@@ -98,7 +118,7 @@ export const Historial = () => {
 
 
                                     )
-                                    )}{console.log(datauser)}
+                                    )}
                                 </tbody>
                             </table>
                         </div>
