@@ -1,6 +1,8 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import { Navigate } from 'react-router-dom';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AuthContext = createContext();
 
@@ -39,13 +41,23 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     console.log("se presiono  cerrar sesion")
-    Cookies.remove('User');
-    setUser(null);
-    setIsDirector(false);
-    Cookies.remove('isLoggedIn');
-    setIsLoggedIn(false);
+    toast.success("haz cerrado sesion")
+    setTimeout(() => {
+        // Actualiza localmente el estado del cliente según sea necesario
+        // Puedes utilizar la función setDatauser para actualizar el estado local
+        // Ejemplo: setDatauser(prevData => [...prevData, data.updatedClient]);
+        // alert('Autorización exitosa')
+        // Redirige a la página '/DashBoardMenu' después de procesar la respuesta
+        Cookies.remove('User');
+        setUser(null);
+        setIsDirector(false);
+        Cookies.remove('isLoggedIn');
+        setIsLoggedIn(false);
+        window.location = "/landing"
+    }, 2000);
+   
     // Utiliza Navigate para redirigir en lugar de window.location
-    window.location = "/landing"
+   
   };
 
   const setUserData = (userData) => {

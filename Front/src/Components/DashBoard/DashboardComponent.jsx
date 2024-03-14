@@ -118,7 +118,7 @@ export const DashboardComponent = () => {
 
 
                                     <Sidebar.Collapse
-                                        className="flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group hover:bg-white hover:text-black dark:text-white dark:hover:bg-gray-700" label={<label className='flex  flex-row  relative text-base text-white right-5 items-center '> <HiShoppingCart color='white || black' className='flex relative right-1 items-center justify-center w-12' /> Apertura de cuentas </label>}   >
+                                        className="flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group hover:bg-white hover:text-black dark:text-white dark:hover:bg-gray-700" label={<label className='flex  flex-row  relative right-4 items-center '> <HiShoppingCart color='white || black' className='flex relative right-1 items-center justify-center w-12' /> Apertura de cuentas </label>}   >
 
                                         <Sidebar.Collapse label={<label className='flex  flex-row  relative right-4 items-center'> <HiClipboard color='white || black' className='flex relative right-1 items-center justify-center w-12' /> Cuenta de Ahorro </label>} className="flex items-center w-full p-2 text-base text-white  transition duration-75 rounded-lg group hover:bg-gray-100  hover:text-black dark:text-white dark:hover:bg-gray-700" >
                                             <Sidebar.Item onClick={() => handleBotonClick('FormularioPersonaNatural')} class="flex items-center  relative left-4 w-full p-2 text-base text-white transition duration-75 rounded-lg group hover:text-black hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{<p className='flex  flex-row  relative right-5 items-center'><HiUser color='white || black' className='flex relative right-1 items-center justify-center w-12' /> Persona Natural</p>}</Sidebar.Item>
@@ -284,9 +284,6 @@ export const DashboardComponent = () => {
                                         </li>
 
 
-                                    </>
-                                )
-                                }
                                 <li>
                                     <a href="#" onClick={() => handleBotonClick('Historial')} className="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-100 hover:text-black dark:hover:bg-gray-700 group">
                                         <svg class="w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
@@ -307,6 +304,9 @@ export const DashboardComponent = () => {
                                         <span className="flex-1 ms-3 whitespace-nowrap">Historial de Denegados</span>
                                     </a>
                                 </li>
+                                    </>
+                                )
+                                }
                             </Sidebar.ItemGroup>
                         </div>
                     </Sidebar>
