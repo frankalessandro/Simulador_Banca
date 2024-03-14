@@ -284,9 +284,6 @@ export const DashboardComponent = () => {
                                         </li>
 
 
-                                    </>
-                                )
-                                }
                                 <li>
                                     <a href="#" onClick={() => handleBotonClick('Historial')} className="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-100 hover:text-black dark:hover:bg-gray-700 group">
                                         <svg class="w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
@@ -307,6 +304,9 @@ export const DashboardComponent = () => {
                                         <span className="flex-1 ms-3 whitespace-nowrap">Historial de Denegados</span>
                                     </a>
                                 </li>
+                                    </>
+                                )
+                                }
                             </Sidebar.ItemGroup>
                         </div>
                     </Sidebar>

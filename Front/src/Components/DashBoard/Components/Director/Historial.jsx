@@ -25,38 +25,58 @@ export const Historial = () => {
         fecthData();
     }, []);
 
-  
+
     const [fechaFiltro, setFechaFiltro] = useState(null);
 
-    const handleFechaChange2 = (event) => {
-        const fechaSeleccionada = new Date(event.target.value).toISOString().slice(0, 10);
-        setFechaFiltro(fechaSeleccionada);
+    const [fechaInicio, setFechaInicio] = useState('');
+    const [fechaFin, setFechaFin] = useState('');
+
+
+    console.log(fechaInicio)
+    console.log(fechaFin)
+
+    const handleFechaInicioChange = (event) => {
+        const inputDate = event.target.value;
+        if (inputDate) {
+            const [year, month, day] = inputDate.split('-');
+            const fechaSeleccionada = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+            setFechaInicio(fechaSeleccionada);
+        } else {
+            setFechaInicio('');
+        }
     };
-  
-    const dataFiltrados = fechaFiltro
-  ? datauser.filter((data) => {
-      // Suponiendo que tienes una propiedad 'fecha' en tus objetos datauser
-      // Formatea la fecha del objeto data para que coincida con la fecha del filtro
-      const fechaData = new Date(data.fecha).toISOString().slice(0, 10);
-      // Compara las fechas formateadas
-      return fechaData === fechaFiltro;
-    })
-  : datauser;
- 
 
-      console.log(dataFiltrados)
+    const handleFechaFinChange = (event) => {
+        const inputDate = event.target.value;
+        if (inputDate) {
+            const [year, month, day] = inputDate.split('-');
+            const fechaSeleccionada = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+            setFechaFin(fechaSeleccionada);
+        } else {
+            setFechaFin('');
+        }
+    };
 
-     
+    const dataFiltrados = (fechaInicio && fechaFin) ? datauser.filter((data) => {
+        const fechaData = new Date(data.fecha).getTime();
+        const fechaInicioTime = new Date(fechaInicio).getTime();
+        const fechaFinTime = new Date(fechaFin).getTime();
+        return fechaData >= fechaInicioTime && fechaData <= fechaFinTime;
+    }) : datauser;
+
+    console.log(dataFiltrados);
 
 
-    
 
-   
-  return (
 
-    <div>
 
-<div className="p-4 sm:ml-64">
+
+
+    return (
+
+        <div>
+
+            <div className="p-4 sm:ml-64">
                 <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
                     <div className=' flex justify-center items-center flex-col gap-10' style={{ minHeight: '85vh' }}>
 
@@ -64,11 +84,15 @@ export const Historial = () => {
 
 
 
-                    <div className='w-3/4 text-black text-4xl flex items-center justify-center font-semibold text-center'>
+                        <div className='w-3/4 text-black text-4xl flex items-center justify-center font-semibold text-center'>
                             <p>Historial de Apertura</p>
                         </div>
+                            <div className='flex flex-row justify-evenly items-center max-[500px]:flex-col max-[500px]:justify-center max-[500px]:items-center'>
+
+                                <input type="date" className='rounded-md border-gray-300 focus:ring-green focus:border-green w-52 ' defaultValue={fechaInicio} onChange={handleFechaInicioChange} />
+                                <input type="date" className='rounded-md border-gray-300 focus:ring-green focus:border-green w-52' defaultValue={fechaFin} onChange={handleFechaFinChange} />
+                            </div>
                         <div className="w-8/12 relative overflow-x-auto shadow-md sm:rounded-lg">
-                        <input type="date" onChange={handleFechaChange2} />
 
                             <table className="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-gray-400">
 
@@ -89,7 +113,7 @@ export const Historial = () => {
                                             Estado
 
                                         </th>
-                                        
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -112,7 +136,7 @@ export const Historial = () => {
                                                 {data.estadocliente}
 
                                             </td>
-                                           
+
                                         </tr>
 
 
@@ -122,11 +146,11 @@ export const Historial = () => {
                                 </tbody>
                             </table>
                         </div>
-                       
+
 
                     </div>
                 </div>
             </div>
-    </div>
-  )
+        </div>
+    )
 }
