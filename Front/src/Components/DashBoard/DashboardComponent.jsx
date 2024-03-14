@@ -131,7 +131,7 @@ export const DashboardComponent = () => {
     
           </Sidebar.Collapse> */}
                                     </Sidebar.Collapse>
-
+                                    <Sidebar.Item onClick={() => handleBotonClick('FormularioPersonaNatural')} class=" flex items-center justify-start p-2 text-white w-full rounded-lg hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">{<p className='flex justify-start items-center relative right-5'><HiUser color='white || black' className='flex   items-center justify-start h-5 w-12' />Busqueda de Cuentas</p>}</Sidebar.Item>
 
 
 

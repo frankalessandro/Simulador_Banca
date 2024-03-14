@@ -16,7 +16,7 @@ export const Historial = () => {
                 }
                 const data = await response.json();
                 setdatauser(data.result.rows)
-                console.log(data.result.rows[0])
+          
 
             } catch (error) {
                 console.error('error al encontrar informacion')
@@ -26,14 +26,16 @@ export const Historial = () => {
     }, []);
 
 
-    const [fechaFiltro, setFechaFiltro] = useState(null);
+ 
+  
+   
 
     const [fechaInicio, setFechaInicio] = useState('');
     const [fechaFin, setFechaFin] = useState('');
+   
 
-
-    console.log(fechaInicio)
-    console.log(fechaFin)
+   
+  
 
     const handleFechaInicioChange = (event) => {
         const inputDate = event.target.value;
@@ -41,6 +43,7 @@ export const Historial = () => {
             const [year, month, day] = inputDate.split('-');
             const fechaSeleccionada = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
             setFechaInicio(fechaSeleccionada);
+            
         } else {
             setFechaInicio('');
         }
@@ -56,15 +59,46 @@ export const Historial = () => {
             setFechaFin('');
         }
     };
-
-    const dataFiltrados = (fechaInicio && fechaFin) ? datauser.filter((data) => {
+    
+    const dataFiltrados = datauser.filter((data) => {
         const fechaData = new Date(data.fecha).getTime();
-        const fechaInicioTime = new Date(fechaInicio).getTime();
-        const fechaFinTime = new Date(fechaFin).getTime();
-        return fechaData >= fechaInicioTime && fechaData <= fechaFinTime;
-    }) : datauser;
+        const fechaInicioTime = fechaInicio ? new Date(fechaInicio).getTime() : 0;
+        const fechaFinTime = fechaFin ? new Date(fechaFin).getTime() : Number.MAX_SAFE_INTEGER;
+        
+        const fechaMatch = fechaData >= fechaInicioTime && fechaData <= fechaFinTime;
+        return documentoMatch && fechaMatch;
+    });
 
-    console.log(dataFiltrados);
+
+
+    console.log(dataFiltrados)
+
+    function mostrarFechaEnFormato(fecha) {
+        // Crear un objeto Date con la fecha recibida
+        const fechaObjeto = new Date(fecha);
+      
+        // Extraer el año, mes y día de la fecha
+        const year = fechaObjeto.getFullYear();
+        const month = fechaObjeto.getMonth() + 1; // Los meses van de 0 a 11, por lo que sumamos 1
+        const day = fechaObjeto.getDate();
+      
+        // Formatear el mes y el día como cadenas de dos dígitos
+        const monthString = month < 10 ? '0' + month : month.toString();
+        const dayString = day < 10 ? '0' + day : day.toString();
+      
+        // Construir la cadena de fecha en el formato deseado: "yyyy-mm-dd"
+        const fechaFormateada = `${dayString}-${monthString}-${year}`;
+      
+        return fechaFormateada;
+      }
+      
+      // Ejemplo de uso
+      const fechaOriginal = "2024-03-14T05:00:00.000Z";
+      const fechaFormateada = mostrarFechaEnFormato(fechaOriginal);
+     
+      
+     
+    
 
 
 
@@ -87,8 +121,8 @@ export const Historial = () => {
                         <div className='w-3/4 text-black text-4xl flex items-center justify-center font-semibold text-center'>
                             <p>Historial de Apertura</p>
                         </div>
-                            <div className='flex flex-row justify-evenly items-center max-[500px]:flex-col max-[500px]:justify-center max-[500px]:items-center'>
-
+                            <div className='flex flex-row justify-evenly items-center max-[1024px]:flex-col max-[1024px]:justify-center max-[1024px]:items-center'>
+                            
                                 <input type="date" className='rounded-md border-gray-300 focus:ring-green focus:border-green w-52 ' defaultValue={fechaInicio} onChange={handleFechaInicioChange} />
                                 <input type="date" className='rounded-md border-gray-300 focus:ring-green focus:border-green w-52' defaultValue={fechaFin} onChange={handleFechaFinChange} />
                             </div>
@@ -99,8 +133,14 @@ export const Historial = () => {
 
                                 <thead className="text-xs text-center text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                     <tr>
+                                    <th scope="col" className="px-6 py-3">
+                                           Nº Documento
+                                        </th>
                                         <th scope="col" className="px-6 py-3">
                                             Nombre de Cliente
+                                        </th>
+                                        <th scope="col" className="px-6 py-3">
+                                            Fecha 
                                         </th>
                                         <th scope="col" className="px-6 py-3">
                                             Producto bancario
@@ -121,11 +161,15 @@ export const Historial = () => {
 
 
                                         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={data.id_cliente}>
-
+                                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                {data.ip_documento}
+                                            </th>
                                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                 {data.nombre}
                                             </th>
-
+                                            <td className="px-6 py-4">
+                                                { mostrarFechaEnFormato(data.fecha)}
+                                            </td>
                                             <td className="px-6 py-4">
                                                 {data.producto}
                                             </td>
