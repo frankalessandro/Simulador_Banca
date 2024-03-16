@@ -52,7 +52,7 @@ const loginUser = async (req, res) => {
 const user = async (req, res) => {
   try {
 
-    const result = await pool.query('SELECT * FROM usuarios')
+    const result = await pool.query('SELECT * FROM usuarios ' )
 
     if (result.rows.length > 0) {
       return res.status(200).json({ result });
@@ -67,19 +67,22 @@ const getPendiente = async (req, res) => {
   try {
 
     const result = await pool.query(`
-      SELECT
-  c.ID_Cliente,
-  fpn.IP_primerNombre AS Nombre,
-  c.Estado AS EstadoCliente,
-  tp.Descripcion AS Producto,
-  dp.N_Cuenta
+    SELECT
+    c.ID_Cliente,
+    fpn.IP_primerNombre AS Nombre,
+    fpn.IP_documento,
+    c.Estado AS EstadoCliente,
+    tp.Descripcion AS Producto,
+    dp.N_Cuenta,
+    dp.fecha
 FROM
-  DetalleProducto dp
-  JOIN cliente c ON dp.Cliente = c.ID_Cliente
-  JOIN FormPersonNatural fpn ON c.inf_cliente = fpn.ID_FormPN
-  JOIN producto p ON dp.Producto = p.ID_Producto
-  JOIN tipoproducto tp ON p.Tipo = tp.ID_tipo
-  WHERE c.Estado = 'Pendiente';
+    DetalleProducto dp
+    JOIN cliente c ON dp.Cliente = c.ID_Cliente
+    JOIN FormPersonNatural fpn ON c.inf_cliente = fpn.ID_FormPN
+    JOIN producto p ON dp.Producto = p.ID_Producto
+    JOIN tipoproducto tp ON p.Tipo = tp.ID_tipo
+  WHERE
+   c.Estado = 'Pendiente';
     `);
 
     if (result.rows.length > 0) {
@@ -99,17 +102,22 @@ const getAutorizado = async (req, res) => {
     SELECT
     c.ID_Cliente,
     fpn.IP_primerNombre AS Nombre,
+    fpn.IP_documento,
     c.Estado AS EstadoCliente,
     tp.Descripcion AS Producto,
-    dp.N_Cuenta
-  FROM
+    dp.N_Cuenta,
+    dp.fecha
+FROM
     DetalleProducto dp
     JOIN cliente c ON dp.Cliente = c.ID_Cliente
     JOIN FormPersonNatural fpn ON c.inf_cliente = fpn.ID_FormPN
     JOIN producto p ON dp.Producto = p.ID_Producto
     JOIN tipoproducto tp ON p.Tipo = tp.ID_tipo
-    WHERE c.Estado = 'Autorizado';
+WHERE
+    c.Estado = 'Autorizado';
     `);
+
+    console.log(result);
 
     if (result.rows.length > 0) {
       return res.status(200).json({ result });
@@ -128,16 +136,19 @@ const getDenegado = async (req, res) => {
     SELECT
     c.ID_Cliente,
     fpn.IP_primerNombre AS Nombre,
+    fpn.IP_documento,
     c.Estado AS EstadoCliente,
     tp.Descripcion AS Producto,
-    dp.N_Cuenta
-  FROM
+    dp.N_Cuenta,
+    dp.fecha
+FROM
     DetalleProducto dp
     JOIN cliente c ON dp.Cliente = c.ID_Cliente
     JOIN FormPersonNatural fpn ON c.inf_cliente = fpn.ID_FormPN
     JOIN producto p ON dp.Producto = p.ID_Producto
     JOIN tipoproducto tp ON p.Tipo = tp.ID_tipo
-    WHERE c.Estado = 'Denegado';
+    WHERE
+     c.Estado = 'Denegado';
     `);
 
     if (result.rows.length > 0) {
@@ -273,8 +284,35 @@ const Estado = async (req, res) => {
   }
 };
 
+const DelateUser = async (req , res ) => {
+  try {
+    const userId = req.params.userId;
+
+    const result2 = await pool.query(`
+    UPDATE DetalleProducto
+    SET responsable = NULL
+    WHERE responsable = ${userId}
+    `) 
+
+    // Buscar el usuario por su ID
+  const result = await pool.query(
+    
+    `DELETE  FROM public.usuarios
+    WHERE ID_Usuario = ${userId};`
+  ) 
+
+    // Enviar una respuesta de éxito
+    res.status(200).json({ message: 'Usuario eliminado correctamente' });
+} catch (error) {
+    // Si ocurre algún error, enviar una respuesta de error con el mensaje
+    console.error('Error al eliminar usuario:', error);
+    res.status(500).json({ message: 'Error al eliminar usuario' });
+}
+}
+
 module.exports = {
   loginUser,
+  DelateUser,
   user,
   getPendiente,
   getAutorizado,

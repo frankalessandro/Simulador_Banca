@@ -3,7 +3,8 @@ import React, { useState } from 'react'
 import Logo from '../assets/Img/Logos/ClarBank Logo.svg'
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../context/AuthContext.jsx';
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 export default function Login() {
@@ -27,8 +28,16 @@ export default function Login() {
           const responseData = await response.json();
           console.log(responseData);
           if (response.status === 200) {
-            alert('Inicio de sesión exitoso');
-            window.location = "/DashBoardMenu";
+            toast.success("Inicio de sesion exitoso ")
+            setTimeout(() => {
+                // Actualiza localmente el estado del cliente según sea necesario
+                // Puedes utilizar la función setDatauser para actualizar el estado local
+                // Ejemplo: setDatauser(prevData => [...prevData, data.updatedClient]);
+                // alert('Autorización exitosa')
+                // Redirige a la página '/DashBoardMenu' después de procesar la respuesta
+                window.location = "/DashBoardMenu";
+            }, 2000);
+            
             setIsLoggedIn(true);
             login(responseData.user);
     
@@ -36,7 +45,15 @@ export default function Login() {
             setUserData(responseData.user);
           }
           else{
-            alert('Usuario o contraseña incorrecto');
+            toast.error("Inicio de sesion Erroneo ")
+            setTimeout(() => {
+                // Actualiza localmente el estado del cliente según sea necesario
+                // Puedes utilizar la función setDatauser para actualizar el estado local
+                // Ejemplo: setDatauser(prevData => [...prevData, data.updatedClient]);
+                // alert('Autorización exitosa')
+                // Redirige a la página '/DashBoardMenu' después de procesar la respuesta
+              
+            }, 1000);
           }
         } catch (error) {
             return res.status(400).json({ message: 'No se encontró información del usuario' });
