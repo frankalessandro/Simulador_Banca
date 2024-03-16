@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 export const CrearUsuario = () => {
@@ -66,10 +67,18 @@ export const CrearUsuario = () => {
             console.log(data);
 
             if (response.ok) {
-                alert('Registro de usuario exitoso');
+                toast.success("Creación exitosa")
+    setTimeout(() => {
+        // Actualiza localmente el estado del cliente según sea necesario
+        // Puedes utilizar la función setDatauser para actualizar el estado local
+        // Ejemplo: setDatauser(prevData => [...prevData, data.updatedClient]);
+        // alert('Autorización exitosa')
+        // Redirige a la página '/DashBoardMenu' después de procesar la respuesta
+        abrir();
+    }, 2000);
                 // Actualiza el estado local para forzar la re-renderización
                 setForceUpdate((prev) => !prev);
-                abrir();
+                
             } else {
                 console.error('Error al registrar usuario');
                 alert('Error al registrar usuarios');
@@ -203,7 +212,7 @@ export const CrearUsuario = () => {
 
                                     <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                                         <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                                            Create New User
+                                            Crear nuevo usuario
                                         </h3>
                                         <button type="button" onClick={abrir} className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal">
                                             <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
