@@ -2,6 +2,7 @@ CREATE TABLE cliente (
     ID_Cliente serial PRIMARY KEY,
     inf_cliente serial,
     Tipo_de_Cliente varchar(30),
+    Saldo int, 
     Estado varchar(15)
 );
 
