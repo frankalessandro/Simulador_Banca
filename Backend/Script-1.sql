@@ -141,12 +141,16 @@ add foreign key (inf_cliente) references FormPersonNatural(ID_FormPN);
 INSERT INTO Rol (ID_Rol, Nombre, Estado) VALUES
 (1, 'Director', 'Activo'),
 (2, 'Asesor', 'Activo');
+(3, 'Cajero', 'Activo');
+(3, 'Cliente', 'Activo');
 
 
 -- Insertar datos en la tabla usuarios
 INSERT INTO usuarios ( Name_User, Password, Rol, Estado) VALUES
 ('admin', 'admin', 1, 'Activo'),
 ('asesor', 'asesor', 2, 'Activo');
+('cajero', 'cajero', 3, 'Activo');
+('cliente', 'cliente', 4, 'Activo');
 
 -- Insertar datos en la tabla tipoproducto
 INSERT INTO tipoproducto (Descripcion) VALUES
@@ -154,7 +158,7 @@ INSERT INTO tipoproducto (Descripcion) VALUES
 
 -- Insertar datos en la tabla producto
 INSERT INTO producto (Estado, Tipo, Asignado) VALUES
-('Activo', 1, 2);
+('Activo', 1, 2); 
 select * from usuarios;
 
 SELECT c.ID_Cliente, fpn.IP_primerNombre AS Nombre, c.Estado AS EstadoCliente, p.ID_Producto AS Producto, dp.N_Cuenta
