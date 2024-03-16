@@ -70,6 +70,7 @@ const getPendiente = async (req, res) => {
     SELECT
     c.ID_Cliente,
     fpn.IP_primerNombre AS Nombre,
+    fpn.IP_documento,
     c.Estado AS EstadoCliente,
     tp.Descripcion AS Producto,
     dp.N_Cuenta,
@@ -101,6 +102,7 @@ const getAutorizado = async (req, res) => {
     SELECT
     c.ID_Cliente,
     fpn.IP_primerNombre AS Nombre,
+    fpn.IP_documento,
     c.Estado AS EstadoCliente,
     tp.Descripcion AS Producto,
     dp.N_Cuenta,
@@ -114,6 +116,8 @@ FROM
 WHERE
     c.Estado = 'Autorizado';
     `);
+
+    console.log(result);
 
     if (result.rows.length > 0) {
       return res.status(200).json({ result });
@@ -132,6 +136,7 @@ const getDenegado = async (req, res) => {
     SELECT
     c.ID_Cliente,
     fpn.IP_primerNombre AS Nombre,
+    fpn.IP_documento,
     c.Estado AS EstadoCliente,
     tp.Descripcion AS Producto,
     dp.N_Cuenta,
