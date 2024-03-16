@@ -16,6 +16,7 @@ import { HiShoppingCart, HiOutlineViewList, HiUser, HiClipboard, HiUserCircle, H
 import { Colors } from 'chart.js'
 import { Historial } from './Components/Director/Historial'
 import { HistorialD } from './Components/Director/HistorialD'
+import { BusquedaC } from './Components/BusquedaC'
 
 
 
@@ -131,7 +132,7 @@ export const DashboardComponent = () => {
     
           </Sidebar.Collapse> */}
                                     </Sidebar.Collapse>
-                                    <Sidebar.Item onClick={() => handleBotonClick('FormularioPersonaNatural')} class=" flex items-center justify-start p-2 text-white w-full rounded-lg hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">{<p className='flex justify-start items-center relative right-5'><HiUser color='white || black' className='flex   items-center justify-start h-5 w-12' />Busqueda de Cuentas</p>}</Sidebar.Item>
+                                    <Sidebar.Item onClick={() => handleBotonClick('Busqueda')} class=" flex items-center justify-start p-2 text-white w-full rounded-lg hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">{<p className='flex justify-start items-center relative right-5'><HiUser color='white || black' className='flex   items-center justify-start h-5 w-12' />Busqueda de Cuentas</p>}</Sidebar.Item>
 
 
 
@@ -320,6 +321,7 @@ export const DashboardComponent = () => {
                         {contenidoSeleccionado === 'Reportes' && <Reportes />}
                         {contenidoSeleccionado === 'Historial' && <Historial />}
                         {contenidoSeleccionado === 'HistorialD' && <HistorialD />}
+                        {contenidoSeleccionado === 'Busqueda' && <BusquedaC/>}
                         {/* Renderiza otros contenidos según sea necesario */}
                     </div>
                 </>
