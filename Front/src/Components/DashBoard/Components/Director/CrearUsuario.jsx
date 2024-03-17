@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 export const CrearUsuario = () => {
@@ -9,10 +10,10 @@ export const CrearUsuario = () => {
     const [datauser, setdatauser] = useState([]);
     const [forceUpdate, setForceUpdate] = useState(false);
     const [activeModal, setactiveModal] = useState("absolute overflow-y-auto overflow-x-hidden justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full sr-only")
-    const [activeModal1, setactiveModal1] = useState("absolute overflow-y-auto overflow-x-hidden justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full sr-only")
-    const [selectedUserId, setSelectedUserId] = useState(null);
+    
     const [InfoUser, setInfoUser] = useState(null);
     const [ActivateModal, setActivateModal] = useState(false);
+   
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -39,14 +40,7 @@ export const CrearUsuario = () => {
         );
     };
 
-    const abrir1 = (userId) => {
-        setSelectedUserId(userId); // Almacena el userId seleccionado al abrir el modal de edición
-        setactiveModal1((prev) =>
-            prev === "absolute overflow-y-auto overflow-x-hidden justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full sr-only"
-                ? "absolute flex items-center overflow-y-auto overflow-x-hidden bg-gray-400 bg-opacity-60 justify-center items-center w- md:inset-0 h-[calc(100%)] max-h-full not-sr-only"
-                : "absolute overflow-y-auto overflow-x-hidden justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full sr-only"
-        );
-    };
+    
 
 
     const AddUser = async (data) => {
@@ -66,13 +60,30 @@ export const CrearUsuario = () => {
             console.log(data);
 
             if (response.ok) {
-                alert('Registro de usuario exitoso');
+                toast.success("Creación exitosa")
+    setTimeout(() => {
+        // Actualiza localmente el estado del cliente según sea necesario
+        // Puedes utilizar la función setDatauser para actualizar el estado local
+        // Ejemplo: setDatauser(prevData => [...prevData, data.updatedClient]);
+        // alert('Autorización exitosa')
+        // Redirige a la página '/DashBoardMenu' después de procesar la respuesta
+        abrir();
+    }, 2000);
                 // Actualiza el estado local para forzar la re-renderización
                 setForceUpdate((prev) => !prev);
-                abrir();
+                
+
             } else {
                 console.error('Error al registrar usuario');
-                alert('Error al registrar usuarios');
+                toast.error("Error al registrar usuario")
+                setTimeout(() => {
+                    // Actualiza localmente el estado del cliente según sea necesario
+                    // Puedes utilizar la función setDatauser para actualizar el estado local
+                    // Ejemplo: setDatauser(prevData => [...prevData, data.updatedClient]);
+                    // alert('Autorización exitosa')
+                    // Redirige a la página '/DashBoardMenu' después de procesar la respuesta
+                   
+                }, 2000);
             }
         } catch (error) {
             console.error('Error en el servidor', error);
@@ -86,9 +97,43 @@ export const CrearUsuario = () => {
         console.log(date)
     }
 
-    const abrirEdicion = (userId) => {
-        setSelectedUserId(userId);
-        abrir1();
+   
+  
+    // Otros estados omitidos por brevedad...
+
+    // Resto del código omitido por brevedad...
+
+    // Función para eliminar usuario
+    const eliminarUsuario = async (userId) => {
+
+
+        console.log(userId)
+        try {
+            const response = await fetch(`http://localhost:3000/user/${userId}`, {
+                method: 'DELETE',
+            });
+
+            if (response.ok) {
+                
+                toast.error("Usuario eliminado correctamente")
+                setTimeout(() => {
+                    // Actualiza localmente el estado del cliente según sea necesario
+                    // Puedes utilizar la función setDatauser para actualizar el estado local
+                    // Ejemplo: setDatauser(prevData => [...prevData, data.updatedClient]);
+                    // alert('Autorización exitosa')
+                    // Redirige a la página '/DashBoardMenu' después de procesar la respuesta
+                    
+                }, 1000);
+                // Actualiza el estado local para forzar la re-renderización
+                setForceUpdate((prev) => !prev);
+                
+            } else {
+                console.error('Error al eliminar usuario');
+                alert('Error al eliminar usuario');
+            }
+        } catch (error) {
+            console.error('Error en el servidor', error);
+        }
     };
 
     return (
@@ -174,7 +219,7 @@ export const CrearUsuario = () => {
                                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.3 4.8 2.9 2.9M7 7H4a1 1 0 0 0-1 1v10c0 .6.4 1 1 1h11c.6 0 1-.4 1-1v-4.5m2.4-10a2 2 0 0 1 0 3l-6.8 6.8L8 14l.7-3.6 6.9-6.8a2 2 0 0 1 2.8 0Z" />
                                                             </svg>
                                                         </button> */}
-                                                        <button href="#" className='hover:bg-gray-200 p-1 rounded-sm'>
+                                                        <button href="#"  onClick={() => eliminarUsuario(date.id_usuario)} className='hover:bg-gray-200 p-1 rounded-sm'>
                                                             <svg className="w-6 h-6 text-red-600 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18 18 6m0 12L6 6" />
                                                             </svg>
@@ -203,7 +248,7 @@ export const CrearUsuario = () => {
 
                                     <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                                         <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                                            Create New User
+                                            Crear nuevo usuario
                                         </h3>
                                         <button type="button" onClick={abrir} className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal">
                                             <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
