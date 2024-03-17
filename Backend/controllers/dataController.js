@@ -300,7 +300,6 @@ const getDetalle = async(req, res) =>{
 
 module.exports = {
   loginUser,
-  DelateUser,
   user,
   getPendiente,
   getAutorizado,

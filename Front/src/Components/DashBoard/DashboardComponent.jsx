@@ -1,19 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Logo from '../../assets/Img/Logos/ClarBank LogoOnly.svg'
 import { ContentCuentaAhorroJuridica } from './Components/ContentCuentaAhorroJuridica/ContentCuentaAhorroJuridica'
 import { ContentCuentaAhorroNatural } from './Components/ContentCuentaAhorroNatural/ContentCuentaAhorroNatural'
 import { PrincipalPage } from './Components/PrincipalPage'
 import Namelogo from '../../assets/Img/Logos/ClarBank Name.svg'
-import { Link } from 'react-router-dom'
 import { No_Disponible } from './Components/NoDisponible'
 import { AutorizacionCuentas } from './Components/Director/AutorizacionCuentas'
 import { CrearUsuario } from './Components/Director/CrearUsuario'
 import { useAuth } from '../../context/AuthContext'
 import { Reportes } from './Components/Director/Reportes'
-import { Button, FloatingLabel, Label, Sidebar, SidebarItemGroup } from 'flowbite-react';
-import { Avatar, Dropdown, Navbar } from 'flowbite-react';
+import { Sidebar } from 'flowbite-react';
+import { Dropdown } from 'flowbite-react';
 import { HiShoppingCart, HiOutlineViewList, HiUser, HiClipboard, HiUserCircle, HiUserGroup } from "react-icons/hi";
-import { Colors } from 'chart.js'
 import { Historial } from './Components/Director/Historial'
 import { HistorialD } from './Components/Director/HistorialD'
 import { Movimientos } from './Components/Cajero/Movimientos'
@@ -51,7 +49,7 @@ export const DashboardComponent = () => {
 
     return (
         <>
-            {isLoggedIn(
+            {isLoggedIn &&(
                 <>
                     <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
                         <div className="px-3 py-3 lg:px-5 lg:pl-3">
@@ -335,11 +333,6 @@ export const DashboardComponent = () => {
                 </>
             )
             }
-            {isLoggedIn && user.rol == 4(
-                <h1>Hi</h1>
-            )}
-
-
         </>
     )
 }
