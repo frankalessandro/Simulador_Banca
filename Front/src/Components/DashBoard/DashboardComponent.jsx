@@ -14,7 +14,9 @@ import { Dropdown } from 'flowbite-react';
 import { HiShoppingCart, HiOutlineViewList, HiUser, HiClipboard, HiUserCircle, HiUserGroup } from "react-icons/hi";
 import { Historial } from './Components/Director/Historial'
 import { HistorialD } from './Components/Director/HistorialD'
-import { Movimientos } from './Components/Cajero/Movimientos'
+import { BusquedaC } from './Components/BusquedaC'
+import nfcLogo from '../../assets/Img/Client/nfcLogo.svg'
+import ChipCard from '../../assets/Img/Client/ChipCard.svg'
 
 
 
@@ -49,7 +51,7 @@ export const DashboardComponent = () => {
 
     return (
         <>
-            {isLoggedIn &&(
+            {isLoggedIn && user.rol !== 4 && (
                 <>
                     <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
                         <div className="px-3 py-3 lg:px-5 lg:pl-3">
@@ -123,7 +125,7 @@ export const DashboardComponent = () => {
                                             <Sidebar.Item onClick={() => handleBotonClick('FormularioPersonaJuridica')} class="flex items-center relative left-4  w-full p-2 text-base text-white transition duration-75 rounded-lg group  hover:bg-gray-100 hover:text-black dark:text-white dark:hover:bg-gray-700">{<p className='flex  flex-row  relative right-5 items-center'><HiUserGroup color='white || black' className='flex relative right-1 items-center justify-center w-12' /> Persona Juridica</p>}</Sidebar.Item>
                                         </Sidebar.Collapse>
                                     </Sidebar.Collapse>
-                                    <Sidebar.Item onClick={() => handleBotonClick('FormularioPersonaNatural')} class=" flex items-center justify-start p-2 text-white w-full rounded-lg hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">{<p className='flex justify-start items-center relative right-5'><HiUser color='white || black' className='flex   items-center justify-start h-5 w-12' />Busqueda de Cuentas</p>}</Sidebar.Item>
+                                    <Sidebar.Item onClick={() => handleBotonClick('Busqueda')} class=" flex items-center justify-start p-2 text-white w-full rounded-lg hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">{<p className='flex justify-start items-center relative right-5'><HiUser color='white || black' className='flex   items-center justify-start h-5 w-12' />Busqueda de Cuentas</p>}</Sidebar.Item>
 
 
 
@@ -327,12 +329,52 @@ export const DashboardComponent = () => {
                         {contenidoSeleccionado === 'Reportes' && <Reportes />}
                         {contenidoSeleccionado === 'Historial' && <Historial />}
                         {contenidoSeleccionado === 'HistorialD' && <HistorialD />}
-                        {contenidoSeleccionado === 'Movimientos' && <Movimientos />}
+                        {contenidoSeleccionado === 'Busqueda' && <BusquedaC />}
                         {/* Renderiza otros contenidos según sea necesario */}
                     </div>
                 </>
             )
+
             }
+            {isLoggedIn && user.rol === 4 && (
+                <>
+                    <section className='w-screen h-screen bg-red-600 flex justify-center items-center flex-col'>
+                        <header>
+                            <span className='text-3xl font-bold'>Módulo Cliente</span>
+                        </header>
+                        <main className='h-3/4 w-full bg-darkGreen flex justify-center items-center'>
+                            <div className='bg-green h-80 w-128 rounded-xl'>
+                                <div className='h-1/3 flex items-end'>
+                                <img src={ChipCard} alt="" />
+                                    <img className='text-stone-300' src={nfcLogo} alt="" />
+                                </div>
+                                <div className='h-2/3 flex justify-end items-end'>
+                                    <img className='w-44 py-5' src={Namelogo} alt="" />
+                                    <img className='h-40' src={Logo} alt="" />
+                                </div>
+                            </div>
+                        </main>
+                    </section>
+                    <div>
+                        <Dropdown
+                            arrowIcon={false}
+                            inline
+                            label={
+                                <button className='flex flex-row items-center  text-sm bg-white rounded-full focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-600'> <p className=' flex items-center text-sm bg-white rounded-full focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-600 '>{user?.name_user} - {user?.rol == 2 && (<> Asesor </>)}{user?.rol == 1 && (<> Director </>)} </p><HiUserCircle color='gray' className='w-16 h-10 ' />  </button>
+                            }
+                        >
+                            <Dropdown.Header>
+                                <span className="block text-sm">{user?.name_user}</span>
+                                <span className="block truncate text-sm font-medium">{user?.name_user}@ClarBank.com</span>
+                            </Dropdown.Header>
+                            <Dropdown.Divider />
+                            <Dropdown.Item onClick={handlelogout}>Salir</Dropdown.Item>
+                        </Dropdown>
+                    </div>
+                </>
+            )}
+
+
         </>
     )
 }
