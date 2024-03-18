@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Logo from '../../assets/Img/Logos/ClarBank LogoOnly.svg'
 import { ContentCuentaAhorroJuridica } from './Components/ContentCuentaAhorroJuridica/ContentCuentaAhorroJuridica'
 import { ContentCuentaAhorroNatural } from './Components/ContentCuentaAhorroNatural/ContentCuentaAhorroNatural'
 import { PrincipalPage } from './Components/PrincipalPage'
 import Namelogo from '../../assets/Img/Logos/ClarBank Name.svg'
-import { Link } from 'react-router-dom'
 import { No_Disponible } from './Components/NoDisponible'
 import { AutorizacionCuentas } from './Components/Director/AutorizacionCuentas'
 import { CrearUsuario } from './Components/Director/CrearUsuario'
 import { useAuth } from '../../context/AuthContext'
 import { Reportes } from './Components/Director/Reportes'
-import { Button, FloatingLabel, Label, Sidebar, SidebarItemGroup } from 'flowbite-react';
-import { Avatar, Dropdown, Navbar } from 'flowbite-react';
+import { Sidebar } from 'flowbite-react';
+import { Dropdown } from 'flowbite-react';
 import { HiShoppingCart, HiOutlineViewList, HiUser, HiClipboard, HiUserCircle, HiUserGroup } from "react-icons/hi";
-import { Colors } from 'chart.js'
 import { Historial } from './Components/Director/Historial'
 import { HistorialD } from './Components/Director/HistorialD'
 import { BusquedaC } from './Components/BusquedaC'
+import nfcLogo from '../../assets/Img/Client/nfcLogo.svg'
+import ChipCard from '../../assets/Img/Client/ChipCard.svg'
 
 
 
@@ -51,8 +51,7 @@ export const DashboardComponent = () => {
 
     return (
         <>
-
-            {isLoggedIn && (
+            {isLoggedIn && user.rol !== 4 && (
                 <>
                     <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
                         <div className="px-3 py-3 lg:px-5 lg:pl-3">
@@ -124,13 +123,7 @@ export const DashboardComponent = () => {
                                         <Sidebar.Collapse label={<label className='flex  flex-row  relative right-4 items-center'> <HiClipboard color='white || black' className='flex relative right-1 items-center justify-center w-12' /> Cuenta de Ahorro </label>} className="flex items-center w-full p-2 text-base text-white  transition duration-75 rounded-lg group hover:bg-gray-100  hover:text-black dark:text-white dark:hover:bg-gray-700" >
                                             <Sidebar.Item onClick={() => handleBotonClick('FormularioPersonaNatural')} class="flex items-center  relative left-4 w-full p-2 text-base text-white transition duration-75 rounded-lg group hover:text-black hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{<p className='flex  flex-row  relative right-5 items-center'><HiUser color='white || black' className='flex relative right-1 items-center justify-center w-12' /> Persona Natural</p>}</Sidebar.Item>
                                             <Sidebar.Item onClick={() => handleBotonClick('FormularioPersonaJuridica')} class="flex items-center relative left-4  w-full p-2 text-base text-white transition duration-75 rounded-lg group  hover:bg-gray-100 hover:text-black dark:text-white dark:hover:bg-gray-700">{<p className='flex  flex-row  relative right-5 items-center'><HiUserGroup color='white || black' className='flex relative right-1 items-center justify-center w-12' /> Persona Juridica</p>}</Sidebar.Item>
-
                                         </Sidebar.Collapse>
-                                        {/* <Sidebar.Collapse  label="Cuenta de Corriente">
-            <Sidebar.Item href="#">Persona Natural</Sidebar.Item>
-            <Sidebar.Item href="#">Persona Juridica</Sidebar.Item>
-    
-          </Sidebar.Collapse> */}
                                     </Sidebar.Collapse>
                                     <Sidebar.Item onClick={() => handleBotonClick('Busqueda')} class=" flex items-center justify-start p-2 text-white w-full rounded-lg hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">{<p className='flex justify-start items-center relative right-5'><HiUser color='white || black' className='flex   items-center justify-start h-5 w-12' />Busqueda de Cuentas</p>}</Sidebar.Item>
 
@@ -284,27 +277,42 @@ export const DashboardComponent = () => {
                                             </a>
                                         </li>
 
+                                        <li>
+                                            <a href="#" onClick={() => handleBotonClick('Historial')} className="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-100 hover:text-black dark:hover:bg-gray-700 group">
+                                                <svg class="w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                                    <path d="M9 7V2.2a2 2 0 0 0-.5.4l-4 3.9a2 2 0 0 0-.3.5H9Z" />
+                                                    <path fill-rule="evenodd" d="M11 7V2h7a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9h5a2 2 0 0 0 2-2Zm4.7 5.7a1 1 0 0 0-1.4-1.4L11 14.6l-1.3-1.3a1 1 0 0 0-1.4 1.4l2 2c.4.4 1 .4 1.4 0l4-4Z" clip-rule="evenodd" />
+                                                </svg>
 
-                                <li>
-                                    <a href="#" onClick={() => handleBotonClick('Historial')} className="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-100 hover:text-black dark:hover:bg-gray-700 group">
-                                        <svg class="w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M9 7V2.2a2 2 0 0 0-.5.4l-4 3.9a2 2 0 0 0-.3.5H9Z" />
-                                            <path fill-rule="evenodd" d="M11 7V2h7a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9h5a2 2 0 0 0 2-2Zm4.7 5.7a1 1 0 0 0-1.4-1.4L11 14.6l-1.3-1.3a1 1 0 0 0-1.4 1.4l2 2c.4.4 1 .4 1.4 0l4-4Z" clip-rule="evenodd" />
-                                        </svg>
-
-                                        <span className="flex-1 ms-3 whitespace-nowrap">Historial de Apertura </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" onClick={() => handleBotonClick('HistorialD')} className="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-100 hover:text-black dark:hover:bg-gray-700 group">
-                                        <svg class="w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                            <path fill-rule="evenodd" d="M9 2.2V7H4.2l.4-.5 3.9-4 .5-.3Zm2-.2v5a2 2 0 0 1-2 2H4v11c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7Z" clip-rule="evenodd" />
-                                        </svg>
+                                                <span className="flex-1 ms-3 whitespace-nowrap">Historial de Apertura </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" onClick={() => handleBotonClick('HistorialD')} className="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-100 hover:text-black dark:hover:bg-gray-700 group">
+                                                <svg class="w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                                    <path fill-rule="evenodd" d="M9 2.2V7H4.2l.4-.5 3.9-4 .5-.3Zm2-.2v5a2 2 0 0 1-2 2H4v11c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7Z" clip-rule="evenodd" />
+                                                </svg>
 
 
-                                        <span className="flex-1 ms-3 whitespace-nowrap">Historial de Denegados</span>
-                                    </a>
-                                </li>
+                                                <span className="flex-1 ms-3 whitespace-nowrap">Historial de Denegados</span>
+                                            </a>
+                                        </li>
+                                    </>
+                                )
+                                }
+                                {user?.rol == 3 && (
+                                    <>
+                                        <li>
+                                            <a href="#" onClick={() => handleBotonClick('Movimientos')} className="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-100 hover:text-black dark:hover:bg-gray-700 group">
+                                                <svg class="w-6 h-6 text-white dark:text-white group-hover:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                                    <path fill-rule="evenodd" d="M7 6a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-2v-4a3 3 0 0 0-3-3H7V6Z" clip-rule="evenodd" />
+                                                    <path fill-rule="evenodd" d="M2 11a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-7Zm7.5 1a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Z" clip-rule="evenodd" />
+                                                    <path d="M10.5 14.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z" />
+                                                </svg>
+                                                <span className="flex-1 ms-3 whitespace-nowrap">Movimientos</span>
+                                            </a>
+                                        </li>
+
                                     </>
                                 )
                                 }
@@ -321,11 +329,51 @@ export const DashboardComponent = () => {
                         {contenidoSeleccionado === 'Reportes' && <Reportes />}
                         {contenidoSeleccionado === 'Historial' && <Historial />}
                         {contenidoSeleccionado === 'HistorialD' && <HistorialD />}
-                        {contenidoSeleccionado === 'Busqueda' && <BusquedaC/>}
+                        {contenidoSeleccionado === 'Busqueda' && <BusquedaC />}
                         {/* Renderiza otros contenidos según sea necesario */}
                     </div>
                 </>
+            )
+
+            }
+            {isLoggedIn && user.rol === 4 && (
+                <>
+                    <section className='w-screen h-screen bg-red-600 flex justify-center items-center flex-col'>
+                        <header>
+                            <span className='text-3xl font-bold'>Módulo Cliente</span>
+                        </header>
+                        <main className='h-3/4 w-full bg-darkGreen flex justify-center items-center'>
+                            <div className='bg-green h-80 w-128 rounded-xl'>
+                                <div className='h-1/3 flex items-end'>
+                                <img src={ChipCard} alt="" />
+                                    <img className='text-stone-300' src={nfcLogo} alt="" />
+                                </div>
+                                <div className='h-2/3 flex justify-end items-end'>
+                                    <img className='w-44 py-5' src={Namelogo} alt="" />
+                                    <img className='h-40' src={Logo} alt="" />
+                                </div>
+                            </div>
+                        </main>
+                    </section>
+                    <div>
+                        <Dropdown
+                            arrowIcon={false}
+                            inline
+                            label={
+                                <button className='flex flex-row items-center  text-sm bg-white rounded-full focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-600'> <p className=' flex items-center text-sm bg-white rounded-full focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-600 '>{user?.name_user} - {user?.rol == 2 && (<> Asesor </>)}{user?.rol == 1 && (<> Director </>)} </p><HiUserCircle color='gray' className='w-16 h-10 ' />  </button>
+                            }
+                        >
+                            <Dropdown.Header>
+                                <span className="block text-sm">{user?.name_user}</span>
+                                <span className="block truncate text-sm font-medium">{user?.name_user}@ClarBank.com</span>
+                            </Dropdown.Header>
+                            <Dropdown.Divider />
+                            <Dropdown.Item onClick={handlelogout}>Salir</Dropdown.Item>
+                        </Dropdown>
+                    </div>
+                </>
             )}
+
 
         </>
     )

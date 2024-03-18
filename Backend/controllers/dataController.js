@@ -299,35 +299,22 @@ const Estado = async (req, res) => {
   }
 };
 
-const DelateUser = async (req , res ) => {
+const getDetalle = async(req, res) =>{
   try {
-    const userId = req.params.userId;
 
-    const result2 = await pool.query(`
-    UPDATE DetalleProducto
-    SET responsable = NULL
-    WHERE responsable = ${userId}
-    `) 
+    const result = await pool.query('SELECT * FROM detalleproducto')
 
-    // Buscar el usuario por su ID
-  const result = await pool.query(
-    
-    `DELETE  FROM public.usuarios
-    WHERE ID_Usuario = ${userId};`
-  ) 
+    if (result.rows.length > 0) {
+      return res.status(200).json({ result });
+    }
 
-    // Enviar una respuesta de éxito
-    res.status(200).json({ message: 'Usuario eliminado correctamente' });
-} catch (error) {
-    // Si ocurre algún error, enviar una respuesta de error con el mensaje
-    console.error('Error al eliminar usuario:', error);
-    res.status(500).json({ message: 'Error al eliminar usuario' });
-}
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 module.exports = {
   loginUser,
-  DelateUser,
   user,
   getPendiente,
   getAutorizado,
@@ -335,6 +322,7 @@ module.exports = {
   AddUser,
   UpdateUser,
   AddFormData,
-  Estado
+  Estado,
+  getDetalle
 }
 
