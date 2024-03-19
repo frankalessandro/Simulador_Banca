@@ -1368,10 +1368,7 @@ o ganadero, por favor diligencie la siguiente información.</label>
                         ¿Cuál(es) de las siguientes operaciones realiza en moneda extranjera?:
                       </label>
                       <select id="opciones" {...register("opciones10",{
-                        required: {
-                          value: true,
-                          message:'Campo requerido'
-                        }
+                       
                       })} defaultValue={getform.opciones10} name="opciones10" className="rounded-md border-gray-300 focus:ring-green focus:border-green w-52 p-2">
                         <option Value="">Seleccionar</option>
                         <option Value="EI">Exportador e importador</option>
@@ -1389,10 +1386,7 @@ o ganadero, por favor diligencie la siguiente información.</label>
                     <div className="flex flex-col w-52 justify-end">
                       <p>Nombre de la entidad</p>
                       <input type="text" {...register("NombreEn",{
-                        required: {
-                          value: true,
-                          message:'Campo requerido'
-                        }, minLength: {
+                        minLength: {
                           value: 3,
                           message:'Minimo 3 letras'
                         },
@@ -1409,10 +1403,7 @@ o ganadero, por favor diligencie la siguiente información.</label>
                         ¿Realiza operaciones en moneda extranjera?:
                       </label>
                       <select id="opciones"{...register("opciones11",{
-                        required: {
-                          value: true,
-                          message:'Campo requerido'
-                        }
+                       
                       })} defaultValue={getform.opciones11} name="opciones11" className="rounded-md border-gray-300 focus:ring-green focus:border-green w-52 p-2">
                         <option Value="">Seleccionar</option>
                         <option Value="prestamos">Préstamos</option>
@@ -1426,10 +1417,7 @@ o ganadero, por favor diligencie la siguiente información.</label>
                     <div className="flex flex-col w-52 justify-end">
                       <p>N° de producto</p>
                       <input type="number"  {...register("NProducto",{
-                        required: {
-                          value: true,
-                          message:'Campo requerido'
-                        }, minLength: {
+                         minLength: {
                           value: 1,
                           message:'Minimo 1 numeros'
                         },
@@ -1444,10 +1432,7 @@ o ganadero, por favor diligencie la siguiente información.</label>
                     <div className="flex flex-col w-52 justify-end">
                       <p>Monto mensual promedio</p>
                       <input type="number" {...register("MontoMP",{
-                        required: {
-                          value: true,
-                          message:'Campo requerido'
-                        }, minLength: {
+                         minLength: {
                           value: 1,
                           message:'Minimo 1 numeros'
                         },
@@ -1466,10 +1451,7 @@ o ganadero, por favor diligencie la siguiente información.</label>
                           value:/^[A-Za-z]+$/i,
                           message:'Digita solo letras'
                          },
-                        required: {
-                          value: true,
-                          message:'Campo requerido'
-                        }, minLength: {
+                         minLength: {
                           value: 1,
                           message:'Minimo 1 letras'
                         },
@@ -1488,10 +1470,7 @@ o ganadero, por favor diligencie la siguiente información.</label>
                           value:/^[A-Za-z]+$/i,
                           message:'Digita solo letras'
                          },
-                        required: {
-                          value: true,
-                          message:'Campo requerido'
-                        }, minLength: {
+                         minLength: {
                           value: 1,
                           message:'Minimo 1 letras'
                         },
@@ -1510,10 +1489,7 @@ o ganadero, por favor diligencie la siguiente información.</label>
                           value:/^[A-Za-z]+$/i,
                           message:'Digita solo letras'
                          },
-                        required: {
-                          value: true,
-                          message:'Campo requerido'
-                        }, minLength: {
+                        minLength: {
                           value: 1,
                           message:'Minimo 1 letras'
                         },

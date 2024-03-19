@@ -321,7 +321,7 @@ export const DashboardComponent = () => {
                         {contenidoSeleccionado === 'Reportes' && <Reportes />}
                         {contenidoSeleccionado === 'Historial' && <Historial />}
                         {contenidoSeleccionado === 'HistorialD' && <HistorialD />}
-                        {contenidoSeleccionado === 'Busqueda' && <BusquedaC/>}
+                        {contenidoSeleccionado === 'Busqueda' && <BusquedaC /> }
                         {/* Renderiza otros contenidos según sea necesario */}
                     </div>
                 </>

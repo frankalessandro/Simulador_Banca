@@ -22,6 +22,8 @@ export const Reportes = () => {
     }, []);
     console.log(infouser)
 
+    
+
     useEffect(() => {
         // Verifica si hay datos en infouser antes de crear el gráfico
         const filteredUsers = infouser.filter(user => user.rol === 2);
