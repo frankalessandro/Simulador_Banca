@@ -33,7 +33,8 @@ export const ModalBusqueda = ({showModal,closeModal, data}) => {
         }
     }, [formData, setValue]);
     
- console.log(data);
+
+ console.log(data)
     return (
         <>
    
