@@ -154,7 +154,7 @@ WHERE
     c.Estado = 'Autorizado';
     `);
 
-    console.log(result);
+    
 
     if (result.rows.length > 0) {
       return res.status(200).json({ result });
@@ -253,6 +253,8 @@ const AddFormData = async (req, res) => {
   const id = req.params.id;
   
   try {
+    // Formulario-----------------------------------------------------------------------------------------------------------------
+
     // Asegúrate de que los nombres de las propiedades en formData coincidan con los nombres de las columnas en la tabla
     const { Nombre, Apellido1, Apellido2, opciones1, NDocumento, FechaE, LugarE, FechaN, CiudadN, opciones2, opciones3, Nacionalidad, DireccionR, BloqueTorre, AptoCasa, Barrio, Municipio, Departamento, Pais, Telefono, Celular, CorreoE, Profesion, opciones4, ActiEcoP, CodigoCIUU, NumeroEm, NombreEm, DireccionEm, BarrioEm, MunicipioEm, DepartamentoEm, PaisEm, TelefonoEm, Ext, CelularEm, CorreoEm, IngresosM, OIngresosM, TotalAc, Totalpa, DetalleOIM, TotalIn, VentasA, FechaCV, opciones5, opciones6, opciones7, opciones8, NumeroT, PaisT, Idtributario, FondosP, PaisFondos, CiudadFondos, opciones9, opciones10, NombreEn, opciones11, NProducto, MontoMP, Moneda, CiudadO, PaisOP } = formData;
     // Construye la consulta de inserción
@@ -262,18 +264,30 @@ const AddFormData = async (req, res) => {
     const insertValues = [Nombre, Apellido1, Apellido2, opciones1, NDocumento, FechaE, LugarE, FechaN, CiudadN, opciones2, opciones3, Nacionalidad, DireccionR, BloqueTorre, AptoCasa, Barrio, Municipio, Departamento, Pais, Telefono, Celular, CorreoE, Profesion, opciones4, ActiEcoP, CodigoCIUU, NumeroEm, NombreEm, DireccionEm, BarrioEm, MunicipioEm, DepartamentoEm, PaisEm, TelefonoEm, Ext, CelularEm, CorreoEm, IngresosM, OIngresosM, TotalAc, Totalpa, DetalleOIM, TotalIn, VentasA, FechaCV, opciones5, opciones6, opciones7, opciones8, NumeroT, PaisT, Idtributario, FondosP, PaisFondos, CiudadFondos, opciones9, opciones10, NombreEn, opciones11, NProducto, MontoMP, Moneda, CiudadO, PaisOP];
     const resultFormPersonNatural = await pool.query(insertQuery, insertValues);
     // Segunda inserción en la tabla cliente utilizando el ID obtenido
-    const insertQueryCliente = `
 
-    
-    INSERT INTO cliente (Tipo_de_Cliente, Estado)
+    // Tabla cliente-------------------------------------------------------------------------------------------------------------
+
+    const insertQueryCliente = `    
+    INSERT INTO cliente (Tipo_de_Cliente, Saldo, Estado)
     VALUES ($1, $2)
-    
-
     `;
     // Asegúrate de proporcionar los valores en el orden correcto
-    const insertValuesCliente = ["Natural", "Pendiente"];
+    const insertValuesCliente = ["Natural", 0,"Pendiente"];
     // Realiza la inserción en la tabla cliente
     const resultCliente = await pool.query(insertQueryCliente, insertValuesCliente);
+
+  // Creacion usuario cliente---------------------------------------------------------------------------------------------------
+
+    const insertQueryUsuario = `    
+    INSERT INTO usuarios (name_user, password, rol, estado)
+    VALUES ($1, $2, $3, $4)
+    `
+    let insertValuesUsuario = [NDocumento, NDocumento, 4, "Activo"]
+
+    const resultUsuario = await pool.query(insertQueryUsuario, insertValuesUsuario);
+
+
+  // Detalle---------------------------------------------------------------------------------------------------------------------
 
     const currentDate = new Date();
     const dia = currentDate.getDate();
@@ -289,7 +303,8 @@ const AddFormData = async (req, res) => {
   `;
   const insertValuesDetalle = [1, id, fechaFormateada];
   const resultDetalle = await pool.query(insertQueryDetalle, insertValuesDetalle);
-    res.status(201).json({ message: 'Datos insertados exitosamente', data: resultFormPersonNatural, resultCliente, resultDetalle });
+
+    res.status(201).json({ message: 'Datos insertados exitosamente', data: resultFormPersonNatural, resultCliente, resultUsuario ,resultDetalle });
 
   } catch (error) {
     console.error('Error al insertar datos:', error);
