@@ -1,3 +1,6 @@
+//77vRdnArGcY4teHo
+
+
 CREATE TABLE cliente (
     ID_Cliente serial PRIMARY KEY,
     inf_cliente serial,
@@ -141,16 +144,16 @@ add foreign key (inf_cliente) references FormPersonNatural(ID_FormPN);
 -- Insertar datos en la tabla Rol
 INSERT INTO Rol (ID_Rol, Nombre, Estado) VALUES
 (1, 'Director', 'Activo'),
-(2, 'Asesor', 'Activo');
-(3, 'Cajero', 'Activo');
+(2, 'Asesor', 'Activo'),
+(3, 'Cajero', 'Activo'),
 (3, 'Cliente', 'Activo');
 
 
 -- Insertar datos en la tabla usuarios
 INSERT INTO usuarios ( Name_User, Password, Rol, Estado) VALUES
 ('admin', 'admin', 1, 'Activo'),
-('asesor', 'asesor', 2, 'Activo');
-('cajero', 'cajero', 3, 'Activo');
+('asesor', 'asesor', 2, 'Activo'),
+('cajero', 'cajero', 3, 'Activo'),
 ('cliente', 'cliente', 4, 'Activo');
 
 -- Insertar datos en la tabla tipoproducto
@@ -158,8 +161,8 @@ INSERT INTO tipoproducto (Descripcion) VALUES
 ('Cuenta de Ahorros');
 
 -- Insertar datos en la tabla producto
-INSERT INTO producto (Estado, Tipo, Asignado) VALUES
-('Activo', 1, 2); 
+INSERT INTO producto (Estado, Tipo) VALUES
+('Activo', 1); 
 select * from usuarios;
 
 SELECT c.ID_Cliente, fpn.IP_primerNombre AS Nombre, c.Estado AS EstadoCliente, p.ID_Producto AS Producto, dp.N_Cuenta
