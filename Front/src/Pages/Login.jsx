@@ -35,7 +35,7 @@ export default function Login() {
                 // Ejemplo: setDatauser(prevData => [...prevData, data.updatedClient]);
                 // alert('Autorización exitosa')
                 // Redirige a la página '/DashBoardMenu' después de procesar la respuesta
-                window.location = "/DashboardMenu";
+                window.location.href = "/DashboardMenu";
             }, 2000);
             
             setIsLoggedIn(true);

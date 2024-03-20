@@ -4,9 +4,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 export const AutorizacionCuentas = () => {
 
-
-
-console.log(supabase)
     const [datauser, setdatauser] = useState([]);
 
     useEffect(() => {
