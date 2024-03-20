@@ -1,8 +1,8 @@
 {
-  "name": "bikenode",
+  "name": "clarbank-node",
   "version": "1.0.0",
   "description": "Proyecto de BackEnd de NodeJS",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

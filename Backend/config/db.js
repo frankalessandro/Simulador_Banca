@@ -1,9 +1,9 @@
 const CONFIG_BD = {
-    user: 'postgres',
-    host: 'localhost',
-    database: 'ClarBank',
-    password: 'admin',
-    port: 5432 //Puerto predeterminado de PostgreSQL
+    user: DB_USER = process.env.DB_USER || 'postgres',
+    host: DB_HOST = process.env.DB_HOST || 'localhost',
+    database: DB_DATABASE = process.env.DB_DATABASE || 'ClarBank',
+    password: DB_PASSWORD = process.env.DB_PASSWORD || 'admin',
+    port: DB_PORT = process.env.DB_PORT || 5432 //Puerto predeterminado de PostgreSQL
 }
 
 module.exports = {
