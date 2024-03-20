@@ -12,7 +12,7 @@ console.log(supabase)
     useEffect(() => {
         const fecthData = async () => {
             try {
-                const response = await fetch('http://localhost:3000/getclienteP');
+                const response = await fetch('${URL}/getclienteP');
                 if (!response.ok) {
                     throw new Error('Network response was not ok')
                 }
@@ -38,7 +38,7 @@ console.log(supabase)
         console.log(id);
         try {
             // Realiza una solicitud al servidor para cambiar el estado del cliente con el ID proporcionado
-            fetch(`http://localhost:3000/Estado/${id}`, {
+            fetch(`${URL}/Estado/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ console.log(supabase)
         console.log(id)
         try {
             // Realiza una solicitud al servidor para cambiar el estado del cliente con el ID proporcionado
-            fetch(`http://localhost:3000/Estado/${id}`, {
+            fetch(`${URL}/Estado/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

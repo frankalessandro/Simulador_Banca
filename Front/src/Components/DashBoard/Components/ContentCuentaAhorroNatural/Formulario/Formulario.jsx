@@ -147,7 +147,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
     console.log('id:', id);
     console.log('datainfo:', datainfo);
     try {
-      const response = await fetch(`http://localhost:3000/AddFormData/${id}`, {
+      const response = await fetch(`${URL}/AddFormData/${id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
