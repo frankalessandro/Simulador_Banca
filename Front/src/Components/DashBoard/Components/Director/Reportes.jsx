@@ -6,7 +6,7 @@ export const Reportes = () => {
     useEffect(() => {
         const fecthInfo = async () => {
             try {
-                const response = await fetch('http://localhost:3000/user');
+                const response = await fetch('http://localhost:3000/getDetalle');
                 if (!response.ok) {
                     throw new Error('Network response was not ok')
                 }

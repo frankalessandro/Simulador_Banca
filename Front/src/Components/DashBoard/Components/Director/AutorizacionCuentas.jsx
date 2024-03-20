@@ -3,9 +3,11 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export const AutorizacionCuentas = () => {
+
+
+
+console.log(supabase)
     const [datauser, setdatauser] = useState([]);
-
-
 
     useEffect(() => {
         const fecthData = async () => {
@@ -22,18 +24,18 @@ export const AutorizacionCuentas = () => {
                 console.error('error al encontrar informacion')
             }
         };
-        fecthData();
+        fecthData(); 
     }, []);
 
     const estado = datauser.map(user => user.estadocliente == 'Pendiente')
 
     console.log(datauser)
-    console.log(estado)
-
+    console.log(datauser.estadoCliente)
+ 
 
 
     const autorizar = (id) => {
-        console.log(id)
+        console.log(id);
         try {
             // Realiza una solicitud al servidor para cambiar el estado del cliente con el ID proporcionado
             fetch(`http://localhost:3000/Estado/${id}`, {
@@ -84,8 +86,7 @@ export const AutorizacionCuentas = () => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    nuevoEstado: 'Denegado'
-
+                    nuevoEstado: 'Denegado',
                 }),
             })
                 .then(response => {
@@ -164,6 +165,7 @@ export const AutorizacionCuentas = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
+
                                     {datauser?.map((data) => (
 
 
