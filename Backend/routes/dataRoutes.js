@@ -12,6 +12,7 @@ router.post('/AddUser', dataController.AddUser)
 router.put('/UpdateUser/:id', dataController.UpdateUser);
 router.post('/AddFormData/:id', dataController.AddFormData);
 router.put('/Estado/:id', dataController.Estado);
-router.get('/getDetalle',dataController.getDetalle)
+router.delete('/user/:userId', dataController.DelateUser )
+router.get('/getBusqueda', dataController.getBusqueda )
 
 module.exports = router;
