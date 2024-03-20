@@ -167,3 +167,46 @@ FROM DetalleProducto dp
 JOIN cliente c ON dp.Cliente = c.ID_Cliente
 JOIN FormPersonNatural fpn ON c.inf_cliente = fpn.ID_FormPN
 JOIN producto p ON dp.Producto = p.ID_Producto;
+
+-- join  busqueda de cliente (Incompleto)
+SELECT 
+    FPN.IP_primerNombre as nombre,
+    FPN.IP_segundoNombre,
+    FPN.IP_primerApellido,
+    FPN.IP_segundoApellido,
+    FPN.AE_profesion,
+    FPN.AE_ocupacion,
+    FPN.DIF_Ingresos_mensuales,
+    FPN.DIF_Otros_ingresos,
+    FPN.IT_Declara_renta,
+    C.Saldo,
+    DP.N_Cuenta
+FROM 
+    FormPersonNatural AS FPN
+JOIN 
+    cliente AS C ON FPN.ID_FormPN = C.inf_cliente
+JOIN 
+    DetalleProducto AS DP ON C.ID_Cliente = DP.Cliente;
+
+-- Tarjeta debito cliente 
+SELECT 
+    FPN.IP_primerNombre as nombre,
+    FPN.IP_primerApellido as apellido1,
+    FPN.IP_segundoApellido as apellido2,
+    TP.Descripcion AS Nombre_Producto,
+    DP.N_Cuenta,
+    C.Saldo
+FROM 
+    usuarios AS U
+JOIN 
+    cliente AS C ON U.ID_Usuario = C.ID_Cliente
+JOIN 
+    DetalleProducto AS DP ON C.ID_Cliente = DP.Cliente
+JOIN 
+    producto AS P ON DP.producto = P.ID_Producto
+JOIN 
+    tipoproducto AS TP ON P.Tipo = TP.ID_tipo
+JOIN 
+    FormPersonNatural AS FPN ON C.inf_cliente = FPN.ID_FormPN
+WHERE 
+    U.ID_Usuario = ;
