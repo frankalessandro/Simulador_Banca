@@ -10,7 +10,7 @@ export const HistorialD = () => {
     useEffect(() => {
         const fecthData = async () => {
             try {
-                const response = await fetch('http://localhost:3000/getclienteD');
+                const response = await fetch('https://simulador-banca.onrender.com/getclienteD');
                 if (!response.ok) {
                     throw new Error('Network response was not ok')
                 }
