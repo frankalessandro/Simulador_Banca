@@ -70,7 +70,8 @@ export const DashboardComponent = () => {
 
     const [userName, setUserName] = useState(null); 
     const [userData, setUserData] = useState(null); // Variable de estado para almacenar el nombre de usuario
-
+    const [data,setdata] = useState(null)
+    
 // Efecto para guardar el nombre de usuario cuando el componente se monta
 useEffect(() => {
     // Verificar si el usuario está autenticado y obtener su nombre de usuario si es así
@@ -89,7 +90,8 @@ useEffect(() => {
                 }
                 const data = await response.json();
                 setUserData(data); // Almacenar los datos del usuario en el estado
-                console.log(data); // Mostrar los datos en la consola (opcional)
+                console.log(data);
+                setdata(userData.ip_primernombre)
             }
         } catch (error) {
             console.error('Error al obtener información:', error);
@@ -103,6 +105,8 @@ useEffect(() => {
 
 console.log(userName)
 console.log(userData)
+
+
 
     return (
         
@@ -276,7 +280,7 @@ console.log(userData)
             )
 
             }
-            {isLoggedIn && user.rol === 4 && (
+            {isLoggedIn && user.rol === 4 && userData &&(
                 <>
                     <section className='w-screen h-screen  flex justify-center items-center flex-col'>
                         <header>
@@ -306,7 +310,7 @@ console.log(userData)
                                         </div>
                                         <div className={`text-white mt-16 flex flex-col justify-end items-end px-2 `}>
                                             <p>producto</p>
-                                            <p>n cuenta</p>
+                                            <p>{userData.n_cuenta}</p>
                                             <p className='text-lg'></p>
                                         </div>
                                     </div>
