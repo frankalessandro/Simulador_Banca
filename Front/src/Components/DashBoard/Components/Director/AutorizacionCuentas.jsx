@@ -12,7 +12,7 @@ console.log(supabase)
     useEffect(() => {
         const fecthData = async () => {
             try {
-                const response = await fetch('${URL}/getclienteP');
+                const response = await fetch('https://simulador-banca.onrender.com/getclienteP');
                 if (!response.ok) {
                     throw new Error('Network response was not ok')
                 }
@@ -38,7 +38,7 @@ console.log(supabase)
         console.log(id);
         try {
             // Realiza una solicitud al servidor para cambiar el estado del cliente con el ID proporcionado
-            fetch(`${URL}/Estado/${id}`, {
+            fetch(`https://simulador-banca.onrender.com/Estado/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ console.log(supabase)
         console.log(id)
         try {
             // Realiza una solicitud al servidor para cambiar el estado del cliente con el ID proporcionado
-            fetch(`${URL}/Estado/${id}`, {
+            fetch(`https://simulador-banca.onrender.com/Estado/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

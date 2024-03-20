@@ -84,7 +84,7 @@ useEffect(() => {
         try {
             // Verificar que se haya almacenado el nombre de usuario en el estado
             if (userName) {
-                const response = await fetch(`${URL}/getcliente/${userName}`);
+                const response = await fetch(`https://simulador-banca.onrender.com/getcliente/${userName}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }

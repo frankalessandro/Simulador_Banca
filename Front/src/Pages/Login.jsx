@@ -18,7 +18,7 @@ export default function Login() {
     const inisesion = async (data) => {
         console.log(data);
         try {
-          const response = await fetch('${URL}/Login', {
+          const response = await fetch(`https://simulador-banca.onrender.com/Login`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

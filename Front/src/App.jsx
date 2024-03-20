@@ -7,10 +7,10 @@ import Login from './Pages/Login';
 import { CrearUsuario } from './Components/DashBoard/Components/Director/CrearUsuario';
 import { AutorizacionCuentas } from './Components/DashBoard/Components/Director/AutorizacionCuentas';
 
-const URL = import.meta.env.VITE_BACKEND_URL || 'https://simulador-banca.onrender.com/';
 
 export default function MyPage() {
 
+   const URL = import.meta.env.VITE_BACKEND_URL || 'https://simulador-banca.onrender.com/';
    return (
       <Router>
          <Routes>

@@ -17,7 +17,7 @@ export const CrearUsuario = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('${URL}/user');
+                const response = await fetch('https://simulador-banca.onrender.com/user');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -45,7 +45,7 @@ export const CrearUsuario = () => {
 
     const AddUser = async (data) => {
         try {
-            const response = await fetch('${URL}/AddUser', {
+            const response = await fetch('https://simulador-banca.onrender.com/AddUser', {
                 method: 'POST',
                 headers: {
                     "Content-type": "application/json"
@@ -109,7 +109,7 @@ export const CrearUsuario = () => {
 
         console.log(userId)
         try {
-            const response = await fetch(`${URL}/user/${userId}`, {
+            const response = await fetch(`https://simulador-banca.onrender.com/user/${userId}`, {
                 method: 'DELETE',
             });
 

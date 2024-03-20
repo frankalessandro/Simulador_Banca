@@ -147,7 +147,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
     console.log('id:', id);
     console.log('datainfo:', datainfo);
     try {
-      const response = await fetch(`${URL}/AddFormData/${id}`, {
+      const response = await fetch(`https://simulador-banca.onrender.com/AddFormData/${id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
