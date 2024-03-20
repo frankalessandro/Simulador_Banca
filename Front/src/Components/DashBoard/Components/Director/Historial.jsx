@@ -66,7 +66,7 @@ export const Historial = () => {
         const fechaFinTime = fechaFin ? new Date(fechaFin).getTime() : Number.MAX_SAFE_INTEGER;
         
         const fechaMatch = fechaData >= fechaInicioTime && fechaData <= fechaFinTime;
-        return documentoMatch && fechaMatch;
+        return  fechaMatch;
     });
 
 

@@ -17,6 +17,7 @@ import { HistorialD } from './Components/Director/HistorialD'
 import { BusquedaC } from './Components/BusquedaC'
 import nfcLogo from '../../assets/Img/Client/nfcLogo.svg'
 import ChipCard from '../../assets/Img/Client/ChipCard.svg'
+import { Movimientos } from './Components/Cajero/Movimientos'
 
 
 
@@ -267,7 +268,8 @@ console.log(userData)
                         {contenidoSeleccionado === 'Reportes' && <Reportes />}
                         {contenidoSeleccionado === 'Historial' && <Historial />}
                         {contenidoSeleccionado === 'HistorialD' && <HistorialD />}
-                        {contenidoSeleccionado === 'Busqueda' && <BusquedaC />}
+                        {contenidoSeleccionado === 'Busqueda' && <BusquedaC /> }
+                        {contenidoSeleccionado === 'Movimientos' && <Movimientos /> }
                         {/* Renderiza otros contenidos según sea necesario */}
                     </div>
                 </>

@@ -95,6 +95,43 @@ FROM
     return res.status(500).json({ error: 'Error interno del servidor.' });
   }
 }
+const getBusqueda = async (req, res) => {
+  try {
+
+    const result = await pool.query(`
+    SELECT
+    c.ID_Cliente,
+    fpn.IP_primerNombre AS Nombre,
+    fpn.IP_primerApellido AS PrimerApellido,
+    fpn.IP_segundoApellido AS SegundoApellido,
+    fpn.IP_fechaNacimiento AS FechaNacimiento,
+    fpn.IP_ciudadNac AS CiudadNacimiento,
+    fpn.IP_estadoCivil AS EstadoCivil,
+    fpn.IP_nacionalidad AS Nacionalidad,
+    fpn.IP_documento,
+    c.Estado AS EstadoCliente,
+    tp.Descripcion AS Producto,
+    dp.N_Cuenta,
+    dp.fecha
+FROM
+    DetalleProducto dp
+    JOIN cliente c ON dp.Cliente = c.ID_Cliente
+    JOIN FormPersonNatural fpn ON c.inf_cliente = fpn.ID_FormPN
+    JOIN producto p ON dp.Producto = p.ID_Producto
+    JOIN tipoproducto tp ON p.Tipo = tp.ID_tipo;
+
+    `);
+
+    if (result.rows.length > 0) {
+      return res.status(200).json({ result });
+    } else {
+      return res.status(404).json({ message: 'No se encontraron resultados.' });
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Error interno del servidor.' });
+  }
+}
 const getAutorizado = async (req, res) => {
   try {
 
@@ -219,12 +256,12 @@ const AddFormData = async (req, res) => {
     // Formulario-----------------------------------------------------------------------------------------------------------------
 
     // Asegúrate de que los nombres de las propiedades en formData coincidan con los nombres de las columnas en la tabla
-    const { Nombre, Apellido1, Apellido2, opcines1, NDocumento, FechaE, LugarE, FechaN, CiudadN, opcines2, opcines3, Nacionalidad, DireccionR, BloqueTorre, AptoCasa, Barrio, Municipio, Departamento, Pais, Telefono, Celular, CorreoE, Profesion, opcines4, ActiEcoP, CodigoCIUU, NumeroEm, NombreEm, DireccionEm, BarrioEm, MunicipioEm, DepartamentoEm, PaisEm, TelefonoEm, Ext, CelularEm, CorreoEm, IngresosM, OIngresosM, TotalAc, Totalpa, DetalleOIM, TotalIn, VentasA, FechaCV, opcines5, opcines6, opcines7, opcines8, NumeroT, PaisT, Idtributario, FondosP, PaisFondos, CiudadFondos, opcines9, opcines10, NombreEn, opcines11, NProducto, MontoMP, Moneda, CiudadO, PaisOP } = formData;
+    const { Nombre, Apellido1, Apellido2, opciones1, NDocumento, FechaE, LugarE, FechaN, CiudadN, opciones2, opciones3, Nacionalidad, DireccionR, BloqueTorre, AptoCasa, Barrio, Municipio, Departamento, Pais, Telefono, Celular, CorreoE, Profesion, opciones4, ActiEcoP, CodigoCIUU, NumeroEm, NombreEm, DireccionEm, BarrioEm, MunicipioEm, DepartamentoEm, PaisEm, TelefonoEm, Ext, CelularEm, CorreoEm, IngresosM, OIngresosM, TotalAc, Totalpa, DetalleOIM, TotalIn, VentasA, FechaCV, opciones5, opciones6, opciones7, opciones8, NumeroT, PaisT, Idtributario, FondosP, PaisFondos, CiudadFondos, opciones9, opciones10, NombreEn, opciones11, NProducto, MontoMP, Moneda, CiudadO, PaisOP } = formData;
     // Construye la consulta de inserción
     const insertQuery = `INSERT INTO FormPersonNatural (IP_primerNombre, IP_primerApellido, IP_segundoApellido, IP_tipoDoc, IP_documento, IP_fechaExpedicion, IP_lugarExpedicion, IP_fechaNacimiento, IP_ciudadNac, IP_genero, IP_estadoCivil, IP_nacionalidad, ICP_direcResidencia, ICP_bloque_torre, ICP_apto_casa, ICP_barrio, ICP_ciudad_municipio, ICP_departamento, ICP_pais, ICP_telefono, ICP_celular, ICP_email, AE_profesion, AE_ocupacion, AE_detalle_act, AE_cod_ciiu, AE_n_empleados, IL_Nombre_Empresa, IL_Direc_empresa, IL_barrio, IL_Ciudad_Municipio, IL_Departamento, IL_Pais, IL_Telefono, IL_EXT, IL_celular, IL_Email_laboral, DIF_Ingresos_mensuales, DIF_Otros_ingresos, DIF_Detalle_Otros_ingresos, DIF_Total_Activos, DIF_Total_Pasivos, DIF_Total_egresos_mensuales, DIF_Ventas_anuales, DIF_Fec_cierre_ventas, IT_Declara_renta, IT_Age_retenedor, IT_Regimen_iva, IT_Tributo_EEUU, IT_id_tributo_eeuu, IT_Tributo_otro_pais, IT_id_otro_pais, IT_Origen_Bienes, IT_Pais_origen, IT_Ciudad_origen, IOIN_Moneda_extranjera, IOIN_Tipos_ope, IOIN_Nombre_entidad, IOIN_Tipo_produc, IOIN_N_produc, IOIN_Monto_mensual_promedio, IOIN_Moneda, IOIN_Ciudad, IOIN_Pais )
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40, $41, $42, $43, $44, $45, $46, $47, $48, $49, $50, $51, $52, $53, $54, $55, $56, $57, $58, $59, $60, $61, $62, $63, $64) ;`;
     // Asegúrate de proporcionar los valores en el orden correcto
-    const insertValues = [Nombre, Apellido1, Apellido2, opcines1, NDocumento, FechaE, LugarE, FechaN, CiudadN, opcines2, opcines3, Nacionalidad, DireccionR, BloqueTorre, AptoCasa, Barrio, Municipio, Departamento, Pais, Telefono, Celular, CorreoE, Profesion, opcines4, ActiEcoP, CodigoCIUU, NumeroEm, NombreEm, DireccionEm, BarrioEm, MunicipioEm, DepartamentoEm, PaisEm, TelefonoEm, Ext, CelularEm, CorreoEm, IngresosM, OIngresosM, TotalAc, Totalpa, DetalleOIM, TotalIn, VentasA, FechaCV, opcines5, opcines6, opcines7, opcines8, NumeroT, PaisT, Idtributario, FondosP, PaisFondos, CiudadFondos, opcines9, opcines10, NombreEn, opcines11, NProducto, MontoMP, Moneda, CiudadO, PaisOP];
+    const insertValues = [Nombre, Apellido1, Apellido2, opciones1, NDocumento, FechaE, LugarE, FechaN, CiudadN, opciones2, opciones3, Nacionalidad, DireccionR, BloqueTorre, AptoCasa, Barrio, Municipio, Departamento, Pais, Telefono, Celular, CorreoE, Profesion, opciones4, ActiEcoP, CodigoCIUU, NumeroEm, NombreEm, DireccionEm, BarrioEm, MunicipioEm, DepartamentoEm, PaisEm, TelefonoEm, Ext, CelularEm, CorreoEm, IngresosM, OIngresosM, TotalAc, Totalpa, DetalleOIM, TotalIn, VentasA, FechaCV, opciones5, opciones6, opciones7, opciones8, NumeroT, PaisT, Idtributario, FondosP, PaisFondos, CiudadFondos, opciones9, opciones10, NombreEn, opciones11, NProducto, MontoMP, Moneda, CiudadO, PaisOP];
     const resultFormPersonNatural = await pool.query(insertQuery, insertValues);
     // Segunda inserción en la tabla cliente utilizando el ID obtenido
 
@@ -361,6 +398,7 @@ module.exports = {
   AddFormData,
   Estado,
   getDetalle, 
-  getcliente
+  getcliente,
+  getBusqueda
 }
 
