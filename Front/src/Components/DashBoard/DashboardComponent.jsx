@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Logo from '../../assets/Img/Logos/ClarBank LogoOnly.svg'
 import { ContentCuentaAhorroJuridica } from './Components/ContentCuentaAhorroJuridica/ContentCuentaAhorroJuridica'
 import { ContentCuentaAhorroNatural } from './Components/ContentCuentaAhorroNatural/ContentCuentaAhorroNatural'
@@ -20,7 +20,24 @@ import ChipCard from '../../assets/Img/Client/ChipCard.svg'
 
 
 
+
+
 export const DashboardComponent = () => {
+
+    const [flipped, setFlipped] = useState(false);
+
+    const handleMouseEnter = () => {
+        setTimeout(() => {
+            setFlipped(true);
+        }, 400); // Retraso de 1000 milisegundos (1 segundo)
+    };
+
+    const handleMouseLeave = () => {
+        setTimeout(() => {
+            setFlipped(false);
+        }, 400); // Retraso de 1000 milisegundos (1 segundo)
+    };
+
 
 
     const [active, setactive] = useState("fixed top-0 left-0 z-40 w-64 shadow-lg h-screen pt-20 transition-transform -translate-x-full bg-green border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700")
@@ -49,8 +66,48 @@ export const DashboardComponent = () => {
         logout()
     }
 
+
+    const [userName, setUserName] = useState(null); 
+    const [userData, setUserData] = useState(null); // Variable de estado para almacenar el nombre de usuario
+
+// Efecto para guardar el nombre de usuario cuando el componente se monta
+useEffect(() => {
+    // Verificar si el usuario está autenticado y obtener su nombre de usuario si es así
+    if (isLoggedIn && user) {
+        setUserName(user.name_user); // Almacenar el nombre de usuario en el estado
+         // Mostrar el nombre de usuario en la consola
+    }
+
+    const fetchData = async () => {
+        try {
+            // Verificar que se haya almacenado el nombre de usuario en el estado
+            if (userName) {
+                const response = await fetch(`http://localhost:3000/getcliente/${userName}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                setUserData(data); // Almacenar los datos del usuario en el estado
+                console.log(data); // Mostrar los datos en la consola (opcional)
+            }
+        } catch (error) {
+            console.error('Error al obtener información:', error);
+        }
+    };
+
+    // Llamar a la función fetchData si el nombre de usuario está disponible
+    fetchData(); 
+
+}, [isLoggedIn, user, userName]); // Agregar userName como dependencia del efecto
+
+console.log(userName)
+console.log(userData)
+
     return (
+        
         <>
+      
+        
             {isLoggedIn && user.rol !== 4 && (
                 <>
                     <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
@@ -127,125 +184,6 @@ export const DashboardComponent = () => {
                                     </Sidebar.Collapse>
                                     <Sidebar.Item onClick={() => handleBotonClick('Busqueda')} class=" flex items-center justify-start p-2 text-white w-full rounded-lg hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">{<p className='flex justify-start items-center relative right-5'><HiUser color='white || black' className='flex   items-center justify-start h-5 w-12' />Busqueda de Cuentas</p>}</Sidebar.Item>
 
-
-
-
-
-                                    {/* <li>
-
-                                        <button type="button" className="flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group hover:bg-gray-100 hover:text-black dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
-                                            <svg className="flex-shrink-0 w-5 h-5 text-white transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 21">
-                                                <path d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z" />
-                                            </svg>
-                                            <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Apertura de Cuentas</span>
-                                            <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
-                                            </svg>
-                                        </button>
-
-                                        <ul id="dropdown-example" className="hidden py-2 space-y-2 pl-4">
-                                            <li>
-                                                <button type="button" className="flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group hover:bg-gray-100 hover:text-black dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-cuentahorro" data-collapse-toggle="dropdown-cuentahorro">
-                                                    <svg className="flex-shrink-0 w-6 h-6 text-white transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path fillRule="evenodd" d="M12 14a3 3 0 0 1 3-3h4a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-4a3 3 0 0 1-3-3Zm3-1a1 1 0 1 0 0 2h4v-2h-4Z" clipRule="evenodd" />
-                                                        <path fillRule="evenodd" d="M12.3 3.3a1 1 0 0 1 1.4 0L16.4 6h-2.8l-1.3-1.3a1 1 0 0 1 0-1.4Zm.1 2.7L9.7 3.3a1 1 0 0 0-1.4 0L5.6 6h6.8ZM4.6 7A2 2 0 0 0 3 9v10c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2h-4a5 5 0 0 1 0-10h4a2 2 0 0 0-1.5-2h-13Z" clipRule="evenodd" />
-                                                    </svg>
-
-                                                    <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Cuenta de Ahorro</span>
-                                                    <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
-                                                    </svg>
-                                                </button>
-                                                <ul id="dropdown-cuentahorro" className="hidden py-2 space-y-2 pl-6">
-                                    <li>
-                                        <button type="button" onClick={() => handleBotonClick('FormularioPersonaNatural')} class="flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group hover:text-black hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-                                            <svg className="w-6 h-6 text-white dark:text-white transition duration-75 group-hover:text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                                <path fillRule="evenodd" d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z" clipRule="evenodd" />
-                                            </svg>
-                                            <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Persona Natural</span>
-                                        </button>
-                                    </li> 
-                                                     <li>
-                                                        <button type="button" onClick={() => handleBotonClick('FormularioPersonaJuridica')} class="flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group  hover:bg-gray-100 hover:text-black dark:text-white dark:hover:bg-gray-700">
-                                                            <svg className="w-6 h-6 text-white dark:text-white transition duration-75 group-hover:text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                                                <path fillRule="evenodd" d="M12 6a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Zm-1.5 8a4 4 0 0 0-4 4c0 1.1.9 2 2 2h7a2 2 0 0 0 2-2 4 4 0 0 0-4-4h-3Zm6.8-3.1a5.5 5.5 0 0 0-2.8-6.3c.6-.4 1.3-.6 2-.6a3.5 3.5 0 0 1 .8 6.9Zm2.2 7.1h.5a2 2 0 0 0 2-2 4 4 0 0 0-4-4h-1.1l-.5.8c1.9 1 3.1 3 3.1 5.2ZM4 7.5a3.5 3.5 0 0 1 5.5-2.9A5.5 5.5 0 0 0 6.7 11 3.5 3.5 0 0 1 4 7.5ZM7.1 12H6a4 4 0 0 0-4 4c0 1.1.9 2 2 2h.5a6 6 0 0 1 3-5.2l-.4-.8Z" clipRule="evenodd" />
-                                                            </svg>
-                                                            <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Persona Juridica</span>
-                                                        </button>
-                                                    </li>
-                                                </ul>
-                                            </li>  */}
-
-                                    {/* <li>
-                                    <button type="button" className="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-cuentacorriente" data-collapse-toggle="dropdown-cuentacorritente">
-                                    <svg className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8H5m12 0c.6 0 1 .4 1 1v2.6M17 8l-4-4M5 8a1 1 0 0 0-1 1v10c0 .6.4 1 1 1h12c.6 0 1-.4 1-1v-2.6M5 8l4-4 4 4m6 4h-4a2 2 0 1 0 0 4h4c.6 0 1-.4 1-1v-2c0-.6-.4-1-1-1Z" />
-                                    </svg>
-                                    <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Cuenta Corriente</span>
-                                    <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
-                                    </svg>
-                                    </button>
-                                    <ul id="dropdown-cuentacorritente" className="hidden py-2 space-y-2">
-                                    <li>
-                                    <a href="#" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Persona Natural</a>
-                                    </li>
-                                    <li>
-                                    <a href="#" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Persona Juridica</a>
-                                    </li>
-                                    </ul>
-                                </li> */}
-                                    {/* </ul>
-                               
-                                    </li> */}
-                                    {/* <li>
-                                <a href="#" onClick={() => handleBotonClick('NoDisponible')} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                                    <svg className="w-6 h-6 text-gray-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                        <path fillRule="evenodd" d="M4 5a2 2 0 0 0-2 2v10c0 1.1.9 2 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H4Zm0 6h16v6H4v-6Z" clipRule="evenodd" />
-                                        <path fillRule="evenodd" d="M5 14c0-.6.4-1 1-1h2a1 1 0 1 1 0 2H6a1 1 0 0 1-1-1Zm5 0c0-.6.4-1 1-1h5a1 1 0 1 1 0 2h-5a1 1 0 0 1-1-1Z" clipRule="evenodd" />
-                                    </svg>
-                                    <span className="flex-1 ms-3 whitespace-nowrap">Tarjetas de Crédito</span>
-                                </a>
-                            </li>
-                            <li>
-                                <button type="button" className="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-credit" data-collapse-toggle="dropdown-credit">
-                                    <svg className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
-                                        <path d="M17 5.923A1 1 0 0 0 16 5h-3V4a4 4 0 1 0-8 0v1H2a1 1 0 0 0-1 .923L.086 17.846A2 2 0 0 0 2.08 20h13.84a2 2 0 0 0 1.994-2.153L17 5.923ZM7 9a1 1 0 0 1-2 0V7h2v2Zm0-5a2 2 0 1 1 4 0v1H7V4Zm6 5a1 1 0 1 1-2 0V7h2v2Z" />
-                                    </svg>
-                                    <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Créditos</span>
-                                    <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
-                                    </svg>
-                                </button>
-                                <ul id="dropdown-credit" className="hidden py-2 space-y-2 pl-4">
-                                    <li>
-                                        <a href="#" onClick={() => handleBotonClick('NoDisponible')} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                                            <svg className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
-                                                <path d="M17 5.923A1 1 0 0 0 16 5h-3V4a4 4 0 1 0-8 0v1H2a1 1 0 0 0-1 .923L.086 17.846A2 2 0 0 0 2.08 20h13.84a2 2 0 0 0 1.994-2.153L17 5.923ZM7 9a1 1 0 0 1-2 0V7h2v2Zm0-5a2 2 0 1 1 4 0v1H7V4Zm6 5a1 1 0 1 1-2 0V7h2v2Z" />
-                                            </svg>
-                                            <span className="flex-1 ms-3 whitespace-nowrap">Crédito Vehículo</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" onClick={() => handleBotonClick('NoDisponible')} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                                            <svg className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
-                                                <path d="M17 5.923A1 1 0 0 0 16 5h-3V4a4 4 0 1 0-8 0v1H2a1 1 0 0 0-1 .923L.086 17.846A2 2 0 0 0 2.08 20h13.84a2 2 0 0 0 1.994-2.153L17 5.923ZM7 9a1 1 0 0 1-2 0V7h2v2Zm0-5a2 2 0 1 1 4 0v1H7V4Zm6 5a1 1 0 1 1-2 0V7h2v2Z" />
-                                            </svg>
-                                            <span className="flex-1 ms-3 whitespace-nowrap">Crédito Hogar</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#" onClick={() => handleBotonClick('NoDisponible')} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                                    <svg className="w-6 h-6 text-gray-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                        <path fillRule="evenodd" d="M7 6c0-1.1.9-2 2-2h11a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-2v-4a3 3 0 0 0-3-3H7V6Z" clipRule="evenodd" />
-                                        <path fillRule="evenodd" d="M2 11c0-1.1.9-2 2-2h11a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-7Zm7.5 1a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Z" clipRule="evenodd" />
-                                        <path d="M10.5 14.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z" />
-                                    </svg>
-                                    <span className="flex-1 ms-3 whitespace-nowrap">Inversiones</span>
-                                </a>
-                            </li> */}
                                 </>)}
                                 {user?.rol == 1 && (
                                     <>
@@ -338,22 +276,44 @@ export const DashboardComponent = () => {
             }
             {isLoggedIn && user.rol === 4 && (
                 <>
-                    <section className='w-screen h-screen bg-red-600 flex justify-center items-center flex-col'>
+                    <section className='w-screen h-screen  flex justify-center items-center flex-col'>
                         <header>
                             <span className='text-3xl font-bold'>Módulo Cliente</span>
                         </header>
-                        <main className='h-3/4 w-full bg-darkGreen flex justify-center items-center'>
-                            <div className='bg-green h-80 w-128 rounded-xl'>
-                                <div className='h-1/3 flex items-end'>
-                                <img src={ChipCard} alt="" />
-                                    <img className='text-stone-300' src={nfcLogo} alt="" />
+                        <main className='h-3/4 w-full bg-white flex justify-center items-center'>
+                            {/* Lado principal */}
+                            <div
+                                className={`bg-green h-80 w-128 rounded-xl relative ${flipped ? 'flip' : ''}`}
+                                onMouseEnter={handleMouseEnter}
+                                onMouseLeave={handleMouseLeave}
+                            >
+                                <div className={`h-1/3 flex items-end ${flipped ? 'hidden' : ''}`}>
+                                    <img src={ChipCard} alt="" />
+                                    <img className='text-stone-300' src={''} alt="" />
                                 </div>
-                                <div className='h-2/3 flex justify-end items-end'>
+                                <div className={`h-2/3 flex justify-end items-end ${flipped ? 'hidden' : ''}`}>
                                     <img className='w-44 py-5' src={Namelogo} alt="" />
                                     <img className='h-40' src={Logo} alt="" />
                                 </div>
+
+                                <div className={`h-12 mt-8 bg-emerald-700 ${flipped ? '' : 'hidden'}`}>
+                                    {/* Contenido en el reverso de la tarjeta */}
+                                    <div className="flip-content">
+                                        <div className={`text-white pt-12 flex justify-center text-4xl `}>
+                                            <p>$2000000</p>
+                                        </div>
+                                        <div className={`text-white mt-16 flex flex-col justify-end items-end px-2 `}>
+                                            <p>producto</p>
+                                            <p>n cuenta</p>
+                                            <p className='text-lg'></p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </main>
+
+
+
                     </section>
                     <div>
                         <Dropdown

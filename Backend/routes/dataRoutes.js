@@ -13,5 +13,6 @@ router.put('/UpdateUser/:id', dataController.UpdateUser);
 router.post('/AddFormData/:id', dataController.AddFormData);
 router.put('/Estado/:id', dataController.Estado);
 router.get('/getDetalle',dataController.getDetalle)
+router.get('/getcliente/:userName', dataController.getcliente);
 
 module.exports = router;

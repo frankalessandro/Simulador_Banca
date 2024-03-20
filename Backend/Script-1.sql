@@ -187,3 +187,26 @@ JOIN
     cliente AS C ON FPN.ID_FormPN = C.inf_cliente
 JOIN 
     DetalleProducto AS DP ON C.ID_Cliente = DP.Cliente;
+
+-- Tarjeta debito cliente 
+SELECT 
+    FPN.IP_primerNombre as nombre,
+    FPN.IP_primerApellido as apellido1,
+    FPN.IP_segundoApellido as apellido2,
+    TP.Descripcion AS Nombre_Producto,
+    DP.N_Cuenta,
+    C.Saldo
+FROM 
+    usuarios AS U
+JOIN 
+    cliente AS C ON U.ID_Usuario = C.ID_Cliente
+JOIN 
+    DetalleProducto AS DP ON C.ID_Cliente = DP.Cliente
+JOIN 
+    producto AS P ON DP.producto = P.ID_Producto
+JOIN 
+    tipoproducto AS TP ON P.Tipo = TP.ID_tipo
+JOIN 
+    FormPersonNatural AS FPN ON C.inf_cliente = FPN.ID_FormPN
+WHERE 
+    U.ID_Usuario = ;
