@@ -14,8 +14,9 @@ router.post('/AddFormData/:id', dataController.AddFormData);
 router.put('/Estado/:id', dataController.Estado);
 router.get('/getDetalle',dataController.getDetalle)
 router.get('/getcliente/:userName', dataController.getcliente);
-router.delete('/user/:userId', dataController.DelateUser )
+// router.delete('/user/:userId', dataController.DelateUser )
 router.get('/getBusqueda', dataController.getBusqueda )
-
+router.get('/getInfoCliente/:accountNumberInt', dataController.getInfoCliente);
+router.put('/UpdateCliente/:id', dataController.UpdateCliente);
 
 module.exports = router;

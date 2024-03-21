@@ -96,10 +96,10 @@ CREATE TABLE FormPersonNatural (
     DIF_Ventas_anuales varchar(20),
     DIF_Fec_cierre_ventas date,
     --Información Tributaria--
-    IT_Declara_renta varchar(2),
-    IT_Age_retenedor varchar(2),
-    IT_Regimen_iva varchar(2),
-    IT_Tributo_EEUU varchar(2),
+    IT_Declara_renta varchar(12),
+    IT_Age_retenedor varchar(12),
+    IT_Regimen_iva varchar(12),
+    IT_Tributo_EEUU varchar(12),
     IT_id_tributo_eeuu varchar(20),
     IT_Tributo_otro_pais varchar(20),
     IT_id_otro_pais varchar(20),
@@ -107,7 +107,7 @@ CREATE TABLE FormPersonNatural (
     IT_Pais_origen varchar(20),
     IT_Ciudad_origen varchar(20),
     --Información Operaciónes Internacionales--
-    IOIN_Moneda_extranjera varchar(2),
+    IOIN_Moneda_extranjera varchar(12),
     IOIN_Tipos_ope varchar(20),
     IOIN_Nombre_entidad varchar(30),
     IOIN_Tipo_produc varchar(25),

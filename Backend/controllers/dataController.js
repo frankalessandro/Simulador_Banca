@@ -52,7 +52,7 @@ const loginUser = async (req, res) => {
 const user = async (req, res) => {
   try {
 
-    const result = await pool.query('SELECT * FROM usuarios ' )
+    const result = await pool.query('SELECT * FROM usuarios ')
 
     if (result.rows.length > 0) {
       return res.status(200).json({ result });
@@ -154,7 +154,7 @@ WHERE
     c.Estado = 'Autorizado';
     `);
 
-    
+
 
     if (result.rows.length > 0) {
       return res.status(200).json({ result });
@@ -245,13 +245,13 @@ const UpdateUser = async (req, res) => {
 const AddFormData = async (req, res) => {
   const formData = req.body;
 
- 
-  if(!formData.FechaCV){
+
+  if (!formData.FechaCV) {
     formData.FechaCV = null
   }
 
   const id = req.params.id;
-  
+
   try {
     // Formulario-----------------------------------------------------------------------------------------------------------------
 
@@ -269,14 +269,14 @@ const AddFormData = async (req, res) => {
 
     const insertQueryCliente = `    
     INSERT INTO cliente (Tipo_de_Cliente, Saldo, Estado)
-    VALUES ($1, $2)
+    VALUES ($1, $2, $3)
     `;
     // Asegúrate de proporcionar los valores en el orden correcto
-    const insertValuesCliente = ["Natural", 0,"Pendiente"];
+    const insertValuesCliente = ["Natural", 0, "Pendiente"];
     // Realiza la inserción en la tabla cliente
     const resultCliente = await pool.query(insertQueryCliente, insertValuesCliente);
 
-  // Creacion usuario cliente---------------------------------------------------------------------------------------------------
+    // Creacion usuario cliente---------------------------------------------------------------------------------------------------
 
     const insertQueryUsuario = `    
     INSERT INTO usuarios (name_user, password, rol, estado)
@@ -287,24 +287,24 @@ const AddFormData = async (req, res) => {
     const resultUsuario = await pool.query(insertQueryUsuario, insertValuesUsuario);
 
 
-  // Detalle---------------------------------------------------------------------------------------------------------------------
+    // Detalle---------------------------------------------------------------------------------------------------------------------
 
     const currentDate = new Date();
     const dia = currentDate.getDate();
     // Ten en cuenta que los meses en JavaScript son indexados desde 0 (enero es 0, febrero es 1, etc.)
     const mes = currentDate.getMonth() + 1;
     const anio = currentDate.getFullYear();
-  
+
     const fechaFormateada = `${anio}-${mes < 10 ? '0' + mes : mes}-${dia < 10 ? '0' + dia : dia}`;
 
-    const insertQueryDetalle= `
+    const insertQueryDetalle = `
     INSERT INTO DetalleProducto (producto, responsable, fecha)
     VALUES ($1, $2, $3)
   `;
-  const insertValuesDetalle = [1, id, fechaFormateada];
-  const resultDetalle = await pool.query(insertQueryDetalle, insertValuesDetalle);
+    const insertValuesDetalle = [1, id, fechaFormateada];
+    const resultDetalle = await pool.query(insertQueryDetalle, insertValuesDetalle);
 
-    res.status(201).json({ message: 'Datos insertados exitosamente', data: resultFormPersonNatural, resultCliente, resultUsuario ,resultDetalle });
+    res.status(201).json({ message: 'Datos insertados exitosamente', data: resultFormPersonNatural, resultCliente, resultUsuario, resultDetalle });
 
   } catch (error) {
     console.error('Error al insertar datos:', error);
@@ -317,26 +317,26 @@ const Estado = async (req, res) => {
   const estado = req.body.nuevoEstado;
 
   try {
-      // Verifica que estado esté definido antes de utilizarlo
-      if (typeof estado !== 'undefined') {
-          // Realiza la actualización en la base de datos utilizando el ID
-          const updateQueryA = 'UPDATE cliente SET estado = $1 WHERE id_cliente = $2';
-          const updateValuesA = [estado, Id];
-          await pool.query(updateQueryA, updateValuesA);
+    // Verifica que estado esté definido antes de utilizarlo
+    if (typeof estado !== 'undefined') {
+      // Realiza la actualización en la base de datos utilizando el ID
+      const updateQueryA = 'UPDATE cliente SET estado = $1 WHERE id_cliente = $2';
+      const updateValuesA = [estado, Id];
+      await pool.query(updateQueryA, updateValuesA);
 
-          res.status(200).json({ message: 'Actualización de autorización exitosa' });
-      } else {
-          console.error('El valor de nuevoEstado no está definido en el cuerpo de la solicitud.');
-          res.status(400).json({ message: 'Bad Request: El valor de nuevoEstado no está definido en el cuerpo de la solicitud.' });
-      }
+      res.status(200).json({ message: 'Actualización de autorización exitosa' });
+    } else {
+      console.error('El valor de nuevoEstado no está definido en el cuerpo de la solicitud.');
+      res.status(400).json({ message: 'Bad Request: El valor de nuevoEstado no está definido en el cuerpo de la solicitud.' });
+    }
   } catch (error) {
-      console.log(req.body);
-      console.error('Error al actualizar la autorización:', error);
-      res.status(500).json({ message: 'Error en el servidor' });
+    console.log(req.body);
+    console.error('Error al actualizar la autorización:', error);
+    res.status(500).json({ message: 'Error en el servidor' });
   }
 };
 
-const getDetalle = async(req, res) =>{
+const getDetalle = async (req, res) => {
   try {
 
     const result = await pool.query('SELECT * FROM detalleproducto')
@@ -352,7 +352,7 @@ const getDetalle = async(req, res) =>{
 const getcliente = async (req, res) => {
   try {
     const nameUser = req.params.userName; // Obtener el valor de name_user de los parámetros de la ruta
-    console.log('userName recibido en el controlador:', nameUser);
+    
     // Realizar la consulta SQL con el nombre de usuario como filtro
     const userDetailsQuery = `
     SELECT c.ID_Cliente, 
@@ -371,7 +371,7 @@ JOIN tipoproducto tp ON p.Tipo = tp.ID_tipo
 WHERE fpn.IP_documento = $1;`;
 
     const userDetailsValues = [nameUser]; // Parámetros de la consulta SQL
-    const userDetailsResult = await pool.query(userDetailsQuery, userDetailsValues); 
+    const userDetailsResult = await pool.query(userDetailsQuery, userDetailsValues);
     // Ejecutar la consulta SQL
 
     // Verificar si se encontraron detalles del usuario
@@ -387,6 +387,66 @@ WHERE fpn.IP_documento = $1;`;
   }
 }
 
+const getInfoCliente = async (req, res) => {
+  try {
+    // Obtén el número de cuenta proporcionado en la URL
+    const { accountNumberInt } = req.params;
+
+    // Consulta SQL modificada para filtrar por el número de cuenta
+    const clienteQuery = `
+      SELECT c.ID_Cliente, 
+             fpn.IP_primerNombre AS PrimerNombre, 
+             fpn.IP_primerApellido AS PrimerApellido, 
+             fpn.IP_segundoApellido AS SegundoApellido, 
+             dp.N_Cuenta
+      FROM cliente c
+      JOIN DetalleProducto dp ON c.ID_Cliente = dp.Cliente
+      JOIN FormPersonNatural fpn ON c.inf_cliente = fpn.ID_FormPN
+      WHERE dp.N_Cuenta = $1;`;
+
+      const clienteValue = [accountNumberInt]
+    const clienteInfo = await pool.query(clienteQuery, clienteValue);
+
+    // Verifica si se encontraron datos
+    if (clienteInfo.rows.length > 0) {
+      // Si se encontraron datos, envía el primer resultado al cliente
+      res.status(200).json(clienteInfo.rows[0]);
+    } else {
+      // Si no se encontraron datos, envía un mensaje indicando que no se encontró ningún cliente con el número de cuenta proporcionado
+      res.status(404).json({ message: "No se encontró ningún cliente con el número de cuenta proporcionado" });
+    }
+  } catch (error) {
+    console.error("Error al obtener información del cliente:", error.message);
+    res.status(500).json({ error: "Error al obtener información del cliente" });
+  }
+};
+
+
+const UpdateCliente = async (req, res) => {
+  const Id = req.params.id;
+  const saldo = req.body.nuevoSaldo;
+
+  try {
+    // Verifica que estado esté definido antes de utilizarlo
+    if (typeof saldo !== 'undefined') {
+      // Realiza la actualización en la base de datos utilizando el ID
+      const updateQueryA = 'UPDATE cliente SET saldo = $1 WHERE id_cliente = $2';
+      const updateValuesA = [saldo, Id];
+      await pool.query(updateQueryA, updateValuesA);
+
+      res.status(200).json({ message: 'Actualización de autorización exitosa' });
+    } else {
+      console.error('El valor de nuevoEstado no está definido en el cuerpo de la solicitud.');
+      res.status(400).json({ message: 'Bad Request: El valor de nuevoEstado no está definido en el cuerpo de la solicitud.' });
+    }
+  } catch (error) {
+    console.log(req.body);
+    console.error('Error al actualizar la autorización:', error);
+    res.status(500).json({ message: 'Error en el servidor' });
+  }
+};
+
+
 module.exports = {
   loginUser,
   user,
@@ -397,8 +457,10 @@ module.exports = {
   UpdateUser,
   AddFormData,
   Estado,
-  getDetalle, 
+  getDetalle,
   getcliente,
-  getBusqueda
+  getBusqueda,
+  getInfoCliente,
+  UpdateCliente
 }
 
