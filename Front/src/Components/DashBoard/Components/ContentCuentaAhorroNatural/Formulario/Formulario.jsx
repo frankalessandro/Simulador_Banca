@@ -9,7 +9,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
 
   const { register, handleSubmit, formState: { errors } } = useForm();
   const { user } = useAuth();
-  console.log(user?.id_usuario)
+  
   let id = user?.id_usuario;
   
   const [getform, setgetfrom] = useState({
@@ -131,16 +131,8 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
     setdatainfo(data); // Agregar el id_usuario al objeto datainfo
     console.log('datainfo:', datainfo);
     console.log('user?.id_usuario:', user?.id_usuario);
-    CrearCliente(data );
-    toast.success("Envio de fomulario exitoso")
-    setTimeout(() => {
-        // Actualiza localmente el estado del cliente según sea necesario
-        // Puedes utilizar la función setDatauser para actualizar el estado local
-        // Ejemplo: setDatauser(prevData => [...prevData, data.updatedClient]);
-        // alert('Autorización exitosa')
-        // Redirige a la página '/DashBoardMenu' después de procesar la respuesta
-        window.location = "/DashBoardMenu";
-    }, 2000);
+    CrearCliente(data , );
+    
   }
 
   const CrearCliente = async () => {
@@ -158,8 +150,16 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
       });
       const responseData = await response.json();
       console.log(responseData);
-      if (response.status === 200) {
-       
+      if (response.ok) {
+        toast.success("Envio de fomulario exitoso")
+        setTimeout(() => {
+            // Actualiza localmente el estado del cliente según sea necesario
+            // Puedes utilizar la función setDatauser para actualizar el estado local
+            // Ejemplo: setDatauser(prevData => [...prevData, data.updatedClient]);
+            // alert('Autorización exitosa')
+            // Redirige a la página '/DashBoardMenu' después de procesar la respuesta
+            window.location = "/DashBoardMenu";
+        }, 2000);
         setUserData(responseData.user);
       }
 
@@ -707,10 +707,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                           value:/^[A-Za-z]+$/i,
                           message:'Digita solo letras'
                          },
-                        required: {
-                          value: true,
-                          message:'Campo requerido'
-                        }, minLength: {
+                        minLength: {
                           value: 3,
                           message:'Minimo 3 letras'
                         },
@@ -726,10 +723,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                       <p>Código CIIU</p>
                       <input type="number"  {...register("CodigoCIIU", {
                         
-                        required: {
-                          value: true,
-                          message:'Campo requerido'
-                        }, minLength: {
+                        minLength: {
                           value: 4,
                           message:'Minimo4 numeros'
                         },
@@ -745,10 +739,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                       <p>N° Empleados</p>
                       <input type="number"  {...register("NumeroEm", {
                         
-                        required: {
-                          value: true,
-                          message:'Campo requerido'
-                        }, minLength: {
+                         minLength: {
                           value: 1,
                           message:'Minimo 1 numeros'
                         },
@@ -767,10 +758,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                           value:/^[A-Za-z]+$/i,
                           message:'Digita solo letras'
                          },
-                        required: {
-                          value: true,
-                          message:'Campo requerido'
-                        }, minLength: {
+                         minLength: {
                           value: 3,
                           message:'Minimo 3 letras'
                         },
@@ -786,10 +774,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                       <p>Dirección de empresa o lugar donde desarrolla su actividad</p>
                       <input type="text"  {...register("DireccionEm", {
                         
-                        required: {
-                          value: true,
-                          message:'Campo requerido'
-                        }, minLength: {
+                        minLength: {
                           value: 3,
                           message:'Minimo 3 digitos'
                         },
@@ -808,10 +793,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                           value:/^[A-Za-z ]+$/i,
                           message:'Digita solo letras'
                          },
-                        required: {
-                          value: true,
-                          message:'Campo requerido'
-                        }, minLength: {
+                         minLength: {
                           value: 3,
                           message:'Minimo 3 letras'
                         },
@@ -830,10 +812,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                           value:/^[A-Za-z]+$/i,
                           message:'Digita solo letras'
                          },
-                        required: {
-                          value: true,
-                          message:'Campo requerido'
-                        }, minLength: {
+                         minLength: {
                           value: 3,
                           message:'Minimo 3 letras'
                         },
@@ -852,10 +831,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                           value:/^[A-Za-z]+$/i,
                           message:'Digita solo letras'
                          },
-                        required: {
-                          value: true,
-                          message:'Campo requerido'
-                        }, minLength: {
+                         minLength: {
                           value: 3,
                           message:'Minimo 3 letras'
                         },
@@ -874,10 +850,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                           value:/^[A-Za-z]+$/i,
                           message:'Digita solo letras'
                          },
-                        required: {
-                          value: true,
-                          message:'Campo requerido'
-                        }, minLength: {
+                        minLength: {
                           value: 3,
                           message:'Minimo 3 letras'
                         },
@@ -909,12 +882,9 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                       <p>Ext</p>
                       <input type="number"  {...register("Ext", {
                         
-                        required: {
-                          value: true,
-                          message:'Campo requerido'
-                        }, minLength: {
-                          value: 5,
-                          message:'Minimo 5 numeros '
+                        minLength: {
+                          value: 2,
+                          message:'Minimo 2 numeros '
                         },
                         maxLength: {
                           value: 5,
@@ -928,10 +898,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                       <p>Celular</p>
                       <input type="number" {...register("CelularEm", {
                        
-                        required: {
-                          value: true,
-                          message:'Campo requerido'
-                        }, minLength: {
+                        minLength: {
                           value: 8,
                           message:'Minimo 8 numeros'
                         },
@@ -945,7 +912,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                     </div>
                     <div>
                       <p>Correo electrónico laboral</p>
-                      <input type="email" required {...register("CorreoEm")} name="CorreoEm" defaultValue={getform.CorreoEm} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      <input type="email"  {...register("CorreoEm")} name="CorreoEm" defaultValue={getform.CorreoEm} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
                     </div>
                   </div>
                 </div>
@@ -982,10 +949,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                     <div >
                       <p>Ingresos mensuales</p>
                       <input type="number"  {...register("IngresosM",{
-                        required: {
-                          value: true,
-                          message:'Campo requerido'
-                        }, minLength: {
+                         minLength: {
                           value: 1,
                           message:'Minimo 1 numeros'
                         },
@@ -1281,10 +1245,7 @@ o ganadero, por favor diligencie la siguiente información.</label>
                   <div className="flex flex-col w-52 justify-end">
                     <p>El país origen de bienes y/o fondos</p>
                     <input type="text"  {...register("PaisFondos",{
-                        required: {
-                          value: true,
-                          message:'Campo requerido'
-                        }, minLength: {
+                         minLength: {
                           value: 3,
                           message:'Minimo 3 letras'
                         },
@@ -1299,10 +1260,7 @@ o ganadero, por favor diligencie la siguiente información.</label>
                   <div className="flex flex-col w-52 justify-end">
                     <p>La ciudad origen de bienes y/o fondos</p>
                     <input type="text"  {...register("CiudadFondos",{
-                        required: {
-                          value: true,
-                          message:'Campo requerido'
-                        }, minLength: {
+                        minLength: {
                           value: 3,
                           message:'Minimo 3 letras'
                         },

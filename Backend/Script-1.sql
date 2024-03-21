@@ -141,16 +141,16 @@ add foreign key (inf_cliente) references FormPersonNatural(ID_FormPN);
 -- Insertar datos en la tabla Rol
 INSERT INTO Rol (ID_Rol, Nombre, Estado) VALUES
 (1, 'Director', 'Activo'),
-(2, 'Asesor', 'Activo');
-(3, 'Cajero', 'Activo');
-(3, 'Cliente', 'Activo');
+(2, 'Asesor', 'Activo'),
+(3, 'Cajero', 'Activo'),
+(4, 'Cliente', 'Activo');
 
 
 -- Insertar datos en la tabla usuarios
 INSERT INTO usuarios ( Name_User, Password, Rol, Estado) VALUES
 ('admin', 'admin', 1, 'Activo'),
-('asesor', 'asesor', 2, 'Activo');
-('cajero', 'cajero', 3, 'Activo');
+('asesor', 'asesor', 2, 'Activo'),
+('cajero', 'cajero', 3, 'Activo'),
 ('cliente', 'cliente', 4, 'Activo');
 
 -- Insertar datos en la tabla tipoproducto

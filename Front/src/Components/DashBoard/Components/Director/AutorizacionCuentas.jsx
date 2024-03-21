@@ -6,7 +6,7 @@ export const AutorizacionCuentas = () => {
 
 
 
-console.log(supabase)
+
     const [datauser, setdatauser] = useState([]);
 
     useEffect(() => {
@@ -186,6 +186,7 @@ console.log(supabase)
 
                                             </td>
                                             <td class="px-6 py-4 flex gap-5 justify-center">
+                                                
                                                 <button onClick={() => denegar(data.id_cliente)} href="#" class='hover:bg-gray-200 p-1 rounded-sm'>
                                                     <svg class="w-6 h-6 text-red-600 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 18 6m0 12L6 6" />
