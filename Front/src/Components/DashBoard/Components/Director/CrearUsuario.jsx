@@ -136,8 +136,11 @@ export const CrearUsuario = () => {
                                         </td>
                                     </tr>
                                     {datauser?.map((date) => (<>
-                                        {date.rol == 2 && (
-                                            <tr  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={date.id_usuario}>
+                                        {date.rol != 1  && (
+                                             <>
+                                             {date.rol != 4 && (
+
+                                                 <tr  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={date.id_usuario}>
                                                 <>
                                                     <th scope="row" className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                                                         <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -149,7 +152,9 @@ export const CrearUsuario = () => {
                                                         </div>
                                                     </th>
                                                     <td className="px-6 py-4">
-                                                        Asesor
+<>
+                                                    {date.rol == 2 && (<> Asesor </>)} {date.rol == 1 && (<> Director </>)} {date.rol == 3 && (<> Cajero </>)} 
+</>
                                                     </td>
                                                     <td className="px-6 py-4">
                                                         <div className="flex items-center">
@@ -159,7 +164,7 @@ export const CrearUsuario = () => {
                                                     <td className="px-6 py-4 flex gap-5 justify-center">
                                                         {/* <button href="#" onClick={() => abrirEdicion(date.id_usuario)} class='hover:bg-gray-200 p-1 rounded-sm'>
                                                             <svg className="w-6 h-6 cd f dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.3 4.8 2.9 2.9M7 7H4a1 1 0 0 0-1 1v10c0 .6.4 1 1 1h11c.6 0 1-.4 1-1v-4.5m2.4-10a2 2 0 0 1 0 3l-6.8 6.8L8 14l.7-3.6 6.9-6.8a2 2 0 0 1 2.8 0Z" />
+                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.3 4.8 2.9 2.9M7 7H4a1 1 0 0 0-1 1v10c0 .6.4 1 1 1h11c.6 0 1-.4 1-1v-4.5m2.4-10a2 2 0 0 1 0 3l-6.8 6.8L8 14l.7-3.6 6.9-6.8a2 2 0 0 1 2.8 0Z" />
                                                             </svg>
                                                         </button> */}
                                                         <button href="#"  onClick={() => eliminarUsuario(date.id_usuario)} className='hover:bg-gray-200 p-1 rounded-sm'>
@@ -170,6 +175,8 @@ export const CrearUsuario = () => {
                                                     </td>
                                                 </>
                                             </tr>
+                                                        )}
+                                        </>
                                         )}
                                     </>
                                     ))}
@@ -177,9 +184,9 @@ export const CrearUsuario = () => {
                             </table>
                         </div>
                         <ModalCreacionU setShowModal={setShowModal} data={modalData} showModal={showModal} closeModal={closeModal} />
-                    </div>
-                </div>
-            </div>
-        </>
+                        </div>
+                        </div>
+                        </div>
+                        </>
     )
 }

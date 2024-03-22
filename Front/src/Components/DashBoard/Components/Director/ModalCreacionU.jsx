@@ -96,6 +96,7 @@ export const ModalCreacionU = ({ data, showModal, closeModal }) => {
                                         Seleccionar
                                     </option>
                                     <option value="2">Asesor</option>
+                                    <option value="3">Cajero</option>
                                 </select>
 
                             </div>
