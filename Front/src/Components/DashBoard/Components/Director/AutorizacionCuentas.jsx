@@ -6,8 +6,6 @@ import { ModalAutorizaciones } from '../ModalAutorizaciones';
 export const AutorizacionCuentas = () => {
 
 
-
-
     const [datauser, setdatauser] = useState([]);
 
     useEffect(() => {
@@ -30,8 +28,8 @@ export const AutorizacionCuentas = () => {
 
     const estado = datauser.map(user => user.estadocliente == 'Pendiente')
 
-    console.log(datauser)
-    console.log(datauser.estadoCliente)
+ 
+    
  
 
 

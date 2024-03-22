@@ -2,17 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ModalCreacionU } from './ModalCreacionU';
 
 
 export const CrearUsuario = () => {
-    const { register, handleSubmit, setValue } = useForm();
+    
     
     const [datauser, setdatauser] = useState([]);
     const [forceUpdate, setForceUpdate] = useState(false);
-    const [activeModal, setactiveModal] = useState("absolute overflow-y-auto overflow-x-hidden justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full sr-only")
-    
-    const [InfoUser, setInfoUser] = useState(null);
-    const [ActivateModal, setActivateModal] = useState(false);
    
     useEffect(() => {
         const fetchData = async () => {
@@ -32,73 +29,19 @@ export const CrearUsuario = () => {
         fetchData();
     }, [forceUpdate]); // Hacer que el efecto dependa de forceUpdate
 
-    const abrir = () => {
-        setactiveModal((prev) =>
-            prev === "absolute overflow-y-auto overflow-x-hidden justify-center items-center w-full md:inset-0 h-[calc(100%)] max-h-full sr-only"
-                ? "absolute flex items-center overflow-y-auto overflow-x-hidden bg-gray-400 bg-opacity-60 justify-center items-center w- md:inset-0 h-[calc(100%)] max-h-full not-sr-only"
-                : "absolute overflow-y-auto overflow-x-hidden justify-center items-center w-full md:inset-0 h-[calc(100%)] max-h-full sr-only"
-        );
+
+    const [modalData, setModalData] = useState(null); // Para almacenar los datos del modal
+    const [showModal, setShowModal] = useState(false);
+
+    const openModal = (datauser) => {
+        setModalData(datauser);
+        setShowModal(true);
     };
 
-    
-
-
-    const AddUser = async (data) => {
-        try {
-            const response = await fetch('http://localhost:3000/AddUser', {
-                method: 'POST',
-                headers: {
-                    "Content-type": "application/json"
-                },
-                body: JSON.stringify({
-                    name: data.name,
-                    password: data.password,
-                    rol: data.rol
-                })
-            });
-
-            console.log(data);
-
-            if (response.ok) {
-                toast.success("Creación exitosa")
-    setTimeout(() => {
-        // Actualiza localmente el estado del cliente según sea necesario
-        // Puedes utilizar la función setDatauser para actualizar el estado local
-        // Ejemplo: setDatauser(prevData => [...prevData, data.updatedClient]);
-        // alert('Autorización exitosa')
-        // Redirige a la página '/DashBoardMenu' después de procesar la respuesta
-        abrir();
-    }, 2000);
-                // Actualiza el estado local para forzar la re-renderización
-                setForceUpdate((prev) => !prev);
-                
-
-            } else {
-                console.error('Error al registrar usuario');
-                toast.error("Error al registrar usuario")
-                setTimeout(() => {
-                    // Actualiza localmente el estado del cliente según sea necesario
-                    // Puedes utilizar la función setDatauser para actualizar el estado local
-                    // Ejemplo: setDatauser(prevData => [...prevData, data.updatedClient]);
-                    // alert('Autorización exitosa')
-                    // Redirige a la página '/DashBoardMenu' después de procesar la respuesta
-                   
-                }, 2000);
-            }
-        } catch (error) {
-            console.error('Error en el servidor', error);
-        }
+    const closeModal = () => {
+        setModalData(null); // Limpiar modalData
+        setShowModal(false);
     };
-
-    const handlePrueba = (date) => {
-        setActivateModal(true)
-        setInfoUser(date)
-        setSelectedUserId(date.id_usuario)
-        console.log(date)
-    }
-
-   
-  
     // Otros estados omitidos por brevedad...
 
     // Resto del código omitido por brevedad...
@@ -139,14 +82,14 @@ export const CrearUsuario = () => {
     return (
         <>
             <div className="p-4 sm:ml-64">
-                <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
+                <div className="md:p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
                     <div className='flex justify-center items-center flex-col gap-10' style={{ minHeight: '85vh' }}>
                         <div className='w-3/4 text-black text-4xl flex items-center justify-center font-semibold text-center'>
                             <p>Creacion de Usuarios</p>
                         </div>
 
 
-                        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+                        <div className="w-11/12 md:w-8/12 relative overflow-x-auto overflow-y-auto  shadow-md sm:rounded-lg">
                             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center">
                                     <tr>
@@ -184,7 +127,7 @@ export const CrearUsuario = () => {
                                             </div>
                                         </td>
                                         <td className="px-6 py-4 flex gap-5 justify-center">
-                                            <button type="button" onClick={abrir} className='hover:bg-gray-200 p-1 rounded-sm'>
+                                            <button type="button" onClick={openModal} className='hover:bg-gray-200 p-1 rounded-sm'>
                                                 <svg className="w-6 h-6 text-black dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 12h4m-2 2v-4M4 18v-1a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v1c0 .6-.4 1-1 1H5a1 1 0 0 1-1-1Zm8-10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                                                 </svg>
@@ -233,67 +176,7 @@ export const CrearUsuario = () => {
                                 </tbody>
                             </table>
                         </div>
-                        {/* {datauser.map((info) => ActivateModal(info))} */}
-                    </div>
-
-                    
-                    {/* Editar Usuarios */}
-
-
-                    {/* crear usuarios */}
-                    <div className={activeModal} >
-                        <div className="p-4 sm:ml-64">
-                            <div className="p-4 border-dashed rounded-lg dark:border-gray-700 mt-14">
-                                <div className='bg-white rounded-lg shadow dark:bg-gray-700 '>
-
-                                    <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                                            Crear nuevo usuario
-                                        </h3>
-                                        <button type="button" onClick={abrir} className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal">
-                                            <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                                            </svg>
-                                            <span className="sr-only">Close modal</span>
-                                        </button>
-                                    </div>
-
-                                    <form className="p-4 md:p-5" onSubmit={handleSubmit(AddUser)}>
-                                        <div className="p-6 space-y-6">
-                                            <div className="grid grid-cols-6 gap-6">
-                                                <div className="col-span-6 sm:col-span-3">
-                                                    <label htmlFor='name' className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
-                                                    <input type="text" name="name" id="name" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green focus:border-green block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green dark:focus:border-green" placeholder="Nombre" {...register("name", { required: true })} required="" />
-                                                </div>
-                                                <div className="col-span-6 sm:col-span-3">
-                                                    <label htmlFor='password' className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contraseña</label>
-                                                    <input type="text" name="password" id="password" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green focus:border-green block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green dark:focus:border-green" placeholder="Contraseña" {...register("password", { required: true })} required="" />
-                                                </div>
-                                                <div className="col-span-6 sm:col-span-3">
-                                                    <label htmlFor='rol' className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rol</label>
-                                                    <select
-                                                        name="rol"
-                                                        id="rol"
-                                                        className="rounded-md w-full border bg-gray-50 border-gray-300 text-gray-900 text-sm p-2.5 focus:ring-green focus:border-green dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green dark:focus:border-green"
-                                                        {...register("rol", { required: true })}
-                                                    >
-                                                        <option value="" disabled>
-                                                            Seleccionar
-                                                        </option>
-                                                        <option value="2">Asesor</option>
-                                                    </select>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {/* <!-- Modal footer --> */}
-                                        <div className="flex items-center p-6 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b dark:border-gray-600">
-                                            <button type="submmit" className="w-full my-4 text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Crear</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+                        <ModalCreacionU setShowModal={setShowModal} data={modalData} showModal={showModal} closeModal={closeModal} />
                     </div>
                 </div>
             </div>
