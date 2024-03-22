@@ -163,7 +163,7 @@ export const AutorizacionCuentas = () => {
 
 
                                     )
-                                    )}{console.log(datauser)}
+                                    )}
                                 </tbody>
                             </table>
                         </div>

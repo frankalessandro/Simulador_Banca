@@ -25,17 +25,12 @@ export const HistorialD = () => {
         fecthData();
     }, []);
 
-    const estado = datauser.map(user => user.estadocliente == 'Pendiente')
-
-    console.log(datauser.fecha)
-    console.log(estado)
-
     const [fechaInicio, setFechaInicio] = useState('');
     const [fechaFin, setFechaFin] = useState('');
+   
 
-
-    console.log(fechaInicio)
-    console.log(fechaFin)
+   
+  
 
     const handleFechaInicioChange = (event) => {
         const inputDate = event.target.value;
@@ -43,6 +38,7 @@ export const HistorialD = () => {
             const [year, month, day] = inputDate.split('-');
             const fechaSeleccionada = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
             setFechaInicio(fechaSeleccionada);
+            
         } else {
             setFechaInicio('');
         }
@@ -58,15 +54,42 @@ export const HistorialD = () => {
             setFechaFin('');
         }
     };
-
-    const dataFiltrados = (fechaInicio && fechaFin) ? datauser.filter((data) => {
+    
+    const dataFiltrados = datauser.filter((data) => {
         const fechaData = new Date(data.fecha).getTime();
-        const fechaInicioTime = new Date(fechaInicio).getTime();
-        const fechaFinTime = new Date(fechaFin).getTime();
-        return fechaData >= fechaInicioTime && fechaData <= fechaFinTime;
-    }) : datauser;
+        const fechaInicioTime = fechaInicio ? new Date(fechaInicio).getTime() : 0;
+        const fechaFinTime = fechaFin ? new Date(fechaFin).getTime() : Number.MAX_SAFE_INTEGER;
+        
+        const fechaMatch = fechaData >= fechaInicioTime && fechaData <= fechaFinTime;
+        return  fechaMatch;
+    });
 
-    console.log(dataFiltrados);
+
+
+    console.log(dataFiltrados)
+
+    function mostrarFechaEnFormato(fecha) {
+        // Crear un objeto Date con la fecha recibida
+        const fechaObjeto = new Date(fecha);
+      
+        // Extraer el año, mes y día de la fecha
+        const year = fechaObjeto.getFullYear();
+        const month = fechaObjeto.getMonth() + 1; // Los meses van de 0 a 11, por lo que sumamos 1
+        const day = fechaObjeto.getDate();
+      
+        // Formatear el mes y el día como cadenas de dos dígitos
+        const monthString = month < 10 ? '0' + month : month.toString();
+        const dayString = day < 10 ? '0' + day : day.toString();
+      
+        // Construir la cadena de fecha en el formato deseado: "yyyy-mm-dd"
+        const fechaFormateada = `${dayString}-${monthString}-${year}`;
+      
+        return fechaFormateada;
+      }
+      
+      // Ejemplo de uso
+      const fechaOriginal = "2024-03-14T05:00:00.000Z";
+      const fechaFormateada = mostrarFechaEnFormato(fechaOriginal);
 
 
 
@@ -140,7 +163,7 @@ export const HistorialD = () => {
 
 
                                     )
-                                    )}{console.log(datauser)}
+                                    )}
                                 </tbody>
                             </table>
                         </div>
