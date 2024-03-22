@@ -283,7 +283,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                           message:'Maximo 10 numeros'
                           
                         }
-                      })} name="NDocumento" defaultValue={getform.NDocumento} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      })}pattern="[0-9]*" name="NDocumento" defaultValue={getform.NDocumento} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
                     {errors.NDocumento &&  <span className='text-red-600 flex items-end'>{errors.NDocumento.message}</span> }
                     
                     </div>
@@ -291,7 +291,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                       <p>Ciudad de nacimiento</p>
                       <input type="text" {...register("CiudadN", {
                          pattern: {
-                          value:/^[A-Za-z]+$/i,
+                          value:/^[A-Za-z ]+$/i,
                           message:'Digita solo letras'
                          },
                         required: {
@@ -392,7 +392,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                       <p>Nacionalidad</p>
                       <input type="text" {...register("Nacionalidad", {
                         pattern: {
-                          value:/^[A-Za-z]+$/i,
+                          value:/^[A-Za-z ]+$/i,
                           message:'Digita solo letras'
                          },
                         required: {
@@ -447,8 +447,8 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                           message:'Minimo 3 digitos'
                         },
                         maxLength: {
-                          value: 15,
-                          message:'Maximo 15 digitos'
+                          value: 30,
+                          message:'Maximo 30 digitos'
                         }
                       })} name="DireccionR" defaultValue={getform.DireccionR} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
                     {errors.DireccionR &&  <span className='text-red-600 flex items-end'>{errors.DireccionR.message}</span> }
@@ -457,10 +457,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                     <div className='flex flex-col w-52 '>
                       <label>Bloque/Torre</label>
                       <input type="text"  {...register("BloqueTorre", {
-                         pattern: {
-                          value:/^[A-Za-z/]+$/i,
-                          message:'Digita solo letras'
-                         },
+                        
                         minLength: {
                           value: 3,
                           message:'Minimo 3 letras'
@@ -475,10 +472,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                     <div>
                       <p>Apto/Casa</p>
                       <input type="text"  {...register("AptoCasa", {
-                         pattern: {
-                          value:/^[A-Za-z/]+$/i,
-                          message:'Digita solo letras'
-                         },
+                         
                          minLength: {
                           value: 3,
                           message:'Minimo 3 letras'
@@ -517,7 +511,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                       <p>Ciudad/Municipio</p>
                       <input type="text"  {...register("Municipio", {
                         pattern: {
-                          value:/^[A-Za-z]+$/i,
+                          value:/^[A-Za-z ]+$/i,
                           message:'Digita solo letras'
                          },
                         required: {
@@ -539,7 +533,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                       <p>Departamento</p>
                       <input type="text"  {...register("Departamento", {
                         pattern: {
-                          value:/^[A-Za-z]+$/i,
+                          value:/^[A-Za-z ]+$/i,
                           message:'Digita solo letras'
                          },
                         required: {
@@ -561,7 +555,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                       <p>País</p>
                       <input type="text"  {...register("Pais", {
                          pattern: {
-                          value:/^[A-Za-z]+$/i,
+                          value:/^[A-Za-z ]+$/i,
                           message:'Digita solo letras'
                          },
                         required: {
@@ -590,7 +584,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                           value: 13,
                           message:'Maximo 13 Numeros'
                         }
-                      })} name="Telefono" defaultValue={getform.Telefono} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      })}pattern="[0-9]*" name="Telefono" defaultValue={getform.Telefono} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
                     {errors.Telefono &&  <span className='text-red-600 flex items-end'>{errors.Telefono.message}</span> }
                    
                     </div>
@@ -607,7 +601,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                           value: 13,
                           message:'Maximo 13 Numeros'
                         }
-                      })} name="Celular" defaultValue={getform.Celular} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      })}pattern="[0-9]*" name="Celular" defaultValue={getform.Celular} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
                     {errors.Celular &&  <span className='text-red-600 flex items-end'>{errors.Celular.message}</span> }
                     
                     </div>
@@ -731,7 +725,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                           value: 7,
                           message:'Maximo 7 numeros'
                         }
-                      })} name="CodigoCIIU" defaultValue={getform.CodigoCIIU} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      })}pattern="[0-9]*" name="CodigoCIIU" defaultValue={getform.CodigoCIIU} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
                     {errors.CodigoCIIU &&  <span className='text-red-600 flex items-end'>{errors.CodigoCIIU.message}</span> }
                      
                     </div>
@@ -744,10 +738,10 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                           message:'Minimo 1 numeros'
                         },
                         maxLength: {
-                          value: 7,
-                          message:'Maximo 7 numeros'
+                          value: 8,
+                          message:'Maximo 8 numeros'
                         }
-                      })} name="NumeroEm" defaultValue={getform.NumeroEm} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      })}pattern="[0-9]*" name="NumeroEm" defaultValue={getform.NumeroEm} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
                     {errors.NumeroEm &&  <span className='text-red-600 flex items-end'>{errors.NumeroEm.message}</span> }
                      
                     </div>
@@ -779,8 +773,8 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                           message:'Minimo 3 digitos'
                         },
                         maxLength: {
-                          value: 15,
-                          message:'Maximo 15 digitos'
+                          value: 30,
+                          message:'Maximo 30 digitos'
                         }
                       })} name="DireccionEm" defaultValue={getform.DireccionEm} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
                     {errors.DireccionEm &&  <span className='text-red-600 flex items-end'>{errors.DireccionEm.message}</span> }
@@ -890,7 +884,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                           value: 5,
                           message:'Maximo 5 numeros'
                         }
-                      })} name="Ext" defaultValue={getform.Ext} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      })}name="Ext" defaultValue={getform.Ext} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
                     {errors.Ext &&  <span className='text-red-600 flex items-end'>{errors.Ext.message}</span> }
                     
                     </div>
@@ -906,7 +900,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                           value: 10,
                           message:'Maximo 10 numeros'
                         }
-                      })} name="CelularEm" defaultValue={getform.CelularEm} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      })}pattern="[0-9]*" name="CelularEm" defaultValue={getform.CelularEm} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
                     {errors.CelularEm &&  <span className='text-red-600 flex items-end'>{errors.CelularEm.message}</span> }
                     
                     </div>
@@ -957,7 +951,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                           value: 8,
                           message:'Maximo 8 numeros'
                         }
-                      })} name="IngresosM" defaultValue={getform.IngresosM} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      })}pattern="[0-9]*" name="IngresosM" defaultValue={getform.IngresosM} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
                     {errors.IngresosM &&  <span className='text-red-600 flex items-end'>{errors.IngresosM.message}</span> }
                    
                     </div>
@@ -972,7 +966,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                           value: 8,
                           message:'Maximo 8 numeros'
                         }
-                      })} name="OIngresosM" defaultValue={getform.OIngresosM} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      })}pattern="[0-9]*" name="OIngresosM" defaultValue={getform.OIngresosM} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
                     {errors.OIngresosM &&  <span className='text-red-600 flex items-end'>{errors.OIngresosM.message}</span> }
                    
                     </div>
@@ -987,7 +981,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                           value: 8,
                           message:'Maximo 8 numeros'
                         }
-                      })} name="TotalAc" defaultValue={getform.TotalAc} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      })}pattern="[0-9]*" name="TotalAc" defaultValue={getform.TotalAc} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
                     {errors.TotalAc &&  <span className='text-red-600 flex items-end'>{errors.TotalAc.message}</span> }
                     
                     </div>
@@ -1002,7 +996,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                           value: 8,
                           message:'Maximo 8 numeros'
                         }
-                      })} name="Totalpa" defaultValue={getform.Totalpa} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      })}pattern="[0-9]*" name="Totalpa" defaultValue={getform.Totalpa} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
                     {errors.Totalpa &&  <span className='text-red-600 flex items-end'>{errors.Totalpa.message}</span> }
                    
                     </div>
@@ -1040,10 +1034,10 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
                           message:'Minimo 1 numeros'
                         },
                         maxLength: {
-                          value: 8,
-                          message:'Maximo 8 numeros'
+                          value: 12,
+                          message:'Maximo 12 numeros'
                         }
-                      })} name="TotalIn" defaultValue={getform.TotalIn} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      })}pattern="[0-9]*" name="TotalIn" defaultValue={getform.TotalIn} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
                     {errors.TotalIn &&  <span className='text-red-600 flex items-end'>{errors.TotalIn.message}</span> }
                     
                     </div>
@@ -1068,7 +1062,7 @@ o ganadero, por favor diligencie la siguiente información.</label>
                           value: 8,
                           message:'Maximo 8 numeros'
                         }
-                      })} name="VentasA" defaultValue={getform.VentasA} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      })}pattern="[0-9]*" name="VentasA" defaultValue={getform.VentasA} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
                     {errors.VentasA &&  <span className='text-red-600 flex items-end'>{errors.VentasA.message}</span> }
                    
                     </div>
@@ -1193,7 +1187,7 @@ o ganadero, por favor diligencie la siguiente información.</label>
                           value: 9,
                           message:'Maximo 9 numeros'
                         }
-                      })} name="NumeroT" defaultValue={getform.NumeroT} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      })}pattern="[0-9]*" name="NumeroT" defaultValue={getform.NumeroT} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
                     {errors.NumeroT &&  <span className='text-red-600 flex items-end'>{errors.NumeroT.message}</span> }
                   
                   </div>
@@ -1223,7 +1217,7 @@ o ganadero, por favor diligencie la siguiente información.</label>
                           value: 9,
                           message:'Maximo 9 numeros'
                         }
-                      })} name="Idtributario" defaultValue={getform.Idtributario} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      })}pattern="[0-9]*" name="Idtributario" defaultValue={getform.Idtributario} onChange={valorInput} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
                     {errors.Idtributario &&  <span className='text-red-600 flex items-end'>{errors.Idtributario.message}</span> }
                   
                   </div>
@@ -1383,7 +1377,7 @@ o ganadero, por favor diligencie la siguiente información.</label>
                           value: 8,
                           message:'Maximo 8 numeros'
                         }
-                      })} name="NProducto" defaultValue={getform.NProducto} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      })}pattern="[0-9]*" name="NProducto" defaultValue={getform.NProducto} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
                     {errors.NProducto &&  <span className='text-red-600 flex items-end'>{errors.NProducto.message}</span> }
                     
                     </div>
@@ -1398,7 +1392,7 @@ o ganadero, por favor diligencie la siguiente información.</label>
                           value: 8,
                           message:'Maximo 8 numeros'
                         }
-                      })} name="MontoMP" defaultValue={getform.MontoMP} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
+                      })}pattern="[0-9]*" name="MontoMP" defaultValue={getform.MontoMP} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
                     {errors.MontoMP &&  <span className='text-red-600 flex items-end'>{errors.MontoMP.message}</span> }
                    
                     </div>
@@ -1414,8 +1408,8 @@ o ganadero, por favor diligencie la siguiente información.</label>
                           message:'Minimo 1 letras'
                         },
                         maxLength: {
-                          value: 8,
-                          message:'Maximo 8 letras'
+                          value: 15,
+                          message:'Maximo 15 letras'
                         }
                       })} name="Moneda" defaultValue={getform.Moneda} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
                     {errors.Moneda &&  <span className='text-red-600 flex items-end'>{errors.Moneda.message}</span> }
@@ -1433,8 +1427,8 @@ o ganadero, por favor diligencie la siguiente información.</label>
                           message:'Minimo 1 letras'
                         },
                         maxLength: {
-                          value: 8,
-                          message:'Maximo 8 letras'
+                          value: 20,
+                          message:'Maximo 20 letras'
                         }
                       })} name="CiudadOp" defaultValue={getform.CiudadOp} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
                     {errors.CiudadOp &&  <span className='text-red-600 flex items-end'>{errors.CiudadOp.message}</span> }
@@ -1452,8 +1446,8 @@ o ganadero, por favor diligencie la siguiente información.</label>
                           message:'Minimo 1 letras'
                         },
                         maxLength: {
-                          value: 8,
-                          message:'Maximo 8 letras'
+                          value: 20,
+                          message:'Maximo 20 letras'
                         }
                       })} name="PaisOp" defaultValue={getform.PaisOp} className="rounded-md border-gray-300 focus:ring-green focus:border-green" />
                     {errors.PaisOp &&  <span className='text-red-600 flex items-end'>{errors.PaisOp.message}</span> }

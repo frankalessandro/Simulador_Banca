@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ModalAutorizaciones } from '../ModalAutorizaciones';
 
 export const AutorizacionCuentas = () => {
 
@@ -76,59 +77,18 @@ export const AutorizacionCuentas = () => {
         }
     };
 
-    const denegar = (id) => {
-        console.log(id)
-        try {
-            // Realiza una solicitud al servidor para cambiar el estado del cliente con el ID proporcionado
-            fetch(`http://localhost:3000/Estado/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    nuevoEstado: 'Denegado',
-                }),
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log(data.message);
-                    toast.error("Denegado")
-                    setTimeout(() => {
-                        // Actualiza localmente el estado del cliente según sea necesario
-                        // Puedes utilizar la función setDatauser para actualizar el estado local
-                        // Ejemplo: setDatauser(prevData => [...prevData, data.updatedClient]);
-                        // alert('Autorización exitosa')
-                        // Redirige a la página '/DashBoardMenu' después de procesar la respuesta
-                        window.location = "/DashBoardMenu";
-                    }, 1500);
+    
+    const [modalData, setModalData] = useState(null); // Para almacenar los datos del modal
+    const [showModal, setShowModal] = useState(false);
 
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log(data.message);
-                    // Actualiza localmente el estado del cliente según sea necesario
-                    // Puedes utilizar la función setDatauser para actualizar el estado local
-                    // Ejemplo: setDatauser(prevData => [...prevData, data.updatedClient]);
+    const openModal = (datauser) => {
+        setModalData(datauser);
+        setShowModal(true);
+    };
 
-                    // Redirige a la página '/DashBoardMenu' después de procesar la respuesta
-                    window.location = "/DashBoardMenu";
-                })
-                .catch(error => {
-                    console.error('Error al cambiar el estado del cliente:', error);
-                });
-        } catch (error) {
-            console.error('Error general:', error);
-        }
+    const closeModal = () => {
+        setModalData(null); // Limpiar modalData
+        setShowModal(false);
     };
 
     return (
@@ -187,7 +147,7 @@ export const AutorizacionCuentas = () => {
                                             </td>
                                             <td class="px-6 py-4 flex gap-5 justify-center">
                                                 
-                                                <button onClick={() => denegar(data.id_cliente)} href="#" class='hover:bg-gray-200 p-1 rounded-sm'>
+                                                <button onClick={()=> openModal(data)} href="#" class='hover:bg-gray-200 p-1 rounded-sm'>
                                                     <svg class="w-6 h-6 text-red-600 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 18 6m0 12L6 6" />
                                                     </svg>
@@ -209,7 +169,7 @@ export const AutorizacionCuentas = () => {
                                 </tbody>
                             </table>
                         </div>
-
+<ModalAutorizaciones   data={modalData} closeModal={closeModal} showModal={showModal}  />
 
                     </div>
                 </div>
