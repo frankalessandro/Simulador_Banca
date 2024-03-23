@@ -52,7 +52,7 @@ const loginUser = async (req, res) => {
 const user = async (req, res) => {
   try {
 
-    const result = await pool.query('SELECT * FROM usuarios ' )
+    const result = await pool.query('SELECT * FROM usuarios ')
 
     if (result.rows.length > 0) {
       return res.status(200).json({ result });
@@ -109,6 +109,23 @@ const getBusqueda = async (req, res) => {
     fpn.IP_estadoCivil AS EstadoCivil,
     fpn.IP_nacionalidad AS Nacionalidad,
     fpn.IP_documento,
+    fpn.IP_genero AS gen,
+    fpn.DIF_Ingresos_mensuales AS Ingresosmensuales ,
+    fpn.DIF_Otros_ingresos AS Otrosingresos,
+    fpn.IT_Declara_renta AS Renta ,
+    fpn.IP_fechaExpedicion AS Fechaexpedicion,
+    fpn.ICP_direcResidencia AS Direccion, 
+     fpn.ICP_barrio AS Barrio,
+     fpn.ICP_ciudad_municipio AS Ciudad, 
+    fpn.ICP_departamento AS Depa, 
+    fpn.ICP_pais AS Pais,
+     fpn.ICP_telefono AS Telefono ,
+     fpn.ICP_celular AS Celular ,
+     fpn.ICP_email AS Correo,
+     fpn.AE_profesion AS Profesion , 
+     fpn.AE_ocupacion AS Ocupacion,
+     fpn.AE_detalle_act AS Actividad ,
+    fpn.IP_tipoDoc AS Tipodocumento,
     c.Estado AS EstadoCliente,
     tp.Descripcion AS Producto,
     dp.N_Cuenta,
@@ -154,7 +171,7 @@ WHERE
     c.Estado = 'Autorizado';
     `);
 
-    
+
 
     if (result.rows.length > 0) {
       return res.status(200).json({ result });
@@ -245,13 +262,13 @@ const UpdateUser = async (req, res) => {
 const AddFormData = async (req, res) => {
   const formData = req.body;
 
- 
-  if(!formData.FechaCV){
+
+  if (!formData.FechaCV) {
     formData.FechaCV = null
   }
 
   const id = req.params.id;
-  
+
   try {
     // Formulario-----------------------------------------------------------------------------------------------------------------
 
@@ -269,14 +286,14 @@ const AddFormData = async (req, res) => {
 
     const insertQueryCliente = `    
     INSERT INTO cliente (Tipo_de_Cliente, Saldo, Estado)
-    VALUES ($1, $2)
+    VALUES ($1, $2, $3)
     `;
     // Asegúrate de proporcionar los valores en el orden correcto
-    const insertValuesCliente = ["Natural", 0,"Pendiente"];
+    const insertValuesCliente = ["Natural", 0, "Pendiente"];
     // Realiza la inserción en la tabla cliente
     const resultCliente = await pool.query(insertQueryCliente, insertValuesCliente);
 
-  // Creacion usuario cliente---------------------------------------------------------------------------------------------------
+    // Creacion usuario cliente---------------------------------------------------------------------------------------------------
 
     const insertQueryUsuario = `    
     INSERT INTO usuarios (name_user, password, rol, estado)
@@ -287,24 +304,24 @@ const AddFormData = async (req, res) => {
     const resultUsuario = await pool.query(insertQueryUsuario, insertValuesUsuario);
 
 
-  // Detalle---------------------------------------------------------------------------------------------------------------------
+    // Detalle---------------------------------------------------------------------------------------------------------------------
 
     const currentDate = new Date();
     const dia = currentDate.getDate();
     // Ten en cuenta que los meses en JavaScript son indexados desde 0 (enero es 0, febrero es 1, etc.)
     const mes = currentDate.getMonth() + 1;
     const anio = currentDate.getFullYear();
-  
-    const fechaFormateada = `${anio}-${mes < 10 ? '0' + mes : mes}-${dia < 10 ? '0' + dia : dia}`;
 
-    const insertQueryDetalle= `
+    const fechaFormateada = `${dia < 10 ? '0' + dia : dia}-${mes < 10 ? '0' + mes : mes}-${anio}`;
+
+    const insertQueryDetalle = `
     INSERT INTO DetalleProducto (producto, responsable, fecha)
     VALUES ($1, $2, $3)
   `;
-  const insertValuesDetalle = [1, id, fechaFormateada];
-  const resultDetalle = await pool.query(insertQueryDetalle, insertValuesDetalle);
+    const insertValuesDetalle = [1, id, fechaFormateada];
+    const resultDetalle = await pool.query(insertQueryDetalle, insertValuesDetalle);
 
-    res.status(201).json({ message: 'Datos insertados exitosamente', data: resultFormPersonNatural, resultCliente, resultUsuario ,resultDetalle });
+    res.status(201).json({ message: 'Datos insertados exitosamente', data: resultFormPersonNatural, resultCliente, resultUsuario, resultDetalle });
 
   } catch (error) {
     console.error('Error al insertar datos:', error);
@@ -317,26 +334,26 @@ const Estado = async (req, res) => {
   const estado = req.body.nuevoEstado;
 
   try {
-      // Verifica que estado esté definido antes de utilizarlo
-      if (typeof estado !== 'undefined') {
-          // Realiza la actualización en la base de datos utilizando el ID
-          const updateQueryA = 'UPDATE cliente SET estado = $1 WHERE id_cliente = $2';
-          const updateValuesA = [estado, Id];
-          await pool.query(updateQueryA, updateValuesA);
+    // Verifica que estado esté definido antes de utilizarlo
+    if (typeof estado !== 'undefined') {
+      // Realiza la actualización en la base de datos utilizando el ID
+      const updateQueryA = 'UPDATE cliente SET estado = $1 WHERE id_cliente = $2';
+      const updateValuesA = [estado, Id];
+      await pool.query(updateQueryA, updateValuesA);
 
-          res.status(200).json({ message: 'Actualización de autorización exitosa' });
-      } else {
-          console.error('El valor de nuevoEstado no está definido en el cuerpo de la solicitud.');
-          res.status(400).json({ message: 'Bad Request: El valor de nuevoEstado no está definido en el cuerpo de la solicitud.' });
-      }
+      res.status(200).json({ message: 'Actualización de autorización exitosa' });
+    } else {
+      console.error('El valor de nuevoEstado no está definido en el cuerpo de la solicitud.');
+      res.status(400).json({ message: 'Bad Request: El valor de nuevoEstado no está definido en el cuerpo de la solicitud.' });
+    }
   } catch (error) {
-      console.log(req.body);
-      console.error('Error al actualizar la autorización:', error);
-      res.status(500).json({ message: 'Error en el servidor' });
+    console.log(req.body);
+    console.error('Error al actualizar la autorización:', error);
+    res.status(500).json({ message: 'Error en el servidor' });
   }
 };
 
-const getDetalle = async(req, res) =>{
+const getDetalle = async (req, res) => {
   try {
 
     const result = await pool.query('SELECT * FROM detalleproducto')
@@ -371,7 +388,7 @@ JOIN tipoproducto tp ON p.Tipo = tp.ID_tipo
 WHERE fpn.IP_documento = $1;`;
 
     const userDetailsValues = [nameUser]; // Parámetros de la consulta SQL
-    const userDetailsResult = await pool.query(userDetailsQuery, userDetailsValues); 
+    const userDetailsResult = await pool.query(userDetailsQuery, userDetailsValues);
     // Ejecutar la consulta SQL
 
     // Verificar si se encontraron detalles del usuario
@@ -386,6 +403,31 @@ WHERE fpn.IP_documento = $1;`;
     res.status(500).json({ message: 'Error interno del servidor' });
   }
 }
+const DelateUser = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    const result2 = await pool.query(`
+    UPDATE DetalleProducto
+    SET responsable = NULL
+    WHERE responsable = ${userId}
+    `)
+
+    // Buscar el usuario por su ID
+    const result = await pool.query(
+
+      `DELETE  FROM public.usuarios
+    WHERE ID_Usuario = ${userId};`
+    )
+
+    // Enviar una respuesta de éxito
+    res.status(200).json({ message: 'Usuario eliminado correctamente' });
+  } catch (error) {
+    // Si ocurre algún error, enviar una respuesta de error con el mensaje
+    console.error('Error al eliminar usuario:', error);
+    res.status(500).json({ message: 'Error al eliminar usuario' });
+  }
+}
 
 module.exports = {
   loginUser,
@@ -393,11 +435,12 @@ module.exports = {
   getPendiente,
   getAutorizado,
   getDenegado,
+  DelateUser,
   AddUser,
   UpdateUser,
   AddFormData,
   Estado,
-  getDetalle, 
+  getDetalle,
   getcliente,
   getBusqueda
 }

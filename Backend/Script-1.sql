@@ -146,7 +146,8 @@ INSERT INTO Rol (ID_Rol, Nombre, Estado) VALUES
 (1, 'Director', 'Activo'),
 (2, 'Asesor', 'Activo'),
 (3, 'Cajero', 'Activo'),
-(3, 'Cliente', 'Activo');
+(4, 'Cliente', 'Activo');
+
 
 
 -- Insertar datos en la tabla usuarios
