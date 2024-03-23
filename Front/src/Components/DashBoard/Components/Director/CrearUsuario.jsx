@@ -14,7 +14,7 @@ export const CrearUsuario = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:3000/user');
+                const response = await fetch('https://simulador-banca.onrender.com/user');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -29,6 +29,29 @@ export const CrearUsuario = () => {
         fetchData();
     }, [forceUpdate]); // Hacer que el efecto dependa de forceUpdate
 
+    const abrir = () => {
+        setactiveModal((prev) =>
+            prev === "absolute overflow-y-auto overflow-x-hidden justify-center items-center w-full md:inset-0 h-[calc(100%)] max-h-full sr-only"
+                ? "absolute flex items-center overflow-y-auto overflow-x-hidden bg-gray-400 bg-opacity-60 justify-center items-center w- md:inset-0 h-[calc(100%)] max-h-full not-sr-only"
+                : "absolute overflow-y-auto overflow-x-hidden justify-center items-center w-full md:inset-0 h-[calc(100%)] max-h-full sr-only"
+        );
+    };
+
+    const AddUser = async (data) => {
+        try {
+            const response = await fetch('https://simulador-banca.onrender.com/AddUser', {
+                method: 'POST',
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify({
+                    name: data.name,
+                    password: data.password,
+                    rol: data.rol
+                })
+            });
+
+            console.log(data);
 
     const [modalData, setModalData] = useState(null); // Para almacenar los datos del modal
     const [showModal, setShowModal] = useState(false);
@@ -52,7 +75,7 @@ export const CrearUsuario = () => {
 
         console.log(userId)
         try {
-            const response = await fetch(`http://localhost:3000/user/${userId}`, {
+            const response = await fetch(`https://simulador-banca.onrender.com/user/${userId}`, {
                 method: 'DELETE',
             });
 

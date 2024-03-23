@@ -5,13 +5,12 @@ import { ModalAutorizaciones } from '../ModalAutorizaciones';
 
 export const AutorizacionCuentas = () => {
 
-
     const [datauser, setdatauser] = useState([]);
 
     useEffect(() => {
         const fecthData = async () => {
             try {
-                const response = await fetch('http://localhost:3000/getclienteP');
+                const response = await fetch('https://simulador-banca.onrender.com/getclienteP');
                 if (!response.ok) {
                     throw new Error('Network response was not ok')
                 }
@@ -37,7 +36,7 @@ export const AutorizacionCuentas = () => {
         console.log(id);
         try {
             // Realiza una solicitud al servidor para cambiar el estado del cliente con el ID proporcionado
-            fetch(`http://localhost:3000/Estado/${id}`, {
+            fetch(`https://simulador-banca.onrender.com/Estado/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -75,9 +74,42 @@ export const AutorizacionCuentas = () => {
         }
     };
 
+
     
     const [modalData, setModalData] = useState(null); // Para almacenar los datos del modal
     const [showModal, setShowModal] = useState(false);
+
+    const denegar = (id) => {
+        console.log(id)
+        try {
+            // Realiza una solicitud al servidor para cambiar el estado del cliente con el ID proporcionado
+            fetch(`https://simulador-banca.onrender.com/Estado/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    nuevoEstado: 'Denegado',
+                }),
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data.message);
+                    toast.error("Denegado")
+                    setTimeout(() => {
+                        // Actualiza localmente el estado del cliente según sea necesario
+                        // Puedes utilizar la función setDatauser para actualizar el estado local
+                        // Ejemplo: setDatauser(prevData => [...prevData, data.updatedClient]);
+                        // alert('Autorización exitosa')
+                        // Redirige a la página '/DashBoardMenu' después de procesar la respuesta
+                        window.location = "/DashBoardMenu";
+                    }, 1500);
+
 
     const openModal = (datauser) => {
         setModalData(datauser);

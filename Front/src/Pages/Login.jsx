@@ -18,7 +18,7 @@ export default function Login() {
     const inisesion = async (data) => {
         console.log(data);
         try {
-          const response = await fetch('http://localhost:3000/Login', {
+          const response = await fetch(`https://simulador-banca.onrender.com/Login`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ export default function Login() {
                 // Ejemplo: setDatauser(prevData => [...prevData, data.updatedClient]);
                 // alert('Autorización exitosa')
                 // Redirige a la página '/DashBoardMenu' después de procesar la respuesta
-                window.location = "/DashBoardMenu";
+                window.location.href = "/DashboardMenu";
             }, 2000);
             
             setIsLoggedIn(true);
