@@ -80,7 +80,7 @@ export const AutorizacionCuentas = () => {
     const [showModal, setShowModal] = useState(false);
 
     const denegar = (id) => {
-        console.log(id)
+        
         try {
             // Realiza una solicitud al servidor para cambiar el estado del cliente con el ID proporcionado
             fetch(`https://simulador-banca.onrender.com/Estado/${id}`, {
@@ -90,8 +90,9 @@ export const AutorizacionCuentas = () => {
                 },
                 body: JSON.stringify({
                     nuevoEstado: 'Denegado',
-                }),
+                })
             })
+
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -100,7 +101,7 @@ export const AutorizacionCuentas = () => {
                 })
                 .then(data => {
                     console.log(data.message);
-                    toast.error("Denegado")
+                    toast.error("denegado")
                     setTimeout(() => {
                         // Actualiza localmente el estado del cliente según sea necesario
                         // Puedes utilizar la función setDatauser para actualizar el estado local
@@ -108,8 +109,16 @@ export const AutorizacionCuentas = () => {
                         // alert('Autorización exitosa')
                         // Redirige a la página '/DashBoardMenu' después de procesar la respuesta
                         window.location = "/DashBoardMenu";
-                    }, 1500);
+                    }, 1500); // 2000 milisegundos = 2 segundos
 
+                })
+                .catch(error => {
+                    console.error('Error al cambiar el estado del cliente:', error);
+                });
+
+        } catch (error) {
+            console.error('Error general:', error);
+        }} 
 
     const openModal = (datauser) => {
         setModalData(datauser);
