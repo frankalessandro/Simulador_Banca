@@ -352,7 +352,7 @@ const getDetalle = async (req, res) => {
 const getcliente = async (req, res) => {
   try {
     const nameUser = req.params.userName; // Obtener el valor de name_user de los parámetros de la ruta
-    
+
     // Realizar la consulta SQL con el nombre de usuario como filtro
     const userDetailsQuery = `
     SELECT c.ID_Cliente, 
@@ -394,17 +394,18 @@ const getInfoCliente = async (req, res) => {
 
     // Consulta SQL modificada para filtrar por el número de cuenta
     const clienteQuery = `
-      SELECT c.ID_Cliente, 
-             fpn.IP_primerNombre AS PrimerNombre, 
-             fpn.IP_primerApellido AS PrimerApellido, 
-             fpn.IP_segundoApellido AS SegundoApellido, 
-             dp.N_Cuenta
-      FROM cliente c
-      JOIN DetalleProducto dp ON c.ID_Cliente = dp.Cliente
-      JOIN FormPersonNatural fpn ON c.inf_cliente = fpn.ID_FormPN
+    SELECT c.ID_Cliente, 
+    fpn.IP_primerNombre AS PrimerNombre, 
+    fpn.IP_primerApellido AS PrimerApellido, 
+    fpn.IP_segundoApellido AS SegundoApellido, 
+    dp.N_Cuenta,
+    c.Saldo
+FROM cliente c
+JOIN DetalleProducto dp ON c.ID_Cliente = dp.Cliente
+JOIN FormPersonNatural fpn ON c.inf_cliente = fpn.ID_FormPN
       WHERE dp.N_Cuenta = $1;`;
 
-      const clienteValue = [accountNumberInt]
+    const clienteValue = [accountNumberInt]
     const clienteInfo = await pool.query(clienteQuery, clienteValue);
 
     // Verifica si se encontraron datos

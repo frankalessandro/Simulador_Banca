@@ -31,7 +31,6 @@ export const Movimientos = () => {
     const [datauser, setdatauser] = useState();
 
     const handleConsultClick = async () => {
-
         try {
             const accountNumberInt = parseInt(accountNumber, 10);
 
@@ -50,6 +49,7 @@ export const Movimientos = () => {
                 setAccountOwner(ownerName);
                 setIsFormDisabled(false);
                 setdatauser(data)
+                console.log(data)
                 console.log(accountOwner)// Habilitar el formulario después de obtener los datos
             } else {
                 console.log('No se encontraron datos para el número de cuenta proporcionado.');
@@ -61,12 +61,15 @@ export const Movimientos = () => {
         }
     };
 
+
     console.log(datauser)
 
     const handleConsign = () => {
         const id = datauser.id_cliente
         console.log(id)
-        
+        const saldo = datauser.saldo
+       
+        const nuevoSaldo = parseFloat(amount) + parseFloat(saldo);
         try {
             // Realiza una solicitud al servidor para cambiar el estado del cliente con el ID proporcionado
             fetch(`http://localhost:3000/UpdateCliente/${id}`, {
@@ -75,7 +78,7 @@ export const Movimientos = () => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    nuevoSaldo: amount,
+                    nuevoSaldo: nuevoSaldo,
                 })
             })
 
@@ -161,21 +164,24 @@ export const Movimientos = () => {
     };
 
     const handleRetirar = () => {
-        const id = datauser.id_cliente
-        console.log(id)
-        
-        try {
-            // Realiza una solicitud al servidor para cambiar el estado del cliente con el ID proporcionado
-            fetch(`http://localhost:3000/UpdateCliente/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    nuevoSaldo: amount,
+        const id = datauser.id_cliente;
+        console.log(id);
+        const saldo = datauser.saldo;
+        const nuevoSaldo = parseFloat(saldo) - parseFloat(amount);
+    
+        // Verificar que el nuevo saldo no sea menor que cero
+        if (nuevoSaldo >= 0) {
+            try {
+                // Realiza una solicitud al servidor para cambiar el estado del cliente con el ID proporcionado
+                fetch(`http://localhost:3000/UpdateCliente/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        nuevoSaldo: nuevoSaldo,
+                    })
                 })
-            })
-
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -184,7 +190,7 @@ export const Movimientos = () => {
                 })
                 .then(data => {
                     console.log(data.message);
-                   
+                    
                     setTimeout(() => {
                         // Actualiza localmente el estado del cliente según sea necesario
                         // Puedes utilizar la función setDatauser para actualizar el estado local
@@ -193,19 +199,22 @@ export const Movimientos = () => {
                         // Redirige a la página '/DashBoardMenu' después de procesar la respuesta
                         window.location = "/DashBoardMenu";
                     }, 1500); // 2000 milisegundos = 2 segundos
-
+    
                 })
                 .catch(error => {
                     console.error('Error al cambiar el estado del cliente:', error);
                 });
-
-        } catch (error) {
-            console.error('Error general:', error);
+    
+            } catch (error) {
+                console.error('Error general:', error);
+            }
+        } else {
+            console.error('El nuevo saldo no puede ser menor que cero');
         }
-
-
+    
         console.log(`Retirando: ${amount} de la cuenta ${accountNumber} perteneciente a ${accountOwner}`);
     };
+    
 
 
     
@@ -251,7 +260,7 @@ export const Movimientos = () => {
                                                     className={`w-full px-3 py-2 border rounded-md focus:outline-none ${!isAccountNumberFilled ? 'border-gray-300 focus:border-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300' : ''}`}
                                                 />
                                                 {isAccountNumberFilled && (
-                                                    <button onClick={() => handleConsultClick} className={`mt-2 bg-green hover:bg-green hover:scale-105 duration-100 text-white font-bold py-2 px-4 rounded transition-all ${isFormDisabled ? 'opacity-50 cursor-not-allowed' : ''}`} disabled={isFormDisabled}>
+                                                    <button onClick={() => handleConsultClick()} className={`mt-2 bg-green hover:bg-green hover:scale-105 duration-100 text-white font-bold py-2 px-4 rounded transition-all ${isFormDisabled ? 'opacity-50 cursor-not-allowed' : ''}`} disabled={isFormDisabled}>
                                                         Consultar
                                                     </button>
                                                 )}

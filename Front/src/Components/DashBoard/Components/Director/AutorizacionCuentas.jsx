@@ -6,7 +6,7 @@ export const AutorizacionCuentas = () => {
 
 
 
-console.log(supabase)
+
     const [datauser, setdatauser] = useState([]);
 
     useEffect(() => {
