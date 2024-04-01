@@ -306,12 +306,12 @@ console.log(userData)
                                     {/* Contenido en el reverso de la tarjeta */}
                                     <div className="flip-content">
                                         <div className={`text-white pt-12 flex justify-center text-4xl `}>
-                                            <p>$2000000</p>
+                                            <p>${userData.saldo}</p>
                                         </div>
                                         <div className={`text-white mt-16 flex flex-col justify-end items-end px-2 `}>
-                                            <p>producto</p>
+                                            <p>{userData.nombre_producto}</p>
                                             <p>{userData.n_cuenta}</p>
-                                            <p className='text-lg'></p>
+                                            <p className='text-lg'>{userData.ip_primernombre} {userData.ip_primerapellido} {userData.ip_segundoapellido}</p>
                                         </div>
                                     </div>
                                 </div>

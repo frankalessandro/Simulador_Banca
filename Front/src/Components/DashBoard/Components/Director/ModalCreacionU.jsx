@@ -8,7 +8,7 @@ export const ModalCreacionU = ({ data, showModal, closeModal }) => {
 
     const AddUser = async (data) => {
         try {
-            const response = await fetch('http://localhost:3000/AddUser', {
+            const response = await fetch('https://simulador-banca.onrender.com/AddUser', {
                 method: 'POST',
                 headers: {
                     "Content-type": "application/json"
