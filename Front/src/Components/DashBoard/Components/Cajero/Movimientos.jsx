@@ -35,7 +35,7 @@ export const Movimientos = () => {
             const accountNumberInt = parseInt(accountNumber, 10);
 
             // Realizar la consulta a la base de datos utilizando el número de cuenta convertido
-            const response = await fetch(`http://localhost:3000/getInfoCliente/${accountNumberInt}`);
+            const response = await fetch(`https://simulador-banca.onrender.com/getInfoCliente/${accountNumberInt}`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -72,7 +72,7 @@ export const Movimientos = () => {
         const nuevoSaldo = parseFloat(amount) + parseFloat(saldo);
         try {
             // Realiza una solicitud al servidor para cambiar el estado del cliente con el ID proporcionado
-            fetch(`http://localhost:3000/UpdateCliente/${id}`, {
+            fetch(`https://simulador-banca.onrender.com/UpdateCliente/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -137,7 +137,7 @@ export const Movimientos = () => {
             const accountNumberInt = parseInt(accountNumber, 10);
 
             // Realizar la consulta a la base de datos utilizando el número de cuenta convertido
-            const response = await fetch(`http://localhost:3000/getInfoCliente/${accountNumberInt}`);
+            const response = await fetch(`https://simulador-banca.onrender.com/getInfoCliente/${accountNumberInt}`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -173,7 +173,7 @@ export const Movimientos = () => {
         if (nuevoSaldo >= 0) {
             try {
                 // Realiza una solicitud al servidor para cambiar el estado del cliente con el ID proporcionado
-                fetch(`http://localhost:3000/UpdateCliente/${id}`, {
+                fetch(`https://simulador-banca.onrender.com/UpdateCliente/${id}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',

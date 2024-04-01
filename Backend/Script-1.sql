@@ -6,7 +6,8 @@ CREATE TABLE cliente (
     inf_cliente serial,
     Tipo_de_Cliente varchar(30),
     Saldo int, 
-    Estado varchar(15)
+    Estado varchar(15),
+    Razon varchar(255)
 );
 
 CREATE TABLE producto (
