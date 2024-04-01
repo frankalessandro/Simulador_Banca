@@ -311,7 +311,7 @@ const AddFormData = async (req, res) => {
     // Ten en cuenta que los meses en JavaScript son indexados desde 0 (enero es 0, febrero es 1, etc.)
     const mes = currentDate.getMonth() + 1;
     const anio = currentDate.getFullYear();
-  
+
     const fechaFormateada = `${anio}-${mes < 10 ? '0' + mes : mes}-${dia < 10 ? '0' + dia : dia}`;
 
     const insertQueryDetalle = `
@@ -460,17 +460,18 @@ const getInfoCliente = async (req, res) => {
 
     // Consulta SQL modificada para filtrar por el número de cuenta
     const clienteQuery = `
-      SELECT c.ID_Cliente, 
-             fpn.IP_primerNombre AS PrimerNombre, 
-             fpn.IP_primerApellido AS PrimerApellido, 
-             fpn.IP_segundoApellido AS SegundoApellido, 
-             dp.N_Cuenta
-      FROM cliente c
-      JOIN DetalleProducto dp ON c.ID_Cliente = dp.Cliente
-      JOIN FormPersonNatural fpn ON c.inf_cliente = fpn.ID_FormPN
+    SELECT c.ID_Cliente, 
+    fpn.IP_primerNombre AS PrimerNombre, 
+    fpn.IP_primerApellido AS PrimerApellido, 
+    fpn.IP_segundoApellido AS SegundoApellido, 
+    dp.N_Cuenta,
+    c.Saldo
+FROM cliente c
+JOIN DetalleProducto dp ON c.ID_Cliente = dp.Cliente
+JOIN FormPersonNatural fpn ON c.inf_cliente = fpn.ID_FormPN
       WHERE dp.N_Cuenta = $1;`;
 
-      const clienteValue = [accountNumberInt]
+    const clienteValue = [accountNumberInt]
     const clienteInfo = await pool.query(clienteQuery, clienteValue);
 
     // Verifica si se encontraron datos
