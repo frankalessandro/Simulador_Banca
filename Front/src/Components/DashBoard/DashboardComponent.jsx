@@ -84,7 +84,7 @@ useEffect(() => {
         try {
             // Verificar que se haya almacenado el nombre de usuario en el estado
             if (userName) {
-                const response = await fetch(`http://localhost:3000/getcliente/${userName}`);
+                const response = await fetch(`https://simulador-banca.onrender.com/getcliente/${userName}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -140,7 +140,7 @@ console.log(userData)
                                             arrowIcon={false}
                                             inline
                                             label={
-                                                <button className='flex flex-row items-center  text-sm bg-white rounded-full focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-600'> <p className=' flex items-center text-sm bg-white rounded-full focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-600 '>{user?.name_user} - {user?.rol == 2 && (<> Asesor </>)}{user?.rol == 1 && (<> Director </>)} </p><HiUserCircle color='gray' className='w-16 h-10 ' />  </button>
+                                                <button className='flex flex-row items-center  text-sm bg-white rounded-full focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-600'> <p className=' flex items-center text-sm bg-white rounded-full focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-600 '>{user?.name_user} - {user?.rol == 2 && (<> Asesor </>)}{user?.rol == 1 && (<> Director </>)}{user?.rol == 3 && (<> Cajero </>)} </p><HiUserCircle color='gray' className='w-16 h-10 ' />  </button>
                                             }
                                         >
                                             <Dropdown.Header>
@@ -184,7 +184,7 @@ console.log(userData)
 
                                         <Sidebar.Collapse label={<label className='flex  flex-row  relative right-4 items-center'> <HiClipboard color='white || black' className='flex relative right-1 items-center justify-center w-12' /> Cuenta de Ahorro </label>} className="flex items-center w-full p-2 text-base text-white  transition duration-75 rounded-lg group hover:bg-gray-100  hover:text-black dark:text-white dark:hover:bg-gray-700" >
                                             <Sidebar.Item onClick={() => handleBotonClick('FormularioPersonaNatural')} class="flex items-center  relative left-4 w-full p-2 text-base text-white transition duration-75 rounded-lg group hover:text-black hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{<p className='flex  flex-row  relative right-5 items-center'><HiUser color='white || black' className='flex relative right-1 items-center justify-center w-12' /> Persona Natural</p>}</Sidebar.Item>
-                                            <Sidebar.Item onClick={() => handleBotonClick('FormularioPersonaJuridica')} class="flex items-center relative left-4  w-full p-2 text-base text-white transition duration-75 rounded-lg group  hover:bg-gray-100 hover:text-black dark:text-white dark:hover:bg-gray-700">{<p className='flex  flex-row  relative right-5 items-center'><HiUserGroup color='white || black' className='flex relative right-1 items-center justify-center w-12' /> Persona Juridica</p>}</Sidebar.Item>
+                                            {/* <Sidebar.Item onClick={() => handleBotonClick('FormularioPersonaJuridica')} class="flex items-center relative left-4  w-full p-2 text-base text-white transition duration-75 rounded-lg group  hover:bg-gray-100 hover:text-black dark:text-white dark:hover:bg-gray-700">{<p className='flex  flex-row  relative right-5 items-center'><HiUserGroup color='white || black' className='flex relative right-1 items-center justify-center w-12' /> Persona Juridica</p>}</Sidebar.Item> */}
                                         </Sidebar.Collapse>
                                     </Sidebar.Collapse>
                                     <Sidebar.Item onClick={() => handleBotonClick('Busqueda')} class=" flex items-center justify-start p-2 text-white w-full rounded-lg hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">{<p className='flex justify-start items-center relative right-5'><HiUser color='white || black' className='flex   items-center justify-start h-5 w-12' />Busqueda de Cuentas</p>}</Sidebar.Item>

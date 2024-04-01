@@ -109,6 +109,23 @@ const getBusqueda = async (req, res) => {
     fpn.IP_estadoCivil AS EstadoCivil,
     fpn.IP_nacionalidad AS Nacionalidad,
     fpn.IP_documento,
+    fpn.IP_genero AS gen,
+    fpn.DIF_Ingresos_mensuales AS Ingresosmensuales ,
+    fpn.DIF_Otros_ingresos AS Otrosingresos,
+    fpn.IT_Declara_renta AS Renta ,
+    fpn.IP_fechaExpedicion AS Fechaexpedicion,
+    fpn.ICP_direcResidencia AS Direccion, 
+     fpn.ICP_barrio AS Barrio,
+     fpn.ICP_ciudad_municipio AS Ciudad, 
+    fpn.ICP_departamento AS Depa, 
+    fpn.ICP_pais AS Pais,
+     fpn.ICP_telefono AS Telefono ,
+     fpn.ICP_celular AS Celular ,
+     fpn.ICP_email AS Correo,
+     fpn.AE_profesion AS Profesion , 
+     fpn.AE_ocupacion AS Ocupacion,
+     fpn.AE_detalle_act AS Actividad ,
+    fpn.IP_tipoDoc AS Tipodocumento,
     c.Estado AS EstadoCliente,
     tp.Descripcion AS Producto,
     dp.N_Cuenta,
@@ -294,7 +311,7 @@ const AddFormData = async (req, res) => {
     // Ten en cuenta que los meses en JavaScript son indexados desde 0 (enero es 0, febrero es 1, etc.)
     const mes = currentDate.getMonth() + 1;
     const anio = currentDate.getFullYear();
-
+  
     const fechaFormateada = `${anio}-${mes < 10 ? '0' + mes : mes}-${dia < 10 ? '0' + dia : dia}`;
 
     const insertQueryDetalle = `
@@ -387,73 +404,13 @@ WHERE fpn.IP_documento = $1;`;
   }
 }
 
-const getInfoCliente = async (req, res) => {
-  try {
-    // Obtén el número de cuenta proporcionado en la URL
-    const { accountNumberInt } = req.params;
-
-    // Consulta SQL modificada para filtrar por el número de cuenta
-    const clienteQuery = `
-    SELECT c.ID_Cliente, 
-    fpn.IP_primerNombre AS PrimerNombre, 
-    fpn.IP_primerApellido AS PrimerApellido, 
-    fpn.IP_segundoApellido AS SegundoApellido, 
-    dp.N_Cuenta,
-    c.Saldo
-FROM cliente c
-JOIN DetalleProducto dp ON c.ID_Cliente = dp.Cliente
-JOIN FormPersonNatural fpn ON c.inf_cliente = fpn.ID_FormPN
-      WHERE dp.N_Cuenta = $1;`;
-
-    const clienteValue = [accountNumberInt]
-    const clienteInfo = await pool.query(clienteQuery, clienteValue);
-
-    // Verifica si se encontraron datos
-    if (clienteInfo.rows.length > 0) {
-      // Si se encontraron datos, envía el primer resultado al cliente
-      res.status(200).json(clienteInfo.rows[0]);
-    } else {
-      // Si no se encontraron datos, envía un mensaje indicando que no se encontró ningún cliente con el número de cuenta proporcionado
-      res.status(404).json({ message: "No se encontró ningún cliente con el número de cuenta proporcionado" });
-    }
-  } catch (error) {
-    console.error("Error al obtener información del cliente:", error.message);
-    res.status(500).json({ error: "Error al obtener información del cliente" });
-  }
-};
-
-
-const UpdateCliente = async (req, res) => {
-  const Id = req.params.id;
-  const saldo = req.body.nuevoSaldo;
-
-  try {
-    // Verifica que estado esté definido antes de utilizarlo
-    if (typeof saldo !== 'undefined') {
-      // Realiza la actualización en la base de datos utilizando el ID
-      const updateQueryA = 'UPDATE cliente SET saldo = $1 WHERE id_cliente = $2';
-      const updateValuesA = [saldo, Id];
-      await pool.query(updateQueryA, updateValuesA);
-
-      res.status(200).json({ message: 'Actualización de autorización exitosa' });
-    } else {
-      console.error('El valor de nuevoEstado no está definido en el cuerpo de la solicitud.');
-      res.status(400).json({ message: 'Bad Request: El valor de nuevoEstado no está definido en el cuerpo de la solicitud.' });
-    }
-  } catch (error) {
-    console.log(req.body);
-    console.error('Error al actualizar la autorización:', error);
-    res.status(500).json({ message: 'Error en el servidor' });
-  }
-};
-
-
 module.exports = {
   loginUser,
   user,
   getPendiente,
   getAutorizado,
   getDenegado,
+  DelateUser,
   AddUser,
   UpdateUser,
   AddFormData,
