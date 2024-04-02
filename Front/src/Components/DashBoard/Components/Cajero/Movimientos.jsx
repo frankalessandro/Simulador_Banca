@@ -2,6 +2,7 @@ import "react-toastify/dist/ReactToastify.css";
 import React from 'react'
 import { Button, Modal } from 'flowbite-react';
 import { useState, useEffect } from 'react';
+import { toast } from "react-toastify";
 
 export const Movimientos = () => {
 
@@ -90,7 +91,7 @@ export const Movimientos = () => {
                 })
                 .then(data => {
                     console.log(data.message);
-                    
+                    toast.success("Monto consignado correctamente")
                     setTimeout(() => {
                         // Actualiza localmente el estado del cliente según sea necesario
                         // Puedes utilizar la función setDatauser para actualizar el estado local
@@ -102,6 +103,7 @@ export const Movimientos = () => {
 
                 })
                 .catch(error => {
+                    toast.error("Error al consignar")
                     console.error('Error al cambiar el estado del cliente:', error);
                 });
 
@@ -190,7 +192,7 @@ export const Movimientos = () => {
                 })
                 .then(data => {
                     console.log(data.message);
-                    
+                    toast.success("Monto retirado correctamente")
                     setTimeout(() => {
                         // Actualiza localmente el estado del cliente según sea necesario
                         // Puedes utilizar la función setDatauser para actualizar el estado local
@@ -206,9 +208,11 @@ export const Movimientos = () => {
                 });
     
             } catch (error) {
+                toast.error("Error al retirar")
                 console.error('Error general:', error);
             }
         } else {
+            toast.error("El nuevo saldo no puede ser menor que cero")
             console.error('El nuevo saldo no puede ser menor que cero');
         }
     
