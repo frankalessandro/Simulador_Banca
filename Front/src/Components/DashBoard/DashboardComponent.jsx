@@ -68,51 +68,51 @@ export const DashboardComponent = () => {
     }
 
 
-    const [userName, setUserName] = useState(null); 
+    const [userName, setUserName] = useState(null);
     const [userData, setUserData] = useState(null); // Variable de estado para almacenar el nombre de usuario
-    const [data,setdata] = useState(null)
-    
-// Efecto para guardar el nombre de usuario cuando el componente se monta
-useEffect(() => {
-    // Verificar si el usuario está autenticado y obtener su nombre de usuario si es así
-    if (isLoggedIn && user) {
-        setUserName(user.name_user); // Almacenar el nombre de usuario en el estado
-         // Mostrar el nombre de usuario en la consola
-    }
+    const [data, setdata] = useState(null)
 
-    const fetchData = async () => {
-        try {
-            // Verificar que se haya almacenado el nombre de usuario en el estado
-            if (userName) {
-                const response = await fetch(`https://simulador-banca.onrender.com/getcliente/${userName}`);
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data = await response.json();
-                setUserData(data); // Almacenar los datos del usuario en el estado
-                console.log(data);
-                setdata(userData.ip_primernombre)
-            }
-        } catch (error) {
-            console.error('Error al obtener información:', error);
+    // Efecto para guardar el nombre de usuario cuando el componente se monta
+    useEffect(() => {
+        // Verificar si el usuario está autenticado y obtener su nombre de usuario si es así
+        if (isLoggedIn && user) {
+            setUserName(user.name_user); // Almacenar el nombre de usuario en el estado
+            // Mostrar el nombre de usuario en la consola
         }
-    };
 
-    // Llamar a la función fetchData si el nombre de usuario está disponible
-    fetchData(); 
+        const fetchData = async () => {
+            try {
+                // Verificar que se haya almacenado el nombre de usuario en el estado
+                if (userName) {
+                    const response = await fetch(`https://simulador-banca.onrender.com/getcliente/${userName}`);
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    const data = await response.json();
+                    setUserData(data); // Almacenar los datos del usuario en el estado
+                    console.log(data);
+                    setdata(userData.ip_primernombre)
+                }
+            } catch (error) {
+                console.error('Error al obtener información:', error);
+            }
+        };
 
-}, [isLoggedIn, user, userName]); // Agregar userName como dependencia del efecto
+        // Llamar a la función fetchData si el nombre de usuario está disponible
+        fetchData();
 
-console.log(userName)
-console.log(userData)
+    }, [isLoggedIn, user, userName]); // Agregar userName como dependencia del efecto
+
+    console.log(userName)
+    console.log(userData)
 
 
 
     return (
-        
+
         <>
-      
-        
+
+
             {isLoggedIn && user.rol !== 4 && (
                 <>
                     <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
@@ -272,15 +272,15 @@ console.log(userData)
                         {contenidoSeleccionado === 'Reportes' && <Reportes />}
                         {contenidoSeleccionado === 'Historial' && <Historial />}
                         {contenidoSeleccionado === 'HistorialD' && <HistorialD />}
-                        {contenidoSeleccionado === 'Busqueda' && <BusquedaC /> }
-                        {contenidoSeleccionado === 'Movimientos' && <Movimientos /> }
+                        {contenidoSeleccionado === 'Busqueda' && <BusquedaC />}
+                        {contenidoSeleccionado === 'Movimientos' && <Movimientos />}
                         {/* Renderiza otros contenidos según sea necesario */}
                     </div>
                 </>
             )
 
             }
-            {isLoggedIn && user.rol === 4 && userData &&(
+            {isLoggedIn && user.rol === 4 && userData && (
                 <>
                     <section className='w-screen h-screen  flex justify-center items-center flex-col'>
                         <header>
@@ -289,26 +289,25 @@ console.log(userData)
                         <main className='h-3/4 w-full bg-white flex justify-center items-center'>
                             {/* Lado principal */}
                             <div
-                                className={`bg-green h-80 w-128 rounded-xl relative ${flipped ? 'flip' : ''}`}
+                                className={`bg-white bg-gradient-to-r from-green to-white h-80 w-128 rounded-xl shadow-xl relative ${flipped ? 'flip' : ''}`}
                                 onMouseEnter={handleMouseEnter}
                                 onMouseLeave={handleMouseLeave}
                             >
                                 <div className={`h-1/3 flex items-end ${flipped ? 'hidden' : ''}`}>
-                                    <img src={ChipCard} alt="" />
+                                    <img className='pl-4' src={ChipCard} alt="" />
                                     <img className='text-stone-300' src={''} alt="" />
                                 </div>
                                 <div className={`h-2/3 flex justify-end items-end ${flipped ? 'hidden' : ''}`}>
-                                    <img className='w-44 py-5' src={Namelogo} alt="" />
-                                    <img className='h-40' src={Logo} alt="" />
+                                    <img className='w-36 py-5' src={Namelogo} alt="" />
+                                    <img className='h-32' src={Logo} alt="" />
                                 </div>
-
                                 <div className={`h-12 mt-8 bg-emerald-700 ${flipped ? '' : 'hidden'}`}>
                                     {/* Contenido en el reverso de la tarjeta */}
                                     <div className="flip-content">
-                                        <div className={`text-white pt-12 flex justify-center text-4xl `}>
+                                        <div className={`text-gray-800 pt-16 flex justify-center text-4xl `}>
                                             <p>${userData.saldo}</p>
                                         </div>
-                                        <div className={`text-white mt-16 flex flex-col justify-end items-end px-2 `}>
+                                        <div className={`text-gray-800 mt-24 flex flex-col justify-end items-end px-2 `}>
                                             <p>{userData.nombre_producto}</p>
                                             <p>{userData.n_cuenta}</p>
                                             <p className='text-lg'>{userData.ip_primernombre} {userData.ip_primerapellido} {userData.ip_segundoapellido}</p>
@@ -318,10 +317,7 @@ console.log(userData)
                             </div>
                         </main>
 
-
-
-                    </section>
-                    <div>
+                        <div>
                         <Dropdown
                             arrowIcon={false}
                             inline
@@ -337,6 +333,9 @@ console.log(userData)
                             <Dropdown.Item onClick={handlelogout}>Salir</Dropdown.Item>
                         </Dropdown>
                     </div>
+
+                    </section>
+                    
                 </>
             )}
 
