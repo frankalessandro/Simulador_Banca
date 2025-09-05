@@ -1,20 +1,46 @@
-import React from 'react';
-import TopLogo from '../../../assets/Img/Logos/ClarBank Banner.svg';
+import TopLogo from '../../../assets/Img/Logos/ClarBank Name.svg';
+import heroImg from '../../../assets/Img/Main_Image.svg';
 
 export const Banner = () => {
   return (
-    <div className="bg-white mx-4 md:mx-12 lg:mx-20 xl:mx-32 flex flex-col md:flex-row rounded shadow-md">
-      <div className="bg-gradient-to-r from-green-400 flex flex-col justify-evenly w-full md:w-3/4">
-        <h1 className="p-8 flex justify-center md:text-3xl lg:text-4xl xl:text-2xl font-bold tracking-tight text-gray-900 dark:text-white md:text-left">
-          ¡Bienvenido a ClarBank, tu destino financiero de confianza!
-        </h1>
-        <p className="px-4 md:px-12 md:py-8 lg:py-12 text-sm md:text-base lg:text-lg xl:text-xl font-normal text-gray-700 dark:text-gray-400 text-center md:text-left">
-          En ClarBank, no solo abrimos puertas, ¡creamos oportunidades! Estamos emocionados de darte la bienvenida a nuestra plataforma financiera donde la excelencia y el compromiso son nuestra prioridad.
-        </p>
+    <header className="relative overflow-hidden bg-gradient-to-br from-darkGreen to-neutralGreen text-white">
+      <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_top_right,white,transparent_60%)]" />
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div className="space-y-6">
+          <div className="p-4 w-full h-full flex justify-center items-center">
+            <img src={TopLogo} alt="ClarBank" />
+          </div>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">
+            Banca moderna, simple y segura
+          </h1>
+          <p className="text-white/90 max-w-xl">
+            Gestiona tus finanzas con una plataforma confiable: cuentas, pagos y reportes con experiencia de nivel bancario.
+          </p>
+          <div className="flex flex-wrap gap-3 pt-2">
+            <a href="#productos" className="px-5 py-3 rounded-lg bg-white text-darkGreen font-medium hover:bg-lightGreen/90 transition">Ver productos</a>
+            <a href="/Login" className="px-5 py-3 rounded-lg ring-1 ring-white/60 hover:bg-white/10 transition">Iniciar sesión</a>
+          </div>
+          <div className="flex gap-8 pt-6 text-white/80 text-sm">
+            <div>
+              <div className="text-2xl font-semibold text-white">24/7</div>
+              <div>Soporte y disponibilidad</div>
+            </div>
+            <div>
+              <div className="text-2xl font-semibold text-white">+99.9%</div>
+              <div>Tiempo de actividad</div>
+            </div>
+            <div>
+              <div className="text-2xl font-semibold text-white">PCI</div>
+              <div>Buenas prácticas de seguridad</div>
+            </div>
+          </div>
+        </div>
+        <div className="relative">
+          <div className="bg-white/10 backdrop-blur rounded-2xl p-6 shadow-2xl ring-1 ring-white/20">
+            <img src={heroImg} alt="Banca moderna" className="w-full h-auto" />
+          </div>
+        </div>
       </div>
-      <div className="mx-4 md:mx-24">
-        <img src={TopLogo} className="h-40 md:h-60 xl:h-80" alt="ClarBank" />
-      </div>
-    </div>
+    </header>
   );
 };

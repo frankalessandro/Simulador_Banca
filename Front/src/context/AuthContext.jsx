@@ -1,8 +1,9 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import Cookies from 'js-cookie';
-import { Navigate } from 'react-router-dom';
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { API_BASE } from '../config.js';
+
 
 const AuthContext = createContext();
 
@@ -41,7 +42,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     console.log("se presiono  cerrar sesion")
-    toast.success("haz cerrado sesion")
+    toast.success("Sesión cerrada exitosamente")
     setTimeout(() => {
         // Actualiza localmente el estado del cliente según sea necesario
         // Puedes utilizar la función setDatauser para actualizar el estado local
@@ -74,7 +75,7 @@ export const AuthProvider = ({ children }) => {
 
   const updateUserData = async (userData) => {
     try {
-      const response = await fetch('https://simulador-banca.onrender.com/UpdateUser', {
+      const response = await fetch(`${API_BASE}/UpdateUser`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Dropdown } from 'flowbite-react';
 import { useAuth } from '../../../../../context/AuthContext';
+import { API_BASE } from '../../../../../config.js';
 
 export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick }) => {
 
@@ -139,7 +140,7 @@ export const Formulario = ({ contenidoSeleccionado1, regresar, handleBotonClick 
     console.log('id:', id);
     console.log('datainfo:', datainfo);
     try {
-      const response = await fetch(`https://simulador-banca.onrender.com/AddFormData/${id}`, {
+      const response = await fetch(`${API_BASE}/AddFormData/${id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -20,4 +20,9 @@ router.get('/getBusqueda', dataController.getBusqueda )
 router.get('/getInfoCliente/:accountNumberInt', dataController.getInfoCliente);
 router.put('/UpdateCliente/:id', dataController.UpdateCliente);
 
+// Nuevas rutas para búsqueda flexible y movimientos
+router.get('/clienteByQuery', dataController.clienteByQuery);
+router.post('/cliente/:id/deposit', dataController.depositCliente);
+router.post('/cliente/:id/withdraw', dataController.withdrawCliente);
+
 module.exports = router;

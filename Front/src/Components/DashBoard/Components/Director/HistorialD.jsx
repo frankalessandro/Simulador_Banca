@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// Removed unused toast imports
+import { API_BASE } from '../../../../config.js';
 
 export const HistorialD = () => {
     const [datauser, setdatauser] = useState([]);
@@ -10,7 +10,7 @@ export const HistorialD = () => {
     useEffect(() => {
         const fecthData = async () => {
             try {
-                const response = await fetch('https://simulador-banca.onrender.com/getclienteD');
+                const response = await fetch(`${API_BASE}/getclienteD`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok')
                 }
@@ -98,27 +98,27 @@ export const HistorialD = () => {
 
         <>
 
-            <div className="p-4 sm:ml-64">
-                <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
-                    <div className=' flex justify-center items-center flex-col gap-10' style={{ minHeight: '85vh' }}>
+            <div className="p-6 sm:ml-64">
+                <div className="mt-16 max-w-6xl mx-auto">
+                    <div className='bg-white rounded-2xl shadow-sm ring-1 ring-gray-100 p-6'>
 
 
 
 
 
-                        <div className='w-3/4 text-black text-4xl flex items-center justify-center font-semibold text-center'>
-                            <p>Historial de Denegados</p>
+                        <div className='mb-6 text-center'>
+                            <h2 className='text-2xl font-semibold text-darkGreen'>Historial de denegados</h2>
+                            <p className='text-sm text-gray-500'>Filtra por fechas para consultar rechazos</p>
                         </div>
-                            <div className='flex flex-row justify-evenly items-center max-[500px]:flex-col max-[500px]:justify-center max-[500px]:items-center '>
+                        <div className='flex flex-row justify-center gap-4 items-center mb-6'>
+                            <input type="date" className='rounded-lg border-gray-300 focus:ring-green focus:border-green w-52' defaultValue={fechaInicio} onChange={handleFechaInicioChange} />
+                            <input type="date" className='rounded-lg border-gray-300 focus:ring-green focus:border-green w-52' defaultValue={fechaFin} onChange={handleFechaFinChange} />
+                        </div>                           
+                        <div className="relative overflow-x-auto rounded-xl ring-1 ring-gray-100">
+                             <table className="w-full text-sm text-center text-gray-700">
 
-                                <input type="date" className='rounded-md border-gray-300 focus:ring-green focus:border-green w-52' defaultValue={fechaInicio} onChange={handleFechaInicioChange} />
-                                <input type="date" className='rounded-md border-gray-300 focus:ring-green focus:border-green w-52' defaultValue={fechaFin} onChange={handleFechaFinChange} />
-                            </div>                           
-                        <div className="w-8/12 relative overflow-x-auto shadow-md sm:rounded-lg">
-                             <table className="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-gray-400">
 
-
-                                <thead className="text-xs text-center text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <thead className="text-xs uppercase bg-gray-50 text-gray-600">
                                     <tr>
                                         <th scope="col" className="px-6 py-3">
                                             Nombre de Cliente
@@ -137,11 +137,11 @@ export const HistorialD = () => {
 
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody className="divide-y divide-gray-100">
                                     {dataFiltrados?.map((data) => (
 
 
-                                        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={data.id_cliente}>
+                                        <tr className="bg-white hover:bg-gray-50" key={data.id_cliente}>
 
                                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                 {data.nombre}
@@ -167,8 +167,6 @@ export const HistorialD = () => {
                                 </tbody>
                             </table>
                         </div>
-
-
                     </div>
                 </div>
             </div>

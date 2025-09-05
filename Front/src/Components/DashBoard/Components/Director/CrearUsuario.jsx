@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ModalCreacionU } from './ModalCreacionU';
+import { ModalEdicionU } from './ModalEdicionU';
+import { API_BASE } from '../../../../config.js';
 
 export const CrearUsuario = () => {
     const [datauser, setdatauser] = useState([]);
     const [forceUpdate, setForceUpdate] = useState(false);
-    const [modalData, setModalData] = useState(null); 
     const [showModal, setShowModal] = useState(false);
+    const [editData, setEditData] = useState(null);
+    const [showEdit, setShowEdit] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('https://simulador-banca.onrender.com/user');
+                const response = await fetch(`${API_BASE}/user`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -26,47 +28,15 @@ export const CrearUsuario = () => {
         fetchData();
     }, [forceUpdate]);
 
-    const abrir = () => {
-        setactiveModal((prev) =>
-            prev === "absolute overflow-y-auto overflow-x-hidden justify-center items-center w-full md:inset-0 h-[calc(100%)] max-h-full sr-only"
-                ? "absolute flex items-center overflow-y-auto overflow-x-hidden bg-gray-400 bg-opacity-60 justify-center items-center w- md:inset-0 h-[calc(100%)] max-h-full not-sr-only"
-                : "absolute overflow-y-auto overflow-x-hidden justify-center items-center w-full md:inset-0 h-[calc(100%)] max-h-full sr-only"
-        );
-    };
+    const abrirCrear = () => setShowModal(true);
 
-    const AddUser = async (data) => {
-        try {
-            const response = await fetch('https://simulador-banca.onrender.com/AddUser', {
-                method: 'POST',
-                headers: {
-                    "Content-type": "application/json"
-                },
-                body: JSON.stringify({
-                    name: data.name,
-                    password: data.password,
-                    rol: data.rol
-                })
-            });
-            console.log(data);
-        } catch (error) {
-            console.error('Error al añadir usuario:', error);
-        }
-    };
-
-    const openModal = (datauser) => {
-        setModalData(datauser);
-        setShowModal(true);
-    };
-
-    const closeModal = () => {
-        setModalData(null); 
-        setShowModal(false);
-    };
+    const openModal = () => abrirCrear();
+    const openEdit = (userRow) => { setEditData(userRow); setShowEdit(true); };
 
     const eliminarUsuario = async (userId) => {
         console.log(userId)
         try {
-            const response = await fetch(`https://simulador-banca.onrender.com/user/${userId}`, {
+            const response = await fetch(`${API_BASE}/user/${userId}`, {
                 method: 'DELETE',
             });
             if (response.ok) {
@@ -85,15 +55,22 @@ export const CrearUsuario = () => {
 
     return (
         <>
-            <div className="p-4 sm:ml-64">
-                <div className="md:p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
-                    <div className='flex justify-center items-center flex-col gap-10' style={{ minHeight: '85vh' }}>
-                        <div className='w-3/4 text-black text-4xl flex items-center justify-center font-semibold text-center'>
-                            <p>Creacion de Usuarios</p>
+            <div className="p-6 sm:ml-64">
+                <div className="mt-16 max-w-6xl mx-auto">
+                    <div className='bg-white rounded-2xl shadow-sm ring-1 ring-gray-100 p-6'>
+                        <div className='mb-6 text-center'>
+                            <h2 className='text-2xl font-semibold text-darkGreen'>Creación de usuarios</h2>
+                            <p className='text-sm text-gray-500'>Gestiona perfiles y estados del equipo</p>
                         </div>
-                        <div className="w-11/12 md:w-8/12 relative overflow-x-auto overflow-y-auto  shadow-md sm:rounded-lg">
-                            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center">
+                        <div className='mb-4 flex justify-end'>
+                            <button onClick={abrirCrear} className='inline-flex items-center gap-2 rounded-lg bg-neutralGreen hover:bg-green text-white px-4 py-2 text-sm focus:ring-4 focus:ring-lightGreen/40'>
+                                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>
+                                Nuevo usuario
+                            </button>
+                        </div>
+                        <div className="w-full relative overflow-x-auto rounded-xl ring-1 ring-gray-100">
+                            <table className="w-full text-sm text-left text-gray-700">
+                                <thead className="text-xs uppercase bg-gray-50 text-gray-600 text-center">
                                     <tr>
                                         <th scope="col" className="px-6 py-3">
                                             Nombre
@@ -109,11 +86,11 @@ export const CrearUsuario = () => {
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody className="divide-y divide-gray-100">
                                     {datauser?.map((date) => (
                                         <>
                                             {date.rol !== 1 && date.rol !== 4 && (
-                                                <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={date.id_usuario}>
+                                                <tr className="bg-white hover:bg-gray-50" key={date.id_usuario}>
                                                     <th scope="row" className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                                                         <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0a9 9 0 0 0 5-1.5 4 4 0 0 0-4-3.5h-2a4 4 0 0 0-4 3.5 9 9 0 0 0 5 1.5Zm3-11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
@@ -132,14 +109,14 @@ export const CrearUsuario = () => {
                                                             <div className="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Activo
                                                         </div>
                                                     </td>
-                                                    <td className="px-6 py-4 flex gap-5 justify-center">
-                                                        <button type="button" onClick={() => openModal(date)} className='hover:bg-gray-200 p-1 rounded-sm'>
-                                                            <svg className="w-6 h-6 text-black dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 12h4m-2 2v-4M4 18v-1a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v1c0 .6-.4 1-1 1H5a1 1 0 0 1-1-1Zm8-10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                                    <td className="px-6 py-4 flex gap-3 justify-center">
+                                                        <button type="button" onClick={() => openEdit(date)} className='inline-flex items-center justify-center rounded-md ring-1 ring-green/30 text-neutralGreen hover:bg-lightGreen/30 p-2'>
+                                                            <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 3h5v5M9 15l12-12M19 13v6a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h6" />
                                                             </svg>
                                                         </button>
-                                                        <button href="#" onClick={() => eliminarUsuario(date.id_usuario)} className='hover:bg-gray-200 p-1 rounded-sm'>
-                                                            <svg className="w-6 h-6 text-red-600 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                        <button href="#" onClick={() => eliminarUsuario(date.id_usuario)} className='inline-flex items-center justify-center rounded-md ring-1 ring-red-200 text-red-600 hover:bg-red-50 p-2'>
+                                                            <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18 18 6m0 12L6 6" />
                                                             </svg>
                                                         </button>
@@ -151,7 +128,8 @@ export const CrearUsuario = () => {
                                 </tbody>
                             </table>
                         </div>
-                        <ModalCreacionU setShowModal={setShowModal} data={modalData} showModal={showModal} closeModal={closeModal} />
+                        <ModalCreacionU showModal={showModal} closeModal={() => setShowModal(false)} onSuccess={() => setForceUpdate((p)=>!p)} />
+                        <ModalEdicionU userData={editData} showModal={showEdit} closeModal={() => setShowEdit(false)} onSuccess={() => setForceUpdate((p)=>!p)} />
                     </div>
                 </div>
             </div>

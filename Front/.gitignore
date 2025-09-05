@@ -26,5 +26,7 @@ dist-ssr
 
 # Contentlayer
 .contentlayer
-
 .env
+.env.local
+.env.example
+.vercel.json

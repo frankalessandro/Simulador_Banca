@@ -1,12 +1,13 @@
-const CONFIG_BD = {
-    user: 'postgres.kocimeuadjdlczbpifau',
-    host: 'aws-0-us-west-1.pooler.supabase.com',
-    database: 'postgres',
-    password: '77vRdnArGcY4teHo',
-    port: 5432 //Puerto predeterminado de PostgreSQL
-}
+require('dotenv').config();
 
-module.exports = {
-    CONFIG_BD ,
+const CONFIG_BD = {
+    user: process.env.DB_USER || 'postgres',
+    host: process.env.DB_HOST || 'localhost',
+    database: process.env.DB_NAME || 'postgres',
+    password: process.env.DB_PASSWORD || 'postgres',
+    port: parseInt(process.env.DB_PORT || '5432', 10)
 };
 
+module.exports = {
+    CONFIG_BD,
+};

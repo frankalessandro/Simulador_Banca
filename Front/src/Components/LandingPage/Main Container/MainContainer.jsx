@@ -1,49 +1,43 @@
 import React from 'react';
-import FrontImage from '../../../assets/Img/Main_Image.svg';
 import nomina from '../../../assets/Img/Carousel/nomina.png';
 import ahorro from '../../../assets/Img/Carousel/cuenta-ahorros.png';
 import credito from '../../../assets/Img/Carousel/credito.png';
 
 export const MainContainer = () => {
   return (
-    <>
-      <div className="Products-card flex flex-wrap items-center justify-center md:justify-between p-5 bg-white mx-4 md:mx-12 lg:mx-20 xl:mx-32 my-5 rounded shadow-md">
-        <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-3">
-          <div className="p-5 h-auto md:h-96 w-full md:w-60">
-            <a href="#">
-              <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Cuentas Nómina</h5>
-            </a>
-            <img src={nomina} alt="Cuentas Nómina" className="w-20 mx-auto md:mx-0" />
-            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 text-center md:text-left">
-              ¡Descubre el poder de una cuenta de nómina diseñada para simplificar tu vida financiera! En un mundo lleno de opciones, ¿por qué conformarse con lo común cuando puedes experimentar la excelencia con nuestros servicios de cuenta de nómina?
-            </p>
+    <section id="productos" className="py-16">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-darkGreen">Nuestros productos</h2>
+          <p className="text-gray-600 mt-2">Soluciones claras para tus metas financieras</p>
+        </div>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="rounded-xl bg-white p-6 shadow-sm ring-1 ring-gray-100 hover:shadow-md transition">
+            <div className="flex items-center gap-4 mb-4">
+              <img src={nomina} alt="Cuentas Nómina" className="w-12 h-12" />
+              <h3 className="text-lg font-medium text-gray-900">Cuentas Nómina</h3>
+            </div>
+            <p className="text-sm text-gray-600">Recibe tu salario y realiza pagos con cero complicaciones, soporte 24/7 y alertas en tiempo real.</p>
+            <div className="mt-4 text-sm text-neutralGreen font-medium">Solicitar información →</div>
+          </div>
+          <div className="rounded-xl bg-white p-6 shadow-sm ring-1 ring-gray-100 hover:shadow-md transition">
+            <div className="flex items-center gap-4 mb-4">
+              <img src={ahorro} alt="Cuentas de Ahorros" className="w-12 h-12" />
+              <h3 className="text-lg font-medium text-gray-900">Cuentas de Ahorros</h3>
+            </div>
+            <p className="text-sm text-gray-600">Haz crecer tu dinero con intereses competitivos, sin costos ocultos y con retiros flexibles.</p>
+            <div className="mt-4 text-sm text-neutralGreen font-medium">Comparar opciones →</div>
+          </div>
+          <div className="rounded-xl bg-white p-6 shadow-sm ring-1 ring-gray-100 hover:shadow-md transition">
+            <div className="flex items-center gap-4 mb-4">
+              <img src={credito} alt="Créditos" className="w-12 h-12" />
+              <h3 className="text-lg font-medium text-gray-900">Créditos</h3>
+            </div>
+            <p className="text-sm text-gray-600">Financiación responsable para tus proyectos: tasas claras, aprobación ágil y acompañamiento personalizado.</p>
+            <div className="mt-4 text-sm text-neutralGreen font-medium">Simular crédito →</div>
           </div>
         </div>
-
-        <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-3">
-          <div className="p-5 h-auto md:h-96 w-full md:w-64">
-            <a href="#">
-              <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Créditos</h5>
-            </a>
-            <img src={credito} alt="Créditos" className="w-20 mx-auto md:mx-0" />
-            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 text-center md:text-left">
-              ¡Desata tu potencial financiero con nuestros servicios de créditos a medida! En la travesía hacia tus metas, no dejes que las barreras financieras te detengan. Con nuestro exclusivo servicio de créditos, te ofrecemos una llave hacia oportunidades ilimitadas.
-            </p>
-          </div>
-        </div>
-
-        <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-3">
-          <div className="p-5 h-auto md:h-96 w-full md:w-64">
-            <a href="#">
-              <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Cuentas de Ahorros</h5>
-            </a>
-            <img src={ahorro} alt="Cuentas de Ahorros" className="w-20 mx-auto md:mx-0" />
-            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 text-center md:text-left">
-              Entra en un mundo de estabilidad financiera y crecimiento con nuestra cuenta de ahorros. ¿Te has preguntado alguna vez cómo sería tener un respaldo financiero sólido para tus proyectos futuros? Con nuestra cuenta de ahorros, estás a un paso de lograrlo.
-            </p>
-          </div>
-        </div> 
       </div>
-    </>
+    </section>
   );
 };

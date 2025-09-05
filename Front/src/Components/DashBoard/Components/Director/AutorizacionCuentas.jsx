@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ModalAutorizaciones } from '../ModalAutorizaciones';
+import { API_BASE } from '../../../../config.js';
 
 export const AutorizacionCuentas = () => {
 
@@ -13,7 +14,7 @@ export const AutorizacionCuentas = () => {
     useEffect(() => {
         const fecthData = async () => {
             try {
-                const response = await fetch('https://simulador-banca.onrender.com/getclienteP');
+                const response = await fetch(`${API_BASE}/getclienteP`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok')
                 }
@@ -39,7 +40,7 @@ export const AutorizacionCuentas = () => {
         console.log(id);
         try {
             // Realiza una solicitud al servidor para cambiar el estado del cliente con el ID proporcionado
-            fetch(`https://simulador-banca.onrender.com/Estado/${id}`, {
+            fetch(`${API_BASE}/Estado/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -86,7 +87,7 @@ export const AutorizacionCuentas = () => {
         
         try {
             // Realiza una solicitud al servidor para cambiar el estado del cliente con el ID proporcionado
-            fetch(`https://simulador-banca.onrender.com/Estado/${id}`, {
+            fetch(`${API_BASE}/Estado/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -135,17 +136,18 @@ export const AutorizacionCuentas = () => {
 
     return (
         <>
-            <div className="p-4 sm:ml-64">
-                <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
-                    <div className='flex justify-center items-center flex-col gap-10' style={{ minHeight: '85vh' }}>
-                        <div className='w-3/4 text-black text-4xl flex items-center justify-center font-semibold text-center'>
-                            <p>Autorización de Cuentas</p>
+            <div className="p-6 sm:ml-64">
+                <div className="mt-16 max-w-6xl mx-auto">
+                    <div className='bg-white rounded-2xl shadow-sm ring-1 ring-gray-100 p-6'>
+                        <div className='mb-6 text-center'>
+                            <h2 className='text-2xl font-semibold text-darkGreen'>Autorización de cuentas</h2>
+                            <p className='text-sm text-gray-500'>Revisa, autoriza o deniega aperturas pendientes</p>
                         </div>
-                        <div className="w-8/12 relative overflow-x-auto shadow-md sm:rounded-lg">
-                            <table className="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-gray-400">
+                        <div className="relative overflow-x-auto rounded-xl ring-1 ring-gray-100">
+                            <table className="w-full text-sm text-center text-gray-700">
 
 
-                                <thead className="text-xs text-center text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <thead className="text-xs uppercase bg-gray-50 text-gray-600">
                                     <tr>
                                         <th scope="col" className="px-6 py-3">
                                             Nombre de Cliente
@@ -166,12 +168,12 @@ export const AutorizacionCuentas = () => {
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody className="divide-y divide-gray-100">
 
                                     {datauser?.map((data) => (
 
 
-                                        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={data.id_cliente}>
+                                        <tr className="bg-white hover:bg-gray-50" key={data.id_cliente}>
 
                                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                 {data.nombre}
@@ -187,16 +189,16 @@ export const AutorizacionCuentas = () => {
                                                 {data.estadocliente}
 
                                             </td>
-                                            <td class="px-6 py-4 flex gap-5 justify-center">
+                                            <td class="px-6 py-4 flex gap-3 justify-center">
                                                 
-                                                <button onClick={()=> openModal(data)} href="#" class='hover:bg-gray-200 p-1 rounded-sm'>
-                                                    <svg class="w-6 h-6 text-red-600 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                <button onClick={()=> openModal(data)} className='inline-flex items-center justify-center rounded-md ring-1 ring-red-200 text-red-600 hover:bg-red-50 p-2'>
+                                                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 18 6m0 12L6 6" />
                                                     </svg>
                                                 </button>
 
-                                                <button onClick={() => autorizar(data.id_cliente)} href="#" class='hover:bg-gray-200 p-1 rounded-sm'>
-                                                    <svg class="w-6 h-6 text-neutralGreen dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                <button onClick={() => autorizar(data.id_cliente)} className='inline-flex items-center justify-center rounded-md ring-1 ring-green/30 text-neutralGreen hover:bg-lightGreen/30 p-2'>
+                                                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 12 4.7 4.5 9.3-9" />
                                                     </svg>
                                                 </button>
@@ -211,8 +213,7 @@ export const AutorizacionCuentas = () => {
                                 </tbody>
                             </table>
                         </div>
-<ModalAutorizaciones   data={modalData} closeModal={closeModal} showModal={showModal}  />
-
+                        <ModalAutorizaciones data={modalData} closeModal={closeModal} showModal={showModal} />
                     </div>
                 </div>
             </div>

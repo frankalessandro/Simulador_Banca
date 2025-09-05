@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { API_BASE } from '../../../../config.js';
 import Chart from 'chart.js/auto'
 
 export const Reportes = () => {
@@ -6,7 +7,7 @@ export const Reportes = () => {
     useEffect(() => {
         const fecthInfo = async () => {
             try {
-                const response = await fetch('https://simulador-banca.onrender.com/getDetalle');
+                const response = await fetch(`${API_BASE}/getDetalle`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok')
                 }

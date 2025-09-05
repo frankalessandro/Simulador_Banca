@@ -6,15 +6,20 @@ import nameLogo from '../../../assets/Img/Logos/ClarBank Name.svg';
 export const TopNavbar = () => {
     return (
         <>
-            <nav className="bg-white border-gray-200 dark:bg-gray-900 shadow-xl">
-                <div className="max-w-screen-x flex flex-wrap items-center justify-between mx-auto p-2">
-                    <Link to="#" class="flex items-center space-x-3 rtl:space-x-reverse">
+            <nav className="sticky top-0 z-50 backdrop-blur bg-white/80 border-b border-gray-100">
+                <div className="max-w-7xl mx-auto px-6 lg:px-8 py-3 flex items-center justify-between">
+                    <Link to="/" className="flex items-center gap-3">
                         <img src={TopLogo} className="h-8" alt="ClarBank" />
-                        <span><img src={nameLogo} alt="" className="h-4" /></span>
+                        <img src={nameLogo} alt="ClarBank" className="h-4" />
                     </Link>
-                    <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+                    <div className="hidden md:flex items-center gap-8 text-sm text-gray-700">
+                        <a href="#productos" className="hover:text-neutralGreen">Productos</a>
+                        <a href="#seguridad" className="hover:text-neutralGreen">Seguridad</a>
+                        <a href="#nosotros" className="hover:text-neutralGreen">Nosotros</a>
+                    </div>
+                    <div className="flex items-center gap-3">
                         <Link to="/Login">
-                            <button type="button" className="text-black bg-green-600 hover:bg-green focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Login</button>
+                            <button type="button" className="px-4 py-2 rounded-lg bg-neutralGreen text-white hover:bg-green focus:ring-4 focus:ring-lightGreen/40 transition">Iniciar sesión</button>
                         </Link>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo, useCallback } from 'react'
 import Logo from '../../assets/Img/Logos/ClarBank LogoOnly.svg'
 import { ContentCuentaAhorroJuridica } from './Components/ContentCuentaAhorroJuridica/ContentCuentaAhorroJuridica'
 import { ContentCuentaAhorroNatural } from './Components/ContentCuentaAhorroNatural/ContentCuentaAhorroNatural'
@@ -11,100 +11,64 @@ import { useAuth } from '../../context/AuthContext'
 import { Reportes } from './Components/Director/Reportes'
 import { Sidebar } from 'flowbite-react';
 import { Dropdown } from 'flowbite-react';
-import { HiShoppingCart, HiOutlineViewList, HiUser, HiClipboard, HiUserCircle, HiUserGroup } from "react-icons/hi";
+import { HiShoppingCart, HiOutlineViewList, HiUser, HiClipboard, HiUserCircle } from "react-icons/hi";
 import { Historial } from './Components/Director/Historial'
 import { HistorialD } from './Components/Director/HistorialD'
 import { BusquedaC } from './Components/BusquedaC'
-import nfcLogo from '../../assets/Img/Client/nfcLogo.svg'
-import ChipCard from '../../assets/Img/Client/ChipCard.svg'
+// Removed unused client visuals from previous version
 import { Movimientos } from './Components/Cajero/Movimientos'
-
-
-
-
+import { API_BASE } from '../../config.js';
 
 export const DashboardComponent = () => {
-
-    const [flipped, setFlipped] = useState(false);
-
-    const handleMouseEnter = () => {
-        setTimeout(() => {
-            setFlipped(true);
-        }, 400); // Retraso de 1000 milisegundos (1 segundo)
-    };
-
-    const handleMouseLeave = () => {
-        setTimeout(() => {
-            setFlipped(false);
-        }, 400); // Retraso de 1000 milisegundos (1 segundo)
-    };
-
-
-
-    const [active, setactive] = useState("fixed top-0 left-0 z-40 w-64 shadow-lg h-screen pt-20 transition-transform -translate-x-full bg-green border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700")
-
-    const Abrir = () => {
-        if (active === "fixed top-0 left-0 z-40 w-64 shadow-lg h-screen pt-20 transition-transform -translate-x-full bg-green border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700") {
-            setactive("fixed top-0 left-0 z-40 w-64 shadow-lg h-screen pt-20 transition-transform -translate-x-px bg-green border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700");
-
-        } else {
-            setactive("fixed top-0 left-0 z-40 w-64 shadow-lg h-screen pt-20 transition-transform -translate-x-full bg-green border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700")
-
-        }
-    }
+    // Sidebar state (open/closed)
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+    const toggleSidebar = useCallback(() => setSidebarOpen((s) => !s), []);
+    const sidebarClass = useMemo(() => (
+        sidebarOpen
+            ? "fixed top-0 left-0 z-40 w-64 shadow-lg h-screen pt-20 transition-transform -translate-x-px bg-green border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+            : "fixed top-0 left-0 z-40 w-64 shadow-lg h-screen pt-20 transition-transform -translate-x-full bg-green border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+    ), [sidebarOpen]);
 
     const { user, isLoggedIn, logout } = useAuth();
 
-    console.log(user)
-
     const [contenidoSeleccionado, setContenidoSeleccionado] = useState('PrincipalPage');
     // Función para manejar clics de botones
-    const handleBotonClick = (contenido) => {
-        setContenidoSeleccionado(contenido);
-    }
-    console.log({ contenidoSeleccionado })
+    const handleBotonClick = (contenido) => setContenidoSeleccionado(contenido);
     const handlelogout = () => {
         logout()
     }
 
-
     const [userName, setUserName] = useState(null);
     const [userData, setUserData] = useState(null); // Variable de estado para almacenar el nombre de usuario
-    const [data, setdata] = useState(null)
+    // Utils
+    const roleName = useMemo(() => {
+        if (!user?.rol) return '';
+        return user.rol === 1 ? 'Director' : user.rol === 2 ? 'Asesor' : user.rol === 3 ? 'Cajero' : user.rol === 4 ? 'Cliente' : '';
+    }, [user?.rol]);
+    // currency format handled inline where needed
 
     // Efecto para guardar el nombre de usuario cuando el componente se monta
     useEffect(() => {
         // Verificar si el usuario está autenticado y obtener su nombre de usuario si es así
-        if (isLoggedIn && user) {
-            setUserName(user.name_user); // Almacenar el nombre de usuario en el estado
-            // Mostrar el nombre de usuario en la consola
+        if (isLoggedIn && user?.name_user) {
+            setUserName(user.name_user);
         }
+    }, [isLoggedIn, user]);
 
-        const fetchData = async () => {
+    useEffect(() => {
+        const fetchClientData = async () => {
+            if (!userName || user?.rol !== 4) return;
             try {
-                // Verificar que se haya almacenado el nombre de usuario en el estado
-                if (userName) {
-                    const response = await fetch(`https://simulador-banca.onrender.com/getcliente/${userName}`);
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    const data = await response.json();
-                    setUserData(data); // Almacenar los datos del usuario en el estado
-                    console.log(data);
-                    setdata(userData.ip_primernombre)
-                }
+                const response = await fetch(`${API_BASE}/getcliente/${userName}`);
+                if (!response.ok) throw new Error('Network response was not ok');
+                const data = await response.json();
+                setUserData(data);
             } catch (error) {
-                console.error('Error al obtener información:', error);
+                // Silenciar en UI y evitar logs innecesarios
             }
         };
-
-        // Llamar a la función fetchData si el nombre de usuario está disponible
-        fetchData();
-
-    }, [isLoggedIn, user, userName]); // Agregar userName como dependencia del efecto
-
-    console.log(userName)
-    console.log(userData)
+        fetchClientData();
+    }, [userName, user?.rol]);
 
 
 
@@ -115,12 +79,12 @@ export const DashboardComponent = () => {
 
             {isLoggedIn && user.rol !== 4 && (
                 <>
-                    <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+                    <nav className="fixed top-0 z-50 w-full bg-white/90 backdrop-blur border-b border-gray-100">
                         <div className="px-3 py-3 lg:px-5 lg:pl-3">
                             <div className="flex items-center justify-between">
 
                                 <div className="flex items-center justify-start rtl:justify-end">
-                                    <button onClick={Abrir} type="button" className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+                                    <button onClick={toggleSidebar} type="button" className="inline-flex items-center p-2 text-sm text-gray-600 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200">
 
                                         <HiOutlineViewList className='h-8 w-5 flex items-center' />
                                         <span className="sr-only">Open sidebar</span>
@@ -140,7 +104,10 @@ export const DashboardComponent = () => {
                                             arrowIcon={false}
                                             inline
                                             label={
-                                                <button className='flex flex-row items-center  text-sm bg-white rounded-full focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-600'> <p className=' flex items-center text-sm bg-white rounded-full focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-600 '>{user?.name_user} - {user?.rol == 2 && (<> Asesor </>)}{user?.rol == 1 && (<> Director </>)}{user?.rol == 3 && (<> Cajero </>)} </p><HiUserCircle color='gray' className='w-16 h-10 ' />  </button>
+                                                <button className='inline-flex items-center gap-2 text-sm bg-white rounded-full px-3 py-1.5 shadow ring-1 ring-gray-200'>
+                                                    <span className='text-gray-700'>{user?.name_user} - {roleName}</span>
+                                                    <HiUserCircle color='gray' className='w-6 h-6 ' />
+                                                </button>
                                             }
                                         >
                                             <Dropdown.Header>
@@ -157,7 +124,7 @@ export const DashboardComponent = () => {
                             </div>
                         </div>
                     </nav>
-                    <Sidebar className={active} aria-label="Sidebar">
+                    <Sidebar className={sidebarClass} aria-label="Sidebar">
                         <div className="fixed left-0 top-1 py-10 h-full px-3 pb-4 w-full  overflow-y-auto bg-green dark:bg-gray-800  "  >
                             <Sidebar.ItemGroup className="space-y-2 font-medium ">
 
@@ -282,60 +249,59 @@ export const DashboardComponent = () => {
             }
             {isLoggedIn && user.rol === 4 && userData && (
                 <>
-                    <section className='w-screen h-screen  flex justify-center items-center flex-col'>
-                        <header>
-                            <span className='text-3xl font-bold'>Módulo Cliente</span>
-                        </header>
-                        <main className='h-3/4 w-full bg-white flex justify-center items-center'>
-                            {/* Lado principal */}
-                            <div
-                                className={`bg-white bg-gradient-to-r from-green to-white h-80 w-128 rounded-xl shadow-xl relative ${flipped ? 'flip' : ''}`}
-                                onMouseEnter={handleMouseEnter}
-                                onMouseLeave={handleMouseLeave}
-                            >
-                                <div className={`h-1/3 flex items-end ${flipped ? 'hidden' : ''}`}>
-                                    <img className='pl-4' src={ChipCard} alt="" />
-                                    <img className='text-stone-300' src={''} alt="" />
+                    <section className='min-h-screen w-full bg-lightGray flex items-center justify-center px-6'>
+                        <div className='max-w-4xl w-full grid gap-6'>
+                            <div className='bg-gradient-to-br from-darkGreen to-neutralGreen text-white rounded-2xl p-6 shadow-xl'>
+                                <div className='flex items-start justify-between'>
+                                    <div>
+                                        <div className='text-sm text-white/80'>Bienvenido</div>
+                                        <div className='text-xl font-semibold'>{userData.ip_primernombre} {userData.ip_primerapellido}</div>
+                                    </div>
+                                    <img src={Logo} className='h-10 opacity-90' alt='ClarBank' />
                                 </div>
-                                <div className={`h-2/3 flex justify-end items-end ${flipped ? 'hidden' : ''}`}>
-                                    <img className='w-36 py-5' src={Namelogo} alt="" />
-                                    <img className='h-32' src={Logo} alt="" />
-                                </div>
-                                <div className={`h-12 mt-8 bg-emerald-700 ${flipped ? '' : 'hidden'}`}>
-                                    {/* Contenido en el reverso de la tarjeta */}
-                                    <div className="flip-content">
-                                        <div className={`text-gray-800 pt-16 flex justify-center text-4xl `}>
-                                            <p>${userData.saldo}</p>
-                                        </div>
-                                        <div className={`text-gray-800 mt-24 flex flex-col justify-end items-end px-2 `}>
-                                            <p>{userData.nombre_producto}</p>
-                                            <p>{userData.n_cuenta}</p>
-                                            <p className='text-lg'>{userData.ip_primernombre} {userData.ip_primerapellido} {userData.ip_segundoapellido}</p>
-                                        </div>
+                                <div className='mt-6 grid sm:grid-cols-3 gap-4'>
+                                    <div className='sm:col-span-2'>
+                                        <div className='text-white/80 text-sm'>Saldo disponible</div>
+                                        <div className='text-3xl sm:text-4xl font-semibold'>{'$'}{Number(userData.saldo || 0).toLocaleString()}</div>
+                                    </div>
+                                    <div className='bg-white/10 backdrop-blur rounded-xl p-4 ring-1 ring-white/20'>
+                                        <div className='text-xs text-white/80'>Producto</div>
+                                        <div className='text-sm font-medium'>{userData.nombre_producto}</div>
+                                        <div className='mt-2 text-xs text-white/80'>N° de cuenta</div>
+                                        <div className='text-sm font-medium'>{String(userData.n_cuenta || '').replace(/.(?=.{4})/g, '•')}</div>
                                     </div>
                                 </div>
                             </div>
-                        </main>
 
-                        <div>
-                        <Dropdown
-                            arrowIcon={false}
-                            inline
-                            label={
-                                <button className='flex flex-row items-center  text-sm bg-white rounded-full focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-600'> <p className=' flex items-center text-sm bg-white rounded-full focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-600 '>{user?.name_user} - {user?.rol == 2 && (<> Asesor </>)}{user?.rol == 1 && (<> Director </>)} </p><HiUserCircle color='gray' className='w-16 h-10 ' />  </button>
-                            }
-                        >
-                            <Dropdown.Header>
-                                <span className="block text-sm">{user?.name_user}</span>
-                                <span className="block truncate text-sm font-medium">{user?.name_user}@ClarBank.com</span>
-                            </Dropdown.Header>
-                            <Dropdown.Divider />
-                            <Dropdown.Item onClick={handlelogout}>Salir</Dropdown.Item>
-                        </Dropdown>
-                    </div>
+                            <div className='bg-white rounded-2xl shadow-sm ring-1 ring-gray-100 p-6'>
+                                <div className='flex items-center justify-between mb-4'>
+                                    <h2 className='text-lg font-semibold text-gray-900'>Actividad reciente</h2>
+                                    <span className='text-xs text-gray-500'>Demo</span>
+                                </div>
+                                <div className='text-sm text-gray-600'>No hay movimientos disponibles en este módulo de simulación.</div>
+                            </div>
 
+                            <div className='flex items-center justify-end'>
+                                <Dropdown
+                                    arrowIcon={false}
+                                    inline
+                                    label={
+                                        <button className='inline-flex items-center gap-2 text-sm bg-white rounded-full px-3 py-1.5 shadow ring-1 ring-gray-200'>
+                                            <span className='text-gray-700'>{user?.name_user}</span>
+                                            <HiUserCircle color='gray' className='w-6 h-6' />
+                                        </button>
+                                    }
+                                >
+                                    <Dropdown.Header>
+                                        <span className="block text-sm">{user?.name_user}</span>
+                                        <span className="block truncate text-sm font-medium">{user?.name_user}@ClarBank.com</span>
+                                    </Dropdown.Header>
+                                    <Dropdown.Divider />
+                                    <Dropdown.Item onClick={handlelogout}>Salir</Dropdown.Item>
+                                </Dropdown>
+                            </div>
+                        </div>
                     </section>
-                    
                 </>
             )}
 
