@@ -21,8 +21,7 @@ router.get('/getInfoCliente/:accountNumberInt', dataController.getInfoCliente);
 router.put('/UpdateCliente/:id', dataController.UpdateCliente);
 
 // Nuevas rutas para búsqueda flexible y movimientos
-router.get('/clienteByQuery', dataController.clienteByQuery);
-router.post('/cliente/:id/deposit', dataController.depositCliente);
-router.post('/cliente/:id/withdraw', dataController.withdrawCliente);
+router.post('/cliente/:id/deposit', (req, res) => { /* TODO: Implement depositCliente in dataController.js */ res.status(500).send('depositCliente not implemented'); });
+router.post('/cliente/:id/withdraw', (req, res) => { /* TODO: Implement withdrawCliente in dataController.js */ res.status(500).send('withdrawCliente not implemented'); });
 
 module.exports = router;

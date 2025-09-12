@@ -96,6 +96,7 @@ Backend/               # API Express + OpenAPI
   controllers/         # Controladores por recurso
   config/db.js         # Configuración PostgreSQL vía env
   swagger.yaml         # Esquema OpenAPI
+  Script-1.sql         # Esquema BD (DDL) + datos semilla
 
 Front/                 # SPA React + Vite
   src/
@@ -105,8 +106,35 @@ Front/                 # SPA React + Vite
     hooks/             # Hooks utilitarios (p.ej. `useLoad`)
     config.js          # `API_BASE` (VITE_API_BASE || localhost)
 
-Documentación/         # Manuales técnicos y referencias
-```
+## Base de Datos
+
+- Motor: PostgreSQL (UTF-8).
+- Script principal: `Backend/Script-1.sql` (creación de tablas, llaves foráneas y datos semilla).
+- Tablas:
+  - `Rol` — Catálogo de roles: `ID_Rol` (PK), `Nombre`, `Estado`.
+  - `usuarios` — Usuarios internos/cliente: `ID_Usuario` (PK), `Name_User`, `Password`, `Rol` (FK→`Rol.ID_Rol`), `Estado`.
+  - `tipoproducto` — Catálogo de tipos: `ID_tipo` (PK), `Descripcion`.
+  - `producto` — Productos: `ID_Producto` (PK), `Estado`, `Tipo` (FK→`tipoproducto.ID_tipo`).
+  - `FormPersonNatural` — Formulario de apertura PN: campos personales, contacto, laboral, financiera, tributaria y operaciones. `ID_FormPN` (PK).
+  - `cliente` — Entidad cliente: `ID_Cliente` (PK), `inf_cliente` (FK→`FormPersonNatural.ID_FormPN`), `Tipo_de_Cliente`, `Saldo`, `Estado`, `Razon`.
+  - `DetalleProducto` — Relación cliente–producto: `ID_detalle` (PK), `Cliente` (FK→`cliente.ID_Cliente`), `producto` (FK→`producto.ID_Producto`), `responsable` (FK→`usuarios.ID_Usuario`), `fecha`, `N_Cuenta` (IDENTITY inicia en 1000000001, validado a 10 dígitos).
+- Relaciones clave:
+  - `usuarios.Rol` → `Rol.ID_Rol`.
+  - `producto.Tipo` → `tipoproducto.ID_tipo`.
+  - `cliente.inf_cliente` → `FormPersonNatural.ID_FormPN`.
+  - `DetalleProducto.Cliente` → `cliente.ID_Cliente`.
+  - `DetalleProducto.producto` → `producto.ID_Producto`.
+  - `DetalleProducto.responsable` → `usuarios.ID_Usuario`.
+- Datos semilla incluidos en el script:
+  - `Rol`: Director (1), Asesor (2), Cajero (3), Cliente (4).
+  - `usuarios`: `admin/admin` (Rol 1), `asesor/asesor` (Rol 2), `cajero/cajero` (Rol 3), `cliente/cliente` (Rol 4).
+  - `tipoproducto`: "Cuenta de Ahorros".
+  - `producto`: estado "Activo" asociado al tipo creado.
+- Cómo aplicar el script:
+  - Crear la base de datos en PostgreSQL (ej. `clarbank`).
+  - Ejecutar: `psql -U <usuario> -h <host> -d clarbank -f Backend/Script-1.sql`.
+  - Alternativa GUI: importar/ejecutar el contenido de `Script-1.sql` en pgAdmin.
+- Requisitos de conexión: configurar `DB_HOST`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`, `DB_PORT` en `Backend/.env`.
 
 ## Instalación y Ejecución
 
@@ -216,4 +244,3 @@ Tablas usadas (extracto de consultas): `usuarios`, `cliente`, `FormPersonNatural
 
 - Node.js >= 22 (definido en `engines` y `.nvmrc`).
 - Archivos en repo: `.nvmrc`, `.node-version` en la raíz y `.nvmrc` en `Backend/` y `Front/`.
-

@@ -11,7 +11,7 @@ export const LandingPage = () => {
   return (
     <>
       <TopNavbar />
-      <div className="bg-lightGray min-h-screen">
+      <div className="bg-gray-950 text-gray-100 min-h-screen">
         <Banner />
         <MainContainer />
         <InfoTabs />
