@@ -105,6 +105,8 @@ Front/                 # SPA React + Vite
     Pages/             # Páginas (Login, DashboardMenu, LandingPage)
     hooks/             # Hooks utilitarios (p.ej. `useLoad`)
     config.js          # `API_BASE` (VITE_API_BASE || localhost)
+```
+
 
 ## Base de Datos
 
